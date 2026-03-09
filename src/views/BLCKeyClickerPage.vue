@@ -8,16 +8,16 @@
         <LootChestButton />
       </v-col>
     </v-row>
-    <v-row>
+    <!-- <v-row>
       <v-col>
         <VendorTabs />
       </v-col>
-    </v-row>
+    </v-row> -->
   </v-container>
 </template>
 <script setup>
-import VendorTabs from "@/components/BLCKeyClicker/VendorTabs.vue";
+// import VendorTabs from "@/components/BLCKeyClicker/vendor/VendorTabs.vue";
 import MapCompButton from "@/components/BLCKeyClicker/MapCompButton.vue";
-import LootChestButton from "@/components/BLCKeyClicker/LootChestButton.vue";
+import LootChestButton from "@/components/BLCKeyClicker/openChest/LootChestButton.vue";
 </script>
 <style></style>
