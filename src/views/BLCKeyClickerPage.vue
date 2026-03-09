@@ -5,7 +5,7 @@
         <MapCompButton />
       </v-col>
       <v-col cols="auto" class="d-flex justify-center">
-        <LootChestButton />
+        <OpenChestPanel />
       </v-col>
     </v-row>
     <!-- <v-row>
@@ -18,6 +18,6 @@
 <script setup>
 // import VendorTabs from "@/components/BLCKeyClicker/vendor/VendorTabs.vue";
 import MapCompButton from "@/components/BLCKeyClicker/MapCompButton.vue";
-import LootChestButton from "@/components/BLCKeyClicker/openChest/LootChestButton.vue";
+import OpenChestPanel from "@/components/BLCKeyClicker/openChest/OpenChestPanel.vue";
 </script>
 <style></style>
