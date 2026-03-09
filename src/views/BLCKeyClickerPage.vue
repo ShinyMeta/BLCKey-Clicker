@@ -1,8 +1,11 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col class="d-flex justify-center">
+    <v-row align="start" justify="center">
+      <v-col cols="auto" class="d-flex justify-center">
         <MapCompButton />
+      </v-col>
+      <v-col cols="auto" class="d-flex justify-center">
+        <LootChestButton />
       </v-col>
     </v-row>
     <v-row>
@@ -15,5 +18,6 @@
 <script setup>
 import VendorTabs from "@/components/BLCKeyClicker/VendorTabs.vue";
 import MapCompButton from "@/components/BLCKeyClicker/MapCompButton.vue";
+import LootChestButton from "@/components/BLCKeyClicker/LootChestButton.vue";
 </script>
 <style></style>
