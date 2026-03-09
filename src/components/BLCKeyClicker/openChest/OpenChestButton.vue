@@ -2,29 +2,41 @@
   <button
     type="button"
     class="chest-btn"
-    :class="{ pressed: isPressed }"
+    :class="{ disabled }"
+    :aria-disabled="disabled"
     @click="handleClick"
   >
-    <div class="chest-image-wrap">
-      <img :src="chestSrc" alt="" class="chest-half chest-base" />
+    <div
+      class="chest-image-wrap"
+      :class="{ pressed: isPressed, shaking: isShaking }"
+    >
+      <div class="chest-glow" :class="{ visible: lidOpen }" />
       <img
-        :src="chestSrc"
+        :src="chestTopSrc"
         alt="Open Chest"
-        class="chest-half chest-lid"
+        class="chest-half chest-top"
         :class="{ opened: lidOpen }"
       />
-      <div class="chest-glow" :class="{ visible: lidOpen }" />
+      <img :src="chestBottomSrc" alt="" class="chest-half chest-bottom" />
     </div>
   </button>
 </template>
 
 <script setup>
 import { nextTick, onBeforeUnmount, ref } from "vue";
-import chestSrc from "@/assets/BLCOpenUI/BasicChestUI.png";
+import chestBottomSrc from "@/assets/BLCOpenUI/chestHalf/2-bottom.png";
+import chestTopSrc from "@/assets/BLCOpenUI/chestHalf/2-top.png";
 
 const emit = defineEmits(["click"]);
+const props = defineProps({
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const isPressed = ref(false);
+const isShaking = ref(false);
 const lidOpen = ref(false);
 const activeTimeouts = new Set();
 let animationRunId = 0;
@@ -48,6 +60,7 @@ function clearTimers() {
 
 function resetState() {
   isPressed.value = false;
+  isShaking.value = false;
   lidOpen.value = false;
 }
 
@@ -78,7 +91,32 @@ async function playOpenAnimation() {
   }, 10000);
 }
 
+async function playDisabledShake() {
+  reset();
+  const currentRunId = animationRunId;
+  await nextTick();
+
+  if (currentRunId !== animationRunId) {
+    return;
+  }
+
+  isShaking.value = true;
+
+  schedule(() => {
+    if (currentRunId !== animationRunId) {
+      return;
+    }
+
+    isShaking.value = false;
+  }, 280);
+}
+
 function handleClick() {
+  if (props.disabled) {
+    playDisabledShake();
+    return;
+  }
+
   emit("click");
   playOpenAnimation();
 }
@@ -95,53 +133,63 @@ onBeforeUnmount(() => {
   all: unset;
   cursor: pointer;
   display: inline-block;
-  transition: transform 0.16s ease-out;
-  will-change: transform;
 }
 
-.chest-btn:hover {
-  transform: scale(1.03);
-}
-
-.chest-btn.pressed {
-  animation: chest-press 0.12s ease-out forwards;
+.chest-btn.disabled {
+  cursor: default;
 }
 
 .chest-image-wrap {
   position: relative;
   display: inline-block;
   width: 200px;
+  transition: transform 0.16s ease-out;
+  will-change: transform;
+}
+
+.chest-btn:not(.disabled):hover .chest-image-wrap {
+  transform: scale(1.03);
+}
+
+.chest-image-wrap.pressed {
+  animation: chest-press 0.12s ease-out forwards;
+}
+
+.chest-image-wrap.shaking {
+  animation: chest-shake 0.28s ease-out;
 }
 
 .chest-half {
-  display: block;
   width: 100%;
   height: auto;
   pointer-events: none;
 }
 
-.chest-base {
-  clip-path: inset(50% 0 0 0);
+.chest-bottom {
+  position: relative;
+  z-index: 3;
+  display: block;
 }
 
-.chest-lid {
+.chest-top {
   position: absolute;
-  top: 0;
+  top: calc(100% * 94 / 256);
   left: 0;
-  clip-path: inset(0 0 50% 0);
+  z-index: 2;
   transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.chest-lid.opened {
-  transform: translateY(-35%);
+.chest-top.opened {
+  transform: translateY(-80%);
 }
 
 .chest-glow {
   position: absolute;
   left: 5%;
   right: 5%;
-  top: 50%;
+  top: calc(100% * 158 / 256);
   height: 8px;
+  z-index: 1;
   transform: translateY(-50%) scaleX(0);
   opacity: 0;
   background: radial-gradient(
@@ -167,6 +215,31 @@ onBeforeUnmount(() => {
   }
   100% {
     transform: scale(0.92);
+  }
+}
+
+@keyframes chest-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-4px);
+  }
+  30% {
+    transform: translateX(4px);
+  }
+  45% {
+    transform: translateX(-3px);
+  }
+  60% {
+    transform: translateX(3px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+  90% {
+    transform: translateX(1px);
   }
 }
 </style>
