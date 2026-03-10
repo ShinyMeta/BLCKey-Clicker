@@ -2,7 +2,7 @@
   <v-container>
     <v-row align="start" justify="center">
       <v-col cols="auto" class="d-flex justify-center">
-        <MapCompButton />
+        <MapCompProgress />
       </v-col>
       <v-col cols="auto" class="d-flex justify-center">
         <OpenChestPanel />
@@ -17,7 +17,7 @@
 </template>
 <script setup>
 // import VendorTabs from "@/components/BLCKeyClicker/vendor/VendorTabs.vue";
-import MapCompButton from "@/components/BLCKeyClicker/MapCompButton.vue";
+import MapCompProgress from "@/components/BLCKeyClicker/MapCompProgress.vue";
 import OpenChestPanel from "@/components/BLCKeyClicker/openChest/OpenChestPanel.vue";
 </script>
 <style></style>

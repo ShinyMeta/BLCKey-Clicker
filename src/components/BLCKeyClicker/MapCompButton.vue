@@ -32,6 +32,7 @@ function onMouseUp() {
 <style scoped>
 .map-comp-btn {
   all: unset;
+  user-select: none;
   cursor: pointer;
   display: inline-block;
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);

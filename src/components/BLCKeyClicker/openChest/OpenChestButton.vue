@@ -131,6 +131,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .chest-btn {
   all: unset;
+  user-select: none;
   cursor: pointer;
   display: inline-block;
 }
