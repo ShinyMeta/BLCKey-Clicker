@@ -59,13 +59,13 @@ const rewardImageByType = {
   transmutationCharge: TransmutationChargeImg,
 };
 
-// Persistent Image objects prevent the browser from dropping decoded image data
-const _rewardImageAnchors = [];
-Object.values(rewardImageByType).forEach((src) => {
-  const img = new Image();
-  img.src = src;
-  _rewardImageAnchors.push(img);
-});
+// This apparently doesn't work? lol  ---Persistent Image objects prevent the browser from dropping decoded image data
+// const _rewardImageAnchors = [];
+// Object.values(rewardImageByType).forEach((src) => {
+//   const img = new Image();
+//   img.src = src;
+//   _rewardImageAnchors.push(img);
+// });
 
 // --- Progress ring delayed reset ---
 const progressOverride = ref(null);
