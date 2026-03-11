@@ -22,10 +22,20 @@ import PoiImg from "@/assets/MapComp/Poi.png";
 import VistaImg from "@/assets/MapComp/Vista.png";
 import WaypointImg from "@/assets/MapComp/Waypoint.png";
 
+const MAX_PARTICLES = 50;
+
 const particleImages = [HeartImg, HeroPointImg, PoiImg, VistaImg, WaypointImg];
 
+// Persistent Image objects prevent the browser from dropping decoded image data
+const _particleImageAnchors = [];
+particleImages.forEach((src) => {
+  const img = new Image();
+  img.src = src;
+  _particleImageAnchors.push(img);
+});
+
 const saveStore = useBLCKeyClickerSaveStore();
-const { mapCompletionProgress } = storeToRefs(saveStore);
+const { mapCompProgress } = storeToRefs(saveStore);
 
 const layerEl = useTemplateRef("layerEl");
 const particles = ref([]);
@@ -71,13 +81,16 @@ function spawnParticle() {
       animationDelay: `${delay}s`,
     },
   });
+  if (particles.value.length > MAX_PARTICLES) {
+    particles.value.splice(0, particles.value.length - MAX_PARTICLES);
+  }
 }
 
 function removeParticle(id) {
   particles.value = particles.value.filter((p) => p.id !== id);
 }
 
-watch(mapCompletionProgress, () => {
+watch(mapCompProgress, () => {
   spawnParticle();
 });
 </script>

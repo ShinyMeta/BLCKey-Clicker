@@ -3,7 +3,7 @@
     <div class="progress-wrapper">
       <MapCompBackgroundLayer />
       <v-progress-circular
-        :model-value="(progress / clicksToComp) * 100"
+        :model-value="ringDisplayValue"
         :size="400"
         :width="20"
         color="cyan-darken-3"
@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onBeforeUnmount } from "vue";
 import { storeToRefs } from "pinia";
 import BLCKeyImg from "@/assets/item/BLCKey.png";
 import TransmutationChargeImg from "@/assets/item/TransmutationCharge.png";
@@ -35,19 +35,46 @@ import MapCompBackgroundLayer from "@/components/BLCKeyClicker/MapCompBackground
 import MapCompButton from "@/components/BLCKeyClicker/MapCompButton.vue";
 import { useBLCKeyClickerSaveStore } from "@/store/BLCKeyClickerSaveStore";
 
+const MAX_REWARD_FLYOUTS = 10;
+
 const emit = defineEmits(["click", "mapComplete"]);
 const saveStore = useBLCKeyClickerSaveStore();
 const {
-  mapCompletionClicksToComp: clicksToComp,
-  mapCompletionProgress: progress,
+  mapCompClicksToComp,
+  mapCompProgress,
 } = storeToRefs(saveStore);
 const rewardFlyouts = ref([]);
 let nextRewardFlyoutId = 0;
 
 const rewardImageByType = {
-  key: BLCKeyImg,
+  blcKey: BLCKeyImg,
   transmutationCharge: TransmutationChargeImg,
 };
+
+// Persistent Image objects prevent the browser from dropping decoded image data
+const _rewardImageAnchors = [];
+Object.values(rewardImageByType).forEach((src) => {
+  const img = new Image();
+  img.src = src;
+  _rewardImageAnchors.push(img);
+});
+
+// --- Progress ring delayed reset ---
+const progressOverride = ref(null);
+let resetTimer = null;
+
+const ringDisplayValue = computed(() => {
+  const p =
+    progressOverride.value !== null ? progressOverride.value : mapCompProgress.value;
+  return (p / mapCompClicksToComp.value) * 100;
+});
+
+onBeforeUnmount(() => {
+  if (resetTimer) {
+    clearTimeout(resetTimer);
+    resetTimer = null;
+  }
+});
 
 function getRewardFlyoutStyle() {
   const angle = Math.random() * Math.PI * 2;
@@ -73,6 +100,12 @@ function showRewardFlyout(src) {
     alt: "Map completion reward",
     style: getRewardFlyoutStyle(),
   });
+  if (rewardFlyouts.value.length > MAX_REWARD_FLYOUTS) {
+    rewardFlyouts.value.splice(
+      0,
+      rewardFlyouts.value.length - MAX_REWARD_FLYOUTS
+    );
+  }
 }
 
 function removeRewardFlyout(id) {
@@ -80,11 +113,25 @@ function removeRewardFlyout(id) {
 }
 
 function handleMapComplete() {
-  const reward = saveStore.registerMapCompletionClick();
+  // If a delayed reset is pending, cancel it and let the store value through
+  if (progressOverride.value !== null) {
+    clearTimeout(resetTimer);
+    resetTimer = null;
+    progressOverride.value = null;
+  }
+
+  const reward = saveStore.stepMapCompProgress();
 
   if (!reward) {
     return;
   }
+
+  // Completion — hold the ring at 100% for 5 seconds before dropping to 0
+  progressOverride.value = mapCompClicksToComp.value;
+  resetTimer = setTimeout(() => {
+    progressOverride.value = null;
+    resetTimer = null;
+  }, 5000);
 
   const rewardImage = rewardImageByType[reward.type];
 
@@ -100,7 +147,7 @@ function handleClick() {
   handleMapComplete();
 }
 
-defineExpose({ progress, showRewardFlyout });
+// defineExpose({ ringDisplayValue, showRewardFlyout });
 </script>
 
 <style scoped>

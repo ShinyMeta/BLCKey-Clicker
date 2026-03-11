@@ -5,8 +5,8 @@ import { ref } from "vue";
 export const useBLCKeyClickerSaveStore = defineStore(
   "BLCKeyClickerSave",
   () => {
-    const mapCompletionClicksToComp = ref(10);
-    const mapCompletionProgress = ref(0);
+    const mapCompClicksToComp = ref(10);
+    const mapCompProgress = ref(0);
     const inventory = ref({
       blcKeys: 0,
       goldenKeys: 0,
@@ -18,16 +18,16 @@ export const useBLCKeyClickerSaveStore = defineStore(
       giftOfExploration: 0,
       giftOfBattle: 0,
     });
-    const mapCompletionKeyDropChance = ref(0.3);
+    const mapCompKeyDropChance = ref(0.3);
     // const achievements = ref();
 
-    function grantMapCompletionReward() {
+    function grantMapCompReward() {
       const rewardType =
-        Math.random() < mapCompletionKeyDropChance.value
-          ? "key"
+        Math.random() < mapCompKeyDropChance.value
+          ? "blcKey"
           : "transmutationCharge";
 
-      if (rewardType === "key") {
+      if (rewardType === "blcKey") {
         inventory.value.blcKeys += 1;
       } else {
         inventory.value.transmutationCharges += 1;
@@ -36,24 +36,24 @@ export const useBLCKeyClickerSaveStore = defineStore(
       return { type: rewardType };
     }
 
-    function registerMapCompletionClick() {
-      mapCompletionProgress.value += 1;
+    function stepMapCompProgress() {
+      mapCompProgress.value += 1;
 
-      if (mapCompletionProgress.value < mapCompletionClicksToComp.value) {
+      if (mapCompProgress.value < mapCompClicksToComp.value) {
         return null;
       }
 
-      mapCompletionProgress.value = 0;
-      return grantMapCompletionReward();
+      mapCompProgress.value = 0;
+      return grantMapCompReward();
     }
 
     return {
-      mapCompletionClicksToComp,
-      mapCompletionProgress,
+      mapCompClicksToComp,
+      mapCompProgress,
       inventory,
-      mapCompletionKeyDropChance,
-      grantMapCompletionReward,
-      registerMapCompletionClick,
+      mapCompKeyDropChance,
+      grantMapCompReward,
+      stepMapCompProgress,
     };
   }
 );
