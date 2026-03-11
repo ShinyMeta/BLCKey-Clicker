@@ -35,6 +35,7 @@ function onMouseUp() {
   user-select: none;
   cursor: pointer;
   display: inline-block;
+  border-radius: 50%;
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform;
 }
