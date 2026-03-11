@@ -9,6 +9,8 @@
         color="cyan-darken-3"
         rounded
         class="progress-ring"
+        :class="{ 'ring-complete': ringComplete }"
+        @animationend="ringComplete = false"
       />
       <div class="reward-flyout-layer">
         <img
@@ -27,7 +29,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onBeforeUnmount, watch } from "vue";
+import { ref, computed, onBeforeUnmount, watch} from "vue";
 import { storeToRefs } from "pinia";
 import BLCKeyImg from "@/assets/item/BLCKey.png";
 import TransmutationChargeImg from "@/assets/item/TransmutationCharge.png";
@@ -67,6 +69,7 @@ Object.values(rewardImageByType).forEach((src) => {
 
 // --- Progress ring delayed reset ---
 const progressOverride = ref(null);
+const ringComplete = ref(false);
 let resetTimer = null;
 
 const ringDisplayValue = computed(() => {
@@ -121,7 +124,7 @@ function removeRewardFlyout(id) {
   rewardFlyouts.value = rewardFlyouts.value.filter((reward) => reward.id !== id);
 }
 
-function holdCompletedProgressRing() {
+async function completedRingAnimation() {
   // If a delayed reset is pending, cancel it and let the latest completion win
   if (progressOverride.value !== null) {
     clearTimeout(resetTimer);
@@ -129,16 +132,18 @@ function holdCompletedProgressRing() {
     progressOverride.value = null;
   }
 
-  // Completion — hold the ring at 100% for 5 seconds before dropping to 0
+  ringComplete.value = true;
+
+  // Completion — hold the ring at 100% for a lil sec
   progressOverride.value = mapCompClicksToComp.value;
   resetTimer = setTimeout(() => {
     progressOverride.value = null;
     resetTimer = null;
-  }, 1000);
+  }, 400);
 }
 
 function handleMapComplete(mapCompCompletionEvent) {
-  holdCompletedProgressRing();
+  completedRingAnimation();
   const rewardImage = rewardImageByType[mapCompCompletionEvent.reward.type];
 
   if (rewardImage) {
@@ -189,6 +194,33 @@ function handleClick() {
 
 .progress-ring {
   grid-area: 1 / 1;
+}
+
+.progress-ring.ring-complete {
+  animation: ring-complete-burst .5s ease-out;
+}
+
+@keyframes ring-complete-burst {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0px transparent);
+  }
+  30% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0px transparent);
+  }
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 10px rgba(0, 188, 212, 0.5));
+  }
+  70% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 14px rgba(0, 188, 212, 0.9));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0px transparent);
+  }
 }
 
 .reward-flyout-layer {
