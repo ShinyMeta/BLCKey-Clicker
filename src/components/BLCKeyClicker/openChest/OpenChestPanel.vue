@@ -15,11 +15,14 @@
         <img :src="blcKeyImg" alt="" class="key-select-image" />
         <span class="key-select-count">{{ inventory.blcKeys }}</span>
       </button>
-      <OpenChestButton
-        ref="chestButton"
-        :disabled="selectedKeyCount === 0"
-        @click="handleChestClick"
-      />
+      <div class="center-controls">
+        <OpenChestButton
+          ref="chestButton"
+          :disabled="selectedKeyCount === 0"
+          @click="handleChestClick"
+        />
+        <ChestPreviewButton />
+      </div>
       <button
         type="button"
         class="key-select-btn"
@@ -46,6 +49,7 @@ import blcKeyImg from "@/assets/item/BLCKey.png";
 import goldenBlcKeyImg from "@/assets/item/goldenBLCKey.png";
 import noRewardImg from "@/assets/noRewardItem.png";
 import OpenChestButton from "@/components/BLCKeyClicker/openChest/OpenChestButton.vue";
+import ChestPreviewButton from "@/components/BLCKeyClicker/openChest/ChestPreviewButton.vue";
 import LootRow from "@/components/BLCKeyClicker/openChest/LootRow.vue";
 import { useBLCKeyClickerSaveStore } from "@/store/BLCKeyClickerSaveStore";
 
@@ -116,6 +120,13 @@ onBeforeUnmount(() => {
   justify-content: center;
   gap: 20px;
   width: 100%;
+}
+
+.center-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
 .key-select-btn {

@@ -10,7 +10,7 @@
     "fetch:weapons": "node scripts/fetch-weapon-sets.js"
   },
   "dependencies": {
-    "@mdi/font": "7.0.96",
+    "@mdi/font": "^7.4.47",
     "core-js": "^3.29.0",
     "gw2api-client": "^7.7.1",
     "pinia": "^2.0.0",

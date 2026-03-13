@@ -57,18 +57,24 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useDisplay } from "vuetify";
 import MapCompProgress from "@/components/BLCKeyClicker/mapComp/MapCompProgress.vue";
 import OpenChestPanel from "@/components/BLCKeyClicker/openChest/OpenChestPanel.vue";
+import { useBLCKeyClickerSaveStore } from "@/store/BLCKeyClickerSaveStore";
 
 const { lgAndUp } = useDisplay();
 const leftDrawerOpen = ref(lgAndUp.value);
 const rightDrawerOpen = ref(lgAndUp.value);
+const saveStore = useBLCKeyClickerSaveStore();
 
 watch(lgAndUp, (isLarge) => {
   leftDrawerOpen.value = isLarge;
   rightDrawerOpen.value = isLarge;
+});
+
+onMounted(() => {
+  saveStore.generateCurrentChestConfig();
 });
 </script>
 

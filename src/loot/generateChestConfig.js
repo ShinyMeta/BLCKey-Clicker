@@ -28,7 +28,7 @@ function pickRandom(catalog, count) {
 function pickRandomWeaponSet(catalog, exclude = []) {
   const names = Object.keys(catalog.sets).filter((n) => !exclude.includes(n));
   const name = names[Math.floor(Math.random() * names.length)];
-  return { name, set: { items: [...catalog.sets[name].items] } };
+  return { name, set: { name, items: [...catalog.sets[name].items] } };
 }
 
 /**

@@ -1,6 +1,14 @@
 // Utilities
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { generateChestConfig } from "@/loot/generateChestConfig";
+import guaranteedItemCatalog from "@/loot/config/sets/guaranteedItems.json";
+import exclusivesCatalog from "@/loot/config/sets/exclusives.json";
+import dyeKitsCatalog from "@/loot/config/sets/dyeKits.json";
+import weaponsCatalog from "@/loot/config/sets/weapons.json";
+import glyphsCatalog from "@/loot/config/sets/glyphs.json";
+import nodesCatalog from "@/loot/config/sets/nodes.json";
+import tonicsCatalog from "@/loot/config/sets/tonics.json";
 
 export const useBLCKeyClickerSaveStore = defineStore(
   "BLCKeyClickerSave",
@@ -20,9 +28,29 @@ export const useBLCKeyClickerSaveStore = defineStore(
       giftOfExploration: 0,
       giftOfBattle: 0,
     });
+    const currentChestConfig = ref(null);
     const mapCompKeyDropChance = ref(0.3);
     let nextMapCompCompletionEventId = 0;
     // const achievements = ref();
+
+    function setCurrentChestConfig(chestConfig) {
+      currentChestConfig.value = chestConfig;
+    }
+
+    function generateCurrentChestConfig() {
+      currentChestConfig.value = generateChestConfig({
+        name: "Current Black Lion Chest",
+        guaranteedItemCatalog,
+        exclusivesCatalog,
+        dyeKitsCatalog,
+        weaponsCatalog,
+        glyphsCatalog,
+        nodesCatalog,
+        tonicsCatalog,
+      });
+
+      return currentChestConfig.value;
+    }
 
     function grantMapCompReward() {
       const rewardType =
@@ -71,7 +99,10 @@ export const useBLCKeyClickerSaveStore = defineStore(
       mapCompProgress,
       mapCompCompletionEvents,
       inventory,
+      currentChestConfig,
       mapCompKeyDropChance,
+      setCurrentChestConfig,
+      generateCurrentChestConfig,
       grantMapCompReward,
       advanceMapCompletion,
     };
