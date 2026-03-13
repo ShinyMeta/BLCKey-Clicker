@@ -28,7 +28,7 @@ function pickRandom(catalog, count) {
 function pickRandomWeaponSet(catalog, exclude = []) {
   const names = Object.keys(catalog.sets).filter((n) => !exclude.includes(n));
   const name = names[Math.floor(Math.random() * names.length)];
-  return { name, set: { name, items: [...catalog.sets[name].items] } };
+  return { name, items: [...catalog.sets[name].items] };
 }
 
 /**
@@ -67,12 +67,15 @@ export function generateChestConfig({
   return {
     name,
     sets: {
-      guaranteedItem: pickRandom(guaranteedItemCatalog, guaranteedItemCatalog.pickCount),
+      guaranteedItem: pickRandom(
+        guaranteedItemCatalog,
+        guaranteedItemCatalog.pickCount,
+      ),
       newExclusive: { items: [exclusivesCatalog.items[newIdx]] },
       returningExclusive: { items: [exclusivesCatalog.items[retIdx]] },
       dyeKits: pickRandom(dyeKitsCatalog, dyeKitsCatalog.pickCount),
-      uncommonWeapons: uncommon.set,
-      rareWeapons: rare.set,
+      uncommonWeapons: uncommon,
+      rareWeapons: rare,
       glyphs: pickRandom(glyphsCatalog, glyphsCatalog.pickCount),
       nodes: pickRandom(nodesCatalog, nodesCatalog.pickCount),
       tonic: pickRandom(tonicsCatalog, tonicsCatalog.pickCount),
