@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { shallowRef, ref } from "vue";
-import { buildLootTable, openChest } from "@/loot/lootService";
+import { mergeTemplateWithConfig, buildLootTable, openChest } from "@/loot/lootService";
 
 export const useLootStore = defineStore("loot", () => {
   const lootTable = shallowRef(null);
@@ -15,7 +15,8 @@ export const useLootStore = defineStore("loot", () => {
    * @param {object} chestConfig - generated chest config with inline sets
    */
   function loadChest(template, chestConfig) {
-    lootTable.value = buildLootTable(template, chestConfig.sets);
+    const merged = mergeTemplateWithConfig(template, chestConfig);
+    lootTable.value = buildLootTable(merged);
     chestName.value = chestConfig.name ?? "";
   }
 

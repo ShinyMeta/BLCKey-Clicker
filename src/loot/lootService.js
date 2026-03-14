@@ -1,6 +1,8 @@
 /**
- * Resolves a template category by combining its fixed items with items
- * injected from set configs via slot declarations.
+ * Resolves a single template category by combining its fixed items with
+ * items injected from set configs via slot declarations.  Preserves the
+ * slot grouping so that consumers (e.g. a preview UI) can display items
+ * by slot while still having resolved weights.
  *
  * Slot weight resolution (first match wins):
  *  1. Item's own `weight` property (from the set config)
@@ -8,34 +10,86 @@
  *  3. Slot's `totalWeight` — divided evenly among all items in the set
  *
  * @param {{ items?: object[], slots?: object[] }} category
- * @param {string} categoryName - tag attached to each resolved item
- * @param {Record<string, { items: object[] }>} sets
- * @returns {object[]}
+ * @param {Record<string, { name?: string, items: object[] }>} sets
+ * @returns {{ items: object[], slots: object[] }}
  */
-function resolveCategory(category, categoryName, sets) {
+function resolveCategory(category, sets) {
   const items = (category.items ?? []).map((item) => ({
     ...item,
     quantity: item.quantity ?? 1,
-    category: categoryName,
   }));
+
+  const slots = [];
 
   for (const slot of category.slots ?? []) {
     const setConfig = sets[slot.setKey];
-    if (!setConfig) {
-      throw new Error(`Missing set config for slot "${slot.setKey}"`);
+    if (!setConfig?.items?.length) {
+      continue;
     }
 
     const perItemWeight =
       slot.weightPerItem ??
-      (slot.totalWeight != null ? slot.totalWeight / setConfig.items.length : undefined);
+      (slot.totalWeight != null
+        ? slot.totalWeight / setConfig.items.length
+        : undefined);
 
-    for (const setItem of setConfig.items) {
-      items.push({
-        ...setItem,
-        quantity: setItem.quantity ?? 1,
-        weight: setItem.weight ?? perItemWeight,
-        category: categoryName,
-      });
+    const resolvedItems = setConfig.items.map((item) => ({
+      ...item,
+      quantity: item.quantity ?? 1,
+      weight: item.weight ?? perItemWeight,
+    }));
+
+    slots.push({
+      setKey: slot.setKey,
+      name: setConfig.name,
+      items: resolvedItems,
+    });
+  }
+
+  return { items, slots };
+}
+
+/**
+ * Merges a loot-table template with a chest config, resolving every
+ * category's fixed items and slot-injected items while preserving the
+ * per-category / per-slot grouping.
+ *
+ * This is the shared intermediate representation used by both the
+ * preview UI (which needs the grouping) and `buildLootTable` (which
+ * flattens it further for rolling).
+ *
+ * @param {object} template - parsed template.json
+ * @param {object} chestConfig - chest config with a `sets` map
+ * @returns {object} merged config keyed by category
+ */
+export function mergeTemplateWithConfig(template, chestConfig) {
+  const { sets } = chestConfig;
+
+  return {
+    fifthDropChance: template.fifthDropChance,
+    guaranteed: resolveCategory(template.guaranteed, sets),
+    commonLeft: resolveCategory(template.commonLeft, sets),
+    commonRight: resolveCategory(template.commonRight, sets),
+    exclusive: resolveCategory(template.exclusive, sets),
+    uncommon: resolveCategory(template.uncommon, sets),
+    rare: resolveCategory(template.rare, sets),
+    superRare: resolveCategory(template.superRare, sets),
+  };
+}
+
+/**
+ * Flattens a resolved category into a plain item array, tagging each
+ * item with its category name for downstream identification.
+ */
+function flattenCategory(resolved, categoryName) {
+  const items = resolved.items.map((item) => ({
+    ...item,
+    category: categoryName,
+  }));
+
+  for (const slot of resolved.slots) {
+    for (const item of slot.items) {
+      items.push({ ...item, category: categoryName });
     }
   }
 
@@ -43,8 +97,8 @@ function resolveCategory(category, categoryName, sets) {
 }
 
 /**
- * Merges a loot-table template with a map of resolved set configs
- * to produce a fully flattened loot table ready for rolling.
+ * Flattens a merged config (from `mergeTemplateWithConfig`) into a
+ * loot table ready for rolling.
  *
  * The resulting table has four sections:
  *  - `guaranteed`   – items always received (no weighting)
@@ -53,28 +107,23 @@ function resolveCategory(category, categoryName, sets) {
  *  - `fifthDrop`    – single pool combining exclusive/uncommon/rare/superRare,
  *                      drawn once with probability `fifthDropChance`
  *
- * @param {object} template - parsed template.json
- * @param {Record<string, { items: object[] }>} sets - setKey → set config
+ * @param {object} mergedConfig - output of mergeTemplateWithConfig()
  * @returns {object} resolved loot table
  */
-export function buildLootTable(template, sets) {
+export function buildLootTable(mergedConfig) {
   return {
-    fifthDropChance: template.fifthDropChance,
+    fifthDropChance: mergedConfig.fifthDropChance,
 
-    guaranteed: resolveCategory(template.guaranteed, "guaranteed", sets),
+    guaranteed: flattenCategory(mergedConfig.guaranteed, "guaranteed"),
 
-    commonLeft: resolveCategory(template.commonLeft, "commonLeft", sets),
-    commonRight: resolveCategory(template.commonRight, "commonRight", sets),
+    commonLeft: flattenCategory(mergedConfig.commonLeft, "commonLeft"),
+    commonRight: flattenCategory(mergedConfig.commonRight, "commonRight"),
 
     fifthDrop: [
-      ...resolveCategory(template.exclusive, "exclusive", sets),
-      ...resolveCategory(template.uncommon, "uncommon", sets),
-      ...resolveCategory(template.rare, "rare", sets),
-      ...(template.superRare.items ?? []).map((item) => ({
-        ...item,
-        quantity: item.quantity ?? 1,
-        category: "superRare",
-      })),
+      ...flattenCategory(mergedConfig.exclusive, "exclusive"),
+      ...flattenCategory(mergedConfig.uncommon, "uncommon"),
+      ...flattenCategory(mergedConfig.rare, "rare"),
+      ...flattenCategory(mergedConfig.superRare, "superRare"),
     ],
   };
 }
@@ -136,15 +185,17 @@ export function openChest(lootTable) {
 }
 
 /**
- * Convenience factory: builds a loot table and returns a service object
- * with a single `openChest()` method bound to that table.
+ * Convenience factory: merges a template with a chest config, builds
+ * the loot table, and returns a service object with a single
+ * `openChest()` method bound to that table.
  *
  * @param {object} template
- * @param {Record<string, { items: object[] }>} sets
+ * @param {object} chestConfig - chest config with a `sets` map
  * @returns {{ lootTable: object, openChest: () => object[] }}
  */
-export function createLootService(template, sets) {
-  const lootTable = buildLootTable(template, sets);
+export function createLootService(template, chestConfig) {
+  const merged = mergeTemplateWithConfig(template, chestConfig);
+  const lootTable = buildLootTable(merged);
   return {
     lootTable,
     openChest: () => openChest(lootTable),

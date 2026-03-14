@@ -21,7 +21,19 @@
           :disabled="selectedKeyCount === 0"
           @click="handleChestClick"
         />
-        <ChestPreviewButton />
+        <ChestPreviewDialog :chest-config="currentChestConfig">
+          <template #activator="activatorProps">
+            <v-btn
+              v-bind="activatorProps"
+              variant="tonal"
+              color="primary"
+              :disabled="!currentChestConfig"
+            >
+              <v-icon icon="mdi-eye" start />
+              Chest Preview
+            </v-btn>
+          </template>
+        </ChestPreviewDialog>
       </div>
       <button
         type="button"
@@ -49,7 +61,7 @@ import blcKeyImg from "@/assets/item/BLCKey.png";
 import goldenBlcKeyImg from "@/assets/item/goldenBLCKey.png";
 import noRewardImg from "@/assets/noRewardItem.png";
 import OpenChestButton from "@/components/BLCKeyClicker/openChest/OpenChestButton.vue";
-import ChestPreviewButton from "@/components/BLCKeyClicker/openChest/ChestPreviewButton.vue";
+import ChestPreviewDialog from "@/components/BLCKeyClicker/openChest/ChestPreviewDialog.vue";
 import LootRow from "@/components/BLCKeyClicker/openChest/LootRow.vue";
 import { useBLCKeyClickerSaveStore } from "@/store/BLCKeyClickerSaveStore";
 
@@ -65,7 +77,7 @@ const props = defineProps({
 });
 
 const saveStore = useBLCKeyClickerSaveStore();
-const { inventory } = storeToRefs(saveStore);
+const { inventory, currentChestConfig } = storeToRefs(saveStore);
 const chestButton = ref(null);
 const lootRow = ref(null);
 const selectedKeyType = ref("blcKeys");

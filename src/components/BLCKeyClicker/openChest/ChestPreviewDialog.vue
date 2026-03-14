@@ -1,15 +1,7 @@
 <template>
   <v-dialog v-model="dialogOpen" max-width="980" scrollable>
     <template #activator="{ props: activatorProps }">
-      <v-btn
-        v-bind="activatorProps"
-        variant="tonal"
-        color="primary"
-        :disabled="!currentChestConfig"
-      >
-        <v-icon icon="mdi-eye" start />
-        Chest Preview
-      </v-btn>
+      <slot name="activator" v-bind="activatorProps" />
     </template>
 
     <v-card class="chest-preview-dialog">
@@ -17,7 +9,7 @@
         <div>
           <div class="text-h6">Chest Preview</div>
           <div class="text-body-2 text-medium-emphasis">
-            {{ currentChestConfig?.name ?? "No chest loaded" }}
+            {{ chestConfig?.name ?? "No chest loaded" }}
           </div>
         </div>
         <v-chip size="small" variant="outlined">
@@ -135,10 +127,9 @@
 
 <script setup>
 import { computed, ref, watch } from "vue";
-import { storeToRefs } from "pinia";
 import noRewardImg from "@/assets/noRewardItem.png";
 import template from "@/loot/config/template.json";
-import { useBLCKeyClickerSaveStore } from "@/store/BLCKeyClickerSaveStore";
+import { mergeTemplateWithConfig } from "@/loot/lootService";
 
 const CATEGORY_ORDER = [
   "guaranteed",
@@ -172,8 +163,12 @@ const SLOT_TITLES = {
 
 const FIFTH_DROP_CATEGORY_KEYS = ["exclusive", "uncommon", "rare", "superRare"];
 
-const saveStore = useBLCKeyClickerSaveStore();
-const { currentChestConfig } = storeToRefs(saveStore);
+const props = defineProps({
+  chestConfig: {
+    type: Object,
+    default: null,
+  },
+});
 
 const dialogOpen = ref(false);
 const isLoadingMetadata = ref(false);
@@ -181,28 +176,27 @@ const itemMetadata = ref({});
 const skinMetadata = ref({});
 const lastLoadedSignature = ref("");
 
-function getSlotLabel(slotKey, setConfig) {
-  if (slotKey === "uncommonWeapons" || slotKey === "rareWeapons") {
-    return setConfig?.name ?? SLOT_TITLES[slotKey] ?? slotKey;
+function getSlotLabel(setKey, slotName) {
+  if (setKey === "uncommonWeapons" || setKey === "rareWeapons") {
+    return slotName ?? SLOT_TITLES[setKey] ?? setKey;
   }
 
-  return SLOT_TITLES[slotKey] ?? slotKey;
+  return SLOT_TITLES[setKey] ?? setKey;
 }
 
-function resolveCategoryRows(categoryKey) {
-  const category = template[categoryKey];
-  const sets = currentChestConfig.value?.sets ?? {};
+const mergedConfig = computed(() =>
+  props.chestConfig ? mergeTemplateWithConfig(template, props.chestConfig) : null
+);
+
+function resolveCategoryRows(categoryKey, resolvedCategory) {
   const rows = [];
   let poolWeight = 0;
 
-  for (const [index, item] of (category.items ?? []).entries()) {
+  for (const [index, item] of resolvedCategory.items.entries()) {
     rows.push({
       type: "item",
       key: `${categoryKey}-fixed-${item.itemId ?? index}`,
-      item: {
-        ...item,
-        quantity: item.quantity ?? 1,
-      },
+      item,
       weight: item.weight ?? null,
     });
 
@@ -211,21 +205,10 @@ function resolveCategoryRows(categoryKey) {
     }
   }
 
-  for (const slot of category.slots ?? []) {
-    const setConfig = sets[slot.setKey];
-    if (!setConfig?.items?.length) {
-      continue;
-    }
-
-    const fallbackWeight =
-      slot.weightPerItem ??
-      (slot.totalWeight != null ? slot.totalWeight / setConfig.items.length : null);
-
-    const resolvedItems = setConfig.items.map((item, index) => ({
+  for (const slot of resolvedCategory.slots) {
+    const resolvedItems = slot.items.map((item, index) => ({
       ...item,
       key: `${categoryKey}-${slot.setKey}-${item.skinId ?? item.itemId ?? index}`,
-      quantity: item.quantity ?? 1,
-      weight: item.weight ?? fallbackWeight,
     }));
 
     const slotTotalWeight = resolvedItems.reduce(
@@ -239,7 +222,7 @@ function resolveCategoryRows(categoryKey) {
       rows.push({
         type: "group",
         key: `${categoryKey}-${slot.setKey}`,
-        label: getSlotLabel(slot.setKey, setConfig),
+        label: getSlotLabel(slot.setKey, slot.name),
         totalWeight: slotTotalWeight,
         items: resolvedItems,
       });
@@ -254,19 +237,20 @@ function resolveCategoryRows(categoryKey) {
     });
   }
 
-  return {
-    rows,
-    poolWeight,
-  };
+  return { rows, poolWeight };
 }
 
-const rawPanels = computed(() =>
-  CATEGORY_ORDER.map((categoryKey) => ({
+const rawPanels = computed(() => {
+  if (!mergedConfig.value) {
+    return [];
+  }
+
+  return CATEGORY_ORDER.map((categoryKey) => ({
     key: categoryKey,
     title: CATEGORY_TITLES[categoryKey],
-    ...resolveCategoryRows(categoryKey),
-  }))
-);
+    ...resolveCategoryRows(categoryKey, mergedConfig.value[categoryKey]),
+  }));
+});
 
 const fifthDropPoolWeight = computed(() =>
   rawPanels.value
@@ -346,7 +330,7 @@ const metadataSignature = computed(() =>
 watch(
   [dialogOpen, metadataSignature],
   async ([isOpen, signature]) => {
-    if (!isOpen || !currentChestConfig.value || !signature || signature === lastLoadedSignature.value) {
+    if (!isOpen || !props.chestConfig || !signature || signature === lastLoadedSignature.value) {
       return;
     }
 
