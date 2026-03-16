@@ -16,6 +16,11 @@ export default createVuetify({
   theme: {
     defaultTheme: "dark",
     options: { customProperties: true },
+    variations: {
+      colors: ["surface"],
+      lighten: 2,
+      darken: 2,
+    },
     themes: {
       light: {
         colors: {

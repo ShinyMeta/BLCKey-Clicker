@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialogOpen" max-width="980" scrollable>
+  <v-dialog v-model="dialogOpen" max-width="860" scrollable>
     <template #activator="{ props: activatorProps }">
       <slot name="activator" v-bind="activatorProps" />
     </template>
@@ -22,7 +22,7 @@
       <v-card-text class="chest-preview-dialog__content">
         <v-progress-linear v-if="isLoadingMetadata" indeterminate class="mb-4" />
 
-        <v-expansion-panels variant="accordion">
+        <v-expansion-panels variant="accordion" class="preview-panels">
           <v-expansion-panel
             v-for="panel in previewPanels"
             :key="panel.key"
@@ -30,10 +30,32 @@
           >
             <template #title>
               <div class="panel-header">
-                <div>
-                  <div class="text-subtitle-1">{{ panel.title }}</div>
-                  <div class="text-caption text-medium-emphasis">
-                    {{ panel.subtitle }}
+                <div class="panel-header__main">
+                  <div
+                    v-if="getPanelPreviewEntries(panel).length"
+                    class="panel-preview-icons"
+                  >
+                    <div
+                      v-for="preview in getPanelPreviewEntries(panel)"
+                      :key="preview.key"
+                      class="panel-preview-icon-wrap"
+                    >
+                      <v-avatar rounded="0" size="30" class="panel-preview-icon">
+                        <v-img
+                          :src="getEntryIcon(preview.entry)"
+                          :alt="getEntryName(preview.entry)"
+                        />
+                      </v-avatar>
+                      <span v-if="preview.badgeText" class="panel-preview-badge">
+                        {{ preview.badgeText }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="panel-header__text">
+                    <div class="text-subtitle-1">{{ panel.title }}</div>
+                    <div class="text-caption text-medium-emphasis">
+                      {{ panel.subtitle }}
+                    </div>
                   </div>
                 </div>
                 <v-chip
@@ -58,7 +80,36 @@
                     <v-expansion-panel>
                       <template #title>
                         <div class="panel-header panel-header--group">
-                          <div class="text-subtitle-2">{{ row.label }}</div>
+                          <div class="panel-header__main">
+                            <div
+                              v-if="getRowPreviewEntries(row).length"
+                              class="panel-preview-icons panel-preview-icons--group"
+                            >
+                              <div
+                                v-for="preview in getRowPreviewEntries(row)"
+                                :key="preview.key"
+                                class="panel-preview-icon-wrap"
+                              >
+                                <v-avatar
+                                  rounded="0"
+                                  size="36"
+                                  class="panel-preview-icon panel-preview-icon--group"
+                                >
+                                  <v-img
+                                    :src="getEntryIcon(preview.entry)"
+                                    :alt="getEntryName(preview.entry)"
+                                  />
+                                </v-avatar>
+                                <span
+                                  v-if="preview.badgeText"
+                                  class="panel-preview-badge panel-preview-badge--group"
+                                >
+                                  {{ preview.badgeText }}
+                                </span>
+                              </div>
+                            </div>
+                            <div class="text-subtitle-2">{{ row.label }}</div>
+                          </div>
                           <v-chip size="small" variant="tonal">
                             {{ formatPercent(getRowPercent(row.totalWeight, panel.denominator)) }}
                           </v-chip>
@@ -66,27 +117,29 @@
                       </template>
 
                       <template #text>
-                        <div
-                          v-for="item in row.items"
-                          :key="item.key"
-                          class="loot-entry"
-                        >
-                          <div class="loot-entry__info">
-                            <v-avatar rounded="0" size="40" class="loot-entry__icon">
-                              <v-img :src="getEntryIcon(item)" :alt="getEntryName(item)" />
-                            </v-avatar>
-                            <div>
-                              <div class="text-body-2">{{ getEntryName(item) }}</div>
-                              <div
-                                v-if="item.quantity > 1"
-                                class="text-caption text-medium-emphasis"
-                              >
-                                x{{ item.quantity }}
+                        <div class="group-rows">
+                          <div
+                            v-for="item in row.items"
+                            :key="item.key"
+                            class="loot-entry"
+                          >
+                            <div class="loot-entry__info">
+                              <v-avatar rounded="0" size="40" class="loot-entry__icon">
+                                <v-img :src="getEntryIcon(item)" :alt="getEntryName(item)" />
+                              </v-avatar>
+                              <div>
+                                <div class="text-body-2">{{ getEntryName(item) }}</div>
+                                <div
+                                  v-if="item.quantity > 1"
+                                  class="text-caption text-medium-emphasis"
+                                >
+                                  x{{ item.quantity }}
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="text-body-2 loot-entry__percent">
-                            {{ formatPercent(getRowPercent(item.weight, panel.denominator)) }}
+                            <div class="text-body-2 loot-entry__percent">
+                              {{ formatPercent(getRowPercent(item.weight, panel.denominator)) }}
+                            </div>
                           </div>
                         </div>
                       </template>
@@ -223,6 +276,7 @@ function resolveCategoryRows(categoryKey, resolvedCategory) {
         type: "group",
         key: `${categoryKey}-${slot.setKey}`,
         label: getSlotLabel(slot.setKey, slot.name),
+        setKey: slot.setKey,
         totalWeight: slotTotalWeight,
         items: resolvedItems,
       });
@@ -232,6 +286,7 @@ function resolveCategoryRows(categoryKey, resolvedCategory) {
     rows.push({
       type: "item",
       key: `${categoryKey}-${slot.setKey}`,
+      setKey: slot.setKey,
       item: resolvedItems[0],
       weight: slotTotalWeight,
     });
@@ -268,15 +323,15 @@ const previewPanels = computed(() =>
           ? fifthDropPoolWeight.value
           : panel.poolWeight;
 
-    let subtitle = "Always included when opening a chest.";
+    let subtitle = "Both items included in every chest.";
     let poolPercentText = "";
 
     if (panel.key === "commonLeft" || panel.key === "commonRight") {
-      subtitle = "One item rolls from this pool on every chest.";
+      subtitle = "One item from this pool in every chest.";
     } else if (isFifthDropPanel) {
       const poolSharePercent = getRowPercent(panel.poolWeight, fifthDropPoolWeight.value);
       const chestSharePercent = poolSharePercent * template.fifthDropChance;
-      subtitle = `${formatPercent(chestSharePercent)} effective chest chance.`;
+      subtitle = `${formatPercent(chestSharePercent)} total chance per chest`;
       poolPercentText = `${formatPercent(poolSharePercent)} of 5th pool`;
     }
 
@@ -406,6 +461,59 @@ function getEntryIcon(entry) {
   return getEntryMetadata(entry)?.icon ?? noRewardImg;
 }
 
+function getPanelPreviewEntries(panel) {
+  if (panel.key === "guaranteed") {
+    return panel.rows
+      .filter((row) => row.type === "item")
+      .slice(0, 2)
+      .map((row, index) => ({
+        key: `${panel.key}-${row.setKey ?? "fixed"}-${index}`,
+        entry: row.item,
+      }));
+  }
+
+  if (panel.key === "exclusive") {
+    const rowOrder = ["newExclusive", "returningExclusive"];
+
+    return rowOrder
+      .map((setKey) => panel.rows.find((row) => row.type === "item" && row.setKey === setKey))
+      .filter(Boolean)
+      .map((row) => ({
+        key: `${panel.key}-${row.setKey}`,
+        entry: row.item,
+        badgeText: row.setKey === "newExclusive" ? "NEW" : "",
+      }));
+  }
+
+  return [];
+}
+
+function getRowPreviewEntries(row) {
+  if (row.type !== "group") {
+    return [];
+  }
+
+  if (row.setKey === "dyeKits") {
+    return row.items.map((item, index) => ({
+      key: `${row.key}-${index}`,
+      entry: item,
+    }));
+  }
+
+  if (row.setKey === "uncommonWeapons" || row.setKey === "rareWeapons") {
+    return row.items.length
+      ? [
+          {
+            key: `${row.key}-preview`,
+            entry: row.items[0],
+          },
+        ]
+      : [];
+  }
+
+  return [];
+}
+
 function getRowPercent(weight, denominator) {
   if (weight == null || denominator == null) {
     return 100;
@@ -440,12 +548,27 @@ function formatPercent(percent) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
+  padding: 14px 18px;
 }
 
 .chest-preview-dialog__content {
   max-height: 75dvh;
+  padding: 12px 18px 18px;
+}
+
+.preview-panels {
+  gap: 8px;
+}
+
+.preview-panels :deep(.v-expansion-panel-title) {
+  min-height: 58px;
+  padding: 10px 14px;
+}
+
+.preview-panels :deep(.v-expansion-panel-text__wrapper) {
+  padding: 0 14px 14px;
 }
 
 .panel-header {
@@ -453,40 +576,109 @@ function formatPercent(percent) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
+}
+
+.panel-header__main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.panel-header__text {
+  min-width: 0;
 }
 
 .panel-header--group {
-  padding-right: 8px;
+  padding-right: 4px;
 }
 
 .preview-rows {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+}
+
+.group-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-preview-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+}
+
+.panel-preview-icons--group {
+  gap: 3px;
+}
+
+.panel-preview-icon-wrap {
+  position: relative;
+}
+
+.panel-preview-icon {
+  background: rgba(var(--v-theme-surface-variant), 0.35);
+  border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
+}
+
+.panel-preview-icon--group {
+  background: rgba(var(--v-theme-surface-variant), 0.45);
+}
+
+.panel-preview-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  padding: 1px 4px;
+  border-radius: 999px;
+  background: rgb(var(--v-theme-primary));
+  color: rgb(var(--v-theme-on-primary));
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+}
+
+.panel-preview-badge--group {
+  top: -4px;
+  right: -4px;
+  font-size: 8px;
 }
 
 .slot-group {
-  border: 1px solid rgba(var(--v-theme-on-surface), 0.12);
-  border-radius: 12px;
+  border-top: 1px solid rgba(var(--v-theme-on-surface), 0.08);
+  margin-bottom: 2px;
+}
+
+.slot-group :deep(.v-expansion-panel-title) {
+  min-height: 46px;
+  padding: 8px 10px;
+}
+
+.slot-group :deep(.v-expansion-panel-text__wrapper) {
+  padding: 0 10px 10px;
 }
 
 .loot-entry {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0;
+  gap: 10px;
+  min-height: 46px;
+  padding: 6px;
 }
 
-.loot-entry + .loot-entry {
+.loot-entry{
   border-top: 1px solid rgba(var(--v-theme-on-surface), 0.08);
 }
 
 .loot-entry__info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   min-width: 0;
 }
 
