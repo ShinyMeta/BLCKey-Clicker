@@ -354,6 +354,22 @@ const fifthDropPoolWeight = computed(() =>
     .reduce((sum, panel) => sum + panel.poolWeight, 0)
 );
 
+const cachedPreviewEntries = computed(() => {
+  const result = {};
+  for (const panel of rawPanels.value) {
+    result[panel.key] = {
+      panel: computePanelPreviewEntries(panel),
+      rows: {},
+    };
+    for (const row of panel.rows) {
+      if (row.type === "group") {
+        result[panel.key].rows[row.key] = computeRowPreviewEntries(row);
+      }
+    }
+  }
+  return result;
+});
+
 const previewPanels = computed(() =>
   rawPanels.value.map((panel) => {
     const isFifthDropPanel = FIFTH_DROP_CATEGORY_KEYS.includes(panel.key);
@@ -383,17 +399,19 @@ const previewPanels = computed(() =>
           : `${formatPercent(poolSharePercent)}`;
     }
 
+    const cached = cachedPreviewEntries.value[panel.key];
+
     return {
       ...panel,
       rows: panel.rows.map((row) =>
         row.type === "group"
-          ? { ...row, previewEntries: computeRowPreviewEntries(row) }
+          ? { ...row, previewEntries: cached.rows[row.key] }
           : row
       ),
       denominator,
       subtitle,
       poolPercentText,
-      previewEntries: computePanelPreviewEntries(panel),
+      previewEntries: cached.panel,
     };
   })
 );
