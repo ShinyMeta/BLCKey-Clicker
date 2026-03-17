@@ -12,10 +12,39 @@
             {{ chestConfig?.name ?? "No chest loaded" }}
           </div>
         </div>
-        <v-chip size="small" variant="outlined">
-          5th drop: {{ formatPercent(template.fifthDropChance * 100) }}
-        </v-chip>
+        <div class="percent-mode-toggle-wrap">
+          <span class="percent-mode-label text-caption text-medium-emphasis text-center">
+            Percentage Display Mode
+          </span>
+          <v-btn-toggle
+            v-model="percentMode"
+            mandatory
+            density="compact"
+            variant="outlined"
+            class="percent-mode-toggle"
+          >
+            <v-btn value="perChest" size="small" title="Show percentages per chest opened">
+              Per chest
+              <template #append>
+                <v-img :src="blcKeyIcon" width="22" height="22" />
+              </template>
+            </v-btn>
+            <v-btn value="goldenKey" size="small" title="Show percentages per 5th-drop roll">
+              <template #prepend>
+                <v-img :src="goldenBlcKeyIcon" width="22" height="22" />
+              </template>
+              Per 5th-drop
+            </v-btn>
+          </v-btn-toggle>
+        </div>
       </v-card-title>
+
+      <v-divider />
+
+      <div class="percent-mode-hint text-caption text-medium-emphasis">
+        <v-icon size="14" class="mr-1">mdi-information-outline</v-icon>
+        {{ percentModeDescription }}
+      </div>
 
       <v-divider />
 
@@ -185,6 +214,8 @@
 <script setup>
 import { computed, ref, watch } from "vue";
 import unknownItem from "@/assets/item/unknown.png";
+import blcKeyIcon from "@/assets/item/BLCKey.png";
+import goldenBlcKeyIcon from "@/assets/item/goldenBLCKey.png";
 import template from "@/loot/config/template.json";
 import { mergeTemplateWithConfig } from "@/loot/lootService";
 
@@ -228,6 +259,7 @@ const props = defineProps({
 });
 
 const dialogOpen = ref(false);
+const percentMode = ref("perChest");
 const isLoadingMetadata = ref(false);
 const itemMetadata = ref({});
 const skinMetadata = ref({});
@@ -320,11 +352,14 @@ const fifthDropPoolWeight = computed(() =>
 const previewPanels = computed(() =>
   rawPanels.value.map((panel) => {
     const isFifthDropPanel = FIFTH_DROP_CATEGORY_KEYS.includes(panel.key);
+    const showPerChest = percentMode.value === "perChest";
     const denominator =
       panel.key === "guaranteed"
         ? null
         : isFifthDropPanel
-          ? fifthDropPoolWeight.value
+          ? showPerChest
+            ? fifthDropPoolWeight.value / template.fifthDropChance
+            : fifthDropPoolWeight.value
           : panel.poolWeight;
 
     let subtitle = "Both items included in every chest.";
@@ -335,8 +370,12 @@ const previewPanels = computed(() =>
     } else if (isFifthDropPanel) {
       const poolSharePercent = getRowPercent(panel.poolWeight, fifthDropPoolWeight.value);
       const chestSharePercent = poolSharePercent * template.fifthDropChance;
-      subtitle = `${formatPercent(chestSharePercent)} total chance per chest`;
-      poolPercentText = `${formatPercent(poolSharePercent)} of 5th pool`;
+      subtitle = percentMode.value === "perChest"
+          ? `${formatPercent(chestSharePercent)} total chance per chest`
+          : `${formatPercent(poolSharePercent)} chance when a 5th drop occurs`;
+      poolPercentText = percentMode.value === "perChest"
+          ? `${formatPercent(chestSharePercent)}`
+          : `${formatPercent(poolSharePercent)}`;
     }
 
     return {
@@ -480,6 +519,18 @@ function pickRandom(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
+function collectAllEntries(panel) {
+  const entries = [];
+  for (const row of panel.rows) {
+    if (row.type === "group") {
+      entries.push(...row.items);
+    } else {
+      entries.push(row.item);
+    }
+  }
+  return entries;
+}
+
 function computePanelPreviewEntries(panel) {
   if (panel.key === "guaranteed") {
     const rotatingRow = panel.rows.find(
@@ -497,6 +548,25 @@ function computePanelPreviewEntries(panel) {
     return newRow
       ? [{ key: `${panel.key}-newExclusive`, entry: newRow.item, badgeText: "NEW" }]
       : [];
+  }
+
+  if (panel.key === "uncommon" || panel.key === "rare") {
+    const weaponSetKey = panel.key === "uncommon" ? "uncommonWeapons" : "rareWeapons";
+    const weaponGroup = panel.rows.find(
+      (row) => row.type === "group" && row.setKey === weaponSetKey
+    );
+    if (weaponGroup?.items.length) {
+      const entry = pickRandom(weaponGroup.items);
+      return [{ key: `${panel.key}-weapon-preview`, entry }];
+    }
+  }
+
+  if (panel.key === "commonLeft" || panel.key === "commonRight" || panel.key === "superRare") {
+    const entries = collectAllEntries(panel);
+    if (entries.length) {
+      const entry = pickRandom(entries);
+      return [{ key: `${panel.key}-preview`, entry }];
+    }
   }
 
   return [];
@@ -521,6 +591,14 @@ function computeRowPreviewEntries(row) {
 
   return [];
 }
+
+const percentModeDescription = computed(() => {
+  if (percentMode.value === "perChest") {
+    return "Percentages below reflect the chance to receive the item per chest opened.  The total chance to get a 5th drop is 10%.";
+  }
+
+  return "Golden keys guarantee a 5th drop.  Percentages are adjusted to show the chance per 5th-drop roll.";
+});
 
 function getRowPercent(weight, denominator) {
   if (weight == null || denominator == null) {
@@ -720,5 +798,26 @@ function formatPercent(percent) {
   flex: 0 0 auto;
   text-align: right;
   font-variant-numeric: tabular-nums;
+}
+
+.percent-mode-toggle-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.percent-mode-toggle .v-btn {
+  min-width: 36px;
+}
+
+.percent-mode-label {
+  line-height: 1;
+}
+
+.percent-mode-hint {
+  display: flex;
+  align-items: center;
+  padding: 8px 18px;
 }
 </style>
