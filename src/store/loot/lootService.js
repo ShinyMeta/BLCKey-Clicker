@@ -166,19 +166,25 @@ function weightedRandom(items) {
 export function openChest(lootTable) {
   const drops = [];
 
-  for (const item of lootTable.guaranteed) {
-    drops.push({ itemId: item.itemId, label: item.label, quantity: item.quantity, category: item.category });
+  function pluck(item) {
+    return {
+      itemId: item.itemId,
+      skinId: item.skinId,
+      label: item.label,
+      quantity: item.quantity,
+      category: item.category,
+    };
   }
 
-  const leftPick = weightedRandom(lootTable.commonLeft);
-  drops.push({ itemId: leftPick.itemId, label: leftPick.label, quantity: leftPick.quantity, category: leftPick.category });
+  for (const item of lootTable.guaranteed) {
+    drops.push(pluck(item));
+  }
 
-  const rightPick = weightedRandom(lootTable.commonRight);
-  drops.push({ itemId: rightPick.itemId, label: rightPick.label, quantity: rightPick.quantity, category: rightPick.category });
+  drops.push(pluck(weightedRandom(lootTable.commonLeft)));
+  drops.push(pluck(weightedRandom(lootTable.commonRight)));
 
   if (Math.random() < lootTable.fifthDropChance) {
-    const pick = weightedRandom(lootTable.fifthDrop);
-    drops.push({ itemId: pick.itemId, label: pick.label, quantity: pick.quantity, category: pick.category });
+    drops.push(pluck(weightedRandom(lootTable.fifthDrop)));
   }
 
   return drops;

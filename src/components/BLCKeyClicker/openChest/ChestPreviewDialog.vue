@@ -221,6 +221,7 @@ import { computed, ref, watch } from "vue";
 import unknownItem from "@/assets/item/unknown.png";
 import blcKeyIcon from "@/assets/item/BLCKey.png";
 import goldenBlcKeyIcon from "@/assets/item/goldenBLCKey.png";
+import api from "@/utils/gw2api";
 import template from "@/store/loot/config/template.json";
 import { mergeTemplateWithConfig } from "@/store/loot/lootService";
 
@@ -464,13 +465,15 @@ watch(
     isLoadingMetadata.value = true;
 
     try {
+      const { itemIds, skinIds } = metadataLookups.value;
+
       const [items, skins] = await Promise.all([
-        fetchMetadataBatch("items", metadataLookups.value.itemIds),
-        fetchMetadataBatch("skins", metadataLookups.value.skinIds),
+        itemIds.length ? api.items().many(itemIds) : [],
+        skinIds.length ? api.skins().many(skinIds) : [],
       ]);
 
-      itemMetadata.value = items;
-      skinMetadata.value = skins;
+      itemMetadata.value = toLookup(items);
+      skinMetadata.value = toLookup(skins);
       lastLoadedSignature.value = signature;
     } catch (error) {
       console.error("Failed to load chest preview metadata", error);
@@ -481,40 +484,11 @@ watch(
   { immediate: true }
 );
 
-async function fetchMetadataBatch(endpoint, ids) {
-  if (!ids.length) {
-    return {};
-  }
-
-  const chunkSize = 150;
-  const responses = await Promise.all(
-    chunkArray(ids, chunkSize).map(async (chunk) => {
-      const response = await fetch(
-        `https://api.guildwars2.com/v2/${endpoint}?ids=${chunk.join(",")}`
-      );
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch ${endpoint}: ${response.status}`);
-      }
-
-      return response.json();
-    })
-  );
-
-  return responses.flat().reduce((lookup, entry) => {
-    lookup[entry.id] = entry;
-    return lookup;
+function toLookup(entries) {
+  return entries.reduce((map, entry) => {
+    map[entry.id] = entry;
+    return map;
   }, {});
-}
-
-function chunkArray(values, chunkSize) {
-  const result = [];
-
-  for (let index = 0; index < values.length; index += chunkSize) {
-    result.push(values.slice(index, index + chunkSize));
-  }
-
-  return result;
 }
 
 function getEntryMetadata(entry) {

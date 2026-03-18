@@ -59,17 +59,15 @@ import { computed, onBeforeUnmount, ref } from "vue";
 import { storeToRefs } from "pinia";
 import blcKeyImg from "@/assets/item/BLCKey.png";
 import goldenBlcKeyImg from "@/assets/item/goldenBLCKey.png";
-import noRewardImg from "@/assets/noRewardItem.png";
+import unknownItem from "@/assets/item/unknown.png";
+import api from "@/utils/gw2api";
 import OpenChestButton from "@/components/BLCKeyClicker/openChest/OpenChestButton.vue";
 import ChestPreviewDialog from "@/components/BLCKeyClicker/openChest/ChestPreviewDialog.vue";
 import LootRow from "@/components/BLCKeyClicker/openChest/LootRow.vue";
 import { useBLCKeyClickerSaveStore } from "@/store/BLCKeyClickerSaveStore";
+import { useLootStore } from "@/store/loot/lootStore";
 
 const props = defineProps({
-  lootSources: {
-    type: Array,
-    default: () => Array(5).fill(noRewardImg),
-  },
   lootRevealDelayMs: {
     type: Number,
     default: 600,
@@ -77,7 +75,9 @@ const props = defineProps({
 });
 
 const saveStore = useBLCKeyClickerSaveStore();
-const { inventory, currentChestConfig } = storeToRefs(saveStore);
+const lootStore = useLootStore();
+const { inventory } = storeToRefs(saveStore);
+const { currentChestConfig } = storeToRefs(lootStore);
 const chestButton = ref(null);
 const lootRow = ref(null);
 const selectedKeyType = ref("blcKeys");
@@ -85,6 +85,7 @@ const selectedKeyCount = computed(
   () => inventory.value[selectedKeyType.value] ?? 0
 );
 let lootRevealTimeoutId = null;
+let openSequenceId = 0;
 
 function clearTimers() {
   if (lootRevealTimeoutId !== null) {
@@ -97,10 +98,48 @@ function handleChestClick() {
   clearTimers();
   lootRow.value?.reset();
 
-  lootRevealTimeoutId = window.setTimeout(() => {
-    lootRow.value?.displayLoot(props.lootSources);
+  inventory.value[selectedKeyType.value] -= 1;
+
+  const drops = lootStore.open();
+  const iconsPromise = resolveDropIcons(drops);
+  const thisSequence = ++openSequenceId;
+
+  lootRevealTimeoutId = window.setTimeout(async () => {
     lootRevealTimeoutId = null;
+    const icons = await iconsPromise;
+    if (thisSequence !== openSequenceId) return;
+    lootRow.value?.displayLoot(icons);
   }, props.lootRevealDelayMs);
+}
+
+async function resolveDropIcons(drops) {
+  const itemIds = [];
+  const skinIds = [];
+
+  for (const drop of drops) {
+    if (drop.skinId != null) skinIds.push(drop.skinId);
+    else if (drop.itemId != null) itemIds.push(drop.itemId);
+  }
+
+  try {
+    const [items, skins] = await Promise.all([
+      itemIds.length ? api.items().many(itemIds) : [],
+      skinIds.length ? api.skins().many(skinIds) : [],
+    ]);
+
+    const iconById = {};
+    for (const entry of items) iconById[`items:${entry.id}`] = entry.icon;
+    for (const entry of skins) iconById[`skins:${entry.id}`] = entry.icon;
+
+    return drops.map((drop) => {
+      if (drop.skinId != null) return iconById[`skins:${drop.skinId}`] ?? unknownItem;
+      if (drop.itemId != null) return iconById[`items:${drop.itemId}`] ?? unknownItem;
+      return unknownItem;
+    });
+  } catch (error) {
+    console.error("Failed to fetch drop icons", error);
+    return drops.map(() => unknownItem);
+  }
 }
 
 function reset() {
