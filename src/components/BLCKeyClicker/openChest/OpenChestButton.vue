@@ -168,7 +168,6 @@ onBeforeUnmount(() => {
 
 .chest-bottom {
   position: relative;
-  z-index: 3;
   display: block;
 }
 
@@ -176,7 +175,6 @@ onBeforeUnmount(() => {
   position: absolute;
   top: calc(100% * 94 / 256);
   left: 0;
-  z-index: 2;
   transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -190,7 +188,6 @@ onBeforeUnmount(() => {
   right: 5%;
   top: calc(100% * 158 / 256);
   height: 8px;
-  z-index: 1;
   transform: translateY(-50%) scaleX(0);
   opacity: 0;
   background: radial-gradient(
