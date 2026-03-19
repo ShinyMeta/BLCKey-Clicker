@@ -176,7 +176,11 @@
                     </v-expansion-panel>
                   </v-expansion-panels>
 
-                  <div v-else class="loot-entry">
+                  <div
+                    v-else
+                    class="loot-entry"
+                    :class="{ 'loot-entry--obtained': isExclusiveObtained(row) }"
+                  >
                     <div class="loot-entry__info">
                       <div class="loot-entry__icon-wrap">
                         <v-avatar rounded="0" size="40" class="loot-entry__icon">
@@ -185,6 +189,12 @@
                             :alt="getEntryName(row.item)"
                           />
                         </v-avatar>
+                        <div
+                          v-if="isExclusiveObtained(row)"
+                          class="loot-entry__obtained-overlay"
+                        >
+                          <v-icon color="success" size="20">mdi-check-circle</v-icon>
+                        </div>
                         <span
                           v-if="getItemBadgeText(row)"
                           class="loot-entry__badge"
@@ -203,7 +213,18 @@
                       </div>
                     </div>
                     <div class="text-body-2 loot-entry__percent">
-                      {{ formatPercent(getRowPercent(row.weight, panel.denominator)) }}
+                      <v-chip
+                        v-if="isExclusiveObtained(row)"
+                        size="small"
+                        color="success"
+                        variant="tonal"
+                      >
+                        <v-icon start size="14">mdi-check</v-icon>
+                        Obtained
+                      </v-chip>
+                      <template v-else>
+                        {{ formatPercent(getRowPercent(row.weight, panel.denominator)) }}
+                      </template>
                     </div>
                   </div>
                 </template>
@@ -218,12 +239,14 @@
 
 <script setup>
 import { computed, ref, watch } from "vue";
+import { storeToRefs } from "pinia";
 import unknownItem from "@/assets/item/unknown.png";
 import blcKeyIcon from "@/assets/item/BLCKey.png";
 import goldenBlcKeyIcon from "@/assets/item/goldenBLCKey.png";
 import api from "@/utils/gw2api";
 import template from "@/store/loot/config/template.json";
 import { mergeTemplateWithConfig } from "@/store/loot/lootService";
+import { useLootStore } from "@/store/loot/lootStore";
 
 const CATEGORY_ORDER = [
   "guaranteed",
@@ -263,6 +286,8 @@ const props = defineProps({
     default: null,
   },
 });
+
+const { lootTable, exclusiveLookup } = storeToRefs(useLootStore());
 
 const dialogOpen = ref(false);
 const percentMode = ref("perChest");
@@ -350,10 +375,16 @@ const rawPanels = computed(() => {
 });
 
 const fifthDropPoolWeight = computed(() =>
-  rawPanels.value
-    .filter((panel) => FIFTH_DROP_CATEGORY_KEYS.includes(panel.key))
-    .reduce((sum, panel) => sum + panel.poolWeight, 0)
+  (lootTable.value?.fifthDrop ?? []).reduce((sum, item) => sum + item.weight, 0),
 );
+
+const fifthDropCategoryWeights = computed(() => {
+  const weights = {};
+  for (const item of lootTable.value?.fifthDrop ?? []) {
+    weights[item.category] = (weights[item.category] ?? 0) + item.weight;
+  }
+  return weights;
+});
 
 const cachedPreviewEntries = computed(() => {
   const result = {};
@@ -371,36 +402,42 @@ const cachedPreviewEntries = computed(() => {
   return result;
 });
 
+function getPanelDenominator(panelKey, poolWeight) {
+  if (panelKey === "guaranteed") return null;
+  if (!FIFTH_DROP_CATEGORY_KEYS.includes(panelKey)) return poolWeight;
+  return percentMode.value === "perChest"
+    ? fifthDropPoolWeight.value / template.fifthDropChance
+    : fifthDropPoolWeight.value;
+}
+
+function getPanelDisplayText(panelKey) {
+  if (panelKey === "guaranteed") {
+    return { subtitle: "Both items included in every chest.", poolPercentText: "" };
+  }
+  if (panelKey === "commonLeft" || panelKey === "commonRight") {
+    return { subtitle: "One item from this pool in every chest.", poolPercentText: "" };
+  }
+
+  const categoryWeight = fifthDropCategoryWeights.value[panelKey] ?? 0;
+  const poolSharePercent = getRowPercent(categoryWeight, fifthDropPoolWeight.value);
+  const chestSharePercent = poolSharePercent * template.fifthDropChance;
+
+  if (percentMode.value === "perChest") {
+    return {
+      subtitle: `${formatPercent(chestSharePercent)} total chance per chest`,
+      poolPercentText: formatPercent(chestSharePercent),
+    };
+  }
+  return {
+    subtitle: `${formatPercent(poolSharePercent)} chance when a 5th drop occurs`,
+    poolPercentText: formatPercent(poolSharePercent),
+  };
+}
+
 const previewPanels = computed(() =>
   rawPanels.value.map((panel) => {
-    const isFifthDropPanel = FIFTH_DROP_CATEGORY_KEYS.includes(panel.key);
-    const showPerChest = percentMode.value === "perChest";
-    const denominator =
-      panel.key === "guaranteed"
-        ? null
-        : isFifthDropPanel
-          ? showPerChest
-            ? fifthDropPoolWeight.value / template.fifthDropChance
-            : fifthDropPoolWeight.value
-          : panel.poolWeight;
-
-    let subtitle = "Both items included in every chest.";
-    let poolPercentText = "";
-
-    if (panel.key === "commonLeft" || panel.key === "commonRight") {
-      subtitle = "One item from this pool in every chest.";
-    } else if (isFifthDropPanel) {
-      const poolSharePercent = getRowPercent(panel.poolWeight, fifthDropPoolWeight.value);
-      const chestSharePercent = poolSharePercent * template.fifthDropChance;
-      subtitle = percentMode.value === "perChest"
-          ? `${formatPercent(chestSharePercent)} total chance per chest`
-          : `${formatPercent(poolSharePercent)} chance when a 5th drop occurs`;
-      poolPercentText = percentMode.value === "perChest"
-          ? `${formatPercent(chestSharePercent)}`
-          : `${formatPercent(poolSharePercent)}`;
-    }
-
     const cached = cachedPreviewEntries.value[panel.key];
+    const { subtitle, poolPercentText } = getPanelDisplayText(panel.key);
 
     return {
       ...panel,
@@ -409,7 +446,7 @@ const previewPanels = computed(() =>
           ? { ...row, previewEntries: cached.rows[row.key] }
           : row
       ),
-      denominator,
+      denominator: getPanelDenominator(panel.key, panel.poolWeight),
       subtitle,
       poolPercentText,
       previewEntries: cached.panel,
@@ -507,8 +544,13 @@ function getEntryIcon(entry) {
   return getEntryMetadata(entry)?.icon ?? unknownItem;
 }
 
+function isExclusiveObtained(row) {
+  if (row.type !== "item") return false;
+  return exclusiveLookup.value.get(row.item.itemId)?.dropped ?? false;
+}
+
 function getItemBadgeText(row) {
-  if (row.setKey === "newExclusive") return "NEW";
+  if (row.setKey === "newExclusive" && !isExclusiveObtained(row)) return "NEW";
   return "";
 }
 
@@ -610,10 +652,6 @@ function getRowPercent(weight, denominator) {
 }
 
 function formatPercent(percent) {
-  if (percent >= 10) {
-    return `${percent.toFixed(2)}%`;
-  }
-
   if (percent >= 1) {
     return `${percent.toFixed(2)}%`;
   }
@@ -622,7 +660,11 @@ function formatPercent(percent) {
     return `${percent.toFixed(3)}%`;
   }
 
-  return `${percent.toFixed(4)}%`;
+  if (percent > 0) {
+    return `${percent.toFixed(4)}%`;
+  }
+
+  return `${percent.toFixed(2)}%`;
 }
 </script>
 
@@ -789,6 +831,16 @@ function formatPercent(percent) {
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.04em;
+}
+
+.loot-entry__obtained-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1;
 }
 
 .loot-entry__percent {

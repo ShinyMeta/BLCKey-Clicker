@@ -12,6 +12,8 @@ export class LootHandler {
   constructor() {
     this._itemIdHandlers = new Map();
     this._categoryHandlers = new Map();
+    /** @type {Map<number, { itemId: number, label: string, dropped: boolean }>} */
+    this._exclusiveLookup = new Map();
   }
 
   /**
@@ -40,6 +42,55 @@ export class LootHandler {
     }
     this._categoryHandlers.get(category).push(handler);
     return this;
+  }
+
+  /**
+   * Populate the exclusive-drop lookup from the exclusive items in the
+   * current chest config.  Each entry starts as not-yet-dropped so that
+   * future features can iterate the full list.
+   *
+   * Weight is intentionally omitted — it belongs to the template slot,
+   * not the item, and the same item can appear in different slots across
+   * chest rotations.
+   *
+   * @param {Array<{ itemId: number, label: string }>} items
+   */
+  initExclusives(items) {
+    this._exclusiveLookup.clear();
+    for (const item of items) {
+      this._exclusiveLookup.set(item.itemId, {
+        itemId: item.itemId,
+        label: item.label,
+        dropped: false,
+      });
+    }
+  }
+
+  /**
+   * Mark an exclusive item as dropped.
+   * @param {number} itemId
+   * @returns {boolean} true if the item existed in the lookup
+   */
+  markExclusiveDropped(itemId) {
+    const entry = this._exclusiveLookup.get(itemId);
+    if (entry) {
+      entry.dropped = true;
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * @param {number} itemId
+   * @returns {boolean}
+   */
+  isExclusiveDropped(itemId) {
+    return this._exclusiveLookup.get(itemId)?.dropped ?? false;
+  }
+
+  /** @returns {Map<number, { itemId: number, label: string, dropped: boolean }>} */
+  get exclusiveLookup() {
+    return this._exclusiveLookup;
   }
 
   /**

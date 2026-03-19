@@ -22,11 +22,23 @@ const ITEM_ID = {
 };
 
 export const useLootStore = defineStore("loot", () => {
-  const lootTable = shallowRef(null);
+  const baseLootTable = shallowRef(null);
   const chestName = ref("");
   const currentChestConfig = ref(null);
   const lastDrops = shallowRef([]);
   const chestHistory = ref([]);
+  const exclusiveLookup = shallowRef(new Map());
+
+  const lootTable = computed(() => {
+    if (!baseLootTable.value) return null;
+    const lookup = exclusiveLookup.value;
+    return {
+      ...baseLootTable.value,
+      fifthDrop: baseLootTable.value.fifthDrop.filter(
+        (item) => item.category !== "exclusive" || !lookup.get(item.itemId)?.dropped,
+      ),
+    };
+  });
 
   const saveStore = useBLCKeyClickerSaveStore();
   const lootHandler = new LootHandler();
@@ -42,7 +54,11 @@ export const useLootStore = defineStore("loot", () => {
     .onItemId(ITEM_ID.TRANSMUTATION_CHARGE, (drop) => saveStore.addToInventory("transmutationCharges", drop.quantity))
     .onItemId(ITEM_ID.GOLDEN_KEY, (drop) => saveStore.addToInventory("goldenKeys", drop.quantity))
     .onItemId(ITEM_ID.WEAPON_TICKET, (drop) => saveStore.addToInventory("blackLionWeaponTickets", drop.quantity))
-    .onItemId(ITEM_ID.TICKET_SCRAP, () => saveStore.addToInventory("blackLionWeaponTickets", 0.1));
+    .onItemId(ITEM_ID.TICKET_SCRAP, () => saveStore.addToInventory("blackLionWeaponTickets", 0.1))
+    .onCategory("exclusive", (drop) => {
+      lootHandler.markExclusiveDropped(drop.itemId);
+      exclusiveLookup.value = new Map(lootHandler.exclusiveLookup);
+    });
 
   /**
    * Load a specific chest by providing a chest config.
@@ -54,9 +70,15 @@ export const useLootStore = defineStore("loot", () => {
    */
   function loadChest(chestConfig) {
     const merged = mergeTemplateWithConfig(template, chestConfig);
-    lootTable.value = buildLootTable(merged);
+    baseLootTable.value = buildLootTable(merged);
     chestName.value = chestConfig.name ?? "";
     currentChestConfig.value = chestConfig;
+
+    const exclusiveItems = baseLootTable.value.fifthDrop.filter(
+      (item) => item.category === "exclusive",
+    );
+    lootHandler.initExclusives(exclusiveItems);
+    exclusiveLookup.value = new Map(lootHandler.exclusiveLookup);
 
     chestHistory.value.push({
       config: structuredClone(chestConfig),
@@ -119,6 +141,7 @@ export const useLootStore = defineStore("loot", () => {
     lastDrops,
     chestHistory,
     currentHistoryEntry,
+    exclusiveLookup,
     lootHandler,
     loadChest,
     generateCurrentChestConfig,
