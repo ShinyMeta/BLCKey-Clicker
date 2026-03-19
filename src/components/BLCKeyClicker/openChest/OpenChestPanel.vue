@@ -3,24 +3,16 @@
     <div class="chest-controls">
       <div class="left-controls">
         <div class="exclusive-previews">
-          <div
+          <ItemImage
             v-for="item in exclusiveItems"
             :key="item.itemId"
+            :item="item"
             class="exclusive-preview"
-          >
-            <v-avatar rounded="lg" size="48" class="exclusive-preview__icon">
-              <v-img :src="item.icon" :alt="item.label" />
-            </v-avatar>
-            <div
-              v-if="item.obtained"
-              class="exclusive-preview__check"
-            >
-              <v-icon color="success" size="20">mdi-check-circle</v-icon>
-            </div>
-            <span v-if="item.badgeText" class="exclusive-preview__badge">
-              {{ item.badgeText }}
-            </span>
-          </div>
+            :size="48"
+            rounded="lg"
+            :text-overlay="false"
+            :avatar-props="{ class: 'exclusive-preview__icon' }"
+          />
         </div>
         <ChestPreviewDialog :chest-config="currentChestConfig">
           <template #activator="activatorProps">
@@ -50,14 +42,38 @@
       >
         <v-btn value="blcKeys" class="key-select-btn" :class="{ empty: inventory.blcKeys === 0 }">
           <div class="key-select-content">
-            <span class="key-select-count">{{ inventory.blcKeys }}</span>
-            <img :src="blcKeyImg" alt="" class="key-select-image" />
+            <ItemImage
+              :item="{
+                name: 'Black Lion Chest Key',
+                icon: blcKeyImg,
+                quantity: inventory.blcKeys,
+              }"
+              :size="52"
+              rounded="lg"
+              :tooltip="false"
+              :text-overlay="String(inventory.blcKeys)"
+              text-overlay-style="shadow"
+              text-overlay-position="bottom-center"
+              class="key-select-image"
+            />
           </div>
         </v-btn>
         <v-btn value="goldenKeys" class="key-select-btn" :class="{ empty: inventory.goldenKeys === 0 }">
           <div class="key-select-content">
-            <span class="key-select-count">{{ inventory.goldenKeys }}</span>
-            <img :src="goldenBlcKeyImg" alt="" class="key-select-image" />
+            <ItemImage
+              :item="{
+                name: 'Golden Black Lion Chest Key',
+                icon: goldenBlcKeyImg,
+                quantity: inventory.goldenKeys,
+              }"
+              :size="52"
+              rounded="lg"
+              :tooltip="false"
+              :text-overlay="String(inventory.goldenKeys)"
+              text-overlay-style="shadow"
+              text-overlay-position="bottom-center"
+              class="key-select-image"
+            />
           </div>
         </v-btn>
       </v-btn-toggle>
@@ -67,17 +83,18 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, ref, watch } from "vue";
+import { computed, onBeforeUnmount, ref } from "vue";
 import { storeToRefs } from "pinia";
 import blcKeyImg from "@/assets/item/BLCKey.png";
 import goldenBlcKeyImg from "@/assets/item/goldenBLCKey.png";
 import unknownItem from "@/assets/item/unknown.png";
-import api from "@/utils/gw2api";
+import ItemImage from "@/components/ItemImage.vue";
 import OpenChestButton from "@/components/BLCKeyClicker/openChest/OpenChestButton.vue";
 import ChestPreviewDialog from "@/components/BLCKeyClicker/openChest/ChestPreviewDialog.vue";
 import LootRow from "@/components/BLCKeyClicker/openChest/LootRow.vue";
 import { useBLCKeyClickerSaveStore } from "@/store/BLCKeyClickerSaveStore";
 import { useLootStore } from "@/store/loot/lootStore";
+import api from "@/utils/gw2api";
 
 const props = defineProps({
   lootRevealDelayMs: {
@@ -99,29 +116,6 @@ const selectedKeyCount = computed(
 let lootRevealTimeoutId = null;
 let openSequenceId = 0;
 
-const exclusiveIcons = ref({});
-
-watch(currentChestConfig, async (config) => {
-  if (!config?.sets) {
-    exclusiveIcons.value = {};
-    return;
-  }
-  const itemIds = [];
-  for (const setKey of ["newExclusive", "returningExclusive"]) {
-    const item = config.sets[setKey]?.items?.[0];
-    if (item?.itemId) itemIds.push(item.itemId);
-  }
-  if (!itemIds.length) return;
-  try {
-    const items = await api.items().many(itemIds);
-    const icons = {};
-    for (const item of items) icons[item.id] = item.icon;
-    exclusiveIcons.value = icons;
-  } catch (error) {
-    console.error("Failed to fetch exclusive icons", error);
-  }
-}, { immediate: true });
-
 const exclusiveItems = computed(() => {
   const config = currentChestConfig.value;
   if (!config?.sets) return [];
@@ -137,7 +131,6 @@ const exclusiveItems = computed(() => {
       setKey,
       obtained,
       badgeText: setKey === "newExclusive" && !obtained ? "NEW" : "",
-      icon: exclusiveIcons.value[entry.itemId] ?? unknownItem,
     });
   }
   return items;
@@ -243,37 +236,9 @@ onBeforeUnmount(() => {
   gap: 8px;
 }
 
-.exclusive-preview {
-  position: relative;
-}
-
-.exclusive-preview__icon {
+.open-chest-panel :deep(.exclusive-preview__icon) {
   background: rgba(var(--v-theme-surface-variant), 0.4);
   border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
-}
-
-.exclusive-preview__check {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.55);
-  border-radius: 8px;
-}
-
-.exclusive-preview__badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  padding: 1px 4px;
-  border-radius: 999px;
-  background: rgb(var(--v-theme-primary));
-  color: rgb(var(--v-theme-on-primary));
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.04em;
 }
 
 /* --- right column: key toggle --- */
@@ -283,7 +248,7 @@ onBeforeUnmount(() => {
 }
 
 .key-toggle :deep(.v-btn) {
-  padding: 4px 6px;
+  padding: 6px;
   height: auto !important;
   min-width: 0 !important;
 }
@@ -299,17 +264,8 @@ onBeforeUnmount(() => {
   gap: 4px;
 }
 
-.key-select-image {
-  width: 52px;
-  height: 52px;
+.open-chest-panel :deep(.key-select-image .item-image__img) {
   object-fit: contain;
-  border-radius: 8px;
-}
-
-.key-select-count {
-  font-size: 1.1rem;
-  font-weight: 700;
-  line-height: 1;
 }
 
 .open-chest-panel :deep(.loot-row) {
