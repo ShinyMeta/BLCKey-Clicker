@@ -116,13 +116,14 @@ export const useLootStore = defineStore("loot", () => {
    * Each drop is run through the loot handler (updating inventory, etc.)
    * and appended to the current history entry.
    *
+   * @param {string} [keyType="blcKeys"] - "blcKeys" for normal odds, "goldenKeys" for a guaranteed 5th drop
    * @returns {Array<{ itemId: number, skinId?: number, label: string, quantity: number, category: string }>}
    */
-  function open() {
+  function open(keyType = "blcKeys") {
     if (!lootTable.value) {
       throw new Error("No chest loaded — call loadChest() first");
     }
-    const drops = openChest(lootTable.value);
+    const drops = openChest(lootTable.value, keyType);
     lastDrops.value = drops;
 
     lootHandler.processDrops(drops);
@@ -134,6 +135,10 @@ export const useLootStore = defineStore("loot", () => {
     return drops;
   }
 
+  function hasExclusiveDropped(itemId) {
+    return exclusiveLookup.value.get(itemId)?.dropped ?? false;
+  }
+
   return {
     lootTable,
     chestName,
@@ -141,7 +146,7 @@ export const useLootStore = defineStore("loot", () => {
     lastDrops,
     chestHistory,
     currentHistoryEntry,
-    exclusiveLookup,
+    hasExclusiveDropped,
     lootHandler,
     loadChest,
     generateCurrentChestConfig,

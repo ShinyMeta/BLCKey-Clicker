@@ -274,7 +274,7 @@ watch(
       return;
     }
 
-    const nextMetadata = await fetchItemLikeMetadata(sourceItem.value);
+    const [nextMetadata = null] = await fetchItemLikeMetadata([sourceItem.value]);
 
     if (requestKey !== metadataKey.value) {
       return;

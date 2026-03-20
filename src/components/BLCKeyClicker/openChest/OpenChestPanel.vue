@@ -40,36 +40,24 @@
         mandatory
         class="key-toggle"
       >
-        <v-btn value="blcKeys" class="key-select-btn" :class="{ empty: inventory.blcKeys === 0 }">
+        <v-btn
+          v-for="key in keyTypes"
+          :key="key.value"
+          :value="key.value"
+          class="key-select-btn"
+          :class="{ empty: inventory[key.value] === 0 }"
+        >
           <div class="key-select-content">
             <ItemImage
               :item="{
-                name: 'Black Lion Chest Key',
-                icon: blcKeyImg,
-                quantity: inventory.blcKeys,
+                name: key.name,
+                icon: key.icon,
+                quantity: inventory[key.value],
               }"
               :size="52"
               rounded="lg"
               :tooltip="false"
-              :text-overlay="String(inventory.blcKeys)"
-              text-overlay-style="shadow"
-              text-overlay-position="bottom-center"
-              class="key-select-image"
-            />
-          </div>
-        </v-btn>
-        <v-btn value="goldenKeys" class="key-select-btn" :class="{ empty: inventory.goldenKeys === 0 }">
-          <div class="key-select-content">
-            <ItemImage
-              :item="{
-                name: 'Golden Black Lion Chest Key',
-                icon: goldenBlcKeyImg,
-                quantity: inventory.goldenKeys,
-              }"
-              :size="52"
-              rounded="lg"
-              :tooltip="false"
-              :text-overlay="String(inventory.goldenKeys)"
+              :text-overlay="String(inventory[key.value])"
               text-overlay-style="shadow"
               text-overlay-position="bottom-center"
               class="key-select-image"
@@ -94,7 +82,7 @@ import ChestPreviewDialog from "@/components/BLCKeyClicker/openChest/ChestPrevie
 import LootRow from "@/components/BLCKeyClicker/openChest/LootRow.vue";
 import { useBLCKeyClickerSaveStore } from "@/store/BLCKeyClickerSaveStore";
 import { useLootStore } from "@/store/loot/lootStore";
-import api from "@/utils/gw2api";
+import { fetchItemLikeMetadata } from "@/utils/gw2api";
 
 const props = defineProps({
   lootRevealDelayMs: {
@@ -106,9 +94,13 @@ const props = defineProps({
 const saveStore = useBLCKeyClickerSaveStore();
 const lootStore = useLootStore();
 const { inventory } = storeToRefs(saveStore);
-const { currentChestConfig, exclusiveLookup } = storeToRefs(lootStore);
+const { currentChestConfig } = storeToRefs(lootStore);
 const chestButton = ref(null);
 const lootRow = ref(null);
+const keyTypes = [
+  { value: "blcKeys", name: "Black Lion Chest Key", icon: blcKeyImg },
+  { value: "goldenKeys", name: "Golden Black Lion Chest Key", icon: goldenBlcKeyImg },
+];
 const selectedKeyType = ref("blcKeys");
 const selectedKeyCount = computed(
   () => inventory.value[selectedKeyType.value] ?? 0
@@ -120,11 +112,10 @@ const exclusiveItems = computed(() => {
   const config = currentChestConfig.value;
   if (!config?.sets) return [];
   const items = [];
-  const lookup = exclusiveLookup.value;
   for (const setKey of ["newExclusive", "returningExclusive"]) {
     const entry = config.sets[setKey]?.items?.[0];
     if (!entry) continue;
-    const obtained = lookup.get(entry.itemId)?.dropped ?? false;
+    const obtained = lootStore.hasExclusiveDropped(entry.itemId);
     items.push({
       itemId: entry.itemId,
       label: entry.label,
@@ -149,7 +140,7 @@ function handleChestClick() {
 
   inventory.value[selectedKeyType.value] -= 1;
 
-  const drops = lootStore.open();
+  const drops = lootStore.open(selectedKeyType.value);
   const iconsPromise = resolveDropIcons(drops);
   const thisSequence = ++openSequenceId;
 
@@ -162,29 +153,9 @@ function handleChestClick() {
 }
 
 async function resolveDropIcons(drops) {
-  const itemIds = [];
-  const skinIds = [];
-
-  for (const drop of drops) {
-    if (drop.skinId != null) skinIds.push(drop.skinId);
-    else if (drop.itemId != null) itemIds.push(drop.itemId);
-  }
-
   try {
-    const [items, skins] = await Promise.all([
-      itemIds.length ? api.items().many(itemIds) : [],
-      skinIds.length ? api.skins().many(skinIds) : [],
-    ]);
-
-    const iconById = {};
-    for (const entry of items) iconById[`items:${entry.id}`] = entry.icon;
-    for (const entry of skins) iconById[`skins:${entry.id}`] = entry.icon;
-
-    return drops.map((drop) => {
-      if (drop.skinId != null) return iconById[`skins:${drop.skinId}`] ?? unknownItem;
-      if (drop.itemId != null) return iconById[`items:${drop.itemId}`] ?? unknownItem;
-      return unknownItem;
-    });
+    const metadata = await fetchItemLikeMetadata(drops);
+    return metadata.map((m) => m?.icon ?? unknownItem);
   } catch (error) {
     console.error("Failed to fetch drop icons", error);
     return drops.map(() => unknownItem);

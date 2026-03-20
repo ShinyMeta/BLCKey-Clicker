@@ -61,21 +61,16 @@
               <div class="panel-header">
                 <div class="panel-header__main">
                   <div class="panel-preview-icons">
-                    <div
+                    <ItemImage
                       v-for="preview in panel.previewEntries"
                       :key="preview.key"
-                      class="panel-preview-icon-wrap"
-                    >
-                      <v-avatar rounded="0" size="30" class="panel-preview-icon">
-                        <v-img
-                          :src="getEntryIcon(preview.entry)"
-                          :alt="getEntryName(preview.entry)"
-                        />
-                      </v-avatar>
-                      <span v-if="preview.badgeText" class="panel-preview-badge">
-                        {{ preview.badgeText }}
-                      </span>
-                    </div>
+                      :item="preview.entry"
+                      :size="30"
+                      :badge-text="preview.badgeText ?? ''"
+                      :tooltip="false"
+                      :text-overlay="false"
+                      class="panel-preview-icon"
+                    />
                   </div>
                   <div class="panel-header__text">
                     <div class="text-subtitle-1">{{ panel.title }}</div>
@@ -110,28 +105,16 @@
                             <div
                               class="panel-preview-icons panel-preview-icons--group"
                             >
-                              <div
+                              <ItemImage
                                 v-for="preview in (row.previewEntries ?? [])"
                                 :key="preview.key"
-                                class="panel-preview-icon-wrap"
-                              >
-                                <v-avatar
-                                  rounded="0"
-                                  size="36"
-                                  class="panel-preview-icon panel-preview-icon--group"
-                                >
-                                  <v-img
-                                    :src="getEntryIcon(preview.entry)"
-                                    :alt="getEntryName(preview.entry)"
-                                  />
-                                </v-avatar>
-                                <span
-                                  v-if="preview.badgeText"
-                                  class="panel-preview-badge panel-preview-badge--group"
-                                >
-                                  {{ preview.badgeText }}
-                                </span>
-                              </div>
+                                :item="preview.entry"
+                                :size="36"
+                                :badge-text="preview.badgeText ?? ''"
+                                :tooltip="false"
+                                :text-overlay="false"
+                                class="panel-preview-icon"
+                              />
                             </div>
                             <div class="text-subtitle-2">
                               {{ row.label }}
@@ -154,11 +137,14 @@
                             class="loot-entry"
                           >
                             <div class="loot-entry__info">
-                              <v-avatar rounded="0" size="40" class="loot-entry__icon">
-                                <v-img :src="getEntryIcon(item)" :alt="getEntryName(item)" />
-                              </v-avatar>
+                              <ItemImage
+                                :item="item"
+                                :size="40"
+                                :tooltip="false"
+                                :text-overlay="false"
+                              />
                               <div>
-                                <div class="text-body-2">{{ getEntryName(item) }}</div>
+                                <div class="text-body-2">{{ item.label }}</div>
                                 <div
                                   v-if="item.quantity > 1"
                                   class="text-caption text-medium-emphasis"
@@ -182,28 +168,16 @@
                     :class="{ 'loot-entry--obtained': isExclusiveObtained(row) }"
                   >
                     <div class="loot-entry__info">
-                      <div class="loot-entry__icon-wrap">
-                        <v-avatar rounded="0" size="40" class="loot-entry__icon">
-                          <v-img
-                            :src="getEntryIcon(row.item)"
-                            :alt="getEntryName(row.item)"
-                          />
-                        </v-avatar>
-                        <div
-                          v-if="isExclusiveObtained(row)"
-                          class="loot-entry__obtained-overlay"
-                        >
-                          <v-icon color="success" size="20">mdi-check-circle</v-icon>
-                        </div>
-                        <span
-                          v-if="getItemBadgeText(row)"
-                          class="loot-entry__badge"
-                        >
-                          {{ getItemBadgeText(row) }}
-                        </span>
-                      </div>
+                      <ItemImage
+                        :item="row.item"
+                        :size="40"
+                        :completed="isExclusiveObtained(row)"
+                        :badge-text="getItemBadgeText(row)"
+                        :tooltip="false"
+                        :text-overlay="false"
+                      />
                       <div>
-                        <div class="text-body-2">{{ getEntryName(row.item) }}</div>
+                        <div class="text-body-2">{{ row.item.label }}</div>
                         <div
                           v-if="row.item.quantity > 1"
                           class="text-caption text-medium-emphasis"
@@ -240,10 +214,10 @@
 <script setup>
 import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
-import unknownItem from "@/assets/item/unknown.png";
 import blcKeyIcon from "@/assets/item/BLCKey.png";
 import goldenBlcKeyIcon from "@/assets/item/goldenBLCKey.png";
-import api from "@/utils/gw2api";
+import ItemImage from "@/components/ItemImage.vue";
+import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import template from "@/store/loot/config/template.json";
 import { mergeTemplateWithConfig } from "@/store/loot/lootService";
 import { useLootStore } from "@/store/loot/lootStore";
@@ -287,14 +261,12 @@ const props = defineProps({
   },
 });
 
-const { lootTable, exclusiveLookup } = storeToRefs(useLootStore());
+const lootStore = useLootStore();
+const { lootTable } = storeToRefs(lootStore);
 
 const dialogOpen = ref(false);
 const percentMode = ref("perChest");
 const isLoadingMetadata = ref(false);
-const itemMetadata = ref({});
-const skinMetadata = ref({});
-const lastLoadedSignature = ref("");
 
 function getSlotLabel(setKey, slotName) {
   if (setKey === "uncommonWeapons" || setKey === "rareWeapons") {
@@ -454,99 +426,24 @@ const previewPanels = computed(() =>
   })
 );
 
-const metadataLookups = computed(() => {
-  const itemIds = new Set();
-  const skinIds = new Set();
-
-  for (const panel of rawPanels.value) {
-    for (const row of panel.rows) {
-      if (row.type === "group") {
-        for (const item of row.items) {
-          if (item.skinId != null) {
-            skinIds.add(item.skinId);
-          } else if (item.itemId != null) {
-            itemIds.add(item.itemId);
-          }
-        }
-        continue;
-      }
-
-      if (row.item.skinId != null) {
-        skinIds.add(row.item.skinId);
-      } else if (row.item.itemId != null) {
-        itemIds.add(row.item.itemId);
-      }
-    }
-  }
-
-  return {
-    itemIds: [...itemIds].sort((a, b) => a - b),
-    skinIds: [...skinIds].sort((a, b) => a - b),
-  };
-});
-
-const metadataSignature = computed(() =>
-  JSON.stringify({
-    itemIds: metadataLookups.value.itemIds,
-    skinIds: metadataLookups.value.skinIds,
-  })
-);
-
 watch(
-  [dialogOpen, metadataSignature],
-  async ([isOpen, signature]) => {
-    if (!isOpen || !props.chestConfig || !signature || signature === lastLoadedSignature.value) {
-      return;
-    }
-
+  dialogOpen,
+  async (isOpen) => {
+    if (!isOpen || !props.chestConfig) return;
     isLoadingMetadata.value = true;
-
     try {
-      const { itemIds, skinIds } = metadataLookups.value;
-
-      const [items, skins] = await Promise.all([
-        itemIds.length ? api.items().many(itemIds) : [],
-        skinIds.length ? api.skins().many(skinIds) : [],
-      ]);
-
-      itemMetadata.value = toLookup(items);
-      skinMetadata.value = toLookup(skins);
-      lastLoadedSignature.value = signature;
+      await fetchItemLikeMetadata(rawPanels.value.flatMap(collectAllEntries));
     } catch (error) {
-      console.error("Failed to load chest preview metadata", error);
+      console.error("Failed to prime metadata cache", error);
     } finally {
       isLoadingMetadata.value = false;
     }
   },
-  { immediate: true }
 );
-
-function toLookup(entries) {
-  return entries.reduce((map, entry) => {
-    map[entry.id] = entry;
-    return map;
-  }, {});
-}
-
-function getEntryMetadata(entry) {
-  if (entry.skinId != null) {
-    return skinMetadata.value[entry.skinId];
-  }
-
-  return itemMetadata.value[entry.itemId];
-}
-
-function getEntryName(entry) {
-  return getEntryMetadata(entry)?.name ?? entry.label;
-}
-
-function getEntryIcon(entry) {
-  return getEntryMetadata(entry)?.icon ?? unknownItem;
-}
 
 function isExclusiveObtained(row) {
   if (row.type !== "item") return false;
-  return exclusiveLookup.value.get(row.item.itemId)?.dropped ?? false;
+  return lootStore.hasExclusiveDropped(row.item.itemId);
 }
 
 function getItemBadgeText(row) {
@@ -742,37 +639,8 @@ function formatPercent(percent) {
   min-width: 36px;
 }
 
-.panel-preview-icon-wrap {
-  position: relative;
-}
-
-.panel-preview-icon {
-  background: rgba(var(--v-theme-surface-variant), 0.35);
+.panel-preview-icons :deep(.panel-preview-icon .item-image__avatar) {
   border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
-}
-
-.panel-preview-icon--group {
-  background: rgba(var(--v-theme-surface-variant), 0.45);
-}
-
-.panel-preview-badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  padding: 1px 4px;
-  border-radius: 999px;
-  background: rgb(var(--v-theme-primary));
-  color: rgb(var(--v-theme-on-primary));
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.04em;
-}
-
-.panel-preview-badge--group {
-  top: -4px;
-  right: -4px;
-  font-size: 8px;
 }
 
 .slot-group {
@@ -807,40 +675,6 @@ function formatPercent(percent) {
   align-items: center;
   gap: 10px;
   min-width: 0;
-}
-
-.loot-entry__icon {
-  flex: 0 0 auto;
-  background: rgba(var(--v-theme-surface-variant), 0.4);
-}
-
-.loot-entry__icon-wrap {
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.loot-entry__badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  padding: 1px 4px;
-  border-radius: 999px;
-  background: rgb(var(--v-theme-primary));
-  color: rgb(var(--v-theme-on-primary));
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.04em;
-}
-
-.loot-entry__obtained-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 1;
 }
 
 .loot-entry__percent {
