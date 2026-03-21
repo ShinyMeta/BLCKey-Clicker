@@ -141,24 +141,32 @@ function handleChestClick() {
   inventory.value[selectedKeyType.value] -= 1;
 
   const drops = lootStore.open(selectedKeyType.value);
-  const iconsPromise = resolveDropIcons(drops);
+  const displayLootPromise = resolveDisplayLoot(drops);
   const thisSequence = ++openSequenceId;
 
   lootRevealTimeoutId = window.setTimeout(async () => {
     lootRevealTimeoutId = null;
-    const icons = await iconsPromise;
+    const displayLoot = await displayLootPromise;
     if (thisSequence !== openSequenceId) return;
-    lootRow.value?.displayLoot(icons);
+    lootRow.value?.displayLoot(displayLoot);
   }, props.lootRevealDelayMs);
 }
 
-async function resolveDropIcons(drops) {
+async function resolveDisplayLoot(drops) {
   try {
     const metadata = await fetchItemLikeMetadata(drops);
-    return metadata.map((m) => m?.icon ?? unknownItem);
+    return drops.map((drop, index) => ({
+      ...drop,
+      name: metadata[index]?.name ?? drop.label,
+      icon: metadata[index]?.icon ?? unknownItem,
+    }));
   } catch (error) {
-    console.error("Failed to fetch drop icons", error);
-    return drops.map(() => unknownItem);
+    console.error("Failed to fetch drop metadata", error);
+    return drops.map((drop) => ({
+      ...drop,
+      name: drop.label,
+      icon: unknownItem,
+    }));
   }
 }
 

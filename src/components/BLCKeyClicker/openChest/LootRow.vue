@@ -1,35 +1,43 @@
 <template>
   <div class="loot-row">
     <div
-      v-for="(src, index) in lootSources"
+      v-for="(item, index) in lootItems"
       :key="`${animationCycle}-${index}`"
       class="loot-slot"
       :class="{ revealed: showLoot }"
       :style="{ '--fly-delay': `${index * 150}ms` }"
     >
-      <img :src="src" alt="Loot" class="loot-img" />
+      <ItemImage
+        :item="item"
+        :size="64"
+        rounded="0"
+        text-overlay-style="shadow"
+        text-overlay-position="bottom-center"
+        class="loot-item-image"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
+import ItemImage from "@/components/ItemImage.vue";
 import { nextTick, ref } from "vue";
 
-const lootSources = ref([]);
+const lootItems = ref([]);
 const showLoot = ref(false);
 const animationCycle = ref(0);
 
 function reset() {
   showLoot.value = false;
-  lootSources.value = [];
+  lootItems.value = [];
 }
 
-async function displayLoot(sources = []) {
+async function displayLoot(items = []) {
   reset();
   await nextTick();
 
   animationCycle.value += 1;
-  lootSources.value = [...sources];
+  lootItems.value = [...items];
   showLoot.value = true;
 }
 
@@ -48,6 +56,9 @@ defineExpose({
 }
 
 .loot-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
   transform: translateY(-120px) scale(0);
 }
@@ -57,10 +68,7 @@ defineExpose({
   animation-delay: var(--fly-delay);
 }
 
-.loot-img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
+.loot-item-image {
   display: block;
 }
 
