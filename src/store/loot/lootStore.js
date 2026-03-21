@@ -94,7 +94,6 @@ export const useLootStore = defineStore("loot", () => {
    */
   function generateCurrentChestConfig() {
     const config = generateChestConfig({
-      name: "Current Black Lion Chest",
       guaranteedItemCatalog,
       exclusivesCatalog,
       dyeKitsCatalog,

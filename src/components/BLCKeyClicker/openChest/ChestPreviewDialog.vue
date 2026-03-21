@@ -216,7 +216,7 @@ import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import blcKeyIcon from "@/assets/item/BLCKey.png";
 import goldenBlcKeyIcon from "@/assets/item/goldenBLCKey.png";
-import ItemImage from "@/components/ItemImage.vue";
+import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import template from "@/store/loot/config/template.json";
 import { mergeTemplateWithConfig } from "@/store/loot/lootService";

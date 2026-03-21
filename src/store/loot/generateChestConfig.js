@@ -1,3 +1,14 @@
+import chestNames from "./config/sets/chestNames.json";
+
+/**
+ * Picks a random chest name from the catalog.
+ * Appends "Chest" if the chosen name doesn't already contain it.
+ */
+function pickRandomChestName() {
+  const name = chestNames[Math.floor(Math.random() * chestNames.length)];
+  return /chest/i.test(name) ? name : `${name} Chest`;
+}
+
 /**
  * Picks `count` unique random indices from an array of the given `length`.
  * Uses Fisher-Yates partial shuffle to avoid duplicates.
@@ -39,7 +50,7 @@ function pickRandomWeaponSet(catalog, exclude = []) {
  * a catalog, and the two weapon sets are guaranteed to be different.
  *
  * @param {object} options
- * @param {string} options.name - display name for the chest
+ * @param {string} [options.name] - display name override (random if omitted)
  * @param {object} options.guaranteedItemCatalog  - guaranteed-items catalog JSON
  * @param {object} options.exclusivesCatalog      - exclusives catalog JSON
  * @param {object} options.dyeKitsCatalog         - dye-kits catalog JSON
@@ -65,7 +76,7 @@ export function generateChestConfig({
   const rare = pickRandomWeaponSet(weaponsCatalog, [uncommon.name]);
 
   return {
-    name,
+    name: name ?? pickRandomChestName(),
     sets: {
       guaranteedItem: pickRandom(
         guaranteedItemCatalog,

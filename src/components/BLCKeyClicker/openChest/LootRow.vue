@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import ItemImage from "@/components/ItemImage.vue";
+import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
 import { nextTick, ref } from "vue";
 
 const lootItems = ref([]);

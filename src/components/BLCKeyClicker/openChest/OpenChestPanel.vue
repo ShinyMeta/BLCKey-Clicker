@@ -1,33 +1,7 @@
 <template>
   <div class="open-chest-panel">
     <div class="chest-controls">
-      <div class="left-controls">
-        <div class="exclusive-previews">
-          <ItemImage
-            v-for="item in exclusiveItems"
-            :key="item.itemId"
-            :item="item"
-            class="exclusive-preview"
-            :size="48"
-            rounded="lg"
-            :text-overlay="false"
-            :avatar-props="{ class: 'exclusive-preview__icon' }"
-          />
-        </div>
-        <ChestPreviewDialog :chest-config="currentChestConfig">
-          <template #activator="activatorProps">
-            <v-btn
-              v-bind="activatorProps"
-              variant="tonal"
-              color="primary"
-              :disabled="!currentChestConfig"
-            >
-              <v-icon icon="mdi-eye" start />
-              Chest Preview
-            </v-btn>
-          </template>
-        </ChestPreviewDialog>
-      </div>
+      <ChestPreviewCard />
 
       <OpenChestButton
         ref="chestButton"
@@ -75,9 +49,9 @@ import { storeToRefs } from "pinia";
 import blcKeyImg from "@/assets/item/BLCKey.png";
 import goldenBlcKeyImg from "@/assets/item/goldenBLCKey.png";
 import unknownItem from "@/assets/item/unknown.png";
-import ItemImage from "@/components/ItemImage.vue";
+import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
 import OpenChestButton from "@/components/BLCKeyClicker/openChest/OpenChestButton.vue";
-import ChestPreviewDialog from "@/components/BLCKeyClicker/openChest/ChestPreviewDialog.vue";
+import ChestPreviewCard from "@/components/BLCKeyClicker/openChest/ChestPreviewCard.vue";
 import LootRow from "@/components/BLCKeyClicker/openChest/LootRow.vue";
 import { useBLCKeyClickerSaveStore } from "@/store/BLCKeyClickerSaveStore";
 import { useLootStore } from "@/store/loot/lootStore";
@@ -93,7 +67,6 @@ const props = defineProps({
 const saveStore = useBLCKeyClickerSaveStore();
 const lootStore = useLootStore();
 const { inventory } = storeToRefs(saveStore);
-const { currentChestConfig } = storeToRefs(lootStore);
 const chestButton = ref(null);
 const lootRow = ref(null);
 const keyTypes = [
@@ -106,25 +79,6 @@ const selectedKeyCount = computed(
 );
 let lootRevealTimeoutId = null;
 let openSequenceId = 0;
-
-const exclusiveItems = computed(() => {
-  const config = currentChestConfig.value;
-  if (!config?.sets) return [];
-  const items = [];
-  for (const setKey of ["newExclusive", "returningExclusive"]) {
-    const entry = config.sets[setKey]?.items?.[0];
-    if (!entry) continue;
-    const obtained = lootStore.hasExclusiveDropped(entry.itemId);
-    items.push({
-      itemId: entry.itemId,
-      label: entry.label,
-      setKey,
-      obtained,
-      badgeText: setKey === "newExclusive" && !obtained ? "NEW" : "",
-    });
-  }
-  return items;
-});
 
 function keyTextOverlayPosition(index)  {
   if (index === 0) return "bottom-right";
@@ -206,26 +160,7 @@ onBeforeUnmount(() => {
   width: 100%;
 }
 
-/* --- left column: exclusive previews + chest preview button --- */
-
-.left-controls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.exclusive-previews {
-  display: flex;
-  gap: 8px;
-}
-
-.open-chest-panel :deep(.exclusive-preview__icon) {
-  background: rgba(var(--v-theme-surface-variant), 0.4);
-  border: 1px solid rgba(var(--v-theme-on-surface), 0.08);
-}
-
-/* --- right column: key toggle --- */
+/* --- key toggle --- */
 
 .key-toggle {
   height: auto !important;
