@@ -1,40 +1,121 @@
 {
-  "fifthDropChance": 0.10,
+  "fifthDropChance": 0.1,
   "guaranteed": {
     "items": [
       { "itemId": 86694, "label": "Black Lion Statuette", "quantity": 1 }
     ],
-    "slots": [
-      { "setKey": "guaranteedItem" }
-    ]
+    "slots": [{ "setKey": "guaranteedItem" }]
   },
   "commonLeft": {
     "items": [
-      { "itemId": 86694, "label": "Black Lion Statuette (2)", "quantity": 2, "weight": 2.91 },
-      { "itemId": 42877, "label": "Metabolic Primer", "quantity": 1, "weight": 5.83 },
-      { "itemId": 8469, "label": "Utility Primer", "quantity": 1, "weight": 5.83 },
-      { "itemId": 20349, "label": "Upgrade Extractor", "quantity": 1, "weight": 7.77 },
-      { "itemId": 64736, "label": "Transmutation Charge (5)", "quantity": 5, "weight": 15.53 },
+      {
+        "itemId": 86694,
+        "label": "Black Lion Statuette",
+        "quantity": 2,
+        "weight": 2.91
+      },
+      {
+        "itemId": 42877,
+        "label": "Metabolic Primer",
+        "quantity": 1,
+        "weight": 5.83
+      },
+      {
+        "itemId": 8469,
+        "label": "Utility Primer",
+        "quantity": 1,
+        "weight": 5.83
+      },
+      {
+        "itemId": 20349,
+        "label": "Upgrade Extractor",
+        "quantity": 1,
+        "weight": 7.77
+      },
+      {
+        "itemId": 64736,
+        "label": "Transmutation Charge",
+        "quantity": 5,
+        "weight": 15.53
+      },
       { "itemId": 19996, "label": "Revive Orb", "quantity": 1, "weight": 15.53 }
     ],
-    "slots": [
-      { "setKey": "dyeKits", "weightPerItem": 11.65 }
-    ]
+    "slots": [{ "setKey": "dyeKits", "weightPerItem": 11.65 }]
   },
   "commonRight": {
     "items": [
-      { "itemId": 43998, "label": "Black Lion Claim Ticket Scrap", "quantity": 1, "weight": 15.87 },
-      { "itemId": 48830, "label": "Black Lion Commemorative Coin", "quantity": 1, "weight": 4.76 },
-      { "itemId": 88001, "label": "Black Lion Lockbreaker Kit", "quantity": 1, "weight": 4.76 },
-      { "itemId": 101321, "label": "Black Lion Material Bag", "quantity": 1, "weight": 9.52 },
-      { "itemId": 78474, "label": "Black Lion Miniature Claim Ticket", "quantity": 1, "weight": 7.94 },
-      { "itemId": 86474, "label": "Guaranteed Armor Unlock", "quantity": 1, "weight": 4.76 },
-      { "itemId": 79696, "label": "Guaranteed Wardrobe Unlock", "quantity": 1, "weight": 7.94 },
-      { "itemId": 86452, "label": "Guaranteed Weapon Unlock", "quantity": 1, "weight": 4.76 },
-      { "itemId": 39124, "label": "Heavy Crafting Bag (2)", "quantity": 2, "weight": 11.11 },
-      { "itemId": 39123, "label": "Large Crafting Bag (2)", "quantity": 2, "weight": 11.11 },
-      { "itemId": 67280, "label": "Teleport to Friend", "quantity": 1, "weight": 12.70 },
-      { "itemId": 86804, "label": "Tyrian Exchange Voucher", "quantity": 1, "weight": 4.76 }
+      {
+        "itemId": 43998,
+        "label": "Black Lion Claim Ticket Scrap",
+        "quantity": 1,
+        "weight": 15.87
+      },
+      {
+        "itemId": 48830,
+        "label": "Black Lion Commemorative Coin",
+        "quantity": 1,
+        "weight": 4.76
+      },
+      {
+        "itemId": 88001,
+        "label": "Black Lion Lockbreaker Kit",
+        "quantity": 1,
+        "weight": 4.76
+      },
+      {
+        "itemId": 101321,
+        "label": "Black Lion Material Bag",
+        "quantity": 1,
+        "weight": 9.52
+      },
+      {
+        "itemId": 78474,
+        "label": "Black Lion Miniature Claim Ticket",
+        "quantity": 1,
+        "weight": 7.94
+      },
+      {
+        "itemId": 86474,
+        "label": "Guaranteed Armor Unlock",
+        "quantity": 1,
+        "weight": 4.76
+      },
+      {
+        "itemId": 79696,
+        "label": "Guaranteed Wardrobe Unlock",
+        "quantity": 1,
+        "weight": 7.94
+      },
+      {
+        "itemId": 86452,
+        "label": "Guaranteed Weapon Unlock",
+        "quantity": 1,
+        "weight": 4.76
+      },
+      {
+        "itemId": 39124,
+        "label": "Heavy Crafting Bag",
+        "quantity": 2,
+        "weight": 11.11
+      },
+      {
+        "itemId": 39123,
+        "label": "Large Crafting Bag",
+        "quantity": 2,
+        "weight": 11.11
+      },
+      {
+        "itemId": 67280,
+        "label": "Teleport to Friend",
+        "quantity": 1,
+        "weight": 12.7
+      },
+      {
+        "itemId": 86804,
+        "label": "Tyrian Exchange Voucher",
+        "quantity": 1,
+        "weight": 4.76
+      }
     ]
   },
   "exclusive": {
@@ -46,17 +127,35 @@
   },
   "uncommon": {
     "items": [
-      { "itemId": 95482, "label": "Vintage Black Lion Weapon Box", "quantity": 1, "weight": 0.24 },
-      { "itemId": 43992, "label": "Black Lion Claim Ticket", "quantity": 1, "weight": 0.99 }
+      {
+        "itemId": 95482,
+        "label": "Vintage Black Lion Weapon Box",
+        "quantity": 1,
+        "weight": 0.24
+      },
+      {
+        "itemId": 43992,
+        "label": "Black Lion Claim Ticket",
+        "quantity": 1,
+        "weight": 0.99
+      }
     ],
-    "slots": [
-      { "setKey": "uncommonWeapons", "totalWeight": 3.74 }
-    ]
+    "slots": [{ "setKey": "uncommonWeapons", "totalWeight": 3.74 }]
   },
   "rare": {
     "items": [
-      { "itemId": 86694, "label": "Black Lion Statuette (25)", "quantity": 25, "weight": 0.07 },
-      { "itemId": 80967, "label": "Golden Black Lion Chest Key (3)", "quantity": 3, "weight": 0.06 }
+      {
+        "itemId": 86694,
+        "label": "Black Lion Statuette",
+        "quantity": 25,
+        "weight": 0.07
+      },
+      {
+        "itemId": 80967,
+        "label": "Golden Black Lion Chest Key",
+        "quantity": 3,
+        "weight": 0.06
+      }
     ],
     "slots": [
       { "setKey": "rareWeapons", "totalWeight": 1.02 },
@@ -67,13 +166,48 @@
   },
   "superRare": {
     "items": [
-      { "itemId": 99989, "label": "Permanent Crafting Station Contract", "quantity": 1, "weight": 0.006 },
-      { "itemId": 35986, "label": "Permanent Trading Post Express Contract", "quantity": 1, "weight": 0.006 },
-      { "itemId": 86497, "label": "Endless Upgrade Extractor Contract", "quantity": 1, "weight": 0.006 },
-      { "itemId": 35985, "label": "Permanent Black Lion Merchant Contract", "quantity": 1, "weight": 0.006 },
-      { "itemId": 35984, "label": "Permanent Bank Access Contract", "quantity": 1, "weight": 0.006 },
-      { "itemId": 78455, "label": "Endless Reinforcing Contract", "quantity": 1, "weight": 0.006 },
-      { "itemId": 38507, "label": "Permanent Hair Stylist Contract", "quantity": 1, "weight": 0.006 }
+      {
+        "itemId": 99989,
+        "label": "Permanent Crafting Station Contract",
+        "quantity": 1,
+        "weight": 0.006
+      },
+      {
+        "itemId": 35986,
+        "label": "Permanent Trading Post Express Contract",
+        "quantity": 1,
+        "weight": 0.006
+      },
+      {
+        "itemId": 86497,
+        "label": "Endless Upgrade Extractor Contract",
+        "quantity": 1,
+        "weight": 0.006
+      },
+      {
+        "itemId": 35985,
+        "label": "Permanent Black Lion Merchant Contract",
+        "quantity": 1,
+        "weight": 0.006
+      },
+      {
+        "itemId": 35984,
+        "label": "Permanent Bank Access Contract",
+        "quantity": 1,
+        "weight": 0.006
+      },
+      {
+        "itemId": 78455,
+        "label": "Endless Reinforcing Contract",
+        "quantity": 1,
+        "weight": 0.006
+      },
+      {
+        "itemId": 38507,
+        "label": "Permanent Hair Stylist Contract",
+        "quantity": 1,
+        "weight": 0.006
+      }
     ]
   }
 }

@@ -41,7 +41,7 @@
         class="key-toggle"
       >
         <v-btn
-          v-for="key in keyTypes"
+          v-for="(key, index) in keyTypes"
           :key="key.value"
           :value="key.value"
           class="key-select-btn"
@@ -55,11 +55,10 @@
                 quantity: inventory[key.value],
               }"
               :size="52"
-              rounded="lg"
               :tooltip="false"
               :text-overlay="String(inventory[key.value])"
               text-overlay-style="shadow"
-              text-overlay-position="bottom-center"
+              :text-overlay-position="keyTextOverlayPosition(index)"
               class="key-select-image"
             />
           </div>
@@ -126,6 +125,12 @@ const exclusiveItems = computed(() => {
   }
   return items;
 });
+
+function keyTextOverlayPosition(index)  {
+  if (index === 0) return "bottom-right";
+  if (index === keyTypes.length - 1) return "bottom-left";
+  return "bottom-center";
+}
 
 function clearTimers() {
   if (lootRevealTimeoutId !== null) {
@@ -230,6 +235,21 @@ onBeforeUnmount(() => {
   padding: 6px;
   height: auto !important;
   min-width: 0 !important;
+  overflow: hidden;
+}
+
+.key-toggle :deep(.v-btn:first-child),
+.key-toggle :deep(.v-btn:first-child .item-image__img) {
+  border-radius: 50% 0 0 50%;
+}
+
+.key-toggle :deep(.v-btn:last-child),
+.key-toggle :deep(.v-btn:last-child .item-image__img) {
+  border-radius: 0 50% 50% 0;
+}
+
+.key-toggle :deep(.v-avatar) {
+  background: none;
 }
 
 .key-toggle :deep(.v-btn.empty) {
