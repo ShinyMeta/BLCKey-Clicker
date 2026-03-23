@@ -1,10 +1,11 @@
 <template>
   <div class="loot-row">
-    <!-- ACTIVE variant: placeholder slots with loot overlays -->
+    <!-- ACTIVE variant: persistent placeholder slots with loot overlays -->
     <template v-if="isActive">
       <div
-        v-for="index in activeSlots"
-        :key="`slot-${animationCycle}-${index}`"
+        v-for="index in SLOT_INDICES"
+        v-show="index < BASE_SLOT_COUNT || lootItems.length > BASE_SLOT_COUNT"
+        :key="index"
         class="loot-slot-container"
         :class="{ 'loot-slot-container--extra': index >= BASE_SLOT_COUNT }"
       >
@@ -20,13 +21,13 @@
         </div>
 
         <div
-          v-if="lootItems[index]"
           class="loot-overlay"
-          :class="{ revealed: showLoot }"
+          :class="{ revealed: showLoot && lootItems[index] != null }"
           :style="{ '--fly-delay': `${index * 150}ms` }"
         >
           <div class="loot-overlay__content" :class="{ fading: isFading }">
             <ItemImage
+              v-if="lootItems[index]"
               :item="lootItems[index]"
               :size="64"
               rounded="0"
@@ -61,13 +62,17 @@
 
 <script setup>
 import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
-import { computed, nextTick, onBeforeUnmount, ref } from "vue";
+import { computed, onBeforeUnmount, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useLootStore } from "@/store/loot/lootStore";
 import statuetteImg from "@/assets/item/statuette.png";
 import d6PlaceholderImg from "@/assets/BLCOpenUI/d6PlaceHolder.png";
 
 const BASE_SLOT_COUNT = 4;
+const MAX_SLOT_COUNT = 5;
+const SLOT_INDICES = Object.freeze(
+  Array.from({ length: MAX_SLOT_COUNT }, (_, i) => i),
+);
 const LOOT_DISPLAY_MS = 2500;
 const FADE_DURATION_MS = 600;
 
@@ -85,20 +90,11 @@ const { currentChestConfig } = storeToRefs(lootStore);
 const lootItems = ref([]);
 const showLoot = ref(false);
 const isFading = ref(false);
-const animationCycle = ref(0);
 
 const isActive = computed(() => props.variant === "active");
 
 const guaranteedItem = computed(() =>
   currentChestConfig.value?.sets?.guaranteedItem?.items?.[0] ?? null,
-);
-
-const slotCount = computed(() =>
-  Math.max(BASE_SLOT_COUNT, lootItems.value.length),
-);
-
-const activeSlots = computed(() =>
-  Array.from({ length: slotCount.value }, (_, i) => i),
 );
 
 function getPlaceholderItem(index) {
@@ -113,6 +109,7 @@ function getPlaceholderItem(index) {
 
 let fadeTimeoutId = null;
 let clearTimeoutId = null;
+let currentDisplayId = 0;
 
 function clearTimers() {
   if (fadeTimeoutId !== null) {
@@ -127,22 +124,42 @@ function clearTimers() {
 
 function reset() {
   clearTimers();
+  currentDisplayId++;
   showLoot.value = false;
   isFading.value = false;
   lootItems.value = [];
 }
 
+async function preloadImages(items) {
+  await Promise.all(
+    items.map((item) => {
+      if (!item?.icon) return;
+      const img = new Image();
+      img.src = item.icon;
+      return img.decode().catch(() => {});
+    }),
+  );
+}
+
 async function displayLoot(items = []) {
   clearTimers();
   isFading.value = false;
+  showLoot.value = false;
+  const thisDisplayId = ++currentDisplayId;
 
   if (isActive.value) {
-    showLoot.value = false;
-    lootItems.value = [];
-    await nextTick();
+    await preloadImages(items);
+    if (thisDisplayId !== currentDisplayId) return;
 
-    animationCycle.value += 1;
     lootItems.value = [...items];
+
+    // Double-rAF: the browser paints one frame without the `revealed` class,
+    // guaranteeing that re-adding it restarts every fly-out animation.
+    await new Promise((r) =>
+      requestAnimationFrame(() => requestAnimationFrame(r)),
+    );
+    if (thisDisplayId !== currentDisplayId) return;
+
     showLoot.value = true;
 
     const totalFlyInMs = items.length * 150 + 550;
@@ -176,7 +193,7 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: center;
   gap: 8px;
-  min-height: 64px;
+  min-height: 68px;
 }
 
 /* --- Active variant: slot containers with placeholder + overlay --- */
@@ -186,6 +203,7 @@ onBeforeUnmount(() => {
   width: 64px;
   height: 64px;
   border: 2px solid rgba(var(--v-theme-on-surface), 0.2);
+  box-sizing: content-box;
   flex-shrink: 0;
 }
 

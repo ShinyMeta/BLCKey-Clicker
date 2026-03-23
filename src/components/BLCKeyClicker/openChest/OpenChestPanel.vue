@@ -164,7 +164,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .open-chest-panel {
-  --loot-row-min-width: calc((64px * 5) + (8px * 4));
+  --loot-row-min-width: calc((68px * 5) + (8px * 4));
   display: flex;
   flex-direction: column;
   align-items: center;
