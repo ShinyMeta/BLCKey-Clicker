@@ -10,6 +10,19 @@
         :class="rootClasses"
         :style="rootStyles"
       >
+        <div v-show="shineActive" class="item-image__shine">
+          <div
+            ref="shineBigRef"
+            class="item-image__shine-layer item-image__shine-layer--big"
+            :style="shineBigStyles"
+          />
+          <div
+            ref="shineSmallRef"
+            class="item-image__shine-layer item-image__shine-layer--small"
+            :style="shineSmallStyles"
+          />
+        </div>
+
         <v-avatar
           v-bind="avatarProps"
           :size="normalizedSize"
@@ -81,9 +94,11 @@
 </template>
 
 <script setup>
-import { computed, ref, useAttrs, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from "vue";
 import noRewardImage from "@/assets/item/noReward.png";
 import unknownImage from "@/assets/item/unknown.png";
+import shineBigSrc from "@/assets/BLCOpenUI/shineBig.png";
+import shineSmallSrc from "@/assets/BLCOpenUI/shineSmall.png";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 
 defineOptions({
@@ -456,6 +471,82 @@ function handleImageError() {
     currentImageSrc.value = fallbackImage.value;
   }
 }
+
+const shineActive = ref(false);
+const shineBigRef = ref(null);
+const shineSmallRef = ref(null);
+const shineColor = ref("white");
+let shineAnimations = [];
+
+const shineBigStyles = computed(() => ({
+  maskImage: `url(${shineBigSrc})`,
+  WebkitMaskImage: `url(${shineBigSrc})`,
+  backgroundColor: shineColor.value,
+}));
+
+const shineSmallStyles = computed(() => ({
+  maskImage: `url(${shineSmallSrc})`,
+  WebkitMaskImage: `url(${shineSmallSrc})`,
+  backgroundColor: shineColor.value,
+}));
+
+function shine(color = "white", duration = 1000) {
+  shineAnimations.forEach((a) => a.cancel());
+  shineAnimations = [];
+  shineColor.value = color;
+  shineActive.value = true;
+
+  nextTick(() => {
+    const bigEl = shineBigRef.value;
+    const smallEl = shineSmallRef.value;
+    if (!bigEl || !smallEl) return;
+
+    const enterMs = 150;
+    const exitMs = 200;
+    const totalMs = enterMs + duration + exitMs;
+    const enterFrac = enterMs / totalMs;
+    const exitFrac = 1 - exitMs / totalMs;
+    const midFrac1 = enterFrac + (exitFrac - enterFrac) * 0.4;
+    const midFrac2 = enterFrac + (exitFrac - enterFrac) * 0.75;
+
+    const bigAnim = bigEl.animate(
+      [
+        { transform: "scale(0) rotate(0deg)", opacity: 0 },
+        { transform: "scale(1.3) rotate(50deg)", opacity: 0.85, offset: enterFrac },
+        { transform: "scale(1.15) rotate(140deg)", opacity: 0.7, offset: midFrac1 },
+        { transform: "scale(1.3) rotate(250deg)", opacity: 0.9, offset: midFrac2 },
+        { transform: "scale(1.2) rotate(310deg)", opacity: 0.85, offset: exitFrac },
+        { transform: "scale(0) rotate(360deg)", opacity: 0 },
+      ],
+      { duration: totalMs, easing: "ease-out", fill: "forwards" },
+    );
+
+    const smallAnim = smallEl.animate(
+      [
+        { transform: "scale(0) rotate(0deg)", opacity: 0 },
+        { transform: "scale(1.1) rotate(-40deg)", opacity: 1, offset: enterFrac },
+        { transform: "scale(1.0) rotate(-170deg)", opacity: 0.8, offset: midFrac1 },
+        { transform: "scale(1.15) rotate(-250deg)", opacity: 1, offset: midFrac2 },
+        { transform: "scale(1.0) rotate(-320deg)", opacity: 0.9, offset: exitFrac },
+        { transform: "scale(0) rotate(-360deg)", opacity: 0 },
+      ],
+      { duration: totalMs, easing: "ease-out", fill: "forwards" },
+    );
+
+    shineAnimations = [bigAnim, smallAnim];
+    bigAnim.finished
+      .then(() => {
+        shineActive.value = false;
+      })
+      .catch(() => {});
+  });
+}
+
+onBeforeUnmount(() => {
+  shineAnimations.forEach((a) => a.cancel());
+});
+
+defineExpose({ shine });
 </script>
 
 <style scoped>
@@ -468,6 +559,7 @@ function handleImageError() {
 }
 
 .item-image__avatar {
+  position: relative;
   width: 100%;
   height: 100%;
   background: rgba(var(--v-theme-surface-variant), 0.3);
@@ -620,5 +712,30 @@ function handleImageError() {
 
 .item-image__tooltip-line {
   line-height: 1.35;
+}
+
+.item-image__shine {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.item-image__shine-layer {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  transform: scale(0);
+  will-change: transform, opacity;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
 }
 </style>

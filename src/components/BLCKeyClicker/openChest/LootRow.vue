@@ -3,8 +3,8 @@
     <!-- ACTIVE variant: persistent placeholder slots with loot overlays -->
     <template v-if="isActive">
       <div
-        v-for="index in SLOT_INDICES"
-        v-show="index < BASE_SLOT_COUNT || lootItems.length > BASE_SLOT_COUNT"
+        v-for="index in slotIndices"
+        v-show="index < BASE_SLOT_COUNT || index < lootItems.length"
         :key="index"
         class="loot-slot-container"
         :class="{ 'loot-slot-container--extra': index >= BASE_SLOT_COUNT }"
@@ -23,11 +23,12 @@
         <div
           class="loot-overlay"
           :class="{ revealed: showLoot && lootItems[index] != null }"
-          :style="{ '--fly-delay': `${index * 150}ms` }"
+          :style="{ '--fly-delay': `${computeFlyDelay(index, lootItems.length)}ms` }"
         >
           <div class="loot-overlay__content" :class="{ fading: isFading }">
             <ItemImage
               v-if="lootItems[index]"
+              :ref="(el) => setLootImageRef(index, el)"
               :item="lootItems[index]"
               :size="64"
               rounded="0"
@@ -69,10 +70,6 @@ import statuetteImg from "@/assets/item/statuette.png";
 import d6PlaceholderImg from "@/assets/BLCOpenUI/d6PlaceHolder.png";
 
 const BASE_SLOT_COUNT = 4;
-const MAX_SLOT_COUNT = 5;
-const SLOT_INDICES = Object.freeze(
-  Array.from({ length: MAX_SLOT_COUNT }, (_, i) => i),
-);
 const LOOT_DISPLAY_MS = 2500;
 const FADE_DURATION_MS = 600;
 
@@ -82,7 +79,15 @@ const props = defineProps({
     default: "active",
     validator: (v) => ["active", "passive"].includes(v),
   },
+  maxDrops: {
+    type: Number,
+    default: 5,
+  },
 });
+
+const slotIndices = computed(() =>
+  Array.from({ length: props.maxDrops }, (_, i) => i),
+);
 
 const lootStore = useLootStore();
 const { currentChestConfig } = storeToRefs(lootStore);
@@ -107,8 +112,28 @@ function getPlaceholderItem(index) {
   return { name: "Random Drop", icon: d6PlaceholderImg };
 }
 
+const lootImageRefs = {};
+function setLootImageRef(index, el) {
+  if (el) {
+    lootImageRefs[index] = el;
+  } else {
+    delete lootImageRefs[index];
+  }
+}
+
+function computeFlyDelay(index, totalItems) {
+  if (totalItems <= BASE_SLOT_COUNT) {
+    return index * 150;
+  }
+  if (index < BASE_SLOT_COUNT) {
+    return index * 100;
+  }
+  return (BASE_SLOT_COUNT - 1) * 100 + 400 + (index - BASE_SLOT_COUNT) * 150;
+}
+
 let fadeTimeoutId = null;
 let clearTimeoutId = null;
+let shineTimeoutIds = [];
 let currentDisplayId = 0;
 
 function clearTimers() {
@@ -120,6 +145,8 @@ function clearTimers() {
     window.clearTimeout(clearTimeoutId);
     clearTimeoutId = null;
   }
+  shineTimeoutIds.forEach((id) => window.clearTimeout(id));
+  shineTimeoutIds = [];
 }
 
 function reset() {
@@ -162,7 +189,18 @@ async function displayLoot(items = []) {
 
     showLoot.value = true;
 
-    const totalFlyInMs = items.length * 150 + 550;
+    for (let i = BASE_SLOT_COUNT; i < items.length; i++) {
+      const settleMs = computeFlyDelay(i, items.length) + 550;
+      const id = window.setTimeout(() => {
+        if (thisDisplayId !== currentDisplayId) return;
+        lootImageRefs[i]?.shine?.();
+      }, settleMs);
+      shineTimeoutIds.push(id);
+    }
+
+    const lastDelay =
+      items.length > 0 ? computeFlyDelay(items.length - 1, items.length) : 0;
+    const totalFlyInMs = lastDelay + 550;
 
     fadeTimeoutId = window.setTimeout(() => {
       fadeTimeoutId = null;
@@ -229,7 +267,6 @@ onBeforeUnmount(() => {
   justify-content: center;
   opacity: 0;
   transform: translateY(-120px) scale(0);
-  z-index: 1;
 }
 
 .loot-overlay.revealed {
