@@ -43,6 +43,7 @@ import { computed, nextTick, onBeforeUnmount, ref } from "vue";
 import chestAppearances from "@/assets/BLCOpenUI/chestHalf";
 import chestInsideGlowSrc from "@/assets/BLCOpenUI/chestInsideGlow.png";
 import chestInsideFlashSrc from "@/assets/BLCOpenUI/chestInsideFlash.png";
+import { emitSoundEvent } from "@/services/sound";
 
 const emit = defineEmits(["click"]);
 const props = defineProps({
@@ -166,6 +167,7 @@ async function playDisabledShake() {
 
 function handleClick() {
   if (props.disabled) {
+    emitSoundEvent("chestDisabled");
     playDisabledShake();
     return;
   }

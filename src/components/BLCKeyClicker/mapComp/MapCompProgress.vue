@@ -37,6 +37,7 @@ import MapCompBackgroundLayer from "@/components/BLCKeyClicker/mapComp/MapCompBa
 import MapCompButton from "@/components/BLCKeyClicker/mapComp/MapCompButton.vue";
 import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 import { useMapCompStore } from "@/store/mapCompStore";
+import { emitSoundEvent } from "@/services/sound";
 
 const MAX_REWARD_FLYOUTS = 10;
 
@@ -145,6 +146,7 @@ async function completedRingAnimation() {
 }
 
 function handleMapComplete(mapCompCompletionEvent) {
+  emitSoundEvent("mapComplete");
   completedRingAnimation();
   const rewardImage = rewardImageByType[mapCompCompletionEvent.reward.type];
 
@@ -174,6 +176,7 @@ watch(
 
 function handleClick() {
   emit("click");
+  emitSoundEvent("mapClick");
   controller.advanceMapCompletion("mapCompButton");
 }
 
