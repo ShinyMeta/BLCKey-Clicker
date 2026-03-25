@@ -128,7 +128,9 @@ function handleChestClick() {
     lootRevealTimeoutId = null;
     const displayLoot = await displayLootPromise;
     if (thisSequence !== openSequenceId) return;
-    lootRow.value?.displayLoot(displayLoot);
+    lootRow.value?.displayLoot(displayLoot, {
+      onFadeStart: () => chestButton.value?.close(),
+    });
   }, props.lootRevealDelayMs);
 }
 

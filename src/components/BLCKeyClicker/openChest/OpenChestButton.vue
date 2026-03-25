@@ -10,12 +10,28 @@
       class="chest-image-wrap"
       :class="{ pressed: isPressed, shaking: isShaking }"
     >
-      <div class="chest-glow" :class="{ visible: lidOpen }" />
       <img
         :src="chestTopSrc"
         alt="Open Chest"
         class="chest-half chest-top"
-        :class="{ opened: lidOpen }"
+        :class="{ opened: lidOpen, closing: isClosing }"
+      />
+      <div
+        class="chest-glow-wrap"
+        :class="{ active: glowActive }"
+      >
+        <img
+          :src="chestInsideGlowSrc"
+          alt=""
+          class="chest-inside-glow"
+          :class="{ active: glowActive }"
+        />
+      </div>
+      <img
+        :src="chestInsideFlashSrc"
+        alt=""
+        class="chest-inside-flash"
+        :class="{ active: flashActive }"
       />
       <img :src="chestBottomSrc" alt="" class="chest-half chest-bottom" />
     </div>
@@ -26,6 +42,8 @@
 import { nextTick, onBeforeUnmount, ref } from "vue";
 import chestBottomSrc from "@/assets/BLCOpenUI/chestHalf/2-bottom.png";
 import chestTopSrc from "@/assets/BLCOpenUI/chestHalf/2-top.png";
+import chestInsideGlowSrc from "@/assets/BLCOpenUI/chestInsideGlow.png";
+import chestInsideFlashSrc from "@/assets/BLCOpenUI/chestInsideFlash.png";
 
 const emit = defineEmits(["click"]);
 const props = defineProps({
@@ -38,6 +56,9 @@ const props = defineProps({
 const isPressed = ref(false);
 const isShaking = ref(false);
 const lidOpen = ref(false);
+const isClosing = ref(false);
+const flashActive = ref(false);
+const glowActive = ref(false);
 const activeTimeouts = new Set();
 let animationRunId = 0;
 
@@ -62,6 +83,9 @@ function resetState() {
   isPressed.value = false;
   isShaking.value = false;
   lidOpen.value = false;
+  isClosing.value = false;
+  flashActive.value = false;
+  glowActive.value = false;
 }
 
 function reset() {
@@ -70,25 +94,48 @@ function reset() {
   resetState();
 }
 
+function close() {
+  const currentRunId = ++animationRunId;
+  clearTimers();
+  isClosing.value = true;
+  glowActive.value = false;
+
+  schedule(() => {
+    if (currentRunId !== animationRunId) return;
+    resetState();
+  }, 350);
+}
+
 async function playOpenAnimation() {
   reset();
   const currentRunId = animationRunId;
   await nextTick();
 
-  if (currentRunId !== animationRunId) {
-    return;
-  }
+  if (currentRunId !== animationRunId) return;
 
   isPressed.value = true;
 
   schedule(() => {
+    if (currentRunId !== animationRunId) return;
     isPressed.value = false;
-    lidOpen.value = true;
-  }, 120);
+    flashActive.value = true;
+  }, 100);  // flash starts
 
   schedule(() => {
+    if (currentRunId !== animationRunId) return;
+    lidOpen.value = true;
+    glowActive.value = true;
+  }, 500);  // chest opens
+
+  schedule(() => {
+    if (currentRunId !== animationRunId) return;
+    flashActive.value = false;
+  }, 700);  // flash ends
+
+  schedule(() => {
+    if (currentRunId !== animationRunId) return;
     resetState();
-  }, 10000);
+  }, 12000);  //auto close if exposed .close isn't called by lootRow
 }
 
 async function playDisabledShake() {
@@ -121,7 +168,7 @@ function handleClick() {
   playOpenAnimation();
 }
 
-defineExpose({ reset });
+defineExpose({ reset, close });
 
 onBeforeUnmount(() => {
   clearTimers();
@@ -175,44 +222,115 @@ onBeforeUnmount(() => {
   position: absolute;
   top: calc(100% * 94 / 256);
   left: 0;
-  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .chest-top.opened {
-  transform: translateY(-80%);
+  animation: lid-open 0.7s ease-out forwards;
 }
 
-.chest-glow {
+.chest-top.closing {
+  animation: lid-slam 0.24s cubic-bezier(0.18, 0.89, 0.32, 1.0) forwards;
+}
+
+.chest-inside-flash {
   position: absolute;
-  left: 5%;
-  right: 5%;
-  top: calc(100% * 158 / 256);
-  height: 8px;
-  transform: translateY(-50%) scaleX(0);
-  opacity: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 215, 0, 0.9) 0%,
-    rgba(255, 180, 0, 0.5) 40%,
-    transparent 70%
-  );
-  border-radius: 50%;
-  filter: blur(3px);
-  transition: transform 0.4s ease-out 0.1s, opacity 0.4s ease-out 0.1s;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
   pointer-events: none;
+  opacity: 0;
 }
 
-.chest-glow.visible {
-  transform: translateY(-50%) scaleX(1);
+.chest-glow-wrap {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 125%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 100ms ease-out;
+  will-change: opacity;
+}
+
+.chest-glow-wrap.active {
   opacity: 1;
+  transition-duration: 1000ms;
+}
+
+.chest-inside-glow {
+  width: 100%;
+  height: auto;
+  opacity: 0.75;
+}
+
+.chest-inside-glow.active {
+  animation: glow-breathe 1.8s ease-in-out 0.4s infinite;
+}
+
+.chest-inside-flash.active {
+  animation: flash-burst 0.5s ease-out forwards;
+}
+
+@keyframes lid-open {
+  0% {
+    transform: translateY(0);
+  }
+  38% {
+    transform: translateY(-82%);
+  }
+  52% {
+    transform: translateY(-55%);
+  }
+  72% {
+    transform: translateY(-74%);
+  }
+  100% {
+    transform: translateY(-72%);
+  }
+}
+
+@keyframes lid-slam {
+  0% {
+    transform: translateY(-72%);
+  }
+  85% {
+    transform: translateY(6%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes flash-burst {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 0.35;
+  }
 }
 
 @keyframes chest-press {
   0% {
-    transform: scale(1);
+    transform: scale(1.03);
   }
   100% {
-    transform: scale(0.92);
+    transform: scale(0.98);
   }
 }
 

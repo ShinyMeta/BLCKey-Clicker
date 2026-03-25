@@ -176,7 +176,7 @@ async function preloadImages(items) {
   );
 }
 
-async function displayLoot(items = []) {
+async function displayLoot(items = [], { onFadeStart } = {}) {
   clearTimers();
   isFading.value = false;
   showLoot.value = false;
@@ -216,6 +216,7 @@ async function displayLoot(items = []) {
 
     fadeTimeoutId = window.setTimeout(() => {
       fadeTimeoutId = null;
+      onFadeStart?.();
       isFading.value = true;
 
       clearTimeoutId = window.setTimeout(() => {
