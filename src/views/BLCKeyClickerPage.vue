@@ -9,6 +9,16 @@
     >
       <div class="pa-4">
         <ChestPreviewCard />
+        <v-btn
+          block
+          class="mt-3"
+          prepend-icon="mdi-refresh"
+          color="primary"
+          variant="tonal"
+          @click="lootStore.generateCurrentChestConfig()"
+        >
+          New Random Chest
+        </v-btn>
       </div>
     </v-navigation-drawer>
 
@@ -53,7 +63,7 @@
       location="right"
       :width="320"
     >
-      <div class="pa-4">Right panel placeholder</div>
+      <RightPanel />
     </v-navigation-drawer>
   </v-layout>
 </template>
@@ -64,6 +74,7 @@ import { useDisplay } from "vuetify";
 import ChestPreviewCard from "@/components/BLCKeyClicker/openChest/ChestPreviewCard.vue";
 import MapCompProgress from "@/components/BLCKeyClicker/mapComp/MapCompProgress.vue";
 import OpenChestPanel from "@/components/BLCKeyClicker/openChest/OpenChestPanel.vue";
+import RightPanel from "@/components/BLCKeyClicker/rightPanel/RightPanel.vue";
 import { useLootStore } from "@/store/loot/lootStore";
 
 const { lgAndUp } = useDisplay();

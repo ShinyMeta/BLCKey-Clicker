@@ -2,9 +2,9 @@
   <v-card class="chest-preview-card" color="surface-lighten-1" variant="elevated">
     <div class="chest-preview-card__header">
       <div class="chest-preview-card__title text-subtitle-2">
-        {{ currentChestConfig?.name || "Black Lion Chest" }}
+        {{ resolvedConfig?.name || "Black Lion Chest" }}
       </div>
-      <ChestPreviewDialog :chest-config="currentChestConfig">
+      <ChestPreviewDialog :chest-config="resolvedConfig">
         <template #activator="activatorProps">
           <v-btn
             v-bind="activatorProps"
@@ -12,7 +12,7 @@
             variant="text"
             color="primary"
             size="small"
-            :disabled="!currentChestConfig"
+            :disabled="!resolvedConfig"
             @click="handlePreviewClick"
           />
         </template>
@@ -60,8 +60,14 @@ import { emitSoundEvent } from "@/services/sound";
 import ChestPreviewDialog from "./ChestPreviewDialog.vue";
 import { useLootStore } from "@/store/loot/lootStore";
 
+const props = defineProps({
+  chestConfig: { type: Object, default: null },
+});
+
 const lootStore = useLootStore();
 const { currentChestConfig } = storeToRefs(lootStore);
+
+const resolvedConfig = computed(() => props.chestConfig ?? currentChestConfig.value);
 
 function handlePreviewClick() {
   emitSoundEvent("chestPreviewOpened");
@@ -72,7 +78,7 @@ function pickRandom(array) {
 }
 
 const exclusiveItems = computed(() => {
-  const config = currentChestConfig.value;
+  const config = resolvedConfig.value;
   if (!config?.sets) return [];
   const items = [];
   for (const setKey of ["newExclusive", "returningExclusive"]) {
@@ -91,7 +97,7 @@ const exclusiveItems = computed(() => {
 });
 
 const weaponPreviewItems = computed(() => {
-  const config = currentChestConfig.value;
+  const config = resolvedConfig.value;
   if (!config?.sets) return [];
   const items = [];
   for (const setKey of ["uncommonWeapons", "rareWeapons"]) {

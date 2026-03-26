@@ -45,24 +45,23 @@ export class LootHandler {
   }
 
   /**
-   * Populate the exclusive-drop lookup from the exclusive items in the
-   * current chest config.  Each entry starts as not-yet-dropped so that
-   * future features can iterate the full list.
-   *
-   * Weight is intentionally omitted — it belongs to the template slot,
-   * not the item, and the same item can appear in different slots across
-   * chest rotations.
+   * Adds new exclusives to the lookup for tracking,
+   * should be called whenever a new chest is loaded
+   * markExclusiveDropped() used to set dropped to true
    *
    * @param {Array<{ itemId: number, label: string }>} items
    */
-  initExclusives(items) {
-    this._exclusiveLookup.clear();
+  trackNewExclusives(items) {
     for (const item of items) {
-      this._exclusiveLookup.set(item.itemId, {
-        itemId: item.itemId,
-        label: item.label,
-        dropped: false,
-      });
+      if (this._exclusiveLookup.has(item.itemId)) {
+        continue;
+      } else {
+        this._exclusiveLookup.set(item.itemId, {
+          itemId: item.itemId,
+          label: item.label,
+          dropped: false,
+        });
+      }
     }
   }
 

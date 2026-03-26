@@ -77,7 +77,7 @@ export const useLootStore = defineStore("loot", () => {
     const exclusiveItems = baseLootTable.value.fifthDrop.filter(
       (item) => item.category === "exclusive",
     );
-    lootHandler.initExclusives(exclusiveItems);
+    lootHandler.trackNewExclusives(exclusiveItems);
     exclusiveLookup.value = new Map(lootHandler.exclusiveLookup);
 
     chestHistory.value.push({
