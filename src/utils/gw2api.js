@@ -2,6 +2,7 @@ import client from "gw2api-client";
 import cacheMemory from "gw2api-client/src/cache/memory";
 
 let api = client();
+api.autoBatch();
 api.cacheStorage(cacheMemory());
 
 export async function fetchItemMetadata(itemIds) {

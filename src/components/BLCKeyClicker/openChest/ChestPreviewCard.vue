@@ -1,5 +1,9 @@
 <template>
-  <v-card class="chest-preview-card" color="surface-lighten-1" variant="elevated">
+  <v-card
+    class="chest-preview-card"
+    color="surface-lighten-1"
+    variant="elevated"
+  >
     <div class="chest-preview-card__header">
       <div class="chest-preview-card__title text-subtitle-2">
         {{ resolvedConfig?.name || "Black Lion Chest" }}
@@ -20,6 +24,14 @@
     </div>
 
     <v-divider />
+
+    <v-progress-linear
+      v-if="isLoadingMetadata"
+      indeterminate
+      color="primary"
+      height="4"
+      class="mb-2"
+    />
 
     <div class="chest-preview-card__content">
       <div class="chest-preview-card__group">
@@ -53,12 +65,13 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
 import { emitSoundEvent } from "@/services/sound";
 import ChestPreviewDialog from "./ChestPreviewDialog.vue";
 import { useLootStore } from "@/store/loot/lootStore";
+import { fetchItemLikeMetadata } from "@/utils/gw2api";
 
 const props = defineProps({
   chestConfig: { type: Object, default: null },
@@ -67,7 +80,9 @@ const props = defineProps({
 const lootStore = useLootStore();
 const { currentChestConfig } = storeToRefs(lootStore);
 
-const resolvedConfig = computed(() => props.chestConfig ?? currentChestConfig.value);
+const resolvedConfig = computed(
+  () => props.chestConfig ?? currentChestConfig.value,
+);
 
 function handlePreviewClick() {
   emitSoundEvent("chestPreviewOpened");
@@ -108,6 +123,38 @@ const weaponPreviewItems = computed(() => {
   }
   return items;
 });
+
+const isLoadingMetadata = ref(false);
+
+const previewItems = computed(() => {
+  return [...exclusiveItems.value, ...weaponPreviewItems.value];
+});
+
+watch(
+  () => resolvedConfig.value,
+  async (chestConfig) => {
+    if (!chestConfig) {
+      isLoadingMetadata.value = false;
+      return;
+    }
+
+    const itemsToResolve = previewItems.value.filter(Boolean);
+    if (!itemsToResolve.length) {
+      isLoadingMetadata.value = false;
+      return;
+    }
+
+    isLoadingMetadata.value = true;
+    try {
+      await fetchItemLikeMetadata(itemsToResolve);
+    } catch (error) {
+      console.error("ChestPreviewCard: failed to fetch item metadata", error);
+    } finally {
+      isLoadingMetadata.value = false;
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <style scoped>
