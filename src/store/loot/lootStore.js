@@ -20,6 +20,7 @@ export const useLootStore = defineStore("loot", () => {
   const lastDrops = shallowRef([]);
   const chestHistory = ref([]);
   const exclusiveLookup = shallowRef(new Map());
+  let historyIdCounter = 0;
 
   const lootTable = computed(() => {
     if (!baseLootTable.value) return null;
@@ -81,6 +82,7 @@ export const useLootStore = defineStore("loot", () => {
     exclusiveLookup.value = new Map(lootHandler.exclusiveLookup);
 
     chestHistory.value.push({
+      id: ++historyIdCounter,
       config: structuredClone(chestConfig),
       opens: [],
     });
