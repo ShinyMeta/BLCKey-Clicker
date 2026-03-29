@@ -72,7 +72,7 @@ import blcChestImg from "@/assets/item/BLChest.png";
 import blcKeyImg from "@/assets/item/BLCKey.png";
 import goldenBlcKeyImg from "@/assets/item/goldenBLCKey.png";
 import unknownItem from "@/assets/item/unknown.png";
-import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
+import ItemImage from "@/components/BLCKeyClicker/shared/ItemImage.vue";
 import OpenChestButton from "@/components/BLCKeyClicker/openChest/OpenChestButton.vue";
 import LootRow from "@/components/BLCKeyClicker/openChest/LootRow.vue";
 import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";

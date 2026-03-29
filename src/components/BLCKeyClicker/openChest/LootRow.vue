@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
+import ItemImage from "@/components/BLCKeyClicker/shared/ItemImage.vue";
 import { emitSoundEvent } from "@/services/sound";
 import { computed, onBeforeUnmount, ref } from "vue";
 import { storeToRefs } from "pinia";

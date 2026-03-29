@@ -18,7 +18,7 @@
 </template>
 
 <script setup>
-import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
+import ItemImage from "@/components/BLCKeyClicker/shared/ItemImage.vue";
 
 const props = defineProps({
   items: { type: Array, default: () => [] },

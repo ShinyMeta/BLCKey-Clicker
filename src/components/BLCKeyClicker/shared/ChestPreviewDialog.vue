@@ -215,7 +215,7 @@
 import { computed, ref, watch } from "vue";
 import blcKeyIcon from "@/assets/item/BLCKey.png";
 import goldenBlcKeyIcon from "@/assets/item/goldenBLCKey.png";
-import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
+import ItemImage from "@/components/BLCKeyClicker/shared/ItemImage.vue";
 import { emitSoundEvent } from "@/services/sound";
 import { useMiscSettingsStore } from "@/services/settings/miscSettingsStore";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";

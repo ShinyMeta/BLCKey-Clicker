@@ -21,7 +21,7 @@
 
 <script setup>
 import { computed } from "vue";
-import ChestPreviewCard from "@/components/BLCKeyClicker/openChest/ChestPreviewCard.vue";
+import ChestPreviewCard from "@/components/BLCKeyClicker/shared/ChestPreviewCard.vue";
 import HistoryLootRow from "@/components/BLCKeyClicker/rightPanel/history/HistoryLootRow.vue";
 
 const props = defineProps({

@@ -87,7 +87,7 @@
 <script setup>
 import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
-import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
+import ItemImage from "@/components/BLCKeyClicker/shared/ItemImage.vue";
 import { emitSoundEvent } from "@/services/sound";
 import ChestPreviewDialog from "./ChestPreviewDialog.vue";
 import { useLootStore } from "@/store/loot/lootStore";

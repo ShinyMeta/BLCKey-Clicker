@@ -71,7 +71,7 @@
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { useDisplay } from "vuetify";
-import ChestPreviewCard from "@/components/BLCKeyClicker/openChest/ChestPreviewCard.vue";
+import ChestPreviewCard from "@/components/BLCKeyClicker/shared/ChestPreviewCard.vue";
 import MapCompProgress from "@/components/BLCKeyClicker/mapComp/MapCompProgress.vue";
 import OpenChestPanel from "@/components/BLCKeyClicker/openChest/OpenChestPanel.vue";
 import RightPanel from "@/components/BLCKeyClicker/rightPanel/RightPanel.vue";

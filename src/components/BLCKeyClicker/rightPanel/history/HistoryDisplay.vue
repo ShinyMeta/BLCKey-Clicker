@@ -18,7 +18,7 @@
 <script setup>
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
-import ChestPreviewCard from "@/components/BLCKeyClicker/openChest/ChestPreviewCard.vue";
+import ChestPreviewCard from "@/components/BLCKeyClicker/shared/ChestPreviewCard.vue";
 import { useLootStore } from "@/store/loot/lootStore";
 import { useRightPanelStore } from "@/store/RightPanelStore";
 
