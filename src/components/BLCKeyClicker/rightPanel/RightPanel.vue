@@ -34,6 +34,7 @@
         <HistoryDisplay v-else-if="currentView === 'history'" />
         <HistoryDetail v-else-if="currentView === 'drops'" 
           :chestHistoryEntry="pageMetaData.selectedHistoryEntry" />
+        <RightPanelHelp v-else-if="currentView === 'help'" />
       </template>
     </div>
   </div>
@@ -46,6 +47,7 @@ import GraphicsSettings from "./settings/GraphicsSettings.vue";
 import SoundSettings from "./settings/SoundSettings.vue";
 import HistoryDisplay from "./history/HistoryDisplay.vue";
 import HistoryDetail from "./history/HistoryDetail.vue";
+import RightPanelHelp from "./help/RightPanelHelp.vue";
 
 import { useRightPanelStore } from "@/store/RightPanelStore";
 
@@ -53,6 +55,7 @@ const MENUS = {
   root: [
     { icon: "mdi-cog-outline", title: "Settings", path: ["settings"] },
     { icon: "mdi-history", title: "History", path: ["history"] },
+    { icon: "mdi-help-circle", title: "Help", path: ["help"] },
   ],
   settings: [
     { icon: "mdi-volume-high", title: "Sound", path: ["settings", "sound"] },
