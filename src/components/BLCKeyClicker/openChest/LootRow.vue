@@ -1,67 +1,27 @@
 <template>
   <div class="loot-row">
-    <!-- ACTIVE variant: persistent placeholder slots with loot overlays -->
-    <template v-if="isActive">
-      <div
-        v-for="index in slotIndices"
-        :key="index"
-        class="loot-slot-container"
-        :class="{
-          'loot-slot-container--extra': index >= BASE_SLOT_COUNT,
-          'loot-slot-container--show':
-            index >= BASE_SLOT_COUNT &&
-            index < lootItems.length,
-        }"
-      >
-        <div class="loot-placeholder">
-          <ItemImage
-            :item="getPlaceholderItem(index)"
-            :size="64"
-            rounded="0"
-            :tooltip="false"
-            :text-overlay="false"
-            class="loot-item-image"
-          />
-        </div>
+    <div v-for="index in slotIndices" :key="index" class="loot-slot-container" :class="{
+      'loot-slot-container--extra': index >= BASE_SLOT_COUNT,
+      'loot-slot-container--show':
+        index >= BASE_SLOT_COUNT &&
+        index < lootItems.length,
+    }">
+      <div class="loot-placeholder">
+        <ItemImage :item="getPlaceholderItem(index)" :size="64" rounded="0" :tooltip="false" :text-overlay="false"
+          class="loot-item-image" />
+      </div>
 
-        <div
-          class="loot-overlay"
-          :class="{ revealed: showLoot && lootItems[index] != null }"
-          :style="{ '--fly-delay': `${computeFlyDelay(index, lootItems.length)}ms` }"
-        >
-          <div class="loot-overlay__content" :class="{ fading: isFading }">
-            <ItemImage
-              v-if="lootItems[index]"
-              :ref="(el) => setLootImageRef(index, el)"
-              :item="lootItems[index]"
-              :size="64"
-              rounded="0"
-              text-overlay-style="shadow"
-              text-overlay-position="bottom-center"
-              class="loot-item-image"
-            />
-          </div>
+      <div class="loot-overlay" :class="{ revealed: showLoot && lootItems[index] != null }"
+        :style="{ '--fly-delay': `${computeFlyDelay(index, lootItems.length)}ms` }">
+        <div class="loot-overlay__content" :class="{ fading: isFading }">
+          <ItemImage v-if="lootItems[index]" :ref="(el) => setLootImageRef(index, el)" :item="lootItems[index]"
+            :size="64" rounded="0" text-overlay-style="shadow" text-overlay-position="bottom-center"
+            class="loot-item-image" />
         </div>
       </div>
-    </template>
+    </div>
 
-    <!-- PASSIVE variant: immediate display, no animations or placeholders -->
-    <template v-else>
-      <div
-        v-for="(item, index) in lootItems"
-        :key="index"
-        class="loot-slot loot-slot--passive"
-      >
-        <ItemImage
-          :item="item"
-          :size="64"
-          rounded="0"
-          text-overlay-style="shadow"
-          text-overlay-position="bottom-center"
-          class="loot-item-image"
-        />
-      </div>
-    </template>
+    <!-- PASSIVE variant moved to HistoryLootRow.vue -->
   </div>
 </template>
 
@@ -89,13 +49,6 @@ const SHINE_COLORS = {
 };
 
 const props = defineProps({
-  // active: The main row below the chest button
-  // passive: primarily used to display loot history in side panel
-  variant: {
-    type: String,
-    default: "active",
-    validator: (v) => ["active", "passive"].includes(v),
-  },
   maxDrops: {
     type: Number,
     default: 5,
@@ -113,7 +66,6 @@ const lootItems = ref([]);
 const showLoot = ref(false);
 const isFading = ref(false);
 
-const isActive = computed(() => props.variant === "active");
 
 const guaranteedItem = computed(() =>
   currentChestConfig.value?.sets?.guaranteedItem?.items?.[0] ?? null,
@@ -188,7 +140,7 @@ async function preloadImages(items) {
       if (!item?.icon) return;
       const img = new Image();
       img.src = item.icon;
-      return img.decode().catch(() => {});
+      return img.decode().catch(() => { });
     }),
   );
 }
@@ -199,71 +151,67 @@ async function displayLoot(items = [], { onFadeStart, onFlyoutComplete } = {}) {
   showLoot.value = false;
   const thisDisplayId = ++currentDisplayId;
 
-  if (isActive.value) {
-    // Overlap the LOOT_BASE_DELAY_MS animation hold with image preloading so the
-    // total wait is max(preload, LOOT_BASE_DELAY_MS) 
-    await Promise.all([
-      preloadImages(items),
-      new Promise((r) => setTimeout(r, LOOT_BASE_DELAY_MS)),
-    ]);
-    if (thisDisplayId !== currentDisplayId) return;
+  // Overlap the LOOT_BASE_DELAY_MS animation hold with image preloading so the
+  // total wait is max(preload, LOOT_BASE_DELAY_MS) 
+  await Promise.all([
+    preloadImages(items),
+    new Promise((r) => setTimeout(r, LOOT_BASE_DELAY_MS)),
+  ]);
+  if (thisDisplayId !== currentDisplayId) return;
 
-    lootItems.value = [...items];
+  lootItems.value = [...items];
 
-    await new Promise((r) =>
-      requestAnimationFrame(() => requestAnimationFrame(r)),
-    );
-    if (thisDisplayId !== currentDisplayId) return;
+  await new Promise((r) =>
+    requestAnimationFrame(() => requestAnimationFrame(r)),
+  );
+  if (thisDisplayId !== currentDisplayId) return;
 
-    showLoot.value = true;
+  showLoot.value = true;
 
-    items.forEach((_, index) => {
-      const settleMs = computeFlyDelay(index, items.length) + LOOT_SOUND_DELAY_MS;
-      const id = window.setTimeout(() => {
-        if (thisDisplayId !== currentDisplayId) return;
-        emitSoundEvent("chestLootFall");
-      }, settleMs);
-      lootFallTimeoutIds.push(id);
-    });
+  items.forEach((_, index) => {
+    const settleMs = computeFlyDelay(index, items.length) + LOOT_SOUND_DELAY_MS;
+    const id = window.setTimeout(() => {
+      if (thisDisplayId !== currentDisplayId) return;
+      emitSoundEvent("chestLootFall");
+    }, settleMs);
+    lootFallTimeoutIds.push(id);
+  });
 
-    for (let i = BASE_SLOT_COUNT; i < items.length; i++) {
-      const shineMs = computeFlyDelay(i, items.length);
-      const color = SHINE_COLORS[items[i]?.category] ?? "white";
-      const id = window.setTimeout(() => {
-        if (thisDisplayId !== currentDisplayId) return;
-        lootImageRefs[i]?.shine?.(color);
-      }, shineMs);
-      shineTimeoutIds.push(id);
-    }
-
-    const lastDelay =
-      items.length > 0 ? computeFlyDelay(items.length - 1, items.length) : 0;
-    const totalFlyInMs = lastDelay;
-
-    if (onFlyoutComplete) {
-      flyoutCompleteTimeoutId = window.setTimeout(() => {
-        flyoutCompleteTimeoutId = null;
-        if (thisDisplayId !== currentDisplayId) return;
-        onFlyoutComplete();
-      }, totalFlyInMs + FLY_OUT_ANIM_MS);
-    }
-
-    fadeTimeoutId = window.setTimeout(() => {
-      fadeTimeoutId = null;
-      onFadeStart?.();
-      isFading.value = true;
-
-      clearTimeoutId = window.setTimeout(() => {
-        clearTimeoutId = null;
-        showLoot.value = false;
-        isFading.value = false;
-        lootItems.value = [];
-      }, FADE_DURATION_MS);
-    }, totalFlyInMs + LOOT_FADE_DELAY_MS);
-  } else {
-    lootItems.value = [...items];
-    showLoot.value = true;
+  for (let i = BASE_SLOT_COUNT; i < items.length; i++) {
+    const shineMs = computeFlyDelay(i, items.length);
+    const color = SHINE_COLORS[items[i]?.category] ?? "white";
+    const id = window.setTimeout(() => {
+      if (thisDisplayId !== currentDisplayId) return;
+      lootImageRefs[i]?.shine?.(color);
+    }, shineMs);
+    shineTimeoutIds.push(id);
   }
+
+  const lastDelay =
+    items.length > 0 ? computeFlyDelay(items.length - 1, items.length) : 0;
+  const totalFlyInMs = lastDelay;
+
+  if (onFlyoutComplete) {
+    flyoutCompleteTimeoutId = window.setTimeout(() => {
+      flyoutCompleteTimeoutId = null;
+      if (thisDisplayId !== currentDisplayId) return;
+      onFlyoutComplete();
+    }, totalFlyInMs + FLY_OUT_ANIM_MS);
+  }
+
+  fadeTimeoutId = window.setTimeout(() => {
+    fadeTimeoutId = null;
+    onFadeStart?.();
+    isFading.value = true;
+
+    clearTimeoutId = window.setTimeout(() => {
+      clearTimeoutId = null;
+      showLoot.value = false;
+      isFading.value = false;
+      lootItems.value = [];
+    }, FADE_DURATION_MS);
+  }, totalFlyInMs + LOOT_FADE_DELAY_MS);
+
 }
 
 defineExpose({ displayLoot, reset });
@@ -282,8 +230,6 @@ onBeforeUnmount(() => {
   user-select: none;
 }
 
-/* --- Active variant: slot containers with placeholder + overlay --- */
-
 .loot-slot-container {
   position: relative;
   width: 64px;
@@ -300,9 +246,9 @@ onBeforeUnmount(() => {
   margin-left: -8px;
   opacity: 0;
   transition:
-    width 0.35s cubic-bezier(.08,.71,.36,1),
-    border-width 0.35s cubic-bezier(.08,.71,.36,1),
-    margin-left 0.35s cubic-bezier(.08,.71,.36,1),
+    width 0.35s cubic-bezier(.08, .71, .36, 1),
+    border-width 0.35s cubic-bezier(.08, .71, .36, 1),
+    margin-left 0.35s cubic-bezier(.08, .71, .36, 1),
     opacity 0.35s ease-out;
 }
 
@@ -346,13 +292,7 @@ onBeforeUnmount(() => {
   opacity: 0;
 }
 
-/* --- Passive variant: static display --- */
-
-.loot-slot--passive {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* --- Passive variant moved to HistoryLootRow.vue --- */
 
 .loot-item-image {
   display: block;
@@ -363,10 +303,12 @@ onBeforeUnmount(() => {
     opacity: 0;
     transform: translateY(-100px) scale(0.3);
   }
+
   60% {
     opacity: 1;
     transform: translateY(2px) scale(1.02);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);

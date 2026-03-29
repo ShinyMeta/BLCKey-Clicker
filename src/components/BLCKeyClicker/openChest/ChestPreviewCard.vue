@@ -4,13 +4,32 @@
     color="surface-lighten-1"
     variant="elevated"
   >
-    <div class="chest-preview-card__header">
-      <div class="chest-preview-card__title text-subtitle-2">
-        {{ resolvedConfig?.name || "Black Lion Chest" }}
+    <v-card-title class="chest-preview-card__header">
+      <div style="flex: 1; min-width: 0;">
+        <div class="chest-preview-card__title text-subtitle-2">
+          {{ resolvedConfig?.name || "Black Lion Chest" }}
+        </div>
+        <div
+          v-if="chestHistoryEntry"
+          class="text-caption text-medium-emphasis chest-preview-card__subtitle"
+        >
+          Opened {{ openedCount }} time{{ openedCount === 1 ? "" : "s" }}
+        </div>
       </div>
-      <ChestPreviewDialog :chest-config="resolvedConfig">
+      <v-btn
+        v-tooltip:top="'View Drop History'"
+        v-if="chestHistoryEntry"
+        icon="mdi-history"
+        variant="text"
+        color="primary"
+        size="small"
+        :disabled="!resolvedConfig || openedCount === 0"
+        @click="handleViewDropHistoryClick"
+      />
+      <ChestPreviewDialog v-else :chest-config="resolvedConfig">
         <template #activator="activatorProps">
           <v-btn
+            v-tooltip:top="'Open Chest Preview'"
             v-bind="activatorProps"
             icon="mdi-eye"
             variant="text"
@@ -21,7 +40,7 @@
           />
         </template>
       </ChestPreviewDialog>
-    </div>
+    </v-card-title>
 
     <v-divider />
 
@@ -33,7 +52,7 @@
       class="mb-2"
     />
 
-    <div class="chest-preview-card__content">
+    <v-card-text class="chest-preview-card__content">
       <div class="chest-preview-card__group">
         <ItemImage
           v-for="item in exclusiveItems"
@@ -60,7 +79,7 @@
           :avatar-props="{ class: 'chest-preview-card__icon' }"
         />
       </div>
-    </div>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -75,17 +94,35 @@ import { fetchItemLikeMetadata } from "@/utils/gw2api";
 
 const props = defineProps({
   chestConfig: { type: Object, default: null },
+  chestHistoryEntry: { type: Object, default: null },
 });
+
+const emit = defineEmits(["view-drop-history"]);
 
 const lootStore = useLootStore();
 const { currentChestConfig } = storeToRefs(lootStore);
 
 const resolvedConfig = computed(
-  () => props.chestConfig ?? currentChestConfig.value,
+  () => props.chestHistoryEntry?.config ?? props.chestConfig ?? currentChestConfig.value,
 );
+
+const dropHistory = computed(() => 
+  props.chestHistoryEntry?.opens ?? [],
+);
+
+const openedCount = computed(() => {
+  if (dropHistory.value == null) return 0;
+  return Array.isArray(dropHistory.value)
+    ? dropHistory.value.length
+    : Number(dropHistory.value) || 0;
+});
 
 function handlePreviewClick() {
   emitSoundEvent("chestPreviewOpened");
+}
+
+function handleViewDropHistoryClick(){
+  emit("view-drop-history", props.chestHistoryEntry);
 }
 
 function pickRandom(array) {
@@ -130,6 +167,7 @@ const previewItems = computed(() => {
   return [...exclusiveItems.value, ...weaponPreviewItems.value];
 });
 
+
 watch(
   () => resolvedConfig.value,
   async (chestConfig) => {
@@ -155,6 +193,7 @@ watch(
   },
   { immediate: true },
 );
+
 </script>
 
 <style scoped>

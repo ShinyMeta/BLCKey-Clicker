@@ -8,7 +8,7 @@
         <v-breadcrumbs-item
           :disabled="item.disabled"
           :class="{ 'breadcrumb-link': !item.disabled }"
-          @click="!item.disabled && navigateTo(item.path)"
+          @click="!item.disabled && rightPanelStore.navigateTo(item.path)"
         >
           {{ item.title }}
         </v-breadcrumbs-item>
@@ -23,7 +23,7 @@
         :key="entry.title"
         :prepend-icon="entry.icon"
         :title="entry.title"
-        @click="navigateTo(entry.path)"
+        @click="rightPanelStore.navigateTo(entry.path)"
       />
     </v-list>
 
@@ -31,15 +31,21 @@
       <GraphicsSettings v-if="currentView === 'graphics'" />
       <SoundSettings v-else-if="currentView === 'sound'" />
       <HistoryDisplay v-else-if="currentView === 'history'" />
+      <HistoryDetail v-else-if="currentView === 'drops'" 
+        :chestHistoryEntry="pageMetaData.selectedHistoryEntry" />
     </template>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
+import { storeToRefs } from "pinia";
 import GraphicsSettings from "./GraphicsSettings.vue";
 import SoundSettings from "./SoundSettings.vue";
 import HistoryDisplay from "./HistoryDisplay.vue";
+import HistoryDetail from "./HistoryDetail.vue";
+
+import { useRightPanelStore } from "@/store/RightPanelStore";
 
 const MENUS = {
   root: [
@@ -52,15 +58,21 @@ const MENUS = {
   ],
 };
 
-const LABELS = Object.fromEntries(
-  Object.values(MENUS).flat().map((e) => [e.path[e.path.length - 1], e.title]),
-);
+const LABELS = Object.fromEntries([
+  ...Object.values(MENUS).flat().map((e) => [e.path[e.path.length - 1], e.title]),
+  ["drops", "Drops"],
+]);
 
-const path = ref([]);
+const rightPanelStore = useRightPanelStore();
+const { path, currentView, pageMetaData } = storeToRefs(rightPanelStore);
 
-const currentView = computed(() =>
-  path.value.length === 0 ? "root" : path.value[path.value.length - 1],
-);
+
+// const path = ref([]);
+// const selectedHistoryEntry = ref(null);
+
+// const currentView = computed(() =>
+//   path.value.length === 0 ? "root" : path.value[path.value.length - 1],
+// );
 
 const currentMenu = computed(() => MENUS[currentView.value] ?? null);
 
@@ -76,9 +88,14 @@ const breadcrumbItems = computed(() => {
   return items;
 });
 
-function navigateTo(newPath) {
-  path.value = [...newPath];
-}
+// function navigateTo(newPath) {
+//   path.value = [...newPath];
+// }
+
+// function handleOpenDrops(entry) {
+//   selectedHistoryEntry.value = entry;
+//   rightPanelStore.navigateTo(["history", "drops"]);
+// }
 </script>
 
 <style scoped>

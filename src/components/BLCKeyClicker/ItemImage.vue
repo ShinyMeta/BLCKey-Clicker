@@ -585,7 +585,8 @@ defineExpose({ shine });
 }
 
 .item-image__text-overlay--chip {
-  --item-image-chip-overhang: 8px;
+  --item-image-chip-vertical-overhang: 6px;
+  --item-image-chip-horizontal-overhang: 8px;
 }
 
 .item-image__text-overlay--top-left {
@@ -639,43 +640,43 @@ defineExpose({ shine });
 }
 
 .item-image__text-overlay--chip.item-image__text-overlay--top-left {
-  top: calc(-1 * var(--item-image-chip-overhang));
-  left: calc(-1 * var(--item-image-chip-overhang));
+  top: calc(-1 * var(--item-image-chip-vertical-overhang));
+  left: calc(-1 * var(--item-image-chip-horizontal-overhang));
 }
 
 .item-image__text-overlay--chip.item-image__text-overlay--top-center {
-  top: calc(-1 * var(--item-image-chip-overhang));
+  top: calc(-1 * var(--item-image-chip-vertical-overhang));
 }
 
 .item-image__text-overlay--chip.item-image__text-overlay--top-right {
-  top: calc(-1 * var(--item-image-chip-overhang));
-  right: calc(-1 * var(--item-image-chip-overhang));
+  top: calc(-1 * var(--item-image-chip-vertical-overhang));
+  right: calc(-1 * var(--item-image-chip-horizontal-overhang));
 }
 
 .item-image__text-overlay--chip.item-image__text-overlay--center-left {
-  left: calc(-1 * var(--item-image-chip-overhang));
+  left: calc(-1 * var(--item-image-chip-horizontal-overhang));
 }
 
 .item-image__text-overlay--chip.item-image__text-overlay--center-right {
-  right: calc(-1 * var(--item-image-chip-overhang));
+  right: calc(-1 * var(--item-image-chip-horizontal-overhang));
 }
 
 .item-image__text-overlay--chip.item-image__text-overlay--bottom-left {
-  bottom: calc(-1 * var(--item-image-chip-overhang));
-  left: calc(-1 * var(--item-image-chip-overhang));
+  bottom: calc(-1 * var(--item-image-chip-vertical-overhang));
+  left: calc(-1 * var(--item-image-chip-horizontal-overhang));
 }
 
 .item-image__text-overlay--chip.item-image__text-overlay--bottom-center {
-  bottom: calc(-1 * var(--item-image-chip-overhang));
+  bottom: calc(-1 * var(--item-image-chip-vertical-overhang));
 }
 
 .item-image__text-overlay--chip.item-image__text-overlay--bottom-right {
-  right: calc(-1 * var(--item-image-chip-overhang));
-  bottom: calc(-1 * var(--item-image-chip-overhang));
+  right: calc(-1 * var(--item-image-chip-horizontal-overhang));
+  bottom: calc(-1 * var(--item-image-chip-vertical-overhang));
 }
 
 .item-image__text-chip {
-  background: rgba(0, 0, 0, 0.92);
+  background: rgba(var(--v-theme-background), 1);
   color: white;
 }
 
