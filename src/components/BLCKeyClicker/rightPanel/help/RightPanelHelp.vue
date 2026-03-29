@@ -6,7 +6,7 @@
       @click="openTutorial = true"
     />
     <v-list-item
-      prepend-icon="$discord"
+      prepend-icon="fa:fab fa-discord"
       title="Discord Server"
       href="https://discord.gg/DAj7xMEVRc"
       target="_blank"
