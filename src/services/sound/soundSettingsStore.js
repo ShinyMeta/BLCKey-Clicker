@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { useStorage } from "@vueuse/core";
 
 const DEFAULT_VOLUME = 0.8;
 
 export const useSoundSettingsStore = defineStore("soundSettings", () => {
-  const muted = ref(false);
-  const masterVolume = ref(DEFAULT_VOLUME);
-  const channelVolumes = ref({
+  const muted = useStorage("sound.muted", false);
+  const masterVolume = useStorage("sound.masterVolume", DEFAULT_VOLUME);
+  const channelVolumes = useStorage("sound.channelVolumes", {
     chest: DEFAULT_VOLUME,
     mapComp: DEFAULT_VOLUME,
   });

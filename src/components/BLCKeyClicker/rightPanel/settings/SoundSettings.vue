@@ -4,7 +4,7 @@
     <v-btn :icon="muteButtonIcon" @click="soundSettings.toggleMute" size="x-large" variant="outlined" 
       :color="muted ? 'error' : 'success'"/>
     
-    <volume-slider v-model="masterVolume" label="Master" :prepend-icon="masterVolumeIcon" />
+    <volume-slider v-model="masterVolume" label="All Sound" :prepend-icon="masterVolumeIcon" />
     <volume-slider v-model="channelVolumes.chest" label="Chest" prepend-icon="mdi-treasure-chest-outline" />
     <volume-slider v-model="channelVolumes.mapComp" label="Map Completion" prepend-icon="mdi-map-check-outline" />
   </div>

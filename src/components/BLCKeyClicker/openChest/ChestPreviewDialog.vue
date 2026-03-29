@@ -17,7 +17,7 @@
             Percentage Display Mode
           </span>
           <v-btn-toggle
-            v-model="percentMode"
+            v-model="previewPercentMode"
             mandatory
             density="compact"
             variant="outlined"
@@ -100,7 +100,7 @@
                   >
                     <v-expansion-panel>
                       <template #title>
-                        <div class="panel-header panel-header--group">
+                        <div class="panel-header">
                           <div class="panel-header__main">
                             <div
                               class="panel-preview-icons panel-preview-icons--group"
@@ -217,10 +217,12 @@ import blcKeyIcon from "@/assets/item/BLCKey.png";
 import goldenBlcKeyIcon from "@/assets/item/goldenBLCKey.png";
 import ItemImage from "@/components/BLCKeyClicker/ItemImage.vue";
 import { emitSoundEvent } from "@/services/sound";
+import { useMiscSettingsStore } from "@/services/settings/miscSettingsStore";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import template from "@/store/loot/config/template.json";
 import { mergeTemplateWithConfig, buildLootTable } from "@/store/loot/lootService";
 import { useLootStore } from "@/store/loot/lootStore";
+import { storeToRefs } from "pinia";
 
 const CATEGORY_ORDER = [
   "guaranteed",
@@ -278,7 +280,13 @@ const lootTable = computed(() => {
 });
 
 const dialogOpen = ref(false);
-const percentMode = ref("perChest");
+const miscSettings = useMiscSettingsStore();
+const { previewPercentMode } = storeToRefs(miscSettings);
+
+// const percentMode = computed({
+//   get: () => miscSettings.previewPercentMode.value,
+//   set: (v) => (miscSettings.previewPercentMode.value = v),
+// });
 const isLoadingMetadata = ref(false);
 
 function getSlotLabel(setKey, slotName) {
@@ -390,7 +398,7 @@ const cachedPreviewEntries = computed(() => {
 function getPanelDenominator(panelKey, poolWeight) {
   if (panelKey === "guaranteed") return null;
   if (!FIFTH_DROP_CATEGORY_KEYS.includes(panelKey)) return poolWeight;
-  return percentMode.value === "perChest"
+  return previewPercentMode.value === "perChest"
     ? fifthDropPoolWeight.value / template.fifthDropChance
     : fifthDropPoolWeight.value;
 }
@@ -407,7 +415,7 @@ function getPanelDisplayText(panelKey) {
   const poolSharePercent = getRowPercent(categoryWeight, fifthDropPoolWeight.value);
   const chestSharePercent = poolSharePercent * template.fifthDropChance;
 
-  if (percentMode.value === "perChest") {
+  if (previewPercentMode.value === "perChest") {
     return {
       subtitle: `${formatPercent(chestSharePercent)} total chance per chest`,
       poolPercentText: formatPercent(chestSharePercent),
@@ -549,7 +557,7 @@ function computeRowPreviewEntries(row) {
 }
 
 const percentModeDescription = computed(() => {
-  if (percentMode.value === "perChest") {
+  if (previewPercentMode.value === "perChest") {
     return "Percentages below reflect the chance to receive the item per chest opened.  The total chance to get a 5th drop is 10%.";
   }
 
@@ -619,6 +627,7 @@ function formatPercent(percent) {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  padding-right: 4px;
 }
 
 .panel-header__main {
@@ -630,10 +639,6 @@ function formatPercent(percent) {
 
 .panel-header__text {
   min-width: 0;
-}
-
-.panel-header--group {
-  padding-right: 4px;
 }
 
 .preview-rows {
