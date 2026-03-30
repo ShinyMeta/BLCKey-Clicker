@@ -44,6 +44,7 @@ import chestAppearances from "@/assets/BLCOpenUI/chestHalf";
 import chestInsideGlowSrc from "@/assets/BLCOpenUI/chestInsideGlow.png";
 import chestInsideFlashSrc from "@/assets/BLCOpenUI/chestInsideFlash.png";
 import { emitSoundEvent } from "@/services/sound";
+import { useTimerStore } from "@/store/timerStore";
 
 const emit = defineEmits(["click"]);
 const props = defineProps({
@@ -72,6 +73,7 @@ const flashActive = ref(false);
 const glowActive = ref(false);
 const activeTimeouts = new Set();
 let animationRunId = 0;
+const timer = useTimerStore();
 
 function schedule(callback, delay) {
   const timeoutId = window.setTimeout(() => {
@@ -170,7 +172,7 @@ async function playDisabledShake() {
 }
 
 function handleClick() {
-  if (props.locked) return;
+  if (props.locked || timer.isTimeUp) return;
 
   if (props.disabled) {
     emitSoundEvent("chestDisabled");

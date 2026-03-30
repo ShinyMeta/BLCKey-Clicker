@@ -12,10 +12,12 @@
 
 <script setup>
 import { ref } from "vue";
+import { useTimerStore } from "@/store/timerStore";
 import mapCompImg from "@/assets/MapComp/MapComp.png";
 
 const emit = defineEmits(["click"]);
 const isClicked = ref(false);
+const timer = useTimerStore();
 
 function onMouseDown() {
   isClicked.value = true;
@@ -24,6 +26,8 @@ function onMouseDown() {
 function onMouseUp() {
   if (isClicked.value) {
     isClicked.value = false;
+    if (timer.isTimeUp) return;
+
     emit("click");
   }
 }

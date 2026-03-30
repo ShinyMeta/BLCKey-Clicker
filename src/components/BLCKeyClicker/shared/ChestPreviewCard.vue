@@ -133,20 +133,8 @@ function pickRandom(array) {
 const exclusiveItems = computed(() => {
   const config = resolvedConfig.value;
   if (!config?.sets) return [];
-  const items = [];
-  for (const setKey of ["newExclusive", "returningExclusive"]) {
-    const entry = config.sets[setKey]?.items?.[0];
-    if (!entry) continue;
-    const obtained = lootStore.hasExclusiveDropped(entry.itemId);
-    items.push({
-      itemId: entry.itemId,
-      label: entry.label,
-      setKey,
-      obtained,
-      badgeText: setKey === "newExclusive" && !obtained ? "NEW" : "",
-    });
-  }
-  return items;
+  
+  return lootStore.exclusivesFromConfig(config);
 });
 
 const weaponPreviewItems = computed(() => {

@@ -1,5 +1,4 @@
 <template>
-  <v-layout>
     <v-navigation-drawer
       v-model="leftDrawerOpen"
       :permanent="lgAndUp"
@@ -7,30 +6,10 @@
       location="left"
       :width="320"
     >
-      <div class="pa-4">
-        <ChestPreviewCard />
-        <v-btn
-          block
-          class="mt-3"
-          prepend-icon="mdi-refresh"
-          color="primary"
-          variant="tonal"
-          @click="lootStore.generateCurrentChestConfig()"
-        >
-          New Random Chest
-        </v-btn>
-      </div>
+      <LeftPanel />
     </v-navigation-drawer>
 
-    <v-main>
-      <div class="center-pane">
-        <section class="center-pane__top">
-          <OpenChestPanel />
-        </section>
-        <section class="center-pane__bottom">
-          <MapCompProgress />
-        </section>
-      </div>
+      <CenterPanel />
 
       <template v-if="!lgAndUp">
         <v-btn
@@ -54,7 +33,6 @@
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
       </template>
-    </v-main>
 
     <v-navigation-drawer
       v-model="rightDrawerOpen"
@@ -65,16 +43,14 @@
     >
       <RightPanel />
     </v-navigation-drawer>
-  </v-layout>
 </template>
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { useDisplay } from "vuetify";
-import ChestPreviewCard from "@/components/BLCKeyClicker/shared/ChestPreviewCard.vue";
-import MapCompProgress from "@/components/BLCKeyClicker/mapComp/MapCompProgress.vue";
-import OpenChestPanel from "@/components/BLCKeyClicker/openChest/OpenChestPanel.vue";
+import CenterPanel from "@/components/BLCKeyClicker/centerPanel/CenterPanel.vue";
 import RightPanel from "@/components/BLCKeyClicker/rightPanel/RightPanel.vue";
+import LeftPanel from "@/components/BLCKeyClicker/leftPanel/LeftPanel.vue";
 import { useLootStore } from "@/store/loot/lootStore";
 
 const { lgAndUp } = useDisplay();
@@ -93,28 +69,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.center-pane {
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100dvh - 64px);
-}
 
-.center-pane__top {
-  flex: 3;
-}
-
-.center-pane__bottom {
-  flex: 6;
-}
-
-.center-pane__top,
-.center-pane__bottom {
-  min-height: 300px;
-  padding: 24px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .panel-tab {
   position: fixed;

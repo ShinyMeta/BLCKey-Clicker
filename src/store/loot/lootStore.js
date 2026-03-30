@@ -42,6 +42,28 @@ export const useLootStore = defineStore("loot", () => {
       : null,
   );
 
+  const currentExclusives = computed(() => {
+    return exclusivesFromConfig(currentChestConfig.value);
+  });
+
+  function exclusivesFromConfig(config) {
+    if (!config?.sets) return [];
+    const items = [];
+    for (const setKey of ["newExclusive", "returningExclusive"]) {
+      const entry = config.sets[setKey]?.items?.[0];
+      if (!entry) continue;
+      const obtained = hasExclusiveDropped(entry.itemId);
+      items.push({
+        itemId: entry.itemId,
+        label: entry.label,
+        setKey,
+        obtained,
+        badgeText: setKey === "newExclusive" && !obtained ? "NEW" : "",
+      });
+    }
+    return items;
+  }
+
   lootHandler
     .onItemId(ITEM_ID.STATUETTE, (drop) => inventoryStore.adjustInventory("statuette", drop.quantity))
     .onItemId(
@@ -138,6 +160,8 @@ export const useLootStore = defineStore("loot", () => {
     lastDrops,
     chestHistory,
     currentHistoryEntry,
+    currentExclusives,
+    exclusivesFromConfig,
     hasExclusiveDropped,
     lootHandler,
     loadChest,
