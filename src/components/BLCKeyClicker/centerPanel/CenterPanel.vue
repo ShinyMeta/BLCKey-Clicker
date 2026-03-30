@@ -1,8 +1,10 @@
 <template>
   <div class="center-panel">
-    
-    <ActiveChestCycle v-if="isActiveChestCycle" />
-    <BetweenChestCycles v-if="isBetweenChestCycles" />
+    <VFadeTransition mode="out-in">
+      <ActiveChestCycle v-if="isActiveChestCycle" key="active" />
+      <BetweenChestCycles v-else-if="isBetweenChestCycles" key="between" />
+    </VFadeTransition>
+
     <PausedTimerOverlay />
   </div>
 </template>

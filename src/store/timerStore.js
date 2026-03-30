@@ -3,7 +3,7 @@ import { ref, computed } from "vue";
 
 // Default to 5 minutes
 const START_MS = 5 * 60 * 1000;
-const TICK_MS = 100; // interval timer
+const TICK_MS = 10; // interval timer
 
 export const useTimerStore = defineStore("timer", () => {
   const remainingMs = ref(0);
@@ -20,13 +20,14 @@ export const useTimerStore = defineStore("timer", () => {
     const minutes = Math.floor(totalMs / 60 / 1000);
     const seconds = Math.floor(totalMs / 1000) % 60;
     const milliseconds = (totalMs % 1000);
+    const tenths = Math.floor(milliseconds / 100);
 
     if (totalMs < 10000) {
       // show seconds.milliseconds as x.xxx
       return `${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
     }
 
-    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${tenths}`;
   });
 
   function tick() {

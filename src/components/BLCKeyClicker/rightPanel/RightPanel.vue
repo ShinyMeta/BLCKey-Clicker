@@ -1,6 +1,6 @@
 <template>
   <div class="right-panel">
-    <v-breadcrumbs :items="breadcrumbItems" density="compact" class="px-3 pt-2 pb-0">
+    <v-breadcrumbs :items="breadcrumbItems" density="compact" class="pa-3 pb-2">
       <template #divider>
         <v-icon icon="mdi-chevron-right" size="x-small" />
       </template>
@@ -100,6 +100,6 @@ const breadcrumbItems = computed(() => {
 
 .right-panel__content {
   height: calc(100dvh - 110px);
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 </style>

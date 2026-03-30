@@ -1,10 +1,12 @@
 <template>
-  <section class="center-pane__top">
-    <OpenChestPanel />
-  </section>
-  <section class="center-pane__bottom">
-    <MapCompProgress />
-  </section>
+  <div class="active-chest-cycle d-flex flex-column">
+    <section class="center-pane__top">
+      <OpenChestPanel />
+    </section>
+    <section class="center-pane__bottom">
+      <MapCompProgress />
+    </section>
+  </div>
 </template>
 
 <script setup>
@@ -13,7 +15,9 @@
 </script>
 
 <style scoped>
-
+.active-chest-cycle {
+  min-height: calc(100dvh - 64px);
+}
 
 .center-pane__top {
   flex: 3;

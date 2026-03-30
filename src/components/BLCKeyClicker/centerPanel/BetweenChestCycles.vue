@@ -1,6 +1,5 @@
 <template>
   <div class="between-chest-cycles d-flex flex-column align-center ga-4">
-    
     <v-btn
       prepend-icon="mdi-play"
       color="primary"
@@ -51,3 +50,6 @@ const didYouWin = computed(() => {
 });
 
 </script>
+
+<style scoped>
+</style>
