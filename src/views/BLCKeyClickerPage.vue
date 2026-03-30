@@ -51,12 +51,10 @@ import { useDisplay } from "vuetify";
 import CenterPanel from "@/components/BLCKeyClicker/centerPanel/CenterPanel.vue";
 import RightPanel from "@/components/BLCKeyClicker/rightPanel/RightPanel.vue";
 import LeftPanel from "@/components/BLCKeyClicker/leftPanel/LeftPanel.vue";
-import { useLootStore } from "@/store/loot/lootStore";
 
 const { lgAndUp } = useDisplay();
 const leftDrawerOpen = ref(lgAndUp.value);
 const rightDrawerOpen = ref(lgAndUp.value);
-const lootStore = useLootStore();
 
 watch(lgAndUp, (isLarge) => {
   leftDrawerOpen.value = isLarge;
@@ -64,7 +62,8 @@ watch(lgAndUp, (isLarge) => {
 });
 
 onMounted(() => {
-  lootStore.generateCurrentChestConfig();
+  // lootStore.generateCurrentChestConfig();
+  // TODO: some time later, maybe we load the save here
 });
 </script>
 

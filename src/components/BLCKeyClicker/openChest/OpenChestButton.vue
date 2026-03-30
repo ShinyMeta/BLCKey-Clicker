@@ -211,6 +211,7 @@ onBeforeUnmount(() => {
   position: relative;
   display: block;
   width: 200px;
+  height: 200px;
   transition: transform 0.16s ease-out;
   will-change: transform;
 }
