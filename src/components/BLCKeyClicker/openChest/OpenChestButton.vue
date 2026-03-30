@@ -73,7 +73,10 @@ const flashActive = ref(false);
 const glowActive = ref(false);
 const activeTimeouts = new Set();
 let animationRunId = 0;
+
 const timer = useTimerStore();
+const disabledByTimer = computed(() => !timer.isActiveChestCycle || timer.isPaused);
+
 
 function schedule(callback, delay) {
   const timeoutId = window.setTimeout(() => {
@@ -172,7 +175,8 @@ async function playDisabledShake() {
 }
 
 function handleClick() {
-  if (props.locked || timer.isTimeUp) return;
+  // props.locked is animation locked by loot row through parent
+  if (props.locked || disabledByTimer.value) return;
 
   if (props.disabled) {
     emitSoundEvent("chestDisabled");

@@ -1,61 +1,99 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 
-const START_SECONDS = 5 // 60 * 5;
+// Default to 5 minutes
+const START_MS = 5 * 60 * 1000;
+const TICK_MS = 100; // interval timer
 
 export const useTimerStore = defineStore("timer", () => {
-  const remainingSeconds = ref(START_SECONDS);
-  const isRunning = ref(false);
-  const showEndDialog = ref(false);
+  const remainingMs = ref(0);
+  const isPaused = ref(false);
+
   let intervalId = null;
+  let lastTick = 0;
 
-  const minutes = computed(() => Math.floor(Math.max(0, remainingSeconds.value) / 60));
-  const seconds = computed(() => Math.floor(Math.max(0, remainingSeconds.value) % 60));
-  const formatted = computed(() => `${String(minutes.value).padStart(2, "0")}:${String(seconds.value).padStart(2, "0")}`);
+  const isActiveChestCycle = computed(() => remainingMs.value > 0);
+  const isBetweenChestCycles = computed(() => remainingMs.value <= 0);
 
-  const isTimeUp = computed(() => remainingSeconds.value <= 0);
+  const formatted = computed(() => {
+    const totalMs = Math.max(0, remainingMs.value);
+    const minutes = Math.floor(totalMs / 60 / 1000);
+    const seconds = Math.floor(totalMs / 1000) % 60;
+    const milliseconds = (totalMs % 1000);
 
-  function start() {
-    if (isRunning.value) return;
-    isRunning.value = true;
-    intervalId = window.setInterval(() => {
-      if (remainingSeconds.value > 0) {
-        remainingSeconds.value -= 1;
-      }
+    if (totalMs < 10000) {
+      // show seconds.milliseconds as x.xxx
+      return `${String(seconds).padStart(2, '0')}.${String(milliseconds).padStart(3, '0')}`;
+    }
 
-      if (remainingSeconds.value <= 0) {
-        stop();
-        showEndDialog.value = true;
-      }
-    }, 1000);
+    return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  });
+
+  function tick() {
+    const now = Date.now();
+    if (!lastTick) lastTick = now;
+    const delta = now - lastTick;
+    lastTick = now;
+
+    if (remainingMs.value > 0) {
+      remainingMs.value = Math.max(0, remainingMs.value - delta);
+    }
+
+    if (remainingMs.value <= 0) {
+      remainingMs.value = 0;
+      stop();
+    }
   }
 
+  function start() {
+    if (isActiveChestCycle.value) return;
+    remainingMs.value = START_MS;
+    lastTick = Date.now();
+    intervalId = window.setInterval(tick, TICK_MS);
+  }
+
+  // clears interval, resets lastTick, really only used internally
   function stop() {
-    isRunning.value = false;
     if (intervalId) {
       window.clearInterval(intervalId);
       intervalId = null;
     }
+    lastTick = 0;
+    remainingMs.value = 0;
   }
 
   function reset() {
     stop();
-    remainingSeconds.value = START_SECONDS;
-    showEndDialog.value = false;
     start();
   }
 
-
-  // start automatically when the store is first used
-  start();
+  function togglePause() {
+    isPaused.value = !isPaused.value;
+    // if we're pausing, clear the interval. If we're unpausing, start a new interval and reset lastTick
+    if (isPaused.value) {
+      if (intervalId) {
+        window.clearInterval(intervalId);
+        intervalId = null;
+        lastTick = 0;
+      }
+    } else {
+      lastTick = Date.now();
+      intervalId = window.setInterval(tick, TICK_MS);
+    }
+  }
 
   return {
-    remainingSeconds,
+    // state
+    remainingMs,
     formatted,
-    isRunning,
-    isTimeUp,
+    isPaused,
+    isActiveChestCycle,
+    isBetweenChestCycles,
+
+    // actions
     start,
     stop,
     reset,
+    togglePause,
   };
 });

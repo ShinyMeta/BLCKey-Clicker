@@ -1,23 +1,29 @@
 <template>
   <div class="center-panel">
-    <ActiveChestCycle v-if="!isTimeUp" />
-    <BetweenChestCycles v-else />
+    
+    <ActiveChestCycle v-if="isActiveChestCycle" />
+    <BetweenChestCycles v-if="isBetweenChestCycles" />
+    <PausedTimerOverlay />
   </div>
 </template>
 
 <script setup>
-  import { computed } from "vue";
+  import { computed } from 'vue';
   import ActiveChestCycle from './ActiveChestCycle.vue';
   import BetweenChestCycles from './BetweenChestCycles.vue';
+  import PausedTimerOverlay from './PausedTimerOverlay.vue';
   import { useTimerStore } from '@/store/timerStore';
 
   const timer = useTimerStore();
-  const isTimeUp = computed(() => timer.isTimeUp);
+
+  const isActiveChestCycle = computed(() => timer.isActiveChestCycle);
+  const isBetweenChestCycles = computed(() => timer.isBetweenChestCycles);
 </script>
 
 <style scoped>
 
 .center-panel {
+  position: relative;
   display: flex;
   flex-direction: column;
   min-height: calc(100dvh - 64px);

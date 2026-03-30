@@ -2,7 +2,6 @@
   <div class="between-chest-cycles d-flex flex-column align-center ga-4">
     
     <v-btn
-      v-if="timer.isTimeUp"
       prepend-icon="mdi-play"
       color="primary"
       variant="tonal"
