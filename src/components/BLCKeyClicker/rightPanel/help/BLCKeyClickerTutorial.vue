@@ -10,6 +10,7 @@
         some keys, click the chest to open it and receive your loot!</p>
       <p>Each chest only lasts 5 minutes, so hurry to unlock the exclusives before 
         they rotate out on patch day!</p>
+      <p>Clicking the timer or pressing <kbd>Esc</kbd> will pause the game.</p>
     </v-card-text>
   </v-card>
 </template>
@@ -25,6 +26,10 @@
 
 .tutorial-text p:not(:last-child) {
   margin-bottom: 1em;
+}
+
+kbd {
+  color: rgb(var(--v-theme-primary));
 }
 
 </style>

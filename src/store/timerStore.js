@@ -1,8 +1,10 @@
+import { emitSoundEvent } from "@/services/sound";
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 
 // Default to 5 minutes
 const START_MS = 5 * 60 * 1000;
+// const START_MS = 2 * 1000;
 const TICK_MS = 10; // interval timer
 
 export const useTimerStore = defineStore("timer", () => {
@@ -42,6 +44,7 @@ export const useTimerStore = defineStore("timer", () => {
 
     if (remainingMs.value <= 0) {
       remainingMs.value = 0;
+      emitSoundEvent("timerHitZero");
       stop();
     }
   }
@@ -69,6 +72,7 @@ export const useTimerStore = defineStore("timer", () => {
   }
 
   function togglePause() {
+    emitSoundEvent("timerPause")
     isPaused.value = !isPaused.value;
     // if we're pausing, clear the interval. If we're unpausing, start a new interval and reset lastTick
     if (isPaused.value) {

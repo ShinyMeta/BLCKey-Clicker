@@ -12,6 +12,9 @@ const EVENT_REGISTRY = {
   chestPreviewClosed: { soundKey: "SwishSoft", channel: "chest", throttleMs: 100 },
   mapClick:      { soundKey: "FootFall",      channel: "mapComp", throttleMs: DEFAULT_THROTTLE_MS },
   mapComplete:   { soundKey: "Exp",           channel: "mapComp", throttleMs: DEFAULT_THROTTLE_MS },
+  timerHitZero:   { soundKey: "HeartEnterArea",     channel: "timer",   throttleMs: DEFAULT_THROTTLE_MS },
+  timerStart:     { soundKey: "BellTone",    channel: "timer",   throttleMs: DEFAULT_THROTTLE_MS },
+  timerPause:     { soundKey: "PaperFlap",   channel: "timer",   throttleMs: DEFAULT_THROTTLE_MS },
 };
 
 const lastPlayed = new Map();

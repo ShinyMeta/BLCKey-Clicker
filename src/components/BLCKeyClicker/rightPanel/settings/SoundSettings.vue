@@ -7,6 +7,7 @@
     <volume-slider v-model="masterVolume" label="All Sound" :prepend-icon="masterVolumeIcon" />
     <volume-slider v-model="channelVolumes.chest" label="Chest" prepend-icon="mdi-treasure-chest-outline" />
     <volume-slider v-model="channelVolumes.mapComp" label="Map Completion" prepend-icon="mdi-map-check-outline" />
+    <volume-slider v-model="channelVolumes.timer" label="Timer" prepend-icon="mdi-timer-outline" />
   </div>
 </template>
 

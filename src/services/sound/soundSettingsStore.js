@@ -9,6 +9,7 @@ export const useSoundSettingsStore = defineStore("soundSettings", () => {
   const channelVolumes = useStorage("sound.channelVolumes", {
     chest: DEFAULT_VOLUME,
     mapComp: DEFAULT_VOLUME,
+    timer: DEFAULT_VOLUME,
   });
 
   function effectiveVolume(channel) {

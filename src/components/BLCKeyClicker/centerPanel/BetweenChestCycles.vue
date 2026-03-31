@@ -22,6 +22,7 @@ import { computed, } from "vue";
 import { useTimerStore } from "@/store/timerStore";
 import { useLootStore } from "@/store/loot/lootStore";
 import { storeToRefs } from "pinia";
+import { emitSoundEvent } from "@/services/sound";
 
 const lootStore = useLootStore();
 const timer = useTimerStore();
@@ -29,6 +30,7 @@ const timer = useTimerStore();
 function beginChestCycle() {
   lootStore.generateCurrentChestConfig();
   timer.reset();
+  emitSoundEvent('timerStart');
 }
 
 const resultStrings = computed(() => {
