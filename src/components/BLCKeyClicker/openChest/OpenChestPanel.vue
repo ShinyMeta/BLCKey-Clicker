@@ -41,6 +41,7 @@
             :value="key.value"
             class="item-select-btn"
             :class="{ empty: inventory[key.value] === 0 }"
+            @contextmenu="handleKeyContextMenu($event, key.value)"
           >
             <div class="item-select-content">
               <ItemImage
@@ -69,6 +70,7 @@
 <script setup>
 import { computed, onBeforeUnmount, ref, useTemplateRef, nextTick, watch } from "vue";
 import { storeToRefs } from "pinia";
+import { useMiscSettingsStore } from "@/services/settings/miscSettingsStore";
 import blcChestImg from "@/assets/item/BLChest.png";
 import blcKeyImg from "@/assets/item/BLCKey.png";
 import goldenBlcKeyImg from "@/assets/item/goldenBLCKey.png";
@@ -98,14 +100,22 @@ const keyTypes = [
   { value: "blcKey", name: "Black Lion Chest Key", icon: blcKeyImg },
   { value: "goldenKey", name: "Golden Black Lion Chest Key", icon: goldenBlcKeyImg },
 ];
-const selectedKeyType = ref("blcKey");
-const keyAutoAttack = ref({
-  blcKey: true,
-  goldenKey: false,
+const miscSettings = useMiscSettingsStore();
+const { keyAutoAttack } = storeToRefs(miscSettings);
+const autoAttackReady = computed(() => {
+  const exclusives = lootStore.currentExclusives || [];
+  const allExclusivesDropped = exclusives.length > 0 && 
+    exclusives.every((it) => lootStore.hasExclusiveDropped(it.itemId));
+  // selected key has auto attack enabled, and qty in inventory
+  return keyAutoAttack.value[selectedKeyType.value] 
+    && selectedKeyCount.value > 0 
+    && !allExclusivesDropped;
 });
+const selectedKeyType = ref("blcKey");
 const selectedKeyCount = computed(
   () => inventory.value[selectedKeyType.value] ?? 0
 );
+
 const isAnimationLocked = ref(false);
 let lootRevealTimeoutId = null;
 let openSequenceId = 0;
@@ -169,15 +179,22 @@ async function resolveDisplayLoot(drops) {
 }
 
 async function triggerAutoAttack() {
-  //if selected key has auto attack, and qty in inventory, click chest
-  if (keyAutoAttack.value[selectedKeyType.value] && selectedKeyCount.value > 0) {
+  if (autoAttackReady.value) {
     await nextTick();
     chestButton.value?.$el.click();
   }
 }
 
-watch(selectedKeyCount, (newCount) => {
-  if (keyAutoAttack.value[selectedKeyType.value] && newCount > 0) {
+function handleKeyContextMenu(event, keyValue) {
+  // Toggle auto-attack for a key only when CTRL + right-click is used
+  // Allow normal context menu when CTRL is not pressed
+  if (!event.ctrlKey) return;
+  event.preventDefault();
+  miscSettings.toggleKeyAutoAttack(keyValue);
+}
+
+watch(autoAttackReady, (newValue) => {
+  if (newValue) {
     triggerAutoAttack();
   }
 });

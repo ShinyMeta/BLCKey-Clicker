@@ -11,6 +11,9 @@
       <p>Each chest only lasts 5 minutes, so hurry to unlock the exclusives before 
         they rotate out on patch day!</p>
       <p>Clicking the timer or pressing <kbd>Esc</kbd> will pause the game.</p>
+      <p>Hold <kbd>Ctrl</kbd> while right-clicking a key to toggle "auto-attack". 
+        When auto-attack is turned on, the chest will automatically consume the selected 
+        key until both exclusives are unlocked.</p>
     </v-card-text>
   </v-card>
 </template>
