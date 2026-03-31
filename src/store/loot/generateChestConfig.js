@@ -31,12 +31,17 @@ function sampleIndices(length, count) {
   return picked;
 }
 
+
 /**
  * Picks `count` unique random items from a catalog's `items` array.
  */
-function pickRandom(catalog, count) {
+function pickRandom(catalog, count, excludedIds = new Set()) {
+  const pool = (catalog.items || []).filter((it) => {
+    return !excludedIds.has(it.itemId);
+  });
+  const pickCount = Math.min(count, pool.length);
   return {
-    items: sampleIndices(catalog.items.length, count).map((i) => catalog.items[i]),
+    items: pickCount > 0 ? sampleIndices(pool.length, pickCount).map((i) => pool[i]) : [],
   };
 }
 
@@ -76,28 +81,67 @@ export function generateChestConfigFromCatalogs({
   glyphsCatalog,
   nodesCatalog,
   tonicsCatalog,
+  // New params for avoiding repeats
+  previousChestConfig = null,
+  exclusiveLookup = null,
 }) {
-  const [newIdx, retIdx] = sampleIndices(exclusivesCatalog.items.length, 2);
 
-  const uncommon = pickRandomWeaponSet(weaponsCatalog);
-  const rare = pickRandomWeaponSet(weaponsCatalog, [uncommon.name]);
+  // Collect ids from previous chest to prevent duplicates across consecutive chests.
+  const prevIds = new Set();
+  const prevWeaponNames = [];
+
+  if (previousChestConfig && previousChestConfig.sets) {
+    const keysToCheck = ["guaranteedItem", "dyeKits", "glyphs", "nodes", "tonic"];
+    keysToCheck.forEach((key) => {
+      const set = previousChestConfig.sets[key];
+      if (!set || !Array.isArray(set.items)) return; // overcautious check for expected structure
+      set.items.forEach((it) => {
+        prevIds.add(it.itemId);
+      });
+    });
+
+    // Collect previous weapon set names to ensure new sets are different.
+    ["uncommonWeapons", "rareWeapons"].forEach((key) => {
+      const set = previousChestConfig.sets[key];
+      if (!set || !set.name) return; // overcautious check for expected structure
+      prevWeaponNames.push(set.name);
+    });
+  }
+  const uncommon = pickRandomWeaponSet(weaponsCatalog, prevWeaponNames);
+  const rare = pickRandomWeaponSet(weaponsCatalog, [uncommon.name, ...prevWeaponNames]);
+
+
+  // Pick Exculsives
+  const prevExclusiveIds = new Set();
+  const nextExclusives = [];
+  
+  if (previousChestConfig && exclusiveLookup) {
+    exclusiveLookup.keys().forEach((id) => {
+      prevExclusiveIds.add(id);
+    })
+    const prevItem = previousChestConfig.sets.newExclusive.items[0];
+    
+    nextExclusives.push({items: [{...prevItem}]});
+  }
+  else {
+    nextExclusives.push(pickRandom(exclusivesCatalog, 1, prevExclusiveIds));
+  }
+  nextExclusives.push(pickRandom(exclusivesCatalog, 1, prevExclusiveIds));
+
 
   return {
     name: name ?? pickRandomChestName(),
     appearanceType: Math.floor(Math.random() * 4),
     sets: {
-      guaranteedItem: pickRandom(
-        guaranteedItemCatalog,
-        guaranteedItemCatalog.pickCount,
-      ),
-      newExclusive: { items: [exclusivesCatalog.items[newIdx]] },
-      returningExclusive: { items: [exclusivesCatalog.items[retIdx]] },
-      dyeKits: pickRandom(dyeKitsCatalog, dyeKitsCatalog.pickCount),
+      guaranteedItem: pickRandom( guaranteedItemCatalog, guaranteedItemCatalog.pickCount, prevIds),
+      returningExclusive: nextExclusives[0],
+      newExclusive: nextExclusives[1],
+      dyeKits: pickRandom(dyeKitsCatalog, dyeKitsCatalog.pickCount, prevIds),
       uncommonWeapons: uncommon,
       rareWeapons: rare,
-      glyphs: pickRandom(glyphsCatalog, glyphsCatalog.pickCount),
-      nodes: pickRandom(nodesCatalog, nodesCatalog.pickCount),
-      tonic: pickRandom(tonicsCatalog, tonicsCatalog.pickCount),
+      glyphs: pickRandom(glyphsCatalog, glyphsCatalog.pickCount, prevIds),
+      nodes: pickRandom(nodesCatalog, nodesCatalog.pickCount, prevIds),
+      tonic: pickRandom(tonicsCatalog, tonicsCatalog.pickCount, prevIds),
     },
   };
 }
@@ -105,13 +149,10 @@ export function generateChestConfigFromCatalogs({
 /**
  * Generates a chest config from the app's bundled set catalogs.
  *
- * @param {object} [options]
- * @param {string} [options.name] - display name override (random if omitted)
  * @returns {object} a chest config ready for lootStore.loadChest()
  */
-export function generateChestConfig({ name } = {}) {
+export function generateChestConfig(previousChestConfig = null, exclusiveLookup = null) {
   return generateChestConfigFromCatalogs({
-    name,
     guaranteedItemCatalog,
     exclusivesCatalog,
     dyeKitsCatalog,
@@ -119,5 +160,7 @@ export function generateChestConfig({ name } = {}) {
     glyphsCatalog,
     nodesCatalog,
     tonicsCatalog,
+    previousChestConfig,
+    exclusiveLookup,
   });
 }

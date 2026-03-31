@@ -51,6 +51,7 @@
                 }"
                 :size="52"
                 :tooltip="false"
+                :auto-attack="keyAutoAttack[key.value]"
                 :text-overlay="String(inventory[key.value])"
                 text-overlay-style="shadow"
                 :text-overlay-position="keyTextOverlayPosition(index)"
@@ -66,7 +67,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, ref } from "vue";
+import { computed, onBeforeUnmount, ref, useTemplateRef, nextTick, watch } from "vue";
 import { storeToRefs } from "pinia";
 import blcChestImg from "@/assets/item/BLChest.png";
 import blcKeyImg from "@/assets/item/BLCKey.png";
@@ -80,27 +81,28 @@ import { useInventoryStore } from "@/store/inventoryStore";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import { emitSoundEvent } from "@/services/sound";
 
-const props = defineProps({
-  lootRevealDelayMs: {
-    type: Number,
-    default: 600,
-  },
-});
 
 const controller = useBLCKeyClickerController();
 const inventoryStore = useInventoryStore();
 const lootStore = controller.lootStore;
 const { inventory } = storeToRefs(inventoryStore);
+
 const chestAppearanceType = computed(
   () => lootStore.currentChestConfig?.appearanceType ?? 0
 );
-const chestButton = ref(null);
+
+const chestButton = useTemplateRef('chestButton') //ref(null);
 const lootRow = ref(null);
+
 const keyTypes = [
   { value: "blcKey", name: "Black Lion Chest Key", icon: blcKeyImg },
   { value: "goldenKey", name: "Golden Black Lion Chest Key", icon: goldenBlcKeyImg },
 ];
 const selectedKeyType = ref("blcKey");
+const keyAutoAttack = ref({
+  blcKey: true,
+  goldenKey: false,
+});
 const selectedKeyCount = computed(
   () => inventory.value[selectedKeyType.value] ?? 0
 );
@@ -121,7 +123,7 @@ function clearTimers() {
   }
 }
 
-function handleChestClick() {
+async function handleChestClick() {
   if (isAnimationLocked.value) return;
 
   clearTimers();
@@ -137,17 +139,15 @@ function handleChestClick() {
   const displayLootPromise = resolveDisplayLoot(drops);
   const thisSequence = ++openSequenceId;
 
-  lootRevealTimeoutId = window.setTimeout(async () => {
-    lootRevealTimeoutId = null;
-    const displayLoot = await displayLootPromise;
-    if (thisSequence !== openSequenceId) return;
-    lootRow.value?.displayLoot(displayLoot, {
-      onFadeStart: () => chestButton.value?.close(),
-      onFlyoutComplete: () => {
-        isAnimationLocked.value = false;
-      },
-    });
-  }, props.lootRevealDelayMs);
+  const displayLoot = await displayLootPromise;
+  if (thisSequence !== openSequenceId) return;
+  lootRow.value?.displayLoot(displayLoot, {
+    onFadeStart: () => chestButton.value?.close(),
+    onFlyoutComplete: () => {
+      isAnimationLocked.value = false;
+      triggerAutoAttack();
+    },
+  });
 }
 
 async function resolveDisplayLoot(drops) {
@@ -167,6 +167,20 @@ async function resolveDisplayLoot(drops) {
     }));
   }
 }
+
+async function triggerAutoAttack() {
+  //if selected key has auto attack, and qty in inventory, click chest
+  if (keyAutoAttack.value[selectedKeyType.value] && selectedKeyCount.value > 0) {
+    await nextTick();
+    chestButton.value?.$el.click();
+  }
+}
+
+watch(selectedKeyCount, (newCount) => {
+  if (keyAutoAttack.value[selectedKeyType.value] && newCount > 0) {
+    triggerAutoAttack();
+  }
+});
 
 function reset() {
   clearTimers();

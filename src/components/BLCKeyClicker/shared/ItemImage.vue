@@ -17,11 +17,11 @@
           <div
             class="item-image__shine-layer item-image__shine-layer--big"
             :style="shineBigStyles"
-          />
+          ></div>
           <div
             class="item-image__shine-layer item-image__shine-layer--small"
             :style="shineSmallStyles"
-          />
+          ></div>
         </div>
 
         <v-avatar
@@ -37,6 +37,11 @@
             cover
             class="item-image__img"
             @error="handleImageError"
+          />
+          <v-img
+            v-if="autoAttack"
+            :src="autoAttackSrc"
+            class="item-image__img item-image__auto-attack"
           />
         </v-avatar>
 
@@ -100,6 +105,7 @@ import noRewardImage from "@/assets/item/noReward.png";
 import unknownImage from "@/assets/item/unknown.png";
 import shineBigSrc from "@/assets/BLCOpenUI/shineBig.png";
 import shineSmallSrc from "@/assets/BLCOpenUI/shineSmall.png";
+import autoAttackSrc from "@/assets/BLCOpenUI/autoAttack.png";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 
 defineOptions({
@@ -110,6 +116,10 @@ const props = defineProps({
   item: {
     type: Object,
     default: () => ({}),
+  },
+  autoAttack: {
+    type: Boolean,
+    default: false,
   },
   size: {
     type: [Number, String],
@@ -323,6 +333,16 @@ watch(
   },
   { immediate: true }
 );
+
+// const autoAttackSrc = computed(() => {
+//   if (!props.autoAttack) return null;
+//   if (normalizedOverlayPosition.value === "top-left" || 
+//     normalizedOverlayPosition.value === "bottom-right"
+//   ) {
+//     return autoAttackXSrc
+//   }
+//   return autoAttackYSrc;
+// });
 
 const resolvedQuantity = computed(() => {
   const quantity = sourceItem.value.quantity;
@@ -549,6 +569,14 @@ defineExpose({ shine });
 .item-image__img {
   width: 100%;
   height: 100%;
+}
+
+.item-image__auto-attack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }
 
 .item-image__badge {

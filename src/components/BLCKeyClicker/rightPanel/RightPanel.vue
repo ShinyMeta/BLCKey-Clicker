@@ -99,7 +99,7 @@ const breadcrumbItems = computed(() => {
 }
 
 .right-panel__content {
-  height: calc(100dvh - 110px);
+  height: calc(100dvh - 120px);
   overflow-y: auto;
 }
 </style>

@@ -117,7 +117,7 @@ export const useLootStore = defineStore("loot", () => {
    * @returns {object} the generated chest config
    */
   function generateCurrentChestConfig() {
-    const config = generateChestConfig();
+    const config = generateChestConfig(currentChestConfig.value, exclusiveLookup.value);
 
     loadChest(config);
     return config;

@@ -35,7 +35,7 @@ import statuetteImg from "@/assets/item/statuette.png";
 import d6PlaceholderImg from "@/assets/BLCOpenUI/d6PlaceHolder.png";
 
 const BASE_SLOT_COUNT = 4;
-const LOOT_BASE_DELAY_MS = 350;
+const LOOT_BASE_DELAY_MS = 500;
 const LOOT_FADE_DELAY_MS = 2500;
 const FADE_DURATION_MS = 600;
 const LOOT_SOUND_DELAY_MS = 50;
