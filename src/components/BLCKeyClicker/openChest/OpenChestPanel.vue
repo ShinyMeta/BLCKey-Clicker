@@ -82,11 +82,13 @@ import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 import { useInventoryStore } from "@/store/inventoryStore";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import { emitSoundEvent } from "@/services/sound";
+import { useStatStore } from "@/store/statStore";
 
 
 const controller = useBLCKeyClickerController();
 const inventoryStore = useInventoryStore();
 const lootStore = controller.lootStore;
+const statStore = useStatStore();
 const { inventory } = storeToRefs(inventoryStore);
 
 const chestAppearanceType = computed(
@@ -144,6 +146,8 @@ async function handleChestClick() {
     return;
   }
 
+  statStore.recordChestDropCount(drops.length);
+  
   isAnimationLocked.value = true;
   emitSoundEvent("chestOpen");
   const displayLootPromise = resolveDisplayLoot(drops);

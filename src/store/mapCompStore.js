@@ -1,14 +1,17 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { useStatStore } from "@/store/statStore";
 
 const MAX_MAP_COMP_COMPLETION_EVENTS = 10;
 
 export const useMapCompStore = defineStore("mapComp", () => {
-  const mapCompClicksToComp = ref(10);
+  const mapCompClicksToComp = ref(5);
   const mapCompProgress = ref(0);
   const mapCompCompletionEvents = ref([]);
   const mapCompKeyDropChance = ref(0.3);
   let nextMapCompCompletionEventId = 0;
+
+  const statStore = useStatStore();
 
   function rollReward() {
     if (Math.random() < mapCompKeyDropChance.value) {
@@ -46,6 +49,9 @@ export const useMapCompStore = defineStore("mapComp", () => {
     const reward = rollReward();
     mapCompProgress.value = 0;
     appendMapCompletionEvent(reward, source);
+    // increment global stat for map completions
+    statStore.incrementTotalMapComps();
+    
     return reward;
   }
 
