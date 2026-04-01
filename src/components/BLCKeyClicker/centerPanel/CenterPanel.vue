@@ -1,8 +1,12 @@
 <template>
-  <div class="center-panel">
+  <div class="center-panel d-flex flex-column">
     <VFadeTransition mode="out-in">
-      <ActiveChestCycle v-if="isActiveChestCycle" key="active" />
-      <BetweenChestCycles v-else-if="isBetweenChestCycles" key="between" />
+      <NewGame                 v-if="controller.isNewGame" key="new" />
+      <ActiveChestCycle   v-else-if="controller.isActiveChestCycle" key="active" />
+      <BetweenChestCycles v-else-if="controller.isBetweenChestCycles" key="between" />
+      <GameOver           v-else-if="controller.isGameOver" key="gameOver"
+        :missed-exclusive="returningExclusive" />
+      
     </VFadeTransition>
 
     <PausedTimerOverlay />
@@ -10,24 +14,30 @@
 </template>
 
 <script setup>
-  import { computed } from 'vue';
-  import ActiveChestCycle from './ActiveChestCycle.vue';
-  import BetweenChestCycles from './BetweenChestCycles.vue';
-  import PausedTimerOverlay from './PausedTimerOverlay.vue';
-  import { useTimerStore } from '@/store/timerStore';
+import { computed } from 'vue';
+import NewGame from './NewGame.vue';
+import ActiveChestCycle from './ActiveChestCycle.vue';
+import BetweenChestCycles from './BetweenChestCycles.vue';
+import GameOver from './GameOver.vue';
+import PausedTimerOverlay from './PausedTimerOverlay.vue';
+import { useBLCKeyClickerController } from '@/store/BLCKeyClickerController';
+import { useLootStore } from "@/store/loot/lootStore";
+import { storeToRefs } from "pinia";
 
-  const timer = useTimerStore();
+const controller = useBLCKeyClickerController();
+const lootStore = useLootStore();
 
-  const isActiveChestCycle = computed(() => timer.isActiveChestCycle);
-  const isBetweenChestCycles = computed(() => timer.isBetweenChestCycles);
+const { currentChestConfig } = storeToRefs(lootStore);
+const returningExclusive = computed(() => {
+  return currentChestConfig.value?.sets?.returningExclusive?.items?.[0];
+});
+
 </script>
 
 <style scoped>
 
 .center-panel {
   position: relative;
-  display: flex;
-  flex-direction: column;
   min-height: calc(100dvh - 64px);
 }
 

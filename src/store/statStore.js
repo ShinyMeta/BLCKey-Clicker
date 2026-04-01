@@ -33,6 +33,13 @@ export const useStatStore = defineStore("stat", () => {
     }
   }
 
+  function resetStats() {
+    totalMapComps.value = 0;
+    totalKeysSpent.value = {blcKey: 0, goldenKey: 0};
+    chestsSinceLastFifthDrop.value = 0;
+    unluckiestStreak.value = 0;
+  }
+
   return {
     totalMapComps,
     totalKeysSpent,
@@ -41,5 +48,6 @@ export const useStatStore = defineStore("stat", () => {
     incrementTotalMapComps,
     addKeySpent,
     recordChestDropCount,
+    resetStats,
   };
 });

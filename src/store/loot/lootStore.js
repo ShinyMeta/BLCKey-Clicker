@@ -19,7 +19,7 @@ export const useLootStore = defineStore("loot", () => {
   const currentChestConfig = ref(null);
   const lastDrops = shallowRef([]);
   const chestHistory = ref([]);
-  const exclusiveLookup = shallowRef(new Map());
+  const exclusiveLookup = ref(new Map());
   let historyIdCounter = 0;
 
   const lootTable = computed(() => {
@@ -80,8 +80,7 @@ export const useLootStore = defineStore("loot", () => {
       () => inventoryStore.adjustInventory("blackLionWeaponTicket", 0.1)
     )
     .onCategory("exclusive", (drop) => {
-      lootHandler.markExclusiveDropped(drop.itemId);
-      exclusiveLookup.value = new Map(lootHandler.exclusiveLookup);
+      markExclusiveDropped(drop.itemId);
     });
 
   /**
@@ -100,8 +99,7 @@ export const useLootStore = defineStore("loot", () => {
     const exclusiveItems = baseLootTable.value.fifthDrop.filter(
       (item) => item.category === "exclusive",
     );
-    lootHandler.trackNewExclusives(exclusiveItems);
-    exclusiveLookup.value = new Map(lootHandler.exclusiveLookup);
+    trackNewExclusives(exclusiveItems);
 
     chestHistory.value.push({
       id: ++historyIdCounter,
@@ -150,8 +148,40 @@ export const useLootStore = defineStore("loot", () => {
     return drops;
   }
 
+  function trackNewExclusives(items) {
+    for (const item of items) {
+      if (exclusiveLookup.value.has(item.itemId)) {
+        continue;
+      } else {
+        exclusiveLookup.value.set(item.itemId, {
+          itemId: item.itemId,
+          label: item.label,
+          dropped: false,
+        });
+      }
+    }
+  }
+
+  function markExclusiveDropped(itemId) {
+    const entry = exclusiveLookup.value.get(itemId);
+    if (entry) {
+      entry.dropped = true;
+      return true;
+    }
+    return false;
+  }
+
   function hasExclusiveDropped(itemId) {
     return exclusiveLookup.value.get(itemId)?.dropped ?? false;
+  }
+
+  function resetLootStore() {
+    //reset history and exclusive lookup
+    chestHistory.value = [];
+    exclusiveLookup.value.clear();
+    //reset current config and loot table
+    currentChestConfig.value = null;
+    baseLootTable.value = null;
   }
 
   return {
@@ -161,11 +191,13 @@ export const useLootStore = defineStore("loot", () => {
     chestHistory,
     currentHistoryEntry,
     currentExclusives,
+    lootHandler,
     exclusivesFromConfig,
     hasExclusiveDropped,
-    lootHandler,
+    exclusiveLookup,
     loadChest,
     generateCurrentChestConfig,
     open,
+    resetLootStore
   };
 });

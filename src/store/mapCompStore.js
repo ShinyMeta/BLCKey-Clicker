@@ -55,11 +55,17 @@ export const useMapCompStore = defineStore("mapComp", () => {
     return reward;
   }
 
+  function resetMapComp() {
+    mapCompProgress.value = 0;
+    mapCompCompletionEvents.value = [];
+  }
+
   return {
     mapCompClicksToComp,
     mapCompProgress,
     mapCompCompletionEvents,
     mapCompKeyDropChance,
     advanceMapCompletion,
+    resetMapComp,
   };
 });

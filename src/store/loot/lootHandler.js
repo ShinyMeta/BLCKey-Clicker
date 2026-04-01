@@ -12,8 +12,6 @@ export class LootHandler {
   constructor() {
     this._itemIdHandlers = new Map();
     this._categoryHandlers = new Map();
-    /** @type {Map<number, { itemId: number, label: string, dropped: boolean }>} */
-    this._exclusiveLookup = new Map();
   }
 
   /**
@@ -44,53 +42,7 @@ export class LootHandler {
     return this;
   }
 
-  /**
-   * Adds new exclusives to the lookup for tracking,
-   * should be called whenever a new chest is loaded
-   * markExclusiveDropped() used to set dropped to true
-   *
-   * @param {Array<{ itemId: number, label: string }>} items
-   */
-  trackNewExclusives(items) {
-    for (const item of items) {
-      if (this._exclusiveLookup.has(item.itemId)) {
-        continue;
-      } else {
-        this._exclusiveLookup.set(item.itemId, {
-          itemId: item.itemId,
-          label: item.label,
-          dropped: false,
-        });
-      }
-    }
-  }
 
-  /**
-   * Mark an exclusive item as dropped.
-   * @param {number} itemId
-   * @returns {boolean} true if the item existed in the lookup
-   */
-  markExclusiveDropped(itemId) {
-    const entry = this._exclusiveLookup.get(itemId);
-    if (entry) {
-      entry.dropped = true;
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   * @param {number} itemId
-   * @returns {boolean}
-   */
-  isExclusiveDropped(itemId) {
-    return this._exclusiveLookup.get(itemId)?.dropped ?? false;
-  }
-
-  /** @returns {Map<number, { itemId: number, label: string, dropped: boolean }>} */
-  get exclusiveLookup() {
-    return this._exclusiveLookup;
-  }
 
   /**
    * Process an array of drops, invoking all matching handlers

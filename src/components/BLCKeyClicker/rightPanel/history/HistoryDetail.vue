@@ -12,7 +12,7 @@
         <!-- <div v-for="(open, idx) in reverseDrops" :key="(idx+1)" class="mb-3">
           <HistoryLootRow :items="open || []" size="40" :label="`#${(idx+1)}`" /> -->
         <div v-for="(open, idx) in reverseDrops" :key="reverseDrops.length - (idx)" class="mb-3">
-          <HistoryLootRow :items="open || []" size="40" :label="`#${reverseDrops.length - (idx)}`" />
+          <HistoryLootRow :items="open || []" size=40 :label="`#${reverseDrops.length - (idx)}`" />
         </div>
       </div>
     </div>

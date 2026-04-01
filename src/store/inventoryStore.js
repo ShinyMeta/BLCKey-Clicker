@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 const DEFAULT_INVENTORY = {
-  blcKey: 0,
-  goldenKey: 999,
+  blcKey: 25,
+  goldenKey: 5,
   statuette: 0,
   // gold: 0,
   // gems: 0, not sure about these
@@ -47,10 +47,15 @@ export const useInventoryStore = defineStore("inventory", () => {
     return true;
   }
 
+  function resetInventory() {
+    inventory.value = { ...DEFAULT_INVENTORY };
+  }
+
   return {
     inventory,
     adjustInventory,
     hasInventory,
     spendInventory,
+    resetInventory,
   };
 });
