@@ -2,7 +2,7 @@
   <v-app-bar>
     <div>
       <RouterLink to="/BLCKeyClicker">
-        <v-img src="@/assets/BLChestItem.png" min-width="64"
+        <v-img src="@/assets/item/BLChest.png" min-width="64"
       /></RouterLink>
     </div>
     <v-app-bar-title>

@@ -1,4 +1,4 @@
-import api from "@/components/utils/gw2api";
+import api from "@/utils/gw2api";
 
 export class DropElement {
   constructor(

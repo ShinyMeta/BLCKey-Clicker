@@ -1,0 +1,6104 @@
+{
+  "sets": {
+    "Chaos Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5580,
+          "label": "Chaos Axe"
+        },
+        {
+          "skinId": 5568,
+          "label": "Chaos Dagger"
+        },
+        {
+          "skinId": 5571,
+          "label": "Chaos Focus"
+        },
+        {
+          "skinId": 5584,
+          "label": "Chaos Greatsword"
+        },
+        {
+          "skinId": 5555,
+          "label": "Chaos Hammer"
+        },
+        {
+          "skinId": 5550,
+          "label": "Chaos Longbow"
+        },
+        {
+          "skinId": 5565,
+          "label": "Chaos Mace"
+        },
+        {
+          "skinId": 5573,
+          "label": "Chaos Pistol"
+        },
+        {
+          "skinId": 5576,
+          "label": "Chaos Rifle"
+        },
+        {
+          "skinId": 5559,
+          "label": "Chaos Scepter"
+        },
+        {
+          "skinId": 5561,
+          "label": "Chaos Shield"
+        },
+        {
+          "skinId": 5569,
+          "label": "Chaos Short Bow"
+        },
+        {
+          "skinId": 5552,
+          "label": "Chaos Spear"
+        },
+        {
+          "skinId": 5564,
+          "label": "Chaos Harpoon Gun"
+        },
+        {
+          "skinId": 5547,
+          "label": "Chaos Staff"
+        },
+        {
+          "skinId": 5557,
+          "label": "Chaos Sword"
+        },
+        {
+          "skinId": 5551,
+          "label": "Chaos Torch"
+        },
+        {
+          "skinId": 5560,
+          "label": "Chaos Trident"
+        },
+        {
+          "skinId": 5575,
+          "label": "Chaos Warhorn"
+        }
+      ]
+    },
+    "Sclerite Weapon Collection": {
+      "items": [
+        {
+          "skinId": 3762,
+          "label": "Sclerite Axe"
+        },
+        {
+          "skinId": 3817,
+          "label": "Sclerite Dagger"
+        },
+        {
+          "skinId": 3754,
+          "label": "Sclerite Focus"
+        },
+        {
+          "skinId": 3801,
+          "label": "Sclerite Greatsword"
+        },
+        {
+          "skinId": 3809,
+          "label": "Sclerite Hammer"
+        },
+        {
+          "skinId": 3783,
+          "label": "Sclerite Longbow"
+        },
+        {
+          "skinId": 3768,
+          "label": "Sclerite Mace"
+        },
+        {
+          "skinId": 3763,
+          "label": "Sclerite Pistol"
+        },
+        {
+          "skinId": 3787,
+          "label": "Sclerite Rifle"
+        },
+        {
+          "skinId": 3781,
+          "label": "Sclerite Scepter"
+        },
+        {
+          "skinId": 3792,
+          "label": "Sclerite Shield"
+        },
+        {
+          "skinId": 3730,
+          "label": "Sclerite Short Bow"
+        },
+        {
+          "skinId": 3820,
+          "label": "Sclerite Staff"
+        },
+        {
+          "skinId": 3827,
+          "label": "Sclerite Sword"
+        },
+        {
+          "skinId": 3719,
+          "label": "Sclerite Torch"
+        },
+        {
+          "skinId": 3736,
+          "label": "Sclerite Warhorn"
+        }
+      ]
+    },
+    "Tormented Weapon Collection": {
+      "items": [
+        {
+          "skinId": 3680,
+          "label": "Tormented Axe"
+        },
+        {
+          "skinId": 3668,
+          "label": "Tormented Dagger"
+        },
+        {
+          "skinId": 3676,
+          "label": "Tormented Focus"
+        },
+        {
+          "skinId": 3679,
+          "label": "Tormented Greatsword"
+        },
+        {
+          "skinId": 3666,
+          "label": "Tormented Hammer"
+        },
+        {
+          "skinId": 3681,
+          "label": "Tormented Longbow"
+        },
+        {
+          "skinId": 3677,
+          "label": "Tormented Mace"
+        },
+        {
+          "skinId": 3663,
+          "label": "Tormented Pistol"
+        },
+        {
+          "skinId": 3661,
+          "label": "Tormented Rifle"
+        },
+        {
+          "skinId": 3683,
+          "label": "Tormented Scepter"
+        },
+        {
+          "skinId": 3685,
+          "label": "Tormented Shield"
+        },
+        {
+          "skinId": 3682,
+          "label": "Tormented Short Bow"
+        },
+        {
+          "skinId": 3675,
+          "label": "Tormented Spear"
+        },
+        {
+          "skinId": 3678,
+          "label": "Tormented Harpoon Gun"
+        },
+        {
+          "skinId": 3667,
+          "label": "Tormented Staff"
+        },
+        {
+          "skinId": 3670,
+          "label": "Tormented Sword"
+        },
+        {
+          "skinId": 3674,
+          "label": "Tormented Torch"
+        },
+        {
+          "skinId": 3686,
+          "label": "Tormented Trident"
+        },
+        {
+          "skinId": 3684,
+          "label": "Tormented Warhorn"
+        }
+      ]
+    },
+    "Dragon's Jade Weapon Collection": {
+      "items": [
+        {
+          "skinId": 3767,
+          "label": "Dragon's Jade Reaver"
+        },
+        {
+          "skinId": 3818,
+          "label": "Dragon's Jade Kris"
+        },
+        {
+          "skinId": 3757,
+          "label": "Dragon's Jade Aspect"
+        },
+        {
+          "skinId": 3803,
+          "label": "Dragon's Jade Avenger"
+        },
+        {
+          "skinId": 3810,
+          "label": "Dragon's Jade Warhammer"
+        },
+        {
+          "skinId": 3786,
+          "label": "Dragon's Jade Hornbow"
+        },
+        {
+          "skinId": 3771,
+          "label": "Dragon's Jade Cudgel"
+        },
+        {
+          "skinId": 3765,
+          "label": "Dragon's Jade Flintlock"
+        },
+        {
+          "skinId": 3791,
+          "label": "Dragon's Jade Blunderbuss"
+        },
+        {
+          "skinId": 3784,
+          "label": "Dragon's Jade Truncheon"
+        },
+        {
+          "skinId": 3795,
+          "label": "Dragon's Jade Wall"
+        },
+        {
+          "skinId": 3734,
+          "label": "Dragon's Jade Needler"
+        },
+        {
+          "skinId": 3822,
+          "label": "Dragon's Jade Quarterstaff"
+        },
+        {
+          "skinId": 3828,
+          "label": "Dragon's Jade Lacerator"
+        },
+        {
+          "skinId": 3721,
+          "label": "Dragon's Jade Flame"
+        },
+        {
+          "skinId": 3740,
+          "label": "Dragon's Jade Harbinger"
+        }
+      ]
+    },
+    "Dreamthistle Weapon Collection": {
+      "items": [
+        {
+          "skinId": 3775,
+          "label": "Dreamthistle Axe"
+        },
+        {
+          "skinId": 3723,
+          "label": "Dreamthistle Dagger"
+        },
+        {
+          "skinId": 3704,
+          "label": "Dreamthistle Focus"
+        },
+        {
+          "skinId": 3709,
+          "label": "Dreamthistle Greatsword"
+        },
+        {
+          "skinId": 3813,
+          "label": "Dreamthistle Hammer"
+        },
+        {
+          "skinId": 3706,
+          "label": "Dreamthistle Longbow"
+        },
+        {
+          "skinId": 3707,
+          "label": "Dreamthistle Mace"
+        },
+        {
+          "skinId": 3776,
+          "label": "Dreamthistle Pistol"
+        },
+        {
+          "skinId": 3796,
+          "label": "Dreamthistle Rifle"
+        },
+        {
+          "skinId": 3788,
+          "label": "Dreamthistle Scepter"
+        },
+        {
+          "skinId": 3717,
+          "label": "Dreamthistle Shield"
+        },
+        {
+          "skinId": 3745,
+          "label": "Dreamthistle Short Bow"
+        },
+        {
+          "skinId": 3759,
+          "label": "Dreamthistle Spear"
+        },
+        {
+          "skinId": 3741,
+          "label": "Dreamthistle Harpoon Gun"
+        },
+        {
+          "skinId": 3731,
+          "label": "Dreamthistle Staff"
+        },
+        {
+          "skinId": 3750,
+          "label": "Dreamthistle Sword"
+        },
+        {
+          "skinId": 3727,
+          "label": "Dreamthistle Torch"
+        },
+        {
+          "skinId": 3738,
+          "label": "Dreamthistle Trident"
+        },
+        {
+          "skinId": 3744,
+          "label": "Dreamthistle Warhorn"
+        }
+      ]
+    },
+    "Fused Weapon Collection": {
+      "items": [
+        {
+          "skinId": 3732,
+          "label": "Fused Dagger"
+        },
+        {
+          "skinId": 3753,
+          "label": "Fused Focus"
+        },
+        {
+          "skinId": 3714,
+          "label": "Fused Greatsword"
+        },
+        {
+          "skinId": 3808,
+          "label": "Fused Hammer"
+        },
+        {
+          "skinId": 3708,
+          "label": "Fused Longbow"
+        },
+        {
+          "skinId": 3716,
+          "label": "Fused Mace"
+        },
+        {
+          "skinId": 3760,
+          "label": "Fused Pistol"
+        },
+        {
+          "skinId": 3724,
+          "label": "Fused Rifle"
+        },
+        {
+          "skinId": 3779,
+          "label": "Fused Scepter"
+        },
+        {
+          "skinId": 3725,
+          "label": "Fused Shield"
+        },
+        {
+          "skinId": 3728,
+          "label": "Fused Short Bow"
+        },
+        {
+          "skinId": 3747,
+          "label": "Fused Staff"
+        },
+        {
+          "skinId": 3756,
+          "label": "Fused Sword"
+        },
+        {
+          "skinId": 3718,
+          "label": "Fused Torch"
+        },
+        {
+          "skinId": 3733,
+          "label": "Fused Warhorn"
+        },
+        {
+          "skinId": 3712,
+          "label": "Fused Axe"
+        }
+      ]
+    },
+    "Ley Line Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5513,
+          "label": "Ley Line Axe"
+        },
+        {
+          "skinId": 5507,
+          "label": "Ley Line Dagger"
+        },
+        {
+          "skinId": 5514,
+          "label": "Ley Line Focus"
+        },
+        {
+          "skinId": 5509,
+          "label": "Ley Line Greatsword"
+        },
+        {
+          "skinId": 5503,
+          "label": "Ley Line Hammer"
+        },
+        {
+          "skinId": 5510,
+          "label": "Ley Line Longbow"
+        },
+        {
+          "skinId": 5501,
+          "label": "Ley Line Mace"
+        },
+        {
+          "skinId": 5515,
+          "label": "Ley Line Pistol"
+        },
+        {
+          "skinId": 5504,
+          "label": "Ley Line Rifle"
+        },
+        {
+          "skinId": 5512,
+          "label": "Ley Line Scepter"
+        },
+        {
+          "skinId": 5511,
+          "label": "Ley Line Shield"
+        },
+        {
+          "skinId": 5502,
+          "label": "Ley Line Short Bow"
+        },
+        {
+          "skinId": 5500,
+          "label": "Ley Line Staff"
+        },
+        {
+          "skinId": 5505,
+          "label": "Ley Line Sword"
+        },
+        {
+          "skinId": 5508,
+          "label": "Ley Line Torch"
+        },
+        {
+          "skinId": 5506,
+          "label": "Ley Line Warhorn"
+        }
+      ]
+    },
+    "Lovestruck Weapon Collection": {
+      "items": [
+        {
+          "skinId": 3660,
+          "label": "Lovestruck Axe"
+        },
+        {
+          "skinId": 3703,
+          "label": "Lovestruck Anlace"
+        },
+        {
+          "skinId": 3673,
+          "label": "Lovestruck Focus"
+        },
+        {
+          "skinId": 3688,
+          "label": "Lovestruck Greatsword"
+        },
+        {
+          "skinId": 3691,
+          "label": "Lovestruck Hammer"
+        },
+        {
+          "skinId": 3664,
+          "label": "Lovestruck Longbow"
+        },
+        {
+          "skinId": 3692,
+          "label": "Lovestruck Mace"
+        },
+        {
+          "skinId": 3694,
+          "label": "Lovestruck Pistol"
+        },
+        {
+          "skinId": 3695,
+          "label": "Lovestruck Rifle"
+        },
+        {
+          "skinId": 3697,
+          "label": "Lovestruck Scepter"
+        },
+        {
+          "skinId": 3698,
+          "label": "Lovestruck Protector"
+        },
+        {
+          "skinId": 3671,
+          "label": "Lovestruck Short Bow"
+        },
+        {
+          "skinId": 3699,
+          "label": "Lovestruck Staff"
+        },
+        {
+          "skinId": 3700,
+          "label": "Lovestruck Sword"
+        },
+        {
+          "skinId": 3701,
+          "label": "Lovestruck Flame"
+        },
+        {
+          "skinId": 3702,
+          "label": "Lovestruck Call"
+        }
+      ]
+    },
+    "Phoenix Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5458,
+          "label": "Phoenix Axe"
+        },
+        {
+          "skinId": 5459,
+          "label": "Phoenix Dagger"
+        },
+        {
+          "skinId": 5460,
+          "label": "Phoenix Focus"
+        },
+        {
+          "skinId": 5461,
+          "label": "Phoenix Greatsword"
+        },
+        {
+          "skinId": 5462,
+          "label": "Phoenix Hammer"
+        },
+        {
+          "skinId": 5463,
+          "label": "Phoenix Longbow"
+        },
+        {
+          "skinId": 5464,
+          "label": "Phoenix Mace"
+        },
+        {
+          "skinId": 5465,
+          "label": "Phoenix Pistol"
+        },
+        {
+          "skinId": 5466,
+          "label": "Phoenix Rifle"
+        },
+        {
+          "skinId": 5467,
+          "label": "Phoenix Scepter"
+        },
+        {
+          "skinId": 5468,
+          "label": "Phoenix Shield"
+        },
+        {
+          "skinId": 5469,
+          "label": "Phoenix Short Bow"
+        },
+        {
+          "skinId": 5470,
+          "label": "Phoenix Staff"
+        },
+        {
+          "skinId": 5471,
+          "label": "Phoenix Sword"
+        },
+        {
+          "skinId": 5472,
+          "label": "Phoenix Torch"
+        },
+        {
+          "skinId": 5473,
+          "label": "Phoenix Warhorn"
+        }
+      ]
+    },
+    "Winter's Weapon Collection": {
+      "items": [
+        {
+          "skinId": 3770,
+          "label": "Winter's Cutter"
+        },
+        {
+          "skinId": 3819,
+          "label": "Winter's Needle"
+        },
+        {
+          "skinId": 3804,
+          "label": "Winter's Edge"
+        },
+        {
+          "skinId": 3811,
+          "label": "Winter's Brunt"
+        },
+        {
+          "skinId": 3789,
+          "label": "Winter's Reach"
+        },
+        {
+          "skinId": 3769,
+          "label": "Winter's Sting"
+        },
+        {
+          "skinId": 3799,
+          "label": "Winter's Shelter"
+        },
+        {
+          "skinId": 3739,
+          "label": "Winter's Arc"
+        },
+        {
+          "skinId": 3824,
+          "label": "Winter's Timber"
+        },
+        {
+          "skinId": 3829,
+          "label": "Winter's Slice"
+        }
+      ]
+    },
+    "Zodiac Weapon Collection": {
+      "items": [
+        {
+          "skinId": 3772,
+          "label": "Zodiac Axe"
+        },
+        {
+          "skinId": 3821,
+          "label": "Zodiac Dagger"
+        },
+        {
+          "skinId": 3761,
+          "label": "Zodiac Focus"
+        },
+        {
+          "skinId": 3806,
+          "label": "Zodiac Greatsword"
+        },
+        {
+          "skinId": 3812,
+          "label": "Zodiac Hammer"
+        },
+        {
+          "skinId": 3790,
+          "label": "Zodiac Longbow"
+        },
+        {
+          "skinId": 3778,
+          "label": "Zodiac Mace"
+        },
+        {
+          "skinId": 3774,
+          "label": "Zodiac Pistol"
+        },
+        {
+          "skinId": 3793,
+          "label": "Zodiac Rifle"
+        },
+        {
+          "skinId": 3785,
+          "label": "Zodiac Scepter"
+        },
+        {
+          "skinId": 3800,
+          "label": "Zodiac Shield"
+        },
+        {
+          "skinId": 3742,
+          "label": "Zodiac Short Bow"
+        },
+        {
+          "skinId": 3826,
+          "label": "Zodiac Staff"
+        },
+        {
+          "skinId": 3830,
+          "label": "Zodiac Sword"
+        },
+        {
+          "skinId": 3726,
+          "label": "Zodiac Torch"
+        },
+        {
+          "skinId": 3743,
+          "label": "Zodiac Warhorn"
+        }
+      ]
+    },
+    "Tempest Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5556,
+          "label": "Tempest Axe"
+        },
+        {
+          "skinId": 5554,
+          "label": "Tempest Dagger"
+        },
+        {
+          "skinId": 5577,
+          "label": "Tempest Focus"
+        },
+        {
+          "skinId": 5583,
+          "label": "Tempest Greatsword"
+        },
+        {
+          "skinId": 5581,
+          "label": "Tempest Hammer"
+        },
+        {
+          "skinId": 5579,
+          "label": "Tempest Longbow"
+        },
+        {
+          "skinId": 5582,
+          "label": "Tempest Mace"
+        },
+        {
+          "skinId": 5572,
+          "label": "Tempest Pistol"
+        },
+        {
+          "skinId": 5578,
+          "label": "Tempest Rifle"
+        },
+        {
+          "skinId": 5553,
+          "label": "Tempest Scepter"
+        },
+        {
+          "skinId": 5574,
+          "label": "Tempest Shield"
+        },
+        {
+          "skinId": 5570,
+          "label": "Tempest Short Bow"
+        },
+        {
+          "skinId": 5563,
+          "label": "Tempest Staff"
+        },
+        {
+          "skinId": 5562,
+          "label": "Tempest Sword"
+        },
+        {
+          "skinId": 5558,
+          "label": "Tempest Torch"
+        },
+        {
+          "skinId": 5549,
+          "label": "Tempest Warhorn"
+        }
+      ]
+    },
+    "Pact Fleet Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5784,
+          "label": "Pact Fleet Sword"
+        },
+        {
+          "skinId": 5780,
+          "label": "Pact Fleet Hammer"
+        },
+        {
+          "skinId": 5781,
+          "label": "Pact Fleet Longbow"
+        },
+        {
+          "skinId": 5788,
+          "label": "Pact Fleet Short Bow"
+        },
+        {
+          "skinId": 5787,
+          "label": "Pact Fleet Axe"
+        },
+        {
+          "skinId": 5786,
+          "label": "Pact Fleet Dagger"
+        },
+        {
+          "skinId": 5779,
+          "label": "Pact Fleet Greatsword"
+        },
+        {
+          "skinId": 5773,
+          "label": "Pact Fleet Mace"
+        },
+        {
+          "skinId": 5778,
+          "label": "Pact Fleet Pistol"
+        },
+        {
+          "skinId": 5785,
+          "label": "Pact Fleet Rifle"
+        },
+        {
+          "skinId": 5777,
+          "label": "Pact Fleet Scepter"
+        },
+        {
+          "skinId": 5783,
+          "label": "Pact Fleet Staff"
+        },
+        {
+          "skinId": 5775,
+          "label": "Pact Fleet Focus"
+        },
+        {
+          "skinId": 5774,
+          "label": "Pact Fleet Torch"
+        },
+        {
+          "skinId": 5776,
+          "label": "Pact Fleet Warhorn"
+        },
+        {
+          "skinId": 5782,
+          "label": "Pact Fleet Shield"
+        }
+      ]
+    },
+    "Wintersday Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5797,
+          "label": "Wintersday Sword"
+        },
+        {
+          "skinId": 5799,
+          "label": "Wintersday Hammer"
+        },
+        {
+          "skinId": 5798,
+          "label": "Wintersday Longbow"
+        },
+        {
+          "skinId": 5808,
+          "label": "Wintersday Short Bow"
+        },
+        {
+          "skinId": 5805,
+          "label": "Wintersday Axe"
+        },
+        {
+          "skinId": 5811,
+          "label": "Wintersday Dagger"
+        },
+        {
+          "skinId": 5807,
+          "label": "Wintersday Greatsword"
+        },
+        {
+          "skinId": 5804,
+          "label": "Wintersday Mace"
+        },
+        {
+          "skinId": 5802,
+          "label": "Wintersday Pistol"
+        },
+        {
+          "skinId": 5806,
+          "label": "Wintersday Rifle"
+        },
+        {
+          "skinId": 5812,
+          "label": "Wintersday Scepter"
+        },
+        {
+          "skinId": 5809,
+          "label": "Wintersday Staff"
+        },
+        {
+          "skinId": 5810,
+          "label": "Wintersday Focus"
+        },
+        {
+          "skinId": 5803,
+          "label": "Wintersday Torch"
+        },
+        {
+          "skinId": 5801,
+          "label": "Wintersday Warhorn"
+        },
+        {
+          "skinId": 5800,
+          "label": "Wintersday Shield"
+        }
+      ]
+    },
+    "Mordrem Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5837,
+          "label": "Mordrem Axe"
+        },
+        {
+          "skinId": 5843,
+          "label": "Mordrem Longbow"
+        },
+        {
+          "skinId": 5844,
+          "label": "Mordrem Short Bow"
+        },
+        {
+          "skinId": 5841,
+          "label": "Mordrem Dagger"
+        },
+        {
+          "skinId": 5842,
+          "label": "Mordrem Focus"
+        },
+        {
+          "skinId": 5829,
+          "label": "Mordrem Hammer"
+        },
+        {
+          "skinId": 5833,
+          "label": "Mordrem Greatsword"
+        },
+        {
+          "skinId": 5832,
+          "label": "Mordrem Mace"
+        },
+        {
+          "skinId": 5831,
+          "label": "Mordrem Pistol"
+        },
+        {
+          "skinId": 5838,
+          "label": "Mordrem Rifle"
+        },
+        {
+          "skinId": 5835,
+          "label": "Mordrem Scepter"
+        },
+        {
+          "skinId": 5839,
+          "label": "Mordrem Shield"
+        },
+        {
+          "skinId": 5836,
+          "label": "Mordrem Staff"
+        },
+        {
+          "skinId": 5840,
+          "label": "Mordrem Sword"
+        },
+        {
+          "skinId": 5834,
+          "label": "Mordrem Torch"
+        },
+        {
+          "skinId": 5830,
+          "label": "Mordrem Warhorn"
+        }
+      ]
+    },
+    "Crimson Lion Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5862,
+          "label": "Crimson Lion Sword"
+        },
+        {
+          "skinId": 5869,
+          "label": "Crimson Lion Hammer"
+        },
+        {
+          "skinId": 5863,
+          "label": "Crimson Lion Longbow"
+        },
+        {
+          "skinId": 5865,
+          "label": "Crimson Lion Short Bow"
+        },
+        {
+          "skinId": 5871,
+          "label": "Crimson Lion Axe"
+        },
+        {
+          "skinId": 5864,
+          "label": "Crimson Lion Dagger"
+        },
+        {
+          "skinId": 5861,
+          "label": "Crimson Lion Greatsword"
+        },
+        {
+          "skinId": 5875,
+          "label": "Crimson Lion Mace"
+        },
+        {
+          "skinId": 5872,
+          "label": "Crimson Lion Pistol"
+        },
+        {
+          "skinId": 5867,
+          "label": "Crimson Lion Rifle"
+        },
+        {
+          "skinId": 5873,
+          "label": "Crimson Lion Scepter"
+        },
+        {
+          "skinId": 5874,
+          "label": "Crimson Lion Staff"
+        },
+        {
+          "skinId": 5860,
+          "label": "Crimson Lion Focus"
+        },
+        {
+          "skinId": 5870,
+          "label": "Crimson Lion Torch"
+        },
+        {
+          "skinId": 5866,
+          "label": "Crimson Lion Warhorn"
+        },
+        {
+          "skinId": 5868,
+          "label": "Crimson Lion Shield"
+        }
+      ]
+    },
+    "Shadow Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5954,
+          "label": "Shadow Sword"
+        },
+        {
+          "skinId": 5904,
+          "label": "Shadow Hammer"
+        },
+        {
+          "skinId": 5931,
+          "label": "Shadow Longbow"
+        },
+        {
+          "skinId": 5899,
+          "label": "Shadow Short Bow"
+        },
+        {
+          "skinId": 5907,
+          "label": "Shadow Axe"
+        },
+        {
+          "skinId": 5927,
+          "label": "Shadow Dagger"
+        },
+        {
+          "skinId": 5952,
+          "label": "Shadow Greatsword"
+        },
+        {
+          "skinId": 5916,
+          "label": "Shadow Mace"
+        },
+        {
+          "skinId": 5882,
+          "label": "Shadow Pistol"
+        },
+        {
+          "skinId": 5947,
+          "label": "Shadow Rifle"
+        },
+        {
+          "skinId": 5930,
+          "label": "Shadow Scepter"
+        },
+        {
+          "skinId": 5924,
+          "label": "Shadow Staff"
+        },
+        {
+          "skinId": 5919,
+          "label": "Shadow Focus"
+        },
+        {
+          "skinId": 5933,
+          "label": "Shadow Torch"
+        },
+        {
+          "skinId": 5888,
+          "label": "Shadow Warhorn"
+        },
+        {
+          "skinId": 5902,
+          "label": "Shadow Shield"
+        }
+      ]
+    },
+    "Balthazar's Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5971,
+          "label": "Balthazar's Sword"
+        },
+        {
+          "skinId": 5975,
+          "label": "Balthazar's Hammer"
+        },
+        {
+          "skinId": 5970,
+          "label": "Balthazar's Longbow"
+        },
+        {
+          "skinId": 5980,
+          "label": "Balthazar's Short Bow"
+        },
+        {
+          "skinId": 5978,
+          "label": "Balthazar's Axe"
+        },
+        {
+          "skinId": 5987,
+          "label": "Balthazar's Dagger"
+        },
+        {
+          "skinId": 5985,
+          "label": "Balthazar's Greatsword"
+        },
+        {
+          "skinId": 5974,
+          "label": "Balthazar's Mace"
+        },
+        {
+          "skinId": 5972,
+          "label": "Balthazar's Pistol"
+        },
+        {
+          "skinId": 5976,
+          "label": "Balthazar's Rifle"
+        },
+        {
+          "skinId": 5986,
+          "label": "Balthazar's Scepter"
+        },
+        {
+          "skinId": 5984,
+          "label": "Balthazar's Staff"
+        },
+        {
+          "skinId": 5977,
+          "label": "Balthazar's Focus"
+        },
+        {
+          "skinId": 5981,
+          "label": "Balthazar's Torch"
+        },
+        {
+          "skinId": 5983,
+          "label": "Balthazar's Warhorn"
+        },
+        {
+          "skinId": 5982,
+          "label": "Balthazar's Shield"
+        }
+      ]
+    },
+    "Daydreamer's Weapon Collection": {
+      "items": [
+        {
+          "skinId": 5994,
+          "label": "Daydreamer's Sword"
+        },
+        {
+          "skinId": 6013,
+          "label": "Daydreamer's Hammer"
+        },
+        {
+          "skinId": 5995,
+          "label": "Daydreamer's Longbow"
+        },
+        {
+          "skinId": 6009,
+          "label": "Daydreamer's Short Bow"
+        },
+        {
+          "skinId": 5997,
+          "label": "Daydreamer's Axe"
+        },
+        {
+          "skinId": 5989,
+          "label": "Daydreamer's Dagger"
+        },
+        {
+          "skinId": 6010,
+          "label": "Daydreamer's Greatsword"
+        },
+        {
+          "skinId": 6012,
+          "label": "Daydreamer's Mace"
+        },
+        {
+          "skinId": 5991,
+          "label": "Daydreamer's Pistol"
+        },
+        {
+          "skinId": 5996,
+          "label": "Daydreamer's Rifle"
+        },
+        {
+          "skinId": 6006,
+          "label": "Daydreamer's Scepter"
+        },
+        {
+          "skinId": 6004,
+          "label": "Daydreamer's Staff"
+        },
+        {
+          "skinId": 6001,
+          "label": "Daydreamer's Focus"
+        },
+        {
+          "skinId": 6002,
+          "label": "Daydreamer's Torch"
+        },
+        {
+          "skinId": 5993,
+          "label": "Daydreamer's Warhorn"
+        },
+        {
+          "skinId": 5999,
+          "label": "Daydreamer's Shield"
+        }
+      ]
+    },
+    "Scientific Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6021,
+          "label": "Scientific Sword"
+        },
+        {
+          "skinId": 6017,
+          "label": "Scientific Hammer"
+        },
+        {
+          "skinId": 6020,
+          "label": "Scientific Longbow"
+        },
+        {
+          "skinId": 6028,
+          "label": "Scientific Short Bow"
+        },
+        {
+          "skinId": 6027,
+          "label": "Scientific Axe"
+        },
+        {
+          "skinId": 6031,
+          "label": "Scientific Dagger"
+        },
+        {
+          "skinId": 6016,
+          "label": "Scientific Greatsword"
+        },
+        {
+          "skinId": 6014,
+          "label": "Scientific Mace"
+        },
+        {
+          "skinId": 6030,
+          "label": "Scientific Pistol"
+        },
+        {
+          "skinId": 6019,
+          "label": "Scientific Rifle"
+        },
+        {
+          "skinId": 6025,
+          "label": "Scientific Scepter"
+        },
+        {
+          "skinId": 6026,
+          "label": "Scientific Staff"
+        },
+        {
+          "skinId": 6018,
+          "label": "Scientific Focus"
+        },
+        {
+          "skinId": 6022,
+          "label": "Scientific Torch"
+        },
+        {
+          "skinId": 6015,
+          "label": "Scientific Warhorn"
+        },
+        {
+          "skinId": 6023,
+          "label": "Scientific Shield"
+        }
+      ]
+    },
+    "Gallant Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6057,
+          "label": "Gallant Sword"
+        },
+        {
+          "skinId": 6052,
+          "label": "Gallant Hammer"
+        },
+        {
+          "skinId": 6058,
+          "label": "Gallant Longbow"
+        },
+        {
+          "skinId": 6053,
+          "label": "Gallant Short Bow"
+        },
+        {
+          "skinId": 6060,
+          "label": "Gallant Axe"
+        },
+        {
+          "skinId": 6037,
+          "label": "Gallant Dagger"
+        },
+        {
+          "skinId": 6036,
+          "label": "Gallant Greatsword"
+        },
+        {
+          "skinId": 6056,
+          "label": "Gallant Mace"
+        },
+        {
+          "skinId": 6032,
+          "label": "Gallant Pistol"
+        },
+        {
+          "skinId": 6070,
+          "label": "Gallant Rifle"
+        },
+        {
+          "skinId": 6067,
+          "label": "Gallant Scepter"
+        },
+        {
+          "skinId": 6038,
+          "label": "Gallant Staff"
+        },
+        {
+          "skinId": 6051,
+          "label": "Gallant Focus"
+        },
+        {
+          "skinId": 6034,
+          "label": "Gallant Torch"
+        },
+        {
+          "skinId": 6048,
+          "label": "Gallant Warhorn"
+        },
+        {
+          "skinId": 6040,
+          "label": "Gallant Shield"
+        }
+      ]
+    },
+    "Dwayna's Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6101,
+          "label": "Dwayna's Sword"
+        },
+        {
+          "skinId": 6094,
+          "label": "Dwayna's Hammer"
+        },
+        {
+          "skinId": 6110,
+          "label": "Dwayna's Longbow"
+        },
+        {
+          "skinId": 6088,
+          "label": "Dwayna's Short Bow"
+        },
+        {
+          "skinId": 6122,
+          "label": "Dwayna's Axe"
+        },
+        {
+          "skinId": 6127,
+          "label": "Dwayna's Dagger"
+        },
+        {
+          "skinId": 6083,
+          "label": "Dwayna's Greatsword"
+        },
+        {
+          "skinId": 6098,
+          "label": "Dwayna's Mace"
+        },
+        {
+          "skinId": 6092,
+          "label": "Dwayna's Pistol"
+        },
+        {
+          "skinId": 6114,
+          "label": "Dwayna's Rifle"
+        },
+        {
+          "skinId": 6108,
+          "label": "Dwayna's Scepter"
+        },
+        {
+          "skinId": 6100,
+          "label": "Dwayna's Staff"
+        },
+        {
+          "skinId": 6105,
+          "label": "Dwayna's Focus"
+        },
+        {
+          "skinId": 6113,
+          "label": "Dwayna's Torch"
+        },
+        {
+          "skinId": 6123,
+          "label": "Dwayna's Warhorn"
+        },
+        {
+          "skinId": 6091,
+          "label": "Dwayna's Shield"
+        }
+      ]
+    },
+    "Glittering Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6380,
+          "label": "Glittering Axe"
+        },
+        {
+          "skinId": 6239,
+          "label": "Glittering Longbow"
+        },
+        {
+          "skinId": 6337,
+          "label": "Glittering Short Bow"
+        },
+        {
+          "skinId": 6263,
+          "label": "Glittering Dagger"
+        },
+        {
+          "skinId": 6277,
+          "label": "Glittering Focus"
+        },
+        {
+          "skinId": 6526,
+          "label": "Glittering Greatsword"
+        },
+        {
+          "skinId": 6266,
+          "label": "Glittering Hammer"
+        },
+        {
+          "skinId": 6294,
+          "label": "Glittering Mace"
+        },
+        {
+          "skinId": 6460,
+          "label": "Glittering Pistol"
+        },
+        {
+          "skinId": 6463,
+          "label": "Glittering Rifle"
+        },
+        {
+          "skinId": 6357,
+          "label": "Glittering Scepter"
+        },
+        {
+          "skinId": 6270,
+          "label": "Glittering Shield"
+        },
+        {
+          "skinId": 6376,
+          "label": "Glittering Staff"
+        },
+        {
+          "skinId": 6396,
+          "label": "Glittering Sword"
+        },
+        {
+          "skinId": 6445,
+          "label": "Glittering Torch"
+        },
+        {
+          "skinId": 6371,
+          "label": "Glittering Warhorn"
+        }
+      ]
+    },
+    "Improvised Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6521,
+          "label": "Improvised Sword"
+        },
+        {
+          "skinId": 6510,
+          "label": "Improvised Hammer"
+        },
+        {
+          "skinId": 6372,
+          "label": "Improvised Longbow"
+        },
+        {
+          "skinId": 6488,
+          "label": "Improvised Short Bow"
+        },
+        {
+          "skinId": 6220,
+          "label": "Improvised Axe"
+        },
+        {
+          "skinId": 6496,
+          "label": "Improvised Dagger"
+        },
+        {
+          "skinId": 6507,
+          "label": "Improvised Greatsword"
+        },
+        {
+          "skinId": 6326,
+          "label": "Improvised Mace"
+        },
+        {
+          "skinId": 6455,
+          "label": "Improvised Pistol"
+        },
+        {
+          "skinId": 6370,
+          "label": "Improvised Rifle"
+        },
+        {
+          "skinId": 6478,
+          "label": "Improvised Scepter"
+        },
+        {
+          "skinId": 6289,
+          "label": "Improvised Staff"
+        },
+        {
+          "skinId": 6393,
+          "label": "Improvised Focus"
+        },
+        {
+          "skinId": 6516,
+          "label": "Improvised Torch"
+        },
+        {
+          "skinId": 6251,
+          "label": "Improvised Warhorn"
+        },
+        {
+          "skinId": 6203,
+          "label": "Improvised Shield"
+        }
+      ]
+    },
+    "Plasma Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6534,
+          "label": "Plasma Axe"
+        },
+        {
+          "skinId": 6544,
+          "label": "Plasma Longbow"
+        },
+        {
+          "skinId": 6549,
+          "label": "Plasma Short Bow"
+        },
+        {
+          "skinId": 6529,
+          "label": "Plasma Dagger"
+        },
+        {
+          "skinId": 6530,
+          "label": "Plasma Focus"
+        },
+        {
+          "skinId": 6546,
+          "label": "Plasma Greatsword"
+        },
+        {
+          "skinId": 6540,
+          "label": "Plasma Hammer"
+        },
+        {
+          "skinId": 6547,
+          "label": "Plasma Mace"
+        },
+        {
+          "skinId": 6545,
+          "label": "Plasma Pistol"
+        },
+        {
+          "skinId": 6533,
+          "label": "Plasma Rifle"
+        },
+        {
+          "skinId": 6535,
+          "label": "Plasma Scepter"
+        },
+        {
+          "skinId": 6542,
+          "label": "Plasma Shield"
+        },
+        {
+          "skinId": 6537,
+          "label": "Plasma Staff"
+        },
+        {
+          "skinId": 6538,
+          "label": "Plasma Sword"
+        },
+        {
+          "skinId": 6541,
+          "label": "Plasma Torch"
+        },
+        {
+          "skinId": 6550,
+          "label": "Plasma Warhorn"
+        }
+      ]
+    },
+    "Merciless Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6571,
+          "label": "Merciless Sword"
+        },
+        {
+          "skinId": 6555,
+          "label": "Merciless Hammer"
+        },
+        {
+          "skinId": 6570,
+          "label": "Merciless Longbow"
+        },
+        {
+          "skinId": 6563,
+          "label": "Merciless Short Bow"
+        },
+        {
+          "skinId": 6552,
+          "label": "Merciless Axe"
+        },
+        {
+          "skinId": 6572,
+          "label": "Merciless Dagger"
+        },
+        {
+          "skinId": 6564,
+          "label": "Merciless Greatsword"
+        },
+        {
+          "skinId": 6551,
+          "label": "Merciless Mace"
+        },
+        {
+          "skinId": 6557,
+          "label": "Merciless Pistol"
+        },
+        {
+          "skinId": 6565,
+          "label": "Merciless Rifle"
+        },
+        {
+          "skinId": 6569,
+          "label": "Merciless Scepter"
+        },
+        {
+          "skinId": 6568,
+          "label": "Merciless Staff"
+        },
+        {
+          "skinId": 6567,
+          "label": "Merciless Focus"
+        },
+        {
+          "skinId": 6574,
+          "label": "Merciless Torch"
+        },
+        {
+          "skinId": 6553,
+          "label": "Merciless Warhorn"
+        },
+        {
+          "skinId": 6566,
+          "label": "Merciless Shield"
+        }
+      ]
+    },
+    "Timekeeper Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6588,
+          "label": "Timekeeper Sword"
+        },
+        {
+          "skinId": 6596,
+          "label": "Timekeeper Hammer"
+        },
+        {
+          "skinId": 6592,
+          "label": "Timekeeper Longbow"
+        },
+        {
+          "skinId": 6594,
+          "label": "Timekeeper Short Bow"
+        },
+        {
+          "skinId": 6582,
+          "label": "Timekeeper Axe"
+        },
+        {
+          "skinId": 6591,
+          "label": "Timekeeper Dagger"
+        },
+        {
+          "skinId": 6580,
+          "label": "Timekeeper Greatsword"
+        },
+        {
+          "skinId": 6595,
+          "label": "Timekeeper Mace"
+        },
+        {
+          "skinId": 6590,
+          "label": "Timekeeper Pistol"
+        },
+        {
+          "skinId": 6581,
+          "label": "Timekeeper Rifle"
+        },
+        {
+          "skinId": 6593,
+          "label": "Timekeeper Scepter"
+        },
+        {
+          "skinId": 6587,
+          "label": "Timekeeper Staff"
+        },
+        {
+          "skinId": 6597,
+          "label": "Timekeeper Focus"
+        },
+        {
+          "skinId": 6576,
+          "label": "Timekeeper Torch"
+        },
+        {
+          "skinId": 6589,
+          "label": "Timekeeper Warhorn"
+        },
+        {
+          "skinId": 6578,
+          "label": "Timekeeper Shield"
+        }
+      ]
+    },
+    "Soaring Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6614,
+          "label": "Soaring Sword"
+        },
+        {
+          "skinId": 6613,
+          "label": "Soaring Hammer"
+        },
+        {
+          "skinId": 6612,
+          "label": "Soaring Longbow"
+        },
+        {
+          "skinId": 6603,
+          "label": "Soaring Short Bow"
+        },
+        {
+          "skinId": 6610,
+          "label": "Soaring Axe"
+        },
+        {
+          "skinId": 6611,
+          "label": "Soaring Dagger"
+        },
+        {
+          "skinId": 6598,
+          "label": "Soaring Greatsword"
+        },
+        {
+          "skinId": 6605,
+          "label": "Soaring Mace"
+        },
+        {
+          "skinId": 6609,
+          "label": "Soaring Pistol"
+        },
+        {
+          "skinId": 6616,
+          "label": "Soaring Rifle"
+        },
+        {
+          "skinId": 6604,
+          "label": "Soaring Scepter"
+        },
+        {
+          "skinId": 6599,
+          "label": "Soaring Staff"
+        },
+        {
+          "skinId": 6608,
+          "label": "Soaring Focus"
+        },
+        {
+          "skinId": 6606,
+          "label": "Soaring Torch"
+        },
+        {
+          "skinId": 6607,
+          "label": "Soaring Warhorn"
+        },
+        {
+          "skinId": 6600,
+          "label": "Soaring Shield"
+        }
+      ]
+    },
+    "Dominator Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6643,
+          "label": "Dominator Sword"
+        },
+        {
+          "skinId": 6629,
+          "label": "Dominator Hammer"
+        },
+        {
+          "skinId": 6628,
+          "label": "Dominator Longbow"
+        },
+        {
+          "skinId": 6647,
+          "label": "Dominator Short Bow"
+        },
+        {
+          "skinId": 6646,
+          "label": "Dominator Axe"
+        },
+        {
+          "skinId": 6631,
+          "label": "Dominator Dagger"
+        },
+        {
+          "skinId": 6648,
+          "label": "Dominator Greatsword"
+        },
+        {
+          "skinId": 6637,
+          "label": "Dominator Mace"
+        },
+        {
+          "skinId": 6655,
+          "label": "Dominator Pistol"
+        },
+        {
+          "skinId": 6632,
+          "label": "Dominator Rifle"
+        },
+        {
+          "skinId": 6653,
+          "label": "Dominator Scepter"
+        },
+        {
+          "skinId": 6656,
+          "label": "Dominator Staff"
+        },
+        {
+          "skinId": 6650,
+          "label": "Dominator Focus"
+        },
+        {
+          "skinId": 6640,
+          "label": "Dominator Torch"
+        },
+        {
+          "skinId": 6627,
+          "label": "Dominator Warhorn"
+        },
+        {
+          "skinId": 6654,
+          "label": "Dominator Shield"
+        }
+      ]
+    },
+    "Spectral Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6696,
+          "label": "Spectral Sword"
+        },
+        {
+          "skinId": 6724,
+          "label": "Spectral Hammer"
+        },
+        {
+          "skinId": 6689,
+          "label": "Spectral Longbow"
+        },
+        {
+          "skinId": 6720,
+          "label": "Spectral Short Bow"
+        },
+        {
+          "skinId": 6692,
+          "label": "Spectral Axe"
+        },
+        {
+          "skinId": 6729,
+          "label": "Spectral Dagger"
+        },
+        {
+          "skinId": 6703,
+          "label": "Spectral Greatsword"
+        },
+        {
+          "skinId": 6709,
+          "label": "Spectral Mace"
+        },
+        {
+          "skinId": 6723,
+          "label": "Spectral Pistol"
+        },
+        {
+          "skinId": 6704,
+          "label": "Spectral Rifle"
+        },
+        {
+          "skinId": 6731,
+          "label": "Spectral  Scepter"
+        },
+        {
+          "skinId": 6710,
+          "label": "Spectral Staff"
+        },
+        {
+          "skinId": 6708,
+          "label": "Spectral Focus"
+        },
+        {
+          "skinId": 6714,
+          "label": "Spectral Torch"
+        },
+        {
+          "skinId": 6735,
+          "label": "Spectral Warhorn"
+        },
+        {
+          "skinId": 6681,
+          "label": "Spectral Shield"
+        }
+      ]
+    },
+    "Cavalier Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6772,
+          "label": "Cavalier Sword"
+        },
+        {
+          "skinId": 6764,
+          "label": "Cavalier Hammer"
+        },
+        {
+          "skinId": 6758,
+          "label": "Cavalier Longbow"
+        },
+        {
+          "skinId": 6753,
+          "label": "Cavalier Short Bow"
+        },
+        {
+          "skinId": 6749,
+          "label": "Cavalier Axe"
+        },
+        {
+          "skinId": 6751,
+          "label": "Cavalier Dagger"
+        },
+        {
+          "skinId": 6765,
+          "label": "Cavalier Greatsword"
+        },
+        {
+          "skinId": 6747,
+          "label": "Cavalier Mace"
+        },
+        {
+          "skinId": 6756,
+          "label": "Cavalier Pistol"
+        },
+        {
+          "skinId": 6757,
+          "label": "Cavalier Rifle"
+        },
+        {
+          "skinId": 6746,
+          "label": "Cavalier Scepter"
+        },
+        {
+          "skinId": 6783,
+          "label": "Cavalier Staff"
+        },
+        {
+          "skinId": 6767,
+          "label": "Cavalier Focus"
+        },
+        {
+          "skinId": 6780,
+          "label": "Cavalier Torch"
+        },
+        {
+          "skinId": 6777,
+          "label": "Cavalier Warhorn"
+        },
+        {
+          "skinId": 6768,
+          "label": "Cavalier Shield"
+        }
+      ]
+    },
+    "Embellished Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6859,
+          "label": "Embellished Sword"
+        },
+        {
+          "skinId": 6868,
+          "label": "Embellished Hammer"
+        },
+        {
+          "skinId": 6865,
+          "label": "Embellished Longbow"
+        },
+        {
+          "skinId": 6862,
+          "label": "Embellished Short Bow"
+        },
+        {
+          "skinId": 6874,
+          "label": "Embellished Axe"
+        },
+        {
+          "skinId": 6877,
+          "label": "Embellished Dagger"
+        },
+        {
+          "skinId": 6882,
+          "label": "Embellished Greatsword"
+        },
+        {
+          "skinId": 6866,
+          "label": "Embellished Mace"
+        },
+        {
+          "skinId": 6886,
+          "label": "Embellished Pistol"
+        },
+        {
+          "skinId": 6871,
+          "label": "Embellished Rifle"
+        },
+        {
+          "skinId": 6861,
+          "label": "Embellished Scepter"
+        },
+        {
+          "skinId": 6887,
+          "label": "Embellished Staff"
+        },
+        {
+          "skinId": 6848,
+          "label": "Embellished Focus"
+        },
+        {
+          "skinId": 6873,
+          "label": "Embellished Torch"
+        },
+        {
+          "skinId": 6876,
+          "label": "Embellished Warhorn"
+        },
+        {
+          "skinId": 6869,
+          "label": "Embellished Shield"
+        }
+      ]
+    },
+    "Bloodstone Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6911,
+          "label": "Bloodstone Sword"
+        },
+        {
+          "skinId": 6908,
+          "label": "Bloodstone Hammer"
+        },
+        {
+          "skinId": 6925,
+          "label": "Bloodstone Longbow"
+        },
+        {
+          "skinId": 6947,
+          "label": "Bloodstone Short Bow"
+        },
+        {
+          "skinId": 6928,
+          "label": "Bloodstone Axe"
+        },
+        {
+          "skinId": 6907,
+          "label": "Bloodstone Dagger"
+        },
+        {
+          "skinId": 6950,
+          "label": "Bloodstone Greatsword"
+        },
+        {
+          "skinId": 6926,
+          "label": "Bloodstone Mace"
+        },
+        {
+          "skinId": 6930,
+          "label": "Bloodstone Pistol"
+        },
+        {
+          "skinId": 6921,
+          "label": "Bloodstone Rifle"
+        },
+        {
+          "skinId": 6920,
+          "label": "Bloodstone Scepter"
+        },
+        {
+          "skinId": 6932,
+          "label": "Bloodstone Staff"
+        },
+        {
+          "skinId": 6934,
+          "label": "Bloodstone Focus"
+        },
+        {
+          "skinId": 6936,
+          "label": "Bloodstone Torch"
+        },
+        {
+          "skinId": 6933,
+          "label": "Bloodstone Warhorn"
+        },
+        {
+          "skinId": 6912,
+          "label": "Bloodstone Shield"
+        }
+      ]
+    },
+    "Gargoyle Weapon Collection": {
+      "items": [
+        {
+          "skinId": 6984,
+          "label": "Gargoyle Sword"
+        },
+        {
+          "skinId": 6986,
+          "label": "Gargoyle Hammer"
+        },
+        {
+          "skinId": 6999,
+          "label": "Gargoyle Longbow"
+        },
+        {
+          "skinId": 6988,
+          "label": "Gargoyle Short Bow"
+        },
+        {
+          "skinId": 6989,
+          "label": "Gargoyle Axe"
+        },
+        {
+          "skinId": 6987,
+          "label": "Gargoyle Dagger"
+        },
+        {
+          "skinId": 6979,
+          "label": "Gargoyle Greatsword"
+        },
+        {
+          "skinId": 6990,
+          "label": "Gargoyle Mace"
+        },
+        {
+          "skinId": 6981,
+          "label": "Gargoyle Pistol"
+        },
+        {
+          "skinId": 6992,
+          "label": "Gargoyle Rifle"
+        },
+        {
+          "skinId": 6993,
+          "label": "Gargoyle Scepter"
+        },
+        {
+          "skinId": 6998,
+          "label": "Gargoyle Staff"
+        },
+        {
+          "skinId": 6995,
+          "label": "Gargoyle Focus"
+        },
+        {
+          "skinId": 6996,
+          "label": "Gargoyle Torch"
+        },
+        {
+          "skinId": 6976,
+          "label": "Gargoyle Warhorn"
+        },
+        {
+          "skinId": 6982,
+          "label": "Gargoyle Shield"
+        }
+      ]
+    },
+    "Frostforged Weapon Collection": {
+      "items": [
+        {
+          "skinId": 7049,
+          "label": "Frostforged Sword"
+        },
+        {
+          "skinId": 7060,
+          "label": "Frostforged Hammer"
+        },
+        {
+          "skinId": 7041,
+          "label": "Frostforged Longbow"
+        },
+        {
+          "skinId": 7039,
+          "label": "Frostforged Short Bow"
+        },
+        {
+          "skinId": 7062,
+          "label": "Frostforged Axe"
+        },
+        {
+          "skinId": 7044,
+          "label": "Frostforged Dagger"
+        },
+        {
+          "skinId": 7050,
+          "label": "Frostforged Greatsword"
+        },
+        {
+          "skinId": 7059,
+          "label": "Frostforged Mace"
+        },
+        {
+          "skinId": 7057,
+          "label": "Frostforged Pistol"
+        },
+        {
+          "skinId": 7046,
+          "label": "Frostforged Rifle"
+        },
+        {
+          "skinId": 7053,
+          "label": "Frostforged Scepter"
+        },
+        {
+          "skinId": 7056,
+          "label": "Frostforged Staff"
+        },
+        {
+          "skinId": 7054,
+          "label": "Frostforged Focus"
+        },
+        {
+          "skinId": 7036,
+          "label": "Frostforged Torch"
+        },
+        {
+          "skinId": 7052,
+          "label": "Frostforged Warhorn"
+        },
+        {
+          "skinId": 7048,
+          "label": "Frostforged Shield"
+        }
+      ]
+    },
+    "Devoted Weapon Collection": {
+      "items": [
+        {
+          "skinId": 7140,
+          "label": "Devoted Sword"
+        },
+        {
+          "skinId": 7132,
+          "label": "Devoted Hammer"
+        },
+        {
+          "skinId": 7137,
+          "label": "Devoted Longbow"
+        },
+        {
+          "skinId": 7081,
+          "label": "Devoted Short Bow"
+        },
+        {
+          "skinId": 7122,
+          "label": "Devoted Axe"
+        },
+        {
+          "skinId": 7096,
+          "label": "Devoted Dagger"
+        },
+        {
+          "skinId": 7090,
+          "label": "Devoted Greatsword"
+        },
+        {
+          "skinId": 7105,
+          "label": "Devoted Mace"
+        },
+        {
+          "skinId": 7138,
+          "label": "Devoted Pistol"
+        },
+        {
+          "skinId": 7152,
+          "label": "Devoted Rifle"
+        },
+        {
+          "skinId": 7148,
+          "label": "Devoted Scepter"
+        },
+        {
+          "skinId": 7112,
+          "label": "Devoted Staff"
+        },
+        {
+          "skinId": 7154,
+          "label": "Devoted Focus"
+        },
+        {
+          "skinId": 7159,
+          "label": "Devoted Torch"
+        },
+        {
+          "skinId": 7092,
+          "label": "Devoted Warhorn"
+        },
+        {
+          "skinId": 7111,
+          "label": "Devoted Shield"
+        }
+      ]
+    },
+    "Beastslayer Weapon Collection": {
+      "items": [
+        {
+          "skinId": 7174,
+          "label": "Beastslayer Sword"
+        },
+        {
+          "skinId": 7178,
+          "label": "Beastslayer Hammer"
+        },
+        {
+          "skinId": 7189,
+          "label": "Beastslayer Longbow"
+        },
+        {
+          "skinId": 7180,
+          "label": "Beastslayer Short Bow"
+        },
+        {
+          "skinId": 7191,
+          "label": "Beastslayer Axe"
+        },
+        {
+          "skinId": 7195,
+          "label": "Beastslayer Dagger"
+        },
+        {
+          "skinId": 7193,
+          "label": "Beastslayer Greatsword"
+        },
+        {
+          "skinId": 7171,
+          "label": "Beastslayer Mace"
+        },
+        {
+          "skinId": 7181,
+          "label": "Beastslayer Pistol"
+        },
+        {
+          "skinId": 7168,
+          "label": "Beastslayer Rifle"
+        },
+        {
+          "skinId": 7175,
+          "label": "Beastslayer Scepter"
+        },
+        {
+          "skinId": 7197,
+          "label": "Beastslayer Staff"
+        },
+        {
+          "skinId": 7186,
+          "label": "Beastslayer Focus"
+        },
+        {
+          "skinId": 7192,
+          "label": "Beastslayer Torch"
+        },
+        {
+          "skinId": 7183,
+          "label": "Beastslayer Warhorn"
+        },
+        {
+          "skinId": 7177,
+          "label": "Beastslayer Shield"
+        }
+      ]
+    },
+    "Keepsake Weapon Collection": {
+      "items": [
+        {
+          "skinId": 7232,
+          "label": "Keepsake Sword"
+        },
+        {
+          "skinId": 7239,
+          "label": "Keepsake Hammer"
+        },
+        {
+          "skinId": 7235,
+          "label": "Keepsake Longbow"
+        },
+        {
+          "skinId": 7240,
+          "label": "Keepsake Short Bow"
+        },
+        {
+          "skinId": 7243,
+          "label": "Keepsake Axe"
+        },
+        {
+          "skinId": 7228,
+          "label": "Keepsake Dagger"
+        },
+        {
+          "skinId": 7229,
+          "label": "Keepsake Greatsword"
+        },
+        {
+          "skinId": 7223,
+          "label": "Keepsake Mace"
+        },
+        {
+          "skinId": 7226,
+          "label": "Keepsake Pistol"
+        },
+        {
+          "skinId": 7224,
+          "label": "Keepsake Rifle"
+        },
+        {
+          "skinId": 7244,
+          "label": "Keepsake Scepter"
+        },
+        {
+          "skinId": 7230,
+          "label": "Keepsake Staff"
+        },
+        {
+          "skinId": 7238,
+          "label": "Keepsake Focus"
+        },
+        {
+          "skinId": 7237,
+          "label": "Keepsake Torch"
+        },
+        {
+          "skinId": 7222,
+          "label": "Keepsake Warhorn"
+        },
+        {
+          "skinId": 7234,
+          "label": "Keepsake Shield"
+        }
+      ]
+    },
+    "Abaddon's Weapon Collection": {
+      "items": [
+        {
+          "skinId": 7338,
+          "label": "Abaddon Sword"
+        },
+        {
+          "skinId": 7311,
+          "label": "Abaddon Hammer"
+        },
+        {
+          "skinId": 7313,
+          "label": "Abaddon Longbow"
+        },
+        {
+          "skinId": 7329,
+          "label": "Abaddon Short Bow"
+        },
+        {
+          "skinId": 7295,
+          "label": "Abaddon Axe"
+        },
+        {
+          "skinId": 7310,
+          "label": "Abaddon Dagger"
+        },
+        {
+          "skinId": 7333,
+          "label": "Abaddon Greatsword"
+        },
+        {
+          "skinId": 7324,
+          "label": "Abaddon Mace"
+        },
+        {
+          "skinId": 7287,
+          "label": "Abaddon Pistol"
+        },
+        {
+          "skinId": 7292,
+          "label": "Abaddon Rifle"
+        },
+        {
+          "skinId": 7293,
+          "label": "Abaddon Scepter"
+        },
+        {
+          "skinId": 7331,
+          "label": "Abaddon Staff"
+        },
+        {
+          "skinId": 7302,
+          "label": "Abaddon Focus"
+        },
+        {
+          "skinId": 7307,
+          "label": "Abaddon Torch"
+        },
+        {
+          "skinId": 7314,
+          "label": "Abaddon Warhorn"
+        },
+        {
+          "skinId": 7301,
+          "label": "Abaddon Shield"
+        }
+      ]
+    },
+    "War God's Weapon Collection": {
+      "items": [
+        {
+          "skinId": 7731,
+          "label": "War God's Sword"
+        },
+        {
+          "skinId": 7756,
+          "label": "War God's Hammer"
+        },
+        {
+          "skinId": 7722,
+          "label": "War God's Longbow"
+        },
+        {
+          "skinId": 7747,
+          "label": "War God's Short Bow"
+        },
+        {
+          "skinId": 7750,
+          "label": "War God's Axe"
+        },
+        {
+          "skinId": 7742,
+          "label": "War God's Dagger"
+        },
+        {
+          "skinId": 7744,
+          "label": "War God's Greatsword"
+        },
+        {
+          "skinId": 7720,
+          "label": "War God's Mace"
+        },
+        {
+          "skinId": 7733,
+          "label": "War God's Pistol"
+        },
+        {
+          "skinId": 7738,
+          "label": "War God's Rifle"
+        },
+        {
+          "skinId": 7730,
+          "label": "War God's Scepter"
+        },
+        {
+          "skinId": 7737,
+          "label": "War God's Staff"
+        },
+        {
+          "skinId": 7741,
+          "label": "War God's Focus"
+        },
+        {
+          "skinId": 7723,
+          "label": "War God's Torch"
+        },
+        {
+          "skinId": 7745,
+          "label": "War God's Warhorn"
+        },
+        {
+          "skinId": 7740,
+          "label": "War God's Shield"
+        }
+      ]
+    },
+    "Shifting Sands Weapon Collection": {
+      "items": [
+        {
+          "skinId": 7808,
+          "label": "Shifting Sands Sword"
+        },
+        {
+          "skinId": 7826,
+          "label": "Shifting Sands Hammer"
+        },
+        {
+          "skinId": 7809,
+          "label": "Shifting Sands Longbow"
+        },
+        {
+          "skinId": 7825,
+          "label": "Shifting Sands Short Bow"
+        },
+        {
+          "skinId": 7810,
+          "label": "Shifting Sands Axe"
+        },
+        {
+          "skinId": 7816,
+          "label": "Shifting Sands Dagger"
+        },
+        {
+          "skinId": 7822,
+          "label": "Shifting Sands Greatsword"
+        },
+        {
+          "skinId": 7812,
+          "label": "Shifting Sands Mace"
+        },
+        {
+          "skinId": 7820,
+          "label": "Shifting Sands Pistol"
+        },
+        {
+          "skinId": 7805,
+          "label": "Shifting Sands Rifle"
+        },
+        {
+          "skinId": 7813,
+          "label": "Shifting Sands Scepter"
+        },
+        {
+          "skinId": 7823,
+          "label": "Shifting Sands Staff"
+        },
+        {
+          "skinId": 7807,
+          "label": "Shifting Sands Focus"
+        },
+        {
+          "skinId": 7824,
+          "label": "Shifting Sands Torch"
+        },
+        {
+          "skinId": 7815,
+          "label": "Shifting Sands Warhorn"
+        },
+        {
+          "skinId": 7818,
+          "label": "Shifting Sands Shield"
+        }
+      ]
+    },
+    "Glacial Weapon Collection": {
+      "items": [
+        {
+          "skinId": 7972,
+          "label": "Glacial Sword"
+        },
+        {
+          "skinId": 7938,
+          "label": "Glacial Hammer"
+        },
+        {
+          "skinId": 7990,
+          "label": "Glacial Longbow"
+        },
+        {
+          "skinId": 7942,
+          "label": "Glacial Short Bow"
+        },
+        {
+          "skinId": 7929,
+          "label": "Glacial Axe"
+        },
+        {
+          "skinId": 7981,
+          "label": "Glacial Dagger"
+        },
+        {
+          "skinId": 7937,
+          "label": "Glacial Greatsword"
+        },
+        {
+          "skinId": 7939,
+          "label": "Glacial Mace"
+        },
+        {
+          "skinId": 7967,
+          "label": "Glacial Pistol"
+        },
+        {
+          "skinId": 7944,
+          "label": "Glacial Rifle"
+        },
+        {
+          "skinId": 7955,
+          "label": "Glacial Scepter"
+        },
+        {
+          "skinId": 7947,
+          "label": "Glacial Staff"
+        },
+        {
+          "skinId": 7957,
+          "label": "Glacial Focus"
+        },
+        {
+          "skinId": 7984,
+          "label": "Glacial Torch"
+        },
+        {
+          "skinId": 7986,
+          "label": "Glacial Warhorn"
+        },
+        {
+          "skinId": 7968,
+          "label": "Glacial Shield"
+        }
+      ]
+    },
+    "Alchemist Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8009,
+          "label": "Alchemist Sword"
+        },
+        {
+          "skinId": 8012,
+          "label": "Alchemist Hammer"
+        },
+        {
+          "skinId": 8011,
+          "label": "Alchemist Longbow"
+        },
+        {
+          "skinId": 8004,
+          "label": "Alchemist Short Bow"
+        },
+        {
+          "skinId": 8022,
+          "label": "Alchemist Axe"
+        },
+        {
+          "skinId": 8017,
+          "label": "Alchemist Dagger"
+        },
+        {
+          "skinId": 8019,
+          "label": "Alchemist Greatsword"
+        },
+        {
+          "skinId": 8018,
+          "label": "Alchemist Mace"
+        },
+        {
+          "skinId": 8020,
+          "label": "Alchemist Pistol"
+        },
+        {
+          "skinId": 8015,
+          "label": "Alchemist Rifle"
+        },
+        {
+          "skinId": 8008,
+          "label": "Alchemist Scepter"
+        },
+        {
+          "skinId": 8023,
+          "label": "Alchemist Staff"
+        },
+        {
+          "skinId": 8005,
+          "label": "Alchemist Focus"
+        },
+        {
+          "skinId": 8013,
+          "label": "Alchemist Torch"
+        },
+        {
+          "skinId": 8016,
+          "label": "Alchemist Warhorn"
+        },
+        {
+          "skinId": 8024,
+          "label": "Alchemist Shield"
+        }
+      ]
+    },
+    "Inquest Mark II Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8101,
+          "label": "Inquest Mark II Sword"
+        },
+        {
+          "skinId": 8099,
+          "label": "Inquest Mark II Hammer"
+        },
+        {
+          "skinId": 8109,
+          "label": "Inquest Mark II Longbow"
+        },
+        {
+          "skinId": 8100,
+          "label": "Inquest Mark II Short Bow"
+        },
+        {
+          "skinId": 8082,
+          "label": "Inquest Mark II Axe"
+        },
+        {
+          "skinId": 8084,
+          "label": "Inquest Mark II Dagger"
+        },
+        {
+          "skinId": 8104,
+          "label": "Inquest Mark II Greatsword"
+        },
+        {
+          "skinId": 8081,
+          "label": "Inquest Mark II Mace"
+        },
+        {
+          "skinId": 8107,
+          "label": "Inquest Mark II Pistol"
+        },
+        {
+          "skinId": 8092,
+          "label": "Inquest Mark II Rifle"
+        },
+        {
+          "skinId": 8102,
+          "label": "Inquest Mark II Scepter"
+        },
+        {
+          "skinId": 8110,
+          "label": "Inquest Mark II Staff"
+        },
+        {
+          "skinId": 8088,
+          "label": "Inquest Mark II Focus"
+        },
+        {
+          "skinId": 8094,
+          "label": "Inquest Mark II Torch"
+        },
+        {
+          "skinId": 8085,
+          "label": "Inquest Mark II Warhorn"
+        },
+        {
+          "skinId": 8089,
+          "label": "Inquest Mark II Shield"
+        }
+      ]
+    },
+    "Desert King Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8147,
+          "label": "Desert King Sword"
+        },
+        {
+          "skinId": 8153,
+          "label": "Desert King Hammer"
+        },
+        {
+          "skinId": 8163,
+          "label": "Desert King Longbow"
+        },
+        {
+          "skinId": 8144,
+          "label": "Desert King Short Bow"
+        },
+        {
+          "skinId": 8179,
+          "label": "Desert King Axe"
+        },
+        {
+          "skinId": 8146,
+          "label": "Desert King Dagger"
+        },
+        {
+          "skinId": 8162,
+          "label": "Desert King Greatsword"
+        },
+        {
+          "skinId": 8157,
+          "label": "Desert King Mace"
+        },
+        {
+          "skinId": 8158,
+          "label": "Desert King Pistol"
+        },
+        {
+          "skinId": 8176,
+          "label": "Desert King Rifle"
+        },
+        {
+          "skinId": 8152,
+          "label": "Desert King Scepter"
+        },
+        {
+          "skinId": 8155,
+          "label": "Desert King Staff"
+        },
+        {
+          "skinId": 8159,
+          "label": "Desert King Focus"
+        },
+        {
+          "skinId": 8178,
+          "label": "Desert King Torch"
+        },
+        {
+          "skinId": 8150,
+          "label": "Desert King Warhorn"
+        },
+        {
+          "skinId": 8168,
+          "label": "Desert King Shield"
+        }
+      ]
+    },
+    "Mad Realm Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8455,
+          "label": "Mad Realm Sword"
+        },
+        {
+          "skinId": 8443,
+          "label": "Mad Realm Hammer"
+        },
+        {
+          "skinId": 8438,
+          "label": "Mad Realm Longbow"
+        },
+        {
+          "skinId": 8449,
+          "label": "Mad Realm Short Bow"
+        },
+        {
+          "skinId": 8446,
+          "label": "Mad Realm Axe"
+        },
+        {
+          "skinId": 8437,
+          "label": "Mad Realm Dagger"
+        },
+        {
+          "skinId": 8451,
+          "label": "Mad Realm Greatsword"
+        },
+        {
+          "skinId": 8445,
+          "label": "Mad Realm Mace"
+        },
+        {
+          "skinId": 8442,
+          "label": "Mad Realm Pistol"
+        },
+        {
+          "skinId": 8456,
+          "label": "Mad Realm Rifle"
+        },
+        {
+          "skinId": 8436,
+          "label": "Mad Realm Scepter"
+        },
+        {
+          "skinId": 8453,
+          "label": "Mad Realm Staff"
+        },
+        {
+          "skinId": 8448,
+          "label": "Mad Realm Focus"
+        },
+        {
+          "skinId": 8452,
+          "label": "Mad Realm Torch"
+        },
+        {
+          "skinId": 8444,
+          "label": "Mad Realm Warhorn"
+        },
+        {
+          "skinId": 8450,
+          "label": "Mad Realm Shield"
+        }
+      ]
+    },
+    "Equinox Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8322,
+          "label": "Equinox Sword"
+        },
+        {
+          "skinId": 8317,
+          "label": "Equinox Hammer"
+        },
+        {
+          "skinId": 8315,
+          "label": "Equinox Longbow"
+        },
+        {
+          "skinId": 8309,
+          "label": "Equinox Short Bow"
+        },
+        {
+          "skinId": 8333,
+          "label": "Equinox Axe"
+        },
+        {
+          "skinId": 8331,
+          "label": "Equinox Dagger"
+        },
+        {
+          "skinId": 8320,
+          "label": "Equinox Greatsword"
+        },
+        {
+          "skinId": 8326,
+          "label": "Equinox Mace"
+        },
+        {
+          "skinId": 8321,
+          "label": "Equinox Pistol"
+        },
+        {
+          "skinId": 8300,
+          "label": "Equinox Rifle"
+        },
+        {
+          "skinId": 8328,
+          "label": "Equinox Scepter"
+        },
+        {
+          "skinId": 8313,
+          "label": "Equinox Staff"
+        },
+        {
+          "skinId": 8311,
+          "label": "Equinox Focus"
+        },
+        {
+          "skinId": 8316,
+          "label": "Equinox Torch"
+        },
+        {
+          "skinId": 8305,
+          "label": "Equinox Warhorn"
+        },
+        {
+          "skinId": 8330,
+          "label": "Equinox Shield"
+        }
+      ]
+    },
+    "Orchestral Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8525,
+          "label": "Orchestral Axe"
+        },
+        {
+          "skinId": 8528,
+          "label": "Orchestral Dagger"
+        },
+        {
+          "skinId": 8530,
+          "label": "Orchestral Focus"
+        },
+        {
+          "skinId": 8550,
+          "label": "Orchestral Greatsword"
+        },
+        {
+          "skinId": 8548,
+          "label": "Orchestral Hammer"
+        },
+        {
+          "skinId": 8532,
+          "label": "Orchestral Longbow"
+        },
+        {
+          "skinId": 8552,
+          "label": "Orchestral Mace"
+        },
+        {
+          "skinId": 8546,
+          "label": "Orchestral Pistol"
+        },
+        {
+          "skinId": 8549,
+          "label": "Orchestral Rifle"
+        },
+        {
+          "skinId": 8527,
+          "label": "Orchestral Scepter"
+        },
+        {
+          "skinId": 8540,
+          "label": "Orchestral Shield"
+        },
+        {
+          "skinId": 8519,
+          "label": "Orchestral Short Bow"
+        },
+        {
+          "skinId": 8526,
+          "label": "Orchestral Staff"
+        },
+        {
+          "skinId": 8537,
+          "label": "Orchestral Sword"
+        },
+        {
+          "skinId": 8521,
+          "label": "Orchestral Torch"
+        },
+        {
+          "skinId": 8523,
+          "label": "Orchestral Warhorn"
+        }
+      ]
+    },
+    "Defiant Glass Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8632,
+          "label": "Defiant Glass Axe"
+        },
+        {
+          "skinId": 8643,
+          "label": "Defiant Glass Dagger"
+        },
+        {
+          "skinId": 8629,
+          "label": "Defiant Glass Focus"
+        },
+        {
+          "skinId": 8633,
+          "label": "Defiant Glass Greatsword"
+        },
+        {
+          "skinId": 8637,
+          "label": "Defiant Glass Hammer"
+        },
+        {
+          "skinId": 8628,
+          "label": "Defiant Glass Longbow"
+        },
+        {
+          "skinId": 8644,
+          "label": "Defiant Glass Mace"
+        },
+        {
+          "skinId": 8639,
+          "label": "Defiant Glass Pistol"
+        },
+        {
+          "skinId": 8641,
+          "label": "Defiant Glass Rifle"
+        },
+        {
+          "skinId": 8642,
+          "label": "Defiant Glass Scepter"
+        },
+        {
+          "skinId": 8630,
+          "label": "Defiant Glass Shield"
+        },
+        {
+          "skinId": 8636,
+          "label": "Defiant Glass Short Bow"
+        },
+        {
+          "skinId": 8635,
+          "label": "Defiant Glass Staff"
+        },
+        {
+          "skinId": 8634,
+          "label": "Defiant Glass Sword"
+        },
+        {
+          "skinId": 8640,
+          "label": "Defiant Glass Torch"
+        },
+        {
+          "skinId": 8631,
+          "label": "Defiant Glass Warhorn"
+        }
+      ]
+    },
+    "Branded Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8673,
+          "label": "Branded Sword"
+        },
+        {
+          "skinId": 8668,
+          "label": "Branded Hammer"
+        },
+        {
+          "skinId": 8664,
+          "label": "Branded Longbow"
+        },
+        {
+          "skinId": 8665,
+          "label": "Branded Short Bow"
+        },
+        {
+          "skinId": 8662,
+          "label": "Branded Axe"
+        },
+        {
+          "skinId": 8679,
+          "label": "Branded Dagger"
+        },
+        {
+          "skinId": 8661,
+          "label": "Branded Greatsword"
+        },
+        {
+          "skinId": 8681,
+          "label": "Branded Mace"
+        },
+        {
+          "skinId": 8663,
+          "label": "Branded Pistol"
+        },
+        {
+          "skinId": 8676,
+          "label": "Branded Rifle"
+        },
+        {
+          "skinId": 8675,
+          "label": "Branded Scepter"
+        },
+        {
+          "skinId": 8660,
+          "label": "Branded Staff"
+        },
+        {
+          "skinId": 8674,
+          "label": "Branded Focus"
+        },
+        {
+          "skinId": 8667,
+          "label": "Branded Torch"
+        },
+        {
+          "skinId": 8680,
+          "label": "Branded Warhorn"
+        },
+        {
+          "skinId": 8671,
+          "label": "Branded Shield"
+        }
+      ]
+    },
+    "Bioluminescent Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8827,
+          "label": "Bioluminescent Sword"
+        },
+        {
+          "skinId": 8830,
+          "label": "Bioluminescent Hammer"
+        },
+        {
+          "skinId": 8844,
+          "label": "Bioluminescent Longbow"
+        },
+        {
+          "skinId": 8818,
+          "label": "Bioluminescent Short Bow"
+        },
+        {
+          "skinId": 8824,
+          "label": "Bioluminescent Axe"
+        },
+        {
+          "skinId": 8820,
+          "label": "Bioluminescent Dagger"
+        },
+        {
+          "skinId": 8809,
+          "label": "Bioluminescent Greatsword"
+        },
+        {
+          "skinId": 8835,
+          "label": "Bioluminescent Mace"
+        },
+        {
+          "skinId": 8823,
+          "label": "Bioluminescent Pistol"
+        },
+        {
+          "skinId": 8811,
+          "label": "Bioluminescent Rifle"
+        },
+        {
+          "skinId": 8808,
+          "label": "Bioluminescent Scepter"
+        },
+        {
+          "skinId": 8838,
+          "label": "Bioluminescent Staff"
+        },
+        {
+          "skinId": 8832,
+          "label": "Bioluminescent Focus"
+        },
+        {
+          "skinId": 8825,
+          "label": "Bioluminescent Torch"
+        },
+        {
+          "skinId": 8843,
+          "label": "Bioluminescent Warhorn"
+        },
+        {
+          "skinId": 8815,
+          "label": "Bioluminescent Shield"
+        }
+      ]
+    },
+    "Endless Ocean Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8913,
+          "label": "Endless Ocean Sword"
+        },
+        {
+          "skinId": 8903,
+          "label": "Endless Ocean Hammer"
+        },
+        {
+          "skinId": 8906,
+          "label": "Endless Ocean Longbow"
+        },
+        {
+          "skinId": 8908,
+          "label": "Endless Ocean Short Bow"
+        },
+        {
+          "skinId": 8900,
+          "label": "Endless Ocean Axe"
+        },
+        {
+          "skinId": 8907,
+          "label": "Endless Ocean Dagger"
+        },
+        {
+          "skinId": 8904,
+          "label": "Endless Ocean Greatsword"
+        },
+        {
+          "skinId": 8909,
+          "label": "Endless Ocean Mace"
+        },
+        {
+          "skinId": 8912,
+          "label": "Endless Ocean Pistol"
+        },
+        {
+          "skinId": 8902,
+          "label": "Endless Ocean Rifle"
+        },
+        {
+          "skinId": 8901,
+          "label": "Endless Ocean Scepter"
+        },
+        {
+          "skinId": 8914,
+          "label": "Endless Ocean Staff"
+        },
+        {
+          "skinId": 8899,
+          "label": "Endless Ocean Focus"
+        },
+        {
+          "skinId": 8905,
+          "label": "Endless Ocean Torch"
+        },
+        {
+          "skinId": 8911,
+          "label": "Endless Ocean Warhorn"
+        },
+        {
+          "skinId": 8910,
+          "label": "Endless Ocean Shield"
+        }
+      ]
+    },
+    "Seven Reapers Weapon Collection": {
+      "items": [
+        {
+          "skinId": 8988,
+          "label": "Seven Reapers Sword"
+        },
+        {
+          "skinId": 8972,
+          "label": "Seven Reapers Hammer"
+        },
+        {
+          "skinId": 8997,
+          "label": "Seven Reapers Longbow"
+        },
+        {
+          "skinId": 8981,
+          "label": "Seven Reapers Short Bow"
+        },
+        {
+          "skinId": 8982,
+          "label": "Seven Reapers Axe"
+        },
+        {
+          "skinId": 8993,
+          "label": "Seven Reapers Dagger"
+        },
+        {
+          "skinId": 8970,
+          "label": "Seven Reapers Greatsword"
+        },
+        {
+          "skinId": 9000,
+          "label": "Seven Reapers Mace"
+        },
+        {
+          "skinId": 8963,
+          "label": "Seven Reapers Pistol"
+        },
+        {
+          "skinId": 8971,
+          "label": "Seven Reapers Rifle"
+        },
+        {
+          "skinId": 8969,
+          "label": "Seven Reapers Scepter"
+        },
+        {
+          "skinId": 8991,
+          "label": "Seven Reapers Staff"
+        },
+        {
+          "skinId": 8962,
+          "label": "Seven Reapers Focus"
+        },
+        {
+          "skinId": 8985,
+          "label": "Seven Reapers Torch"
+        },
+        {
+          "skinId": 8978,
+          "label": "Seven Reapers Warhorn"
+        },
+        {
+          "skinId": 8987,
+          "label": "Seven Reapers Shield"
+        }
+      ]
+    },
+    "Draconic Weapon Collection": {
+      "items": [
+        {
+          "skinId": 9123,
+          "label": "Draconic Sword"
+        },
+        {
+          "skinId": 9125,
+          "label": "Draconic Hammer"
+        },
+        {
+          "skinId": 9094,
+          "label": "Draconic Longbow"
+        },
+        {
+          "skinId": 9105,
+          "label": "Draconic Short Bow"
+        },
+        {
+          "skinId": 9113,
+          "label": "Draconic Axe"
+        },
+        {
+          "skinId": 9110,
+          "label": "Draconic Dagger"
+        },
+        {
+          "skinId": 9129,
+          "label": "Draconic Greatsword"
+        },
+        {
+          "skinId": 9106,
+          "label": "Draconic Mace"
+        },
+        {
+          "skinId": 9118,
+          "label": "Draconic Pistol"
+        },
+        {
+          "skinId": 9107,
+          "label": "Draconic Rifle"
+        },
+        {
+          "skinId": 9126,
+          "label": "Draconic Scepter"
+        },
+        {
+          "skinId": 9103,
+          "label": "Draconic Staff"
+        },
+        {
+          "skinId": 9115,
+          "label": "Draconic Focus"
+        },
+        {
+          "skinId": 9117,
+          "label": "Draconic Torch"
+        },
+        {
+          "skinId": 9128,
+          "label": "Draconic Warhorn"
+        },
+        {
+          "skinId": 9130,
+          "label": "Draconic Shield"
+        }
+      ]
+    },
+    "Dark Wing Weapon Collection": {
+      "items": [
+        {
+          "skinId": 9271,
+          "label": "Dark Wing Sword"
+        },
+        {
+          "skinId": 9320,
+          "label": "Dark Wing Hammer"
+        },
+        {
+          "skinId": 9319,
+          "label": "Dark Wing Longbow"
+        },
+        {
+          "skinId": 9256,
+          "label": "Dark Wing Short Bow"
+        },
+        {
+          "skinId": 9317,
+          "label": "Dark Wing Axe"
+        },
+        {
+          "skinId": 9246,
+          "label": "Dark Wing Dagger"
+        },
+        {
+          "skinId": 9280,
+          "label": "Dark Wing Greatsword"
+        },
+        {
+          "skinId": 9243,
+          "label": "Dark Wing Mace"
+        },
+        {
+          "skinId": 9261,
+          "label": "Dark Wing Pistol"
+        },
+        {
+          "skinId": 9247,
+          "label": "Dark Wing Rifle"
+        },
+        {
+          "skinId": 9255,
+          "label": "Dark Wing Scepter"
+        },
+        {
+          "skinId": 9263,
+          "label": "Dark Wing Staff"
+        },
+        {
+          "skinId": 9294,
+          "label": "Dark Wing Focus"
+        },
+        {
+          "skinId": 9288,
+          "label": "Dark Wing Torch"
+        },
+        {
+          "skinId": 9312,
+          "label": "Dark Wing Warhorn"
+        },
+        {
+          "skinId": 9293,
+          "label": "Dark Wing Shield"
+        }
+      ]
+    },
+    "Ice Reaver Weapon Collection": {
+      "items": [
+        {
+          "skinId": 9381,
+          "label": "Ice Reaver Sword"
+        },
+        {
+          "skinId": 9393,
+          "label": "Ice Reaver Hammer"
+        },
+        {
+          "skinId": 9370,
+          "label": "Ice Reaver Longbow"
+        },
+        {
+          "skinId": 9444,
+          "label": "Ice Reaver Short Bow"
+        },
+        {
+          "skinId": 9430,
+          "label": "Ice Reaver Axe"
+        },
+        {
+          "skinId": 9396,
+          "label": "Ice Reaver Dagger"
+        },
+        {
+          "skinId": 9435,
+          "label": "Ice Reaver Greatsword"
+        },
+        {
+          "skinId": 9373,
+          "label": "Ice Reaver Mace"
+        },
+        {
+          "skinId": 9423,
+          "label": "Ice Reaver Pistol"
+        },
+        {
+          "skinId": 9391,
+          "label": "Ice Reaver Rifle"
+        },
+        {
+          "skinId": 9379,
+          "label": "Ice Reaver Scepter"
+        },
+        {
+          "skinId": 9378,
+          "label": "Ice Reaver Staff"
+        },
+        {
+          "skinId": 9405,
+          "label": "Ice Reaver Focus"
+        },
+        {
+          "skinId": 9424,
+          "label": "Ice Reaver Torch"
+        },
+        {
+          "skinId": 9445,
+          "label": "Ice Reaver Warhorn"
+        },
+        {
+          "skinId": 9372,
+          "label": "Ice Reaver Shield"
+        }
+      ]
+    },
+    "Eternal Forged Weapon Collection": {
+      "items": [
+        {
+          "skinId": 9497,
+          "label": "Eternal Forged Sword"
+        },
+        {
+          "skinId": 9514,
+          "label": "Eternal Forged Hammer"
+        },
+        {
+          "skinId": 9495,
+          "label": "Eternal Forged Longbow"
+        },
+        {
+          "skinId": 9493,
+          "label": "Eternal Forged Short Bow"
+        },
+        {
+          "skinId": 9504,
+          "label": "Eternal Forged Axe"
+        },
+        {
+          "skinId": 9496,
+          "label": "Eternal Forged Dagger"
+        },
+        {
+          "skinId": 9521,
+          "label": "Eternal Forged Greatsword"
+        },
+        {
+          "skinId": 9531,
+          "label": "Eternal Forged Mace"
+        },
+        {
+          "skinId": 9535,
+          "label": "Eternal Forged Pistol"
+        },
+        {
+          "skinId": 9487,
+          "label": "Eternal Forged Rifle"
+        },
+        {
+          "skinId": 9509,
+          "label": "Eternal Forged Scepter"
+        },
+        {
+          "skinId": 9515,
+          "label": "Eternal Forged Staff"
+        },
+        {
+          "skinId": 9486,
+          "label": "Eternal Forged Focus"
+        },
+        {
+          "skinId": 9507,
+          "label": "Eternal Forged Torch"
+        },
+        {
+          "skinId": 9520,
+          "label": "Eternal Forged Warhorn"
+        },
+        {
+          "skinId": 9491,
+          "label": "Eternal Forged Shield"
+        }
+      ]
+    },
+    "Lorekeeper Weapon Collection": {
+      "items": [
+        {
+          "skinId": 9584,
+          "label": "Lorekeeper Sword"
+        },
+        {
+          "skinId": 9561,
+          "label": "Lorekeeper Hammer"
+        },
+        {
+          "skinId": 9572,
+          "label": "Lorekeeper Longbow"
+        },
+        {
+          "skinId": 9576,
+          "label": "Lorekeeper Short Bow"
+        },
+        {
+          "skinId": 9565,
+          "label": "Lorekeeper Axe"
+        },
+        {
+          "skinId": 9563,
+          "label": "Lorekeeper Dagger"
+        },
+        {
+          "skinId": 9579,
+          "label": "Lorekeeper Greatsword"
+        },
+        {
+          "skinId": 9566,
+          "label": "Lorekeeper Mace"
+        },
+        {
+          "skinId": 9569,
+          "label": "Lorekeeper Pistol"
+        },
+        {
+          "skinId": 9560,
+          "label": "Lorekeeper Rifle"
+        },
+        {
+          "skinId": 9571,
+          "label": "Lorekeeper Scepter"
+        },
+        {
+          "skinId": 9568,
+          "label": "Lorekeeper Staff"
+        },
+        {
+          "skinId": 9564,
+          "label": "Lorekeeper Focus"
+        },
+        {
+          "skinId": 9585,
+          "label": "Lorekeeper Torch"
+        },
+        {
+          "skinId": 9583,
+          "label": "Lorekeeper Warhorn"
+        },
+        {
+          "skinId": 9573,
+          "label": "Lorekeeper Shield"
+        }
+      ]
+    },
+    "Dark Matter Weapon Collection": {
+      "items": [
+        {
+          "skinId": 9646,
+          "label": "Dark Matter Sword"
+        },
+        {
+          "skinId": 9630,
+          "label": "Dark Matter Hammer"
+        },
+        {
+          "skinId": 9643,
+          "label": "Dark Matter Longbow"
+        },
+        {
+          "skinId": 9618,
+          "label": "Dark Matter Short Bow"
+        },
+        {
+          "skinId": 9635,
+          "label": "Dark Matter Axe"
+        },
+        {
+          "skinId": 9629,
+          "label": "Dark Matter Dagger"
+        },
+        {
+          "skinId": 9645,
+          "label": "Dark Matter Greatsword"
+        },
+        {
+          "skinId": 9636,
+          "label": "Dark Matter Mace"
+        },
+        {
+          "skinId": 9653,
+          "label": "Dark Matter Pistol"
+        },
+        {
+          "skinId": 9623,
+          "label": "Dark Matter Rifle"
+        },
+        {
+          "skinId": 9637,
+          "label": "Dark Matter Scepter"
+        },
+        {
+          "skinId": 9634,
+          "label": "Dark Matter Staff"
+        },
+        {
+          "skinId": 9624,
+          "label": "Dark Matter Focus"
+        },
+        {
+          "skinId": 9621,
+          "label": "Dark Matter Torch"
+        },
+        {
+          "skinId": 9625,
+          "label": "Dark Matter Warhorn"
+        },
+        {
+          "skinId": 9627,
+          "label": "Dark Matter Shield"
+        }
+      ]
+    },
+    "Shimmering Aurora Weapon Collection": {
+      "items": [
+        {
+          "skinId": 9783,
+          "label": "Shimmering Aurora Sword"
+        },
+        {
+          "skinId": 9781,
+          "label": "Shimmering Aurora Hammer"
+        },
+        {
+          "skinId": 9759,
+          "label": "Shimmering Aurora Longbow"
+        },
+        {
+          "skinId": 9744,
+          "label": "Shimmering Aurora Short Bow"
+        },
+        {
+          "skinId": 9756,
+          "label": "Shimmering Aurora Axe"
+        },
+        {
+          "skinId": 9774,
+          "label": "Shimmering Aurora Dagger"
+        },
+        {
+          "skinId": 9760,
+          "label": "Shimmering Aurora Greatsword"
+        },
+        {
+          "skinId": 9784,
+          "label": "Shimmering Aurora Mace"
+        },
+        {
+          "skinId": 9746,
+          "label": "Shimmering Aurora Pistol"
+        },
+        {
+          "skinId": 9743,
+          "label": "Shimmering Aurora Rifle"
+        },
+        {
+          "skinId": 9776,
+          "label": "Shimmering Aurora Scepter"
+        },
+        {
+          "skinId": 9737,
+          "label": "Shimmering Aurora Staff"
+        },
+        {
+          "skinId": 9723,
+          "label": "Shimmering Aurora Focus"
+        },
+        {
+          "skinId": 9775,
+          "label": "Shimmering Aurora Torch"
+        },
+        {
+          "skinId": 9785,
+          "label": "Shimmering Aurora Warhorn"
+        },
+        {
+          "skinId": 9724,
+          "label": "Shimmering Aurora Shield"
+        }
+      ]
+    },
+    "Bright Inquisitor Weapon Collection": {
+      "items": [
+        {
+          "skinId": 9872,
+          "label": "Bright Inquisitor Sword"
+        },
+        {
+          "skinId": 9866,
+          "label": "Bright Inquisitor Hammer"
+        },
+        {
+          "skinId": 9881,
+          "label": "Bright Inquisitor Longbow"
+        },
+        {
+          "skinId": 9857,
+          "label": "Bright Inquisitor Short Bow"
+        },
+        {
+          "skinId": 9887,
+          "label": "Bright Inquisitor Axe"
+        },
+        {
+          "skinId": 9884,
+          "label": "Bright Inquisitor Dagger"
+        },
+        {
+          "skinId": 9835,
+          "label": "Bright Inquisitor Greatsword"
+        },
+        {
+          "skinId": 9843,
+          "label": "Bright Inquisitor Mace"
+        },
+        {
+          "skinId": 9854,
+          "label": "Bright Inquisitor Pistol"
+        },
+        {
+          "skinId": 9879,
+          "label": "Bright Inquisitor Rifle"
+        },
+        {
+          "skinId": 9869,
+          "label": "Bright Inquisitor Scepter"
+        },
+        {
+          "skinId": 9834,
+          "label": "Bright Inquisitor Staff"
+        },
+        {
+          "skinId": 9870,
+          "label": "Bright Inquisitor Focus"
+        },
+        {
+          "skinId": 9878,
+          "label": "Bright Inquisitor Torch"
+        },
+        {
+          "skinId": 9853,
+          "label": "Bright Inquisitor Warhorn"
+        },
+        {
+          "skinId": 9836,
+          "label": "Bright Inquisitor Shield"
+        }
+      ]
+    },
+    "Etherbound Weapon Collection": {
+      "items": [
+        {
+          "skinId": 9950,
+          "label": "Etherbound Sword"
+        },
+        {
+          "skinId": 9948,
+          "label": "Etherbound Hammer"
+        },
+        {
+          "skinId": 9951,
+          "label": "Etherbound Longbow"
+        },
+        {
+          "skinId": 9963,
+          "label": "Etherbound Short Bow"
+        },
+        {
+          "skinId": 9965,
+          "label": "Etherbound Axe"
+        },
+        {
+          "skinId": 9964,
+          "label": "Etherbound Dagger"
+        },
+        {
+          "skinId": 9947,
+          "label": "Etherbound Greatsword"
+        },
+        {
+          "skinId": 9958,
+          "label": "Etherbound Mace"
+        },
+        {
+          "skinId": 9949,
+          "label": "Etherbound Pistol"
+        },
+        {
+          "skinId": 9952,
+          "label": "Etherbound Rifle"
+        },
+        {
+          "skinId": 9966,
+          "label": "Etherbound Scepter"
+        },
+        {
+          "skinId": 9953,
+          "label": "Etherbound Staff"
+        },
+        {
+          "skinId": 9962,
+          "label": "Etherbound Focus"
+        },
+        {
+          "skinId": 9957,
+          "label": "Etherbound Torch"
+        },
+        {
+          "skinId": 9955,
+          "label": "Etherbound Warhorn"
+        },
+        {
+          "skinId": 9959,
+          "label": "Etherbound Shield"
+        }
+      ]
+    },
+    "Maguuma Weapon Collection": {
+      "items": [
+        {
+          "skinId": 10022,
+          "label": "Maguuma Sword"
+        },
+        {
+          "skinId": 10035,
+          "label": "Maguuma Hammer"
+        },
+        {
+          "skinId": 10025,
+          "label": "Maguuma Longbow"
+        },
+        {
+          "skinId": 10014,
+          "label": "Maguuma Short Bow"
+        },
+        {
+          "skinId": 10037,
+          "label": "Maguuma Axe"
+        },
+        {
+          "skinId": 10030,
+          "label": "Maguuma Dagger"
+        },
+        {
+          "skinId": 10036,
+          "label": "Maguuma Greatsword"
+        },
+        {
+          "skinId": 10039,
+          "label": "Maguuma Mace"
+        },
+        {
+          "skinId": 10024,
+          "label": "Maguuma Pistol"
+        },
+        {
+          "skinId": 10015,
+          "label": "Maguuma Rifle"
+        },
+        {
+          "skinId": 10041,
+          "label": "Maguuma Scepter"
+        },
+        {
+          "skinId": 10017,
+          "label": "Maguuma Staff"
+        },
+        {
+          "skinId": 10027,
+          "label": "Maguuma Focus"
+        },
+        {
+          "skinId": 10013,
+          "label": "Maguuma Torch"
+        },
+        {
+          "skinId": 10034,
+          "label": "Maguuma Warhorn"
+        },
+        {
+          "skinId": 10029,
+          "label": "Maguuma Shield"
+        }
+      ]
+    },
+    "Magical Weapon Collection": {
+      "items": [
+        {
+          "skinId": 10096,
+          "label": "Magical Sword"
+        },
+        {
+          "skinId": 10071,
+          "label": "Magical Hammer"
+        },
+        {
+          "skinId": 10087,
+          "label": "Magical Longbow"
+        },
+        {
+          "skinId": 10090,
+          "label": "Magical Short Bow"
+        },
+        {
+          "skinId": 10092,
+          "label": "Magical Axe"
+        },
+        {
+          "skinId": 10095,
+          "label": "Magical Dagger"
+        },
+        {
+          "skinId": 10073,
+          "label": "Magical Greatsword"
+        },
+        {
+          "skinId": 10093,
+          "label": "Magical Mace"
+        },
+        {
+          "skinId": 10070,
+          "label": "Magical Pistol"
+        },
+        {
+          "skinId": 10089,
+          "label": "Magical Rifle"
+        },
+        {
+          "skinId": 10076,
+          "label": "Magical Scepter"
+        },
+        {
+          "skinId": 10082,
+          "label": "Magical Staff"
+        },
+        {
+          "skinId": 10075,
+          "label": "Magical Focus"
+        },
+        {
+          "skinId": 10069,
+          "label": "Magical Torch"
+        },
+        {
+          "skinId": 10083,
+          "label": "Magical Warhorn"
+        },
+        {
+          "skinId": 10085,
+          "label": "Magical Shield"
+        }
+      ]
+    },
+    "Venombite Weapon Collection": {
+      "items": [
+        {
+          "skinId": 10138,
+          "label": "Venombite Sword"
+        },
+        {
+          "skinId": 10144,
+          "label": "Venombite Hammer"
+        },
+        {
+          "skinId": 10143,
+          "label": "Venombite Longbow"
+        },
+        {
+          "skinId": 10146,
+          "label": "Venombite Short Bow"
+        },
+        {
+          "skinId": 10141,
+          "label": "Venombite Axe"
+        },
+        {
+          "skinId": 10135,
+          "label": "Venombite Dagger"
+        },
+        {
+          "skinId": 10150,
+          "label": "Venombite Greatsword"
+        },
+        {
+          "skinId": 10136,
+          "label": "Venombite Mace"
+        },
+        {
+          "skinId": 10145,
+          "label": "Venombite Pistol"
+        },
+        {
+          "skinId": 10147,
+          "label": "Venombite Rifle"
+        },
+        {
+          "skinId": 10137,
+          "label": "Venombite Scepter"
+        },
+        {
+          "skinId": 10151,
+          "label": "Venombite Staff"
+        },
+        {
+          "skinId": 10148,
+          "label": "Venombite Focus"
+        },
+        {
+          "skinId": 10142,
+          "label": "Venombite Torch"
+        },
+        {
+          "skinId": 10152,
+          "label": "Venombite Warhorn"
+        },
+        {
+          "skinId": 10153,
+          "label": "Venombite Shield"
+        }
+      ]
+    },
+    "Abyss Stalker Weapon Collection": {
+      "items": [
+        {
+          "skinId": 10187,
+          "label": "Abyss Stalker Sword"
+        },
+        {
+          "skinId": 10202,
+          "label": "Abyss Stalker Hammer"
+        },
+        {
+          "skinId": 10209,
+          "label": "Abyss Stalker Longbow"
+        },
+        {
+          "skinId": 10170,
+          "label": "Abyss Stalker Short Bow"
+        },
+        {
+          "skinId": 10222,
+          "label": "Abyss Stalker Axe"
+        },
+        {
+          "skinId": 10210,
+          "label": "Abyss Stalker Dagger"
+        },
+        {
+          "skinId": 10184,
+          "label": "Abyss Stalker Greatsword"
+        },
+        {
+          "skinId": 10204,
+          "label": "Abyss Stalker Mace"
+        },
+        {
+          "skinId": 10166,
+          "label": "Abyss Stalker Pistol"
+        },
+        {
+          "skinId": 10203,
+          "label": "Abyss Stalker Rifle"
+        },
+        {
+          "skinId": 10176,
+          "label": "Abyss Stalker Scepter"
+        },
+        {
+          "skinId": 10224,
+          "label": "Abyss Stalker Staff"
+        },
+        {
+          "skinId": 10178,
+          "label": "Abyss Stalker Focus"
+        },
+        {
+          "skinId": 10196,
+          "label": "Abyss Stalker Torch"
+        },
+        {
+          "skinId": 10180,
+          "label": "Abyss Stalker Warhorn"
+        },
+        {
+          "skinId": 10177,
+          "label": "Abyss Stalker Shield"
+        }
+      ]
+    },
+    "White Tiger Weapon Collection": {
+      "items": [
+        {
+          "skinId": 10179,
+          "label": "White Tiger Sword"
+        },
+        {
+          "skinId": 10220,
+          "label": "White Tiger Hammer"
+        },
+        {
+          "skinId": 10197,
+          "label": "White Tiger Longbow"
+        },
+        {
+          "skinId": 10171,
+          "label": "White Tiger Short Bow"
+        },
+        {
+          "skinId": 10172,
+          "label": "White Tiger Axe"
+        },
+        {
+          "skinId": 10181,
+          "label": "White Tiger Dagger"
+        },
+        {
+          "skinId": 10199,
+          "label": "White Tiger Greatsword"
+        },
+        {
+          "skinId": 10221,
+          "label": "White Tiger Mace"
+        },
+        {
+          "skinId": 10186,
+          "label": "White Tiger Pistol"
+        },
+        {
+          "skinId": 10190,
+          "label": "White Tiger Rifle"
+        },
+        {
+          "skinId": 10213,
+          "label": "White Tiger Scepter"
+        },
+        {
+          "skinId": 10205,
+          "label": "White Tiger Staff"
+        },
+        {
+          "skinId": 10225,
+          "label": "White Tiger Focus"
+        },
+        {
+          "skinId": 10207,
+          "label": "White Tiger Torch"
+        },
+        {
+          "skinId": 10189,
+          "label": "White Tiger Warhorn"
+        },
+        {
+          "skinId": 10188,
+          "label": "White Tiger Shield"
+        }
+      ]
+    },
+    "Red Crane Weapon Collection": {
+      "items": [
+        {
+          "skinId": 10269,
+          "label": "Red Crane Sword"
+        },
+        {
+          "skinId": 10405,
+          "label": "Red Crane Hammer"
+        },
+        {
+          "skinId": 10759,
+          "label": "Red Crane Longbow"
+        },
+        {
+          "skinId": 10598,
+          "label": "Red Crane Short Bow"
+        },
+        {
+          "skinId": 10452,
+          "label": "Red Crane Axe"
+        },
+        {
+          "skinId": 10557,
+          "label": "Red Crane Dagger"
+        },
+        {
+          "skinId": 10627,
+          "label": "Red Crane Greatsword"
+        },
+        {
+          "skinId": 10657,
+          "label": "Red Crane Mace"
+        },
+        {
+          "skinId": 10398,
+          "label": "Red Crane Pistol"
+        },
+        {
+          "skinId": 10308,
+          "label": "Red Crane Rifle"
+        },
+        {
+          "skinId": 10370,
+          "label": "Red Crane Scepter"
+        },
+        {
+          "skinId": 10443,
+          "label": "Red Crane Staff"
+        },
+        {
+          "skinId": 10364,
+          "label": "Red Crane Focus"
+        },
+        {
+          "skinId": 10545,
+          "label": "Red Crane Torch"
+        },
+        {
+          "skinId": 10655,
+          "label": "Red Crane Warhorn"
+        },
+        {
+          "skinId": 10661,
+          "label": "Red Crane Shield"
+        }
+      ]
+    },
+    "Steel Lotus Weapon Collection": {
+      "items": [
+        {
+          "skinId": 10806,
+          "label": "Steel Lotus Sword"
+        },
+        {
+          "skinId": 10809,
+          "label": "Steel Lotus Hammer"
+        },
+        {
+          "skinId": 10826,
+          "label": "Steel Lotus Longbow"
+        },
+        {
+          "skinId": 10812,
+          "label": "Steel Lotus Short Bow"
+        },
+        {
+          "skinId": 10807,
+          "label": "Steel Lotus Axe"
+        },
+        {
+          "skinId": 10810,
+          "label": "Steel Lotus Dagger"
+        },
+        {
+          "skinId": 10819,
+          "label": "Steel Lotus Greatsword"
+        },
+        {
+          "skinId": 10827,
+          "label": "Steel Lotus Mace"
+        },
+        {
+          "skinId": 10830,
+          "label": "Steel Lotus Pistol"
+        },
+        {
+          "skinId": 10808,
+          "label": "Steel Lotus Rifle"
+        },
+        {
+          "skinId": 10813,
+          "label": "Steel Lotus Scepter"
+        },
+        {
+          "skinId": 10802,
+          "label": "Steel Lotus Staff"
+        },
+        {
+          "skinId": 10829,
+          "label": "Steel Lotus Focus"
+        },
+        {
+          "skinId": 10800,
+          "label": "Steel Lotus Torch"
+        },
+        {
+          "skinId": 10820,
+          "label": "Steel Lotus Warhorn"
+        },
+        {
+          "skinId": 10804,
+          "label": "Steel Lotus Shield"
+        }
+      ]
+    },
+    "Fox Fire Weapon Collection": {
+      "items": [
+        {
+          "skinId": 10890,
+          "label": "Fox Fire Sword"
+        },
+        {
+          "skinId": 10895,
+          "label": "Fox Fire Hammer"
+        },
+        {
+          "skinId": 10883,
+          "label": "Fox Fire Longbow"
+        },
+        {
+          "skinId": 10894,
+          "label": "Fox Fire Short Bow"
+        },
+        {
+          "skinId": 10877,
+          "label": "Fox Fire Axe"
+        },
+        {
+          "skinId": 10893,
+          "label": "Fox Fire Dagger"
+        },
+        {
+          "skinId": 10884,
+          "label": "Fox Fire Greatsword"
+        },
+        {
+          "skinId": 10885,
+          "label": "Fox Fire Mace"
+        },
+        {
+          "skinId": 10892,
+          "label": "Fox Fire Pistol"
+        },
+        {
+          "skinId": 10882,
+          "label": "Fox Fire Rifle"
+        },
+        {
+          "skinId": 10889,
+          "label": "Fox Fire Scepter"
+        },
+        {
+          "skinId": 10876,
+          "label": "Fox Fire Staff"
+        },
+        {
+          "skinId": 10879,
+          "label": "Fox Fire Focus"
+        },
+        {
+          "skinId": 10887,
+          "label": "Fox Fire Torch"
+        },
+        {
+          "skinId": 10878,
+          "label": "Fox Fire Warhorn"
+        },
+        {
+          "skinId": 10891,
+          "label": "Fox Fire Shield"
+        }
+      ]
+    },
+    "New Kaineng Weapon Collection": {
+      "items": [
+        {
+          "skinId": 11004,
+          "label": "New Kaineng Sword"
+        },
+        {
+          "skinId": 10989,
+          "label": "New Kaineng Hammer"
+        },
+        {
+          "skinId": 10972,
+          "label": "New Kaineng Longbow"
+        },
+        {
+          "skinId": 11022,
+          "label": "New Kaineng Short Bow"
+        },
+        {
+          "skinId": 10984,
+          "label": "New Kaineng Axe"
+        },
+        {
+          "skinId": 11023,
+          "label": "New Kaineng Dagger"
+        },
+        {
+          "skinId": 10990,
+          "label": "New Kaineng Greatsword"
+        },
+        {
+          "skinId": 11006,
+          "label": "New Kaineng Mace"
+        },
+        {
+          "skinId": 10979,
+          "label": "New Kaineng Pistol"
+        },
+        {
+          "skinId": 11013,
+          "label": "New Kaineng Rifle"
+        },
+        {
+          "skinId": 10975,
+          "label": "New Kaineng Scepter"
+        },
+        {
+          "skinId": 10998,
+          "label": "New Kaineng Staff"
+        },
+        {
+          "skinId": 11024,
+          "label": "New Kaineng Focus"
+        },
+        {
+          "skinId": 11002,
+          "label": "New Kaineng Torch"
+        },
+        {
+          "skinId": 10971,
+          "label": "New Kaineng Warhorn"
+        },
+        {
+          "skinId": 11015,
+          "label": "New Kaineng Shield"
+        }
+      ]
+    },
+    "Dokkaebi Weapon Collection": {
+      "items": [
+        {
+          "skinId": 11057,
+          "label": "Dokkaebi Sword"
+        },
+        {
+          "skinId": 11099,
+          "label": "Dokkaebi Hammer"
+        },
+        {
+          "skinId": 11095,
+          "label": "Dokkaebi Longbow"
+        },
+        {
+          "skinId": 11091,
+          "label": "Dokkaebi Short Bow"
+        },
+        {
+          "skinId": 11056,
+          "label": "Dokkaebi Axe"
+        },
+        {
+          "skinId": 11074,
+          "label": "Dokkaebi Dagger"
+        },
+        {
+          "skinId": 11083,
+          "label": "Dokkaebi Greatsword"
+        },
+        {
+          "skinId": 11066,
+          "label": "Dokkaebi Mace"
+        },
+        {
+          "skinId": 11072,
+          "label": "Dokkaebi Pistol"
+        },
+        {
+          "skinId": 11092,
+          "label": "Dokkaebi Rifle"
+        },
+        {
+          "skinId": 11077,
+          "label": "Dokkaebi Scepter"
+        },
+        {
+          "skinId": 11060,
+          "label": "Dokkaebi Staff"
+        },
+        {
+          "skinId": 11075,
+          "label": "Dokkaebi Focus"
+        },
+        {
+          "skinId": 11058,
+          "label": "Dokkaebi Torch"
+        },
+        {
+          "skinId": 11096,
+          "label": "Dokkaebi Warhorn"
+        },
+        {
+          "skinId": 11081,
+          "label": "Dokkaebi Shield"
+        }
+      ]
+    },
+    "Snow Garden Weapon Collection": {
+      "items": [
+        {
+          "skinId": 11169,
+          "label": "Snow Garden Sword"
+        },
+        {
+          "skinId": 11165,
+          "label": "Snow Garden Hammer"
+        },
+        {
+          "skinId": 11146,
+          "label": "Snow Garden Longbow"
+        },
+        {
+          "skinId": 11148,
+          "label": "Snow Garden Short Bow"
+        },
+        {
+          "skinId": 11166,
+          "label": "Snow Garden Axe"
+        },
+        {
+          "skinId": 11163,
+          "label": "Snow Garden Dagger"
+        },
+        {
+          "skinId": 11145,
+          "label": "Snow Garden Greatsword"
+        },
+        {
+          "skinId": 11170,
+          "label": "Snow Garden Mace"
+        },
+        {
+          "skinId": 11161,
+          "label": "Snow Garden Pistol"
+        },
+        {
+          "skinId": 11168,
+          "label": "Snow Garden Rifle"
+        },
+        {
+          "skinId": 11157,
+          "label": "Snow Garden Scepter"
+        },
+        {
+          "skinId": 11156,
+          "label": "Snow Garden Staff"
+        },
+        {
+          "skinId": 11149,
+          "label": "Snow Garden Focus"
+        },
+        {
+          "skinId": 11147,
+          "label": "Snow Garden Torch"
+        },
+        {
+          "skinId": 11164,
+          "label": "Snow Garden Warhorn"
+        },
+        {
+          "skinId": 11159,
+          "label": "Snow Garden Shield"
+        }
+      ]
+    },
+    "Reflective Koi Weapon Collection": {
+      "items": [
+        {
+          "skinId": 11245,
+          "label": "Reflective Koi Sword"
+        },
+        {
+          "skinId": 11235,
+          "label": "Reflective Koi Hammer"
+        },
+        {
+          "skinId": 11243,
+          "label": "Reflective Koi Longbow"
+        },
+        {
+          "skinId": 11239,
+          "label": "Reflective Koi Short Bow"
+        },
+        {
+          "skinId": 11241,
+          "label": "Reflective Koi Axe"
+        },
+        {
+          "skinId": 11240,
+          "label": "Reflective Koi Dagger"
+        },
+        {
+          "skinId": 11248,
+          "label": "Reflective Koi Greatsword"
+        },
+        {
+          "skinId": 11238,
+          "label": "Reflective Koi Mace"
+        },
+        {
+          "skinId": 11250,
+          "label": "Reflective Koi Pistol"
+        },
+        {
+          "skinId": 11252,
+          "label": "Reflective Koi Rifle"
+        },
+        {
+          "skinId": 11237,
+          "label": "Reflective Koi Scepter"
+        },
+        {
+          "skinId": 11242,
+          "label": "Reflective Koi Staff"
+        },
+        {
+          "skinId": 11244,
+          "label": "Reflective Koi Focus"
+        },
+        {
+          "skinId": 11249,
+          "label": "Reflective Koi Torch"
+        },
+        {
+          "skinId": 11251,
+          "label": "Reflective Koi Warhorn"
+        },
+        {
+          "skinId": 11234,
+          "label": "Reflective Koi Shield"
+        }
+      ]
+    },
+    "Collapsing Star Weapon Collection": {
+      "items": [
+        {
+          "skinId": 11408,
+          "label": "Collapsing Star Sword"
+        },
+        {
+          "skinId": 11369,
+          "label": "Collapsing Star Hammer"
+        },
+        {
+          "skinId": 11365,
+          "label": "Collapsing Star Longbow"
+        },
+        {
+          "skinId": 11390,
+          "label": "Collapsing Star Short Bow"
+        },
+        {
+          "skinId": 11393,
+          "label": "Collapsing Star Axe"
+        },
+        {
+          "skinId": 11407,
+          "label": "Collapsing Star Dagger"
+        },
+        {
+          "skinId": 11391,
+          "label": "Collapsing Star Greatsword"
+        },
+        {
+          "skinId": 11392,
+          "label": "Collapsing Star Mace"
+        },
+        {
+          "skinId": 11403,
+          "label": "Collapsing Star Pistol"
+        },
+        {
+          "skinId": 11397,
+          "label": "Collapsing Star Rifle"
+        },
+        {
+          "skinId": 11381,
+          "label": "Collapsing Star Scepter"
+        },
+        {
+          "skinId": 11373,
+          "label": "Collapsing Star Staff"
+        },
+        {
+          "skinId": 11398,
+          "label": "Collapsing Star Focus"
+        },
+        {
+          "skinId": 11384,
+          "label": "Collapsing Star Torch"
+        },
+        {
+          "skinId": 11399,
+          "label": "Collapsing Star Warhorn"
+        },
+        {
+          "skinId": 11395,
+          "label": "Collapsing Star Shield"
+        }
+      ]
+    },
+    "Paladin's Decree Weapon Collection": {
+      "items": [
+        {
+          "skinId": 11437,
+          "label": "Paladin's Decree Sword"
+        },
+        {
+          "skinId": 11427,
+          "label": "Paladin's Decree Hammer"
+        },
+        {
+          "skinId": 11416,
+          "label": "Paladin's Decree Longbow"
+        },
+        {
+          "skinId": 11420,
+          "label": "Paladin's Decree Short Bow"
+        },
+        {
+          "skinId": 11425,
+          "label": "Paladin's Decree Axe"
+        },
+        {
+          "skinId": 11434,
+          "label": "Paladin's Decree Dagger"
+        },
+        {
+          "skinId": 11433,
+          "label": "Paladin's Decree Greatsword"
+        },
+        {
+          "skinId": 11426,
+          "label": "Paladin's Decree Mace"
+        },
+        {
+          "skinId": 11417,
+          "label": "Paladin's Decree Pistol"
+        },
+        {
+          "skinId": 11424,
+          "label": "Paladin's Decree Rifle"
+        },
+        {
+          "skinId": 11438,
+          "label": "Paladin's Decree Scepter"
+        },
+        {
+          "skinId": 11422,
+          "label": "Paladin's Decree Staff"
+        },
+        {
+          "skinId": 11421,
+          "label": "Paladin's Decree Focus"
+        },
+        {
+          "skinId": 11423,
+          "label": "Paladin's Decree Torch"
+        },
+        {
+          "skinId": 11432,
+          "label": "Paladin's Decree Warhorn"
+        },
+        {
+          "skinId": 11430,
+          "label": "Paladin's Decree Shield"
+        }
+      ]
+    },
+    "Vinelord Edgebloom Weapon Collection": {
+      "items": [
+        {
+          "skinId": 11838,
+          "label": "Vinelord Edgebloom Sword"
+        },
+        {
+          "skinId": 11818,
+          "label": "Vinelord Edgebloom Hammer"
+        },
+        {
+          "skinId": 11834,
+          "label": "Vinelord Edgebloom Longbow"
+        },
+        {
+          "skinId": 11825,
+          "label": "Vinelord Edgebloom Short Bow"
+        },
+        {
+          "skinId": 11820,
+          "label": "Vinelord Edgebloom Axe"
+        },
+        {
+          "skinId": 11833,
+          "label": "Vinelord Edgebloom Dagger"
+        },
+        {
+          "skinId": 11819,
+          "label": "Vinelord Edgebloom Greatsword"
+        },
+        {
+          "skinId": 11839,
+          "label": "Vinelord Edgebloom Mace"
+        },
+        {
+          "skinId": 11831,
+          "label": "Vinelord Edgebloom Pistol"
+        },
+        {
+          "skinId": 11821,
+          "label": "Vinelord Edgebloom Rifle"
+        },
+        {
+          "skinId": 11830,
+          "label": "Vinelord Edgebloom Scepter"
+        },
+        {
+          "skinId": 11835,
+          "label": "Vinelord Edgebloom Staff"
+        },
+        {
+          "skinId": 11832,
+          "label": "Vinelord Edgebloom Focus"
+        },
+        {
+          "skinId": 11829,
+          "label": "Vinelord Edgebloom Torch"
+        },
+        {
+          "skinId": 11836,
+          "label": "Vinelord Edgebloom Warhorn"
+        },
+        {
+          "skinId": 11837,
+          "label": "Vinelord Edgebloom Shield"
+        }
+      ]
+    },
+    "Thundercrag Weapon Collection": {
+      "items": [
+        {
+          "skinId": 11948,
+          "label": "Thundercrag Sword"
+        },
+        {
+          "skinId": 11955,
+          "label": "Thundercrag Hammer"
+        },
+        {
+          "skinId": 11968,
+          "label": "Thundercrag Longbow"
+        },
+        {
+          "skinId": 11946,
+          "label": "Thundercrag Short Bow"
+        },
+        {
+          "skinId": 11970,
+          "label": "Thundercrag Axe"
+        },
+        {
+          "skinId": 11943,
+          "label": "Thundercrag Dagger"
+        },
+        {
+          "skinId": 11935,
+          "label": "Thundercrag Greatsword"
+        },
+        {
+          "skinId": 11959,
+          "label": "Thundercrag Mace"
+        },
+        {
+          "skinId": 11971,
+          "label": "Thundercrag Pistol"
+        },
+        {
+          "skinId": 11963,
+          "label": "Thundercrag Rifle"
+        },
+        {
+          "skinId": 11950,
+          "label": "Thundercrag Scepter"
+        },
+        {
+          "skinId": 11962,
+          "label": "Thundercrag Staff"
+        },
+        {
+          "skinId": 11974,
+          "label": "Thundercrag Focus"
+        },
+        {
+          "skinId": 11951,
+          "label": "Thundercrag Torch"
+        },
+        {
+          "skinId": 11939,
+          "label": "Thundercrag Warhorn"
+        },
+        {
+          "skinId": 11972,
+          "label": "Thundercrag Shield"
+        }
+      ]
+    },
+    "Necrotic Essence Weapon Collection": {
+      "items": [
+        {
+          "skinId": 12041,
+          "label": "Necrotic Essence Sword"
+        },
+        {
+          "skinId": 12057,
+          "label": "Necrotic Essence Hammer"
+        },
+        {
+          "skinId": 12043,
+          "label": "Necrotic Essence Longbow"
+        },
+        {
+          "skinId": 12042,
+          "label": "Necrotic Essence Short Bow"
+        },
+        {
+          "skinId": 12046,
+          "label": "Necrotic Essence Axe"
+        },
+        {
+          "skinId": 12096,
+          "label": "Necrotic Essence Dagger"
+        },
+        {
+          "skinId": 12028,
+          "label": "Necrotic Essence Greatsword"
+        },
+        {
+          "skinId": 12097,
+          "label": "Necrotic Essence Mace"
+        },
+        {
+          "skinId": 12055,
+          "label": "Necrotic Essence Pistol"
+        },
+        {
+          "skinId": 12085,
+          "label": "Necrotic Essence Rifle"
+        },
+        {
+          "skinId": 12061,
+          "label": "Necrotic Essence Scepter"
+        },
+        {
+          "skinId": 12033,
+          "label": "Necrotic Essence Staff"
+        },
+        {
+          "skinId": 12023,
+          "label": "Necrotic Essence Focus"
+        },
+        {
+          "skinId": 12069,
+          "label": "Necrotic Essence Torch"
+        },
+        {
+          "skinId": 12027,
+          "label": "Necrotic Essence Warhorn"
+        },
+        {
+          "skinId": 12011,
+          "label": "Necrotic Essence Shield"
+        }
+      ]
+    },
+    "Shadow Chevalier Weapon Collection": {
+      "items": [
+        {
+          "skinId": 12146,
+          "label": "Shadow Chevalier Sword"
+        },
+        {
+          "skinId": 12179,
+          "label": "Shadow Chevalier Hammer"
+        },
+        {
+          "skinId": 12138,
+          "label": "Shadow Chevalier Longbow"
+        },
+        {
+          "skinId": 12149,
+          "label": "Shadow Chevalier Short Bow"
+        },
+        {
+          "skinId": 12150,
+          "label": "Shadow Chevalier Axe"
+        },
+        {
+          "skinId": 12157,
+          "label": "Shadow Chevalier Dagger"
+        },
+        {
+          "skinId": 12160,
+          "label": "Shadow Chevalier Greatsword"
+        },
+        {
+          "skinId": 12169,
+          "label": "Shadow Chevalier Mace"
+        },
+        {
+          "skinId": 12203,
+          "label": "Shadow Chevalier Pistol"
+        },
+        {
+          "skinId": 12208,
+          "label": "Shadow Chevalier Rifle"
+        },
+        {
+          "skinId": 12183,
+          "label": "Shadow Chevalier Scepter"
+        },
+        {
+          "skinId": 12147,
+          "label": "Shadow Chevalier Staff"
+        },
+        {
+          "skinId": 12210,
+          "label": "Shadow Chevalier Focus"
+        },
+        {
+          "skinId": 12207,
+          "label": "Shadow Chevalier Torch"
+        },
+        {
+          "skinId": 12199,
+          "label": "Shadow Chevalier Warhorn"
+        },
+        {
+          "skinId": 12188,
+          "label": "Shadow Chevalier Shield"
+        }
+      ]
+    },
+    "Chromatic Assassin Weapon Collection": {
+      "items": [
+        {
+          "skinId": 12266,
+          "label": "Chromatic Assassin Sword"
+        },
+        {
+          "skinId": 12235,
+          "label": "Chromatic Assassin Hammer"
+        },
+        {
+          "skinId": 12228,
+          "label": "Chromatic Assassin Longbow"
+        },
+        {
+          "skinId": 12218,
+          "label": "Chromatic Assassin Short Bow"
+        },
+        {
+          "skinId": 12237,
+          "label": "Chromatic Assassin Axe"
+        },
+        {
+          "skinId": 12236,
+          "label": "Chromatic Assassin Dagger"
+        },
+        {
+          "skinId": 12260,
+          "label": "Chromatic Assassin Greatsword"
+        },
+        {
+          "skinId": 12241,
+          "label": "Chromatic Assassin Mace"
+        },
+        {
+          "skinId": 12279,
+          "label": "Chromatic Assassin Pistol"
+        },
+        {
+          "skinId": 12238,
+          "label": "Chromatic Assassin Rifle"
+        },
+        {
+          "skinId": 12254,
+          "label": "Chromatic Assassin Scepter"
+        },
+        {
+          "skinId": 12229,
+          "label": "Chromatic Assassin Staff"
+        },
+        {
+          "skinId": 12255,
+          "label": "Chromatic Assassin Focus"
+        },
+        {
+          "skinId": 12261,
+          "label": "Chromatic Assassin Torch"
+        },
+        {
+          "skinId": 12242,
+          "label": "Chromatic Assassin Warhorn"
+        },
+        {
+          "skinId": 12223,
+          "label": "Chromatic Assassin Shield"
+        },
+        {
+          "skinId": 12253,
+          "label": "Chromatic Assassin Spear"
+        }
+      ]
+    },
+    "Void Corrupted Weapon Collection": {
+      "items": [
+        {
+          "skinId": 12570,
+          "label": "Void Corrupted Sword"
+        },
+        {
+          "skinId": 12465,
+          "label": "Void Corrupted Hammer"
+        },
+        {
+          "skinId": 12458,
+          "label": "Void Corrupted Longbow"
+        },
+        {
+          "skinId": 12408,
+          "label": "Void Corrupted Short Bow"
+        },
+        {
+          "skinId": 12354,
+          "label": "Void Corrupted Axe"
+        },
+        {
+          "skinId": 12541,
+          "label": "Void Corrupted Dagger"
+        },
+        {
+          "skinId": 12376,
+          "label": "Void Corrupted Greatsword"
+        },
+        {
+          "skinId": 12356,
+          "label": "Void Corrupted Mace"
+        },
+        {
+          "skinId": 12390,
+          "label": "Void Corrupted Pistol"
+        },
+        {
+          "skinId": 12360,
+          "label": "Void Corrupted Rifle"
+        },
+        {
+          "skinId": 12568,
+          "label": "Void Corrupted Scepter"
+        },
+        {
+          "skinId": 12379,
+          "label": "Void Corrupted Staff"
+        },
+        {
+          "skinId": 12413,
+          "label": "Void Corrupted Focus"
+        },
+        {
+          "skinId": 12532,
+          "label": "Void Corrupted Torch"
+        },
+        {
+          "skinId": 12442,
+          "label": "Void Corrupted Warhorn"
+        },
+        {
+          "skinId": 12368,
+          "label": "Void Corrupted Shield"
+        },
+        {
+          "skinId": 12554,
+          "label": "Void Corrupted Spear"
+        }
+      ]
+    },
+    "Mystical Beast Weapon Collection": {
+      "items": [
+        {
+          "skinId": 12636,
+          "label": "Mystical Beast Sword"
+        },
+        {
+          "skinId": 12615,
+          "label": "Mystical Beast Hammer"
+        },
+        {
+          "skinId": 12612,
+          "label": "Mystical Beast Longbow"
+        },
+        {
+          "skinId": 12620,
+          "label": "Mystical Beast Short Bow"
+        },
+        {
+          "skinId": 12629,
+          "label": "Mystical Beast Axe"
+        },
+        {
+          "skinId": 12628,
+          "label": "Mystical Beast Dagger"
+        },
+        {
+          "skinId": 12623,
+          "label": "Mystical Beast Greatsword"
+        },
+        {
+          "skinId": 12642,
+          "label": "Mystical Beast Mace"
+        },
+        {
+          "skinId": 12632,
+          "label": "Mystical Beast Pistol"
+        },
+        {
+          "skinId": 12603,
+          "label": "Mystical Beast Rifle"
+        },
+        {
+          "skinId": 12631,
+          "label": "Mystical Beast Scepter"
+        },
+        {
+          "skinId": 12602,
+          "label": "Mystical Beast Staff"
+        },
+        {
+          "skinId": 12611,
+          "label": "Mystical Beast Focus"
+        },
+        {
+          "skinId": 12626,
+          "label": "Mystical Beast Torch"
+        },
+        {
+          "skinId": 12599,
+          "label": "Mystical Beast Warhorn"
+        },
+        {
+          "skinId": 12637,
+          "label": "Mystical Beast Shield"
+        },
+        {
+          "skinId": 12618,
+          "label": "Mystical Beast Spear"
+        }
+      ]
+    },
+    "Foefire Weapon Collection": {
+      "items": [
+        {
+          "skinId": 12669,
+          "label": "Foefire Sword"
+        },
+        {
+          "skinId": 12645,
+          "label": "Foefire Hammer"
+        },
+        {
+          "skinId": 12654,
+          "label": "Foefire Longbow"
+        },
+        {
+          "skinId": 12655,
+          "label": "Foefire Short Bow"
+        },
+        {
+          "skinId": 12665,
+          "label": "Foefire Axe"
+        },
+        {
+          "skinId": 12661,
+          "label": "Foefire Dagger"
+        },
+        {
+          "skinId": 12650,
+          "label": "Foefire Greatsword"
+        },
+        {
+          "skinId": 12663,
+          "label": "Foefire Mace"
+        },
+        {
+          "skinId": 12667,
+          "label": "Foefire Pistol"
+        },
+        {
+          "skinId": 12662,
+          "label": "Foefire Rifle"
+        },
+        {
+          "skinId": 12671,
+          "label": "Foefire Scepter"
+        },
+        {
+          "skinId": 12670,
+          "label": "Foefire Staff"
+        },
+        {
+          "skinId": 12668,
+          "label": "Foefire Focus"
+        },
+        {
+          "skinId": 12658,
+          "label": "Foefire Torch"
+        },
+        {
+          "skinId": 12666,
+          "label": "Foefire Warhorn"
+        },
+        {
+          "skinId": 12653,
+          "label": "Foefire Shield"
+        },
+        {
+          "skinId": 12649,
+          "label": "Foefire Spear"
+        }
+      ]
+    },
+    "Dragon Essence Weapon Collection": {
+      "items": [
+        {
+          "skinId": 12746,
+          "label": "Dragon Essence Sword"
+        },
+        {
+          "skinId": 12745,
+          "label": "Dragon Essence Hammer"
+        },
+        {
+          "skinId": 12766,
+          "label": "Dragon Essence Longbow"
+        },
+        {
+          "skinId": 12783,
+          "label": "Dragon Essence Short Bow"
+        },
+        {
+          "skinId": 12789,
+          "label": "Dragon Essence Axe"
+        },
+        {
+          "skinId": 12754,
+          "label": "Dragon Essence Dagger"
+        },
+        {
+          "skinId": 12785,
+          "label": "Dragon Essence Greatsword"
+        },
+        {
+          "skinId": 12781,
+          "label": "Dragon Essence Mace"
+        },
+        {
+          "skinId": 12759,
+          "label": "Dragon Essence Pistol"
+        },
+        {
+          "skinId": 12750,
+          "label": "Dragon Essence Rifle"
+        },
+        {
+          "skinId": 12761,
+          "label": "Dragon Essence Scepter"
+        },
+        {
+          "skinId": 12793,
+          "label": "Dragon Essence Staff"
+        },
+        {
+          "skinId": 12760,
+          "label": "Dragon Essence Focus"
+        },
+        {
+          "skinId": 12795,
+          "label": "Dragon Essence Torch"
+        },
+        {
+          "skinId": 12756,
+          "label": "Dragon Essence Warhorn"
+        },
+        {
+          "skinId": 12751,
+          "label": "Dragon Essence Shield"
+        },
+        {
+          "skinId": 12777,
+          "label": "Dragon Essence Spear"
+        }
+      ]
+    },
+    "Imperial Everbloom Weapon Collection": {
+      "items": [
+        {
+          "skinId": 12850,
+          "label": "Imperial Everbloom Sword"
+        },
+        {
+          "skinId": 12838,
+          "label": "Imperial Everbloom Hammer"
+        },
+        {
+          "skinId": 12849,
+          "label": "Imperial Everbloom Longbow"
+        },
+        {
+          "skinId": 12840,
+          "label": "Imperial Everbloom Short Bow"
+        },
+        {
+          "skinId": 12845,
+          "label": "Imperial Everbloom Axe"
+        },
+        {
+          "skinId": 12852,
+          "label": "Imperial Everbloom Dagger"
+        },
+        {
+          "skinId": 12844,
+          "label": "Imperial Everbloom Greatsword"
+        },
+        {
+          "skinId": 12843,
+          "label": "Imperial Everbloom Mace"
+        },
+        {
+          "skinId": 12848,
+          "label": "Imperial Everbloom Pistol"
+        },
+        {
+          "skinId": 12846,
+          "label": "Imperial Everbloom Rifle"
+        },
+        {
+          "skinId": 12847,
+          "label": "Imperial Everbloom Scepter"
+        },
+        {
+          "skinId": 12836,
+          "label": "Imperial Everbloom Staff"
+        },
+        {
+          "skinId": 12841,
+          "label": "Imperial Everbloom Focus"
+        },
+        {
+          "skinId": 12853,
+          "label": "Imperial Everbloom Torch"
+        },
+        {
+          "skinId": 12851,
+          "label": "Imperial Everbloom Warhorn"
+        },
+        {
+          "skinId": 12855,
+          "label": "Imperial Everbloom Shield"
+        },
+        {
+          "skinId": 12837,
+          "label": "Imperial Everbloom Spear"
+        }
+      ]
+    },
+    "Shade-Touched Weapon Collection": {
+      "items": [
+        {
+          "skinId": 13203,
+          "label": "Shade-Touched Spear"
+        },
+        {
+          "skinId": 13214,
+          "label": "Shade-Touched Sword"
+        },
+        {
+          "skinId": 13216,
+          "label": "Shade-Touched Hammer"
+        },
+        {
+          "skinId": 13220,
+          "label": "Shade-Touched Longbow"
+        },
+        {
+          "skinId": 13217,
+          "label": "Shade-Touched Short Bow"
+        },
+        {
+          "skinId": 13204,
+          "label": "Shade-Touched Axe"
+        },
+        {
+          "skinId": 13210,
+          "label": "Shade-Touched Dagger"
+        },
+        {
+          "skinId": 13219,
+          "label": "Shade-Touched Greatsword"
+        },
+        {
+          "skinId": 13207,
+          "label": "Shade-Touched Mace"
+        },
+        {
+          "skinId": 13211,
+          "label": "Shade-Touched Pistol"
+        },
+        {
+          "skinId": 13232,
+          "label": "Shade-Touched Rifle"
+        },
+        {
+          "skinId": 13223,
+          "label": "Shade-Touched Scepter"
+        },
+        {
+          "skinId": 13231,
+          "label": "Shade-Touched Staff"
+        },
+        {
+          "skinId": 13206,
+          "label": "Shade-Touched Focus"
+        },
+        {
+          "skinId": 13221,
+          "label": "Shade-Touched Torch"
+        },
+        {
+          "skinId": 13225,
+          "label": "Shade-Touched Warhorn"
+        },
+        {
+          "skinId": 13209,
+          "label": "Shade-Touched Shield"
+        }
+      ]
+    },
+    "Calligrapher's Weapon Collection": {
+      "items": [
+        {
+          "skinId": 13529,
+          "label": "Calligrapher's Axe"
+        },
+        {
+          "skinId": 13394,
+          "label": "Calligrapher's Dagger"
+        },
+        {
+          "skinId": 13424,
+          "label": "Calligrapher's Focus"
+        },
+        {
+          "skinId": 13518,
+          "label": "Calligrapher's Greatsword"
+        },
+        {
+          "skinId": 13414,
+          "label": "Calligrapher's Hammer"
+        },
+        {
+          "skinId": 13475,
+          "label": "Calligrapher's Longbow"
+        },
+        {
+          "skinId": 13274,
+          "label": "Calligrapher's Mace"
+        },
+        {
+          "skinId": 13389,
+          "label": "Calligrapher's Pistol"
+        },
+        {
+          "skinId": 13575,
+          "label": "Calligrapher's Rifle"
+        },
+        {
+          "skinId": 13482,
+          "label": "Calligrapher's Scepter"
+        },
+        {
+          "skinId": 13363,
+          "label": "Calligrapher's Shield"
+        },
+        {
+          "skinId": 13379,
+          "label": "Calligrapher's Short Bow"
+        },
+        {
+          "skinId": 13458,
+          "label": "Calligrapher's Spear"
+        },
+        {
+          "skinId": 13626,
+          "label": "Calligrapher's Staff"
+        },
+        {
+          "skinId": 13573,
+          "label": "Calligrapher's Sword"
+        },
+        {
+          "skinId": 13534,
+          "label": "Calligrapher's Torch"
+        },
+        {
+          "skinId": 13342,
+          "label": "Calligrapher's Warhorn"
+        }
+      ]
+    },
+    "Painter's Brilliance Weapon Collection": {
+      "items": [
+        {
+          "skinId": 13726,
+          "label": "Painter's Brilliance Axe"
+        },
+        {
+          "skinId": 13753,
+          "label": "Painter's Brilliance Dagger"
+        },
+        {
+          "skinId": 13781,
+          "label": "Painter's Brilliance Focus"
+        },
+        {
+          "skinId": 13741,
+          "label": "Painter's Brilliance Greatsword"
+        },
+        {
+          "skinId": 13764,
+          "label": "Painter's Brilliance Hammer"
+        },
+        {
+          "skinId": 13744,
+          "label": "Painter's Brilliance Longbow"
+        },
+        {
+          "skinId": 13777,
+          "label": "Painter's Brilliance Mace"
+        },
+        {
+          "skinId": 13735,
+          "label": "Painter's Brilliance Pistol"
+        },
+        {
+          "skinId": 13784,
+          "label": "Painter's Brilliance Rifle"
+        },
+        {
+          "skinId": 13688,
+          "label": "Painter's Brilliance Scepter"
+        },
+        {
+          "skinId": 13712,
+          "label": "Painter's Brilliance Shield"
+        },
+        {
+          "skinId": 13787,
+          "label": "Painter's Brilliance Short Bow"
+        },
+        {
+          "skinId": 13752,
+          "label": "Painter's Brilliance Spear"
+        },
+        {
+          "skinId": 13707,
+          "label": "Painter's Brilliance Staff"
+        },
+        {
+          "skinId": 13690,
+          "label": "Painter's Brilliance Sword"
+        },
+        {
+          "skinId": 13769,
+          "label": "Painter's Brilliance Torch"
+        },
+        {
+          "skinId": 13717,
+          "label": "Painter's Brilliance Warhorn"
+        }
+      ]
+    }
+  }
+}

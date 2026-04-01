@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import BLCSimulator from "@/components/BLCSimulator.vue";
+import BLCSimulator from "@/components/BLCSimulator/BLCSimulator.vue";
 </script>

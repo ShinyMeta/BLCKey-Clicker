@@ -1,0 +1,77 @@
+{
+  "pickCount": 2,
+  "items": [
+    {
+      "itemId": 90664,
+      "label": "Glyph of Alchemy (Unused)"
+    },
+    {
+      "itemId": 87385,
+      "label": "Glyph of Bounty (Unused)"
+    },
+    {
+      "itemId": 90538,
+      "label": "Glyph of the Crucible (Unused)"
+    },
+    {
+      "itemId": 87434,
+      "label": "Glyph of Flight (Unused)"
+    },
+    {
+      "itemId": 87559,
+      "label": "Glyph of the Forester (Unused)"
+    },
+    {
+      "itemId": 88298,
+      "label": "Glyph of the Herbalist (Unused)"
+    },
+    {
+      "itemId": 87451,
+      "label": "Glyph of Industry (Unused)"
+    },
+    {
+      "itemId": 87452,
+      "label": "Glyph of the Leatherworker (Unused)"
+    },
+    {
+      "itemId": 87515,
+      "label": "Glyph of the Prospector (Unused)"
+    },
+    {
+      "itemId": 90726,
+      "label": "Glyph of Reaping (Unused)"
+    },
+    {
+      "itemId": 87426,
+      "label": "Glyph of the Scavenger (Unused)"
+    },
+    {
+      "itemId": 87460,
+      "label": "Glyph of the Tailor (Unused)"
+    },
+    {
+      "itemId": 92682,
+      "label": "Glyph of the Timekeeper (Unused)"
+    },
+    {
+      "itemId": 87410,
+      "label": "Glyph of the Unbound (Unused)"
+    },
+    {
+      "itemId": 88045,
+      "label": "Glyph of Volatility (Unused)"
+    },
+    {
+      "itemId": 87424,
+      "label": "Glyph of the Watchknight (Unused)"
+    },
+    {
+      "itemId": 92915,
+      "label": "Glyph of Overload (Unused)"
+    },
+    {
+      "itemId": 92833,
+      "label": "Glyph of Virtue (Unused)"
+    }
+  ]
+}

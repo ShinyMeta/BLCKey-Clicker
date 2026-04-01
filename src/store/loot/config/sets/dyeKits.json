@@ -1,0 +1,141 @@
+{
+  "pickCount": 4,
+  "items": [
+    {
+      "itemId": 68653,
+      "label": "Crimson Lion Dye Kit"
+    },
+    {
+      "itemId": 43935,
+      "label": "Deathly Dye Kit"
+    },
+    {
+      "itemId": 41744,
+      "label": "Flame Dye Kit"
+    },
+    {
+      "itemId": 41745,
+      "label": "Frost Dye Kit"
+    },
+    {
+      "itemId": 68005,
+      "label": "Glint's Winter Dye Kit"
+    },
+    {
+      "itemId": 43078,
+      "label": "Lion's Arch Commemorative Dye Kit"
+    },
+    {
+      "itemId": 64254,
+      "label": "Lion's Arch Survivors Dye Kit"
+    },
+    {
+      "itemId": 47900,
+      "label": "Metallurgic Dye Kit"
+    },
+    {
+      "itemId": 48954,
+      "label": "Toxic Dye Kit"
+    },
+    {
+      "itemId": 67291,
+      "label": "Taimi's Dye Kit"
+    },
+    {
+      "itemId": 78734,
+      "label": "Blue Shift Dye Kit"
+    },
+    {
+      "itemId": 70367,
+      "label": "Mad King Dye Kit"
+    },
+    {
+      "itemId": 68786,
+      "label": "Shadow Dye Kit"
+    },
+    {
+      "itemId": 77470,
+      "label": "Winter Chimes Dye Kit"
+    },
+    {
+      "itemId": 79354,
+      "label": "Bloodstone Dye Kit"
+    },
+    {
+      "itemId": 80974,
+      "label": "Primordus Dye Kit"
+    },
+    {
+      "itemId": 80069,
+      "label": "Solar and Lunar Dye Kit"
+    },
+    {
+      "itemId": 79695,
+      "label": "Vibrant Dye Kit"
+    },
+    {
+      "itemId": 87603,
+      "label": "Awakened Dye Kit"
+    },
+    {
+      "itemId": 85628,
+      "label": "Elonian Beasts Dye Kit"
+    },
+    {
+      "itemId": 86163,
+      "label": "Elonian Landscape Dye Kit"
+    },
+    {
+      "itemId": 81545,
+      "label": "Jormag Dye Kit"
+    },
+    {
+      "itemId": 86898,
+      "label": "Zhaitan Dye Kit"
+    },
+    {
+      "itemId": 89717,
+      "label": "Kralkatorrik Dye Kit"
+    },
+    {
+      "itemId": 88258,
+      "label": "Mordremoth Dye Kit"
+    },
+    {
+      "itemId": 90079,
+      "label": "Sacred Dye Kit"
+    },
+    {
+      "itemId": 91654,
+      "label": "Charr Dye Kit"
+    },
+    {
+      "itemId": 69934,
+      "label": "Lion's Arch Rebuild Dye Kit"
+    },
+    {
+      "itemId": 92201,
+      "label": "Norn Dye Kit"
+    },
+    {
+      "itemId": 94368,
+      "label": "Aurene Dye Kit"
+    },
+    {
+      "itemId": 95362,
+      "label": "Darkest Abyss Dye Kit"
+    },
+    {
+      "itemId": 97666,
+      "label": "Soo-Won Dye Kit"
+    },
+    {
+      "itemId": 98106,
+      "label": "Jade Dye Kit"
+    },
+    {
+      "itemId": 99806,
+      "label": "Monstrous Dye Kit"
+    }
+  ]
+}

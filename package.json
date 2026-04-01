@@ -6,12 +6,20 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix --ignore-path .gitignore"
+    "lint": "eslint . --fix --ignore-path .gitignore",
+    "fetch:weapons": "node scripts/fetch-weapon-sets.js",
+    "generate:example-chest": "node scripts/generate-example-chest.mjs",
+    "fetch:exclusives": "node scripts/fetch-exclusives.mjs",
+    "fetch:dye-kits": "node scripts/fetch-dye-kits.mjs",
+    "fetch:nodes": "node scripts/fetch-nodes.mjs",
+    "fetch:glyphs": "node scripts/fetch-glyphs.mjs",
+    "fetch:all": "node scripts/fetch-all.mjs"
   },
   "dependencies": {
-    "@mdi/font": "7.0.96",
+    "@mdi/font": "^7.4.47",
+    "@vueuse/core": "^14.2.1",
     "core-js": "^3.29.0",
-    "gw2api-client": "^7.7.1",
+    "gw2api-client": "ShinyMeta/gw2api-client#autoBatch",
     "pinia": "^2.0.0",
     "roboto-fontface": "*",
     "short-unique-id": "^5.2.0",
@@ -21,11 +29,12 @@
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^7.2.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "eslint": "^8.37.0",
     "eslint-plugin-vue": "^9.3.0",
     "sass": "^1.60.0",
-    "vite": "^4.2.0",
-    "vite-plugin-vuetify": "^1.0.0"
+    "vite": "^5.0.0",
+    "vite-plugin-vuetify": "^2.0.0"
   }
 }

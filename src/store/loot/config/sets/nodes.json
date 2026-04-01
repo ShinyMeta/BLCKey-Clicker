@@ -1,0 +1,65 @@
+{
+  "pickCount": 4,
+  "items": [
+    {
+      "itemId": 81852,
+      "label": "Advanced Leather Rack"
+    },
+    {
+      "itemId": 81853,
+      "label": "Advanced Cloth Rack"
+    },
+    {
+      "itemId": 79085,
+      "label": "Hard Wood Logging Node"
+    },
+    {
+      "itemId": 68090,
+      "label": "Elder Wood Logging Node"
+    },
+    {
+      "itemId": 68091,
+      "label": "Ancient Wood Logging Node"
+    },
+    {
+      "itemId": 79260,
+      "label": "Iron Ore Mining Node"
+    },
+    {
+      "itemId": 68097,
+      "label": "Platinum Mining Node"
+    },
+    {
+      "itemId": 68098,
+      "label": "Mithril Mining Node"
+    },
+    {
+      "itemId": 68094,
+      "label": "Orichalcum Mining Node"
+    },
+    {
+      "itemId": 68089,
+      "label": "Omnomberry Harvesting Node"
+    },
+    {
+      "itemId": 68092,
+      "label": "Snow Truffle Harvesting Node"
+    },
+    {
+      "itemId": 68096,
+      "label": "Lotus Harvesting Node"
+    },
+    {
+      "itemId": 68095,
+      "label": "Orrian Truffle Harvesting Node"
+    },
+    {
+      "itemId": 79063,
+      "label": "Flaxseed Harvesting Node"
+    },
+    {
+      "itemId": 68093,
+      "label": "Ghost Pepper Harvesting Node"
+    }
+  ]
+}

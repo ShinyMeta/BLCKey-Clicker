@@ -1,0 +1,13 @@
+{
+  "pickCount": 1,
+  "items": [
+    { "itemId": 86694, "label": "Black Lion Statuette" },
+    { "itemId": 43998, "label": "Black Lion Claim Ticket Scrap" },
+    { "itemId": 93786, "label": "Gnashblade's Exotic Weapon Grab Bag" },
+    { "itemId": 86946, "label": "The Evon Gnashblade Lucky Envelope" },
+    { "itemId": 93694, "label": "Gnashblade Dragon Coffer" },
+    { "itemId": 88151, "label": "Gnashblade Zephyrite Supply Box" },
+    { "itemId": 85457, "label": "The Evon Gnashblade Trick-or-Treat Bag" },
+    { "itemId": 86710, "label": "The Evon Gnashblade Wintersday Gift" }
+  ]
+}
