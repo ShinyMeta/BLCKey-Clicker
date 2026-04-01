@@ -16,6 +16,7 @@
         >
           Play Again?
         </v-btn>
+        <ShareGameEndButton :missed-exclusive="props.missedExclusive" />
       </v-card-actions>
     </v-card>
 
@@ -25,6 +26,7 @@
 
 <script setup>
 import WolverineItemImage from "../shared/WolverineItemImage.vue";
+import ShareGameEndButton from "./ShareGameEndButton.vue";
 import { useBLCKeyClickerController } from '@/store/BLCKeyClickerController';
 
 const controller = useBLCKeyClickerController();
