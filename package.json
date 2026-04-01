@@ -1,7 +1,6 @@
 {
-  "name": "gw2-blc-simulator",
-  "version": "0.0.0",
-  "private": true,
+  "name": "blckey-clicker",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

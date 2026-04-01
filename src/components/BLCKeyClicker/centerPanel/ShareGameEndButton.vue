@@ -55,9 +55,9 @@ const sharableString = computed(() => {
   const unlockedExclusives = Array.from(exclusiveLookup.value.values())
     .filter(exclusive => exclusive.dropped);
   if (props.missedExclusive) {
-    return `I unlocked ${unlockedExclusives.length} exclusives, but lost my one true love, ${props.missedExclusive.label}. #BLCKeyClicker https://shinymeta.github.io/GW2-BLC-Simulator/BLCKeyClicker`;
+    return `I unlocked ${unlockedExclusives.length} exclusives, but lost my one true love, ${props.missedExclusive.label}. #BLCKeyClicker https://shinymeta.github.io/BLCKey-Clicker`;
   }
-  return `I unlocked all ${unlockedExclusives.length} exclusives without missing a single one. My soul is complete. #BLCKeyClicker https://shinymeta.github.io/GW2-BLC-Simulator/BLCKeyClicker`;
+  return `I unlocked all ${unlockedExclusives.length} exclusives without missing a single one. My soul is complete. #BLCKeyClicker https://shinymeta.github.io/BLCKey-Clicker`;
 });
 
 function copyToClipboard() {

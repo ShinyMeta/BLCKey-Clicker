@@ -2,7 +2,7 @@ const WIKI_API = "https://wiki.guildwars2.com/api.php";
 const GW2_ITEMS_API = "https://api.guildwars2.com/v2/items";
 
 const HEADERS = {
-  "User-Agent": "GW2-BLC-Simulator/1.0 (wiki scraper; Node.js)",
+  "User-Agent": "BLCKey-Clicker/1.0 (wiki scraper; Node.js)",
 };
 
 export const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

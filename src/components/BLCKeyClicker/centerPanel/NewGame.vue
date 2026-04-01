@@ -1,6 +1,6 @@
 <template>
   <div class="new-game d-flex flex-column align-center ga-4 mt-8">
-    <p class="text-h4">Welcome to the BLCKey Clicker!</p>
+    <p class="text-h4">Welcome to BLCKey Clicker!</p>
 
     <p>If its your first time, 
       <v-btn density="comfortable" variant="tonal" @click="openTutorial = true">

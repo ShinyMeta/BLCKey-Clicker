@@ -15,7 +15,7 @@
     <v-list-item
       prepend-icon="mdi-github"
       title="GitHub"
-      href="https://github.com/ShinyMeta/GW2-BLC-Simulator"
+      href="https://github.com/ShinyMeta/BLCKey-Clicker"
       target="_blank"
       rel="noopener"
     />
