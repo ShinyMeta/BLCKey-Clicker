@@ -11,6 +11,8 @@
 
       <CenterPanel />
 
+  <DevMenuWindow />
+
       <template v-if="!lgAndUp">
         <v-btn
           icon
@@ -51,6 +53,7 @@ import { useDisplay } from "vuetify";
 import CenterPanel from "@/components/BLCKeyClicker/centerPanel/CenterPanel.vue";
 import RightPanel from "@/components/BLCKeyClicker/rightPanel/RightPanel.vue";
 import LeftPanel from "@/components/BLCKeyClicker/leftPanel/LeftPanel.vue";
+import DevMenuWindow from "@/components/BLCKeyClicker/shared/DevMenuWindow.vue";
 
 const { lgAndUp } = useDisplay();
 const leftDrawerOpen = ref(lgAndUp.value);
