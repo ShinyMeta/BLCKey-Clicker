@@ -9,10 +9,24 @@
         No opens for this chest.
       </div>
       <div v-else>
-        <!-- <div v-for="(open, idx) in reverseDrops" :key="(idx+1)" class="mb-3">
-          <HistoryLootRow :items="open || []" size="40" :label="`#${(idx+1)}`" /> -->
-        <div v-for="(open, idx) in reverseDrops" :key="reverseDrops.length - (idx)" class="mb-3">
-          <HistoryLootRow :items="open || []" size=40 :label="`#${reverseDrops.length - (idx)}`" />
+        <div v-if="totalPages > 1" class="d-flex justify-center mb-4">
+          <v-pagination
+            v-model="currentPage"
+            :length="totalPages"
+            :total-visible="3"
+            density="compact"
+          />
+        </div>
+        <div v-for="(open, idx) in pagedDrops" :key="dropNumber(idx)" class="mb-3">
+          <HistoryLootRow :items="open || []" size="40" :label="`#${dropNumber(idx)}`" />
+        </div>
+        <div v-if="totalPages > 1" class="d-flex justify-center">
+          <v-pagination
+            v-model="currentPage"
+            :length="totalPages"
+            :total-visible="3"
+            density="compact"
+          />
         </div>
       </div>
     </div>
@@ -20,7 +34,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import ChestPreviewCard from "@/components/BLCKeyClicker/shared/ChestPreviewCard.vue";
 import HistoryLootRow from "@/components/BLCKeyClicker/rightPanel/history/HistoryLootRow.vue";
 
@@ -28,9 +42,27 @@ const props = defineProps({
   chestHistoryEntry: { type: Object, default: null },
 });
 
+const itemsPerPage = 15;
+const currentPage = ref(1);
+
 const reverseDrops = computed(() => {
-  // return props.chestHistoryEntry.opens
   return props.chestHistoryEntry?.opens ? [...props.chestHistoryEntry.opens].reverse() : [];
+});
+
+const totalPages = computed(() => Math.max(1, Math.ceil(reverseDrops.value.length / itemsPerPage)));
+const pageStart = computed(() => (currentPage.value - 1) * itemsPerPage);
+const pagedDrops = computed(() => {
+  return reverseDrops.value.slice(pageStart.value, pageStart.value + itemsPerPage);
+});
+
+const dropNumber = (indexOnPage) => {
+  return reverseDrops.value.length - (pageStart.value + indexOnPage);
+};
+
+watch(totalPages, (pages) => {
+  if (currentPage.value > pages) {
+    currentPage.value = pages;
+  }
 });
 </script>
 

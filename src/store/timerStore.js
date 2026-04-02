@@ -2,12 +2,19 @@ import { emitSoundEvent } from "@/services/sound";
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 
-// Default to 5 minutes
-const START_MS = 5 * 60 * 1000;
-// const START_MS = 2 * 1000;
-const TICK_MS = 10; // interval timer
 
 export const useTimerStore = defineStore("timer", () => {
+  // Default to 5 minutes
+  const START_MS = 5 * 60 * 1000;
+  // const START_MS = 2 * 1000;
+  const TICK_MS = 10; // interval timer
+  const getDefaults = computed(() => {
+    return {
+      START_MS,
+      TICK_MS,
+    };
+  });
+
   const remainingMs = ref(0);
   const isPaused = ref(false);
 
@@ -88,6 +95,9 @@ export const useTimerStore = defineStore("timer", () => {
   }
 
   return {
+    // constants getters
+    getDefaults,
+
     // state
     remainingMs,
     formatted,
