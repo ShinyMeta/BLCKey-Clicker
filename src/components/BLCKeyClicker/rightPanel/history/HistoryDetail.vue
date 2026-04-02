@@ -18,7 +18,7 @@
           />
         </div>
         <div v-for="(open, idx) in pagedDrops" :key="dropNumber(idx)" class="mb-3">
-          <HistoryLootRow :items="open || []" size="40" :label="`#${dropNumber(idx)}`" />
+          <HistoryLootRow :items="open || []" :size="40" :label="`#${dropNumber(idx)}`" />
         </div>
         <div v-if="totalPages > 1" class="d-flex justify-center">
           <v-pagination

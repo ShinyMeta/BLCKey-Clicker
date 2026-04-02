@@ -14,15 +14,15 @@ import { computed } from "vue";
 import { storeToRefs } from "pinia";
 import ChestPreviewCard from "@/components/BLCKeyClicker/shared/ChestPreviewCard.vue";
 import ChestCycleTimer from "./ChestCycleTimer.vue";
+import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 import { useLootStore } from "@/store/loot/lootStore";
-import { useTimerStore } from "@/store/timerStore";
 
+const controller = useBLCKeyClickerController();
 const lootStore = useLootStore();
-const timer = useTimerStore();
 const { currentChestConfig } = storeToRefs(lootStore);
 
 const chestLabel = computed(() => {
-  return timer.isActiveChestCycle ?
+  return controller.isActiveChestCycle ?
     "Current Chest Details" 
   : "Previous Chest Details";
 });

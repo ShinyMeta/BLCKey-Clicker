@@ -1,7 +1,7 @@
 <template>
   <v-btn class="chest-cycle-timer text-h3 pa-4" variant="tonal" :color="pauseButtonColor" size="x-large"
     :prepend-icon="pauseButtonIcon" 
-    @click="timer.togglePause"
+    @click="controller.togglePause"
   >
       {{ timer.formatted }}
   </v-btn>
@@ -9,11 +9,13 @@
 
 <script setup>
 import { useTimerStore } from "@/store/timerStore";
+import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 import { computed, } from "vue";
 
 const timer = useTimerStore();
+const controller = useBLCKeyClickerController();
 
-const pauseButtonIcon = computed(() => timer.isPaused ? 'mdi-play' : 'mdi-pause');
+const pauseButtonIcon = computed(() => controller.isPaused ? 'mdi-play' : 'mdi-pause');
 const pauseButtonColor = computed(() => timer.remainingMs < 10000 ? 'error' : 'primary');
 
 </script>

@@ -12,14 +12,14 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { useTimerStore } from "@/store/timerStore";
+import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 import mapCompImg from "@/assets/MapComp/MapComp.png";
 
 const emit = defineEmits(["click"]);
 const isClicked = ref(false);
-const timer = useTimerStore();
+const controller = useBLCKeyClickerController();
 
-const disabledByTimer = computed(() => !timer.isActiveChestCycle || timer.isPaused);
+const isInputDisabled = computed(() => !controller.isActiveInteractionEnabled);
 
 function onMouseDown() {
   isClicked.value = true;
@@ -29,7 +29,7 @@ function onMouseUp() {
   if (isClicked.value) {
     isClicked.value = false;
     
-    if (disabledByTimer.value) return;
+    if (isInputDisabled.value) return;
 
     emit("click");
   }

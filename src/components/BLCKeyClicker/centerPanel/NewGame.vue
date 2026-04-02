@@ -26,18 +26,13 @@
 <script setup>
 import { ref } from "vue";
 import Tutorial from "@/components/BLCKeyClicker/rightPanel/help/BLCKeyClickerTutorial.vue";
-import { useTimerStore } from "@/store/timerStore";
-import { emitSoundEvent } from "@/services/sound";
-import { useLootStore } from "@/store/loot/lootStore";
+import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 
-const timer = useTimerStore();
-const lootStore = useLootStore();
+const controller = useBLCKeyClickerController();
 
 const openTutorial = ref(false);
 
 function beginChestCycle() {
-  lootStore.generateCurrentChestConfig();
-  timer.reset();
-  emitSoundEvent('timerStart');
+  controller.startChestCycle("newGame");
 }
 </script>

@@ -44,7 +44,7 @@ import chestAppearances from "@/assets/BLCOpenUI/chestHalf";
 import chestInsideGlowSrc from "@/assets/BLCOpenUI/chestInsideGlow.png";
 import chestInsideFlashSrc from "@/assets/BLCOpenUI/chestInsideFlash.png";
 import { emitSoundEvent } from "@/services/sound";
-import { useTimerStore } from "@/store/timerStore";
+import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 
 const emit = defineEmits(["click"]);
 const props = defineProps({
@@ -74,8 +74,8 @@ const glowActive = ref(false);
 const activeTimeouts = new Set();
 let animationRunId = 0;
 
-const timer = useTimerStore();
-const disabledByTimer = computed(() => !timer.isActiveChestCycle || timer.isPaused);
+const controller = useBLCKeyClickerController();
+const isInputDisabled = computed(() => !controller.isActiveInteractionEnabled);
 
 
 function schedule(callback, delay) {
@@ -176,7 +176,7 @@ async function playDisabledShake() {
 
 function handleClick() {
   // props.locked is animation locked by loot row through parent
-  if (props.locked || disabledByTimer.value) return;
+  if (props.locked || isInputDisabled.value) return;
 
   if (props.disabled) {
     emitSoundEvent("chestDisabled");

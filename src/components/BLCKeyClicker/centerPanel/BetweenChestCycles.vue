@@ -18,18 +18,13 @@
 
 <script setup>
 import StatsDisplay from "./StatsDisplay.vue";
-import { useTimerStore } from "@/store/timerStore";
-import { emitSoundEvent } from "@/services/sound";
-import { useLootStore } from "@/store/loot/lootStore";
+import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 import BLCKeyDexExclusives from "./BLCKeyDexExclusives.vue";
 
-const timer = useTimerStore();
-const lootStore = useLootStore();
+const controller = useBLCKeyClickerController();
 
 function beginChestCycle() {
-  lootStore.generateCurrentChestConfig();
-  timer.reset();
-  emitSoundEvent('timerStart');
+  controller.startChestCycle("betweenChestCycles");
 }
 
 

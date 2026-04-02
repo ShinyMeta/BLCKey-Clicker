@@ -4,16 +4,16 @@
  * Standalone hotkey controller plugin. Not tied to a component and able
  * to reference Pinia stores. Add new bindings here.
  */
-import { useTimerStore } from '../store/timerStore'
+import { useBLCKeyClickerController } from '../store/BLCKeyClickerController'
 
 export default {
   install (app) {
     function onKeydown (e) {
       // Escape toggles pause on the main timer
       if (e.key === 'Escape') {
-        const timer = useTimerStore()
-        if (timer && typeof timer.togglePause === 'function') {
-          timer.togglePause()
+        const controller = useBLCKeyClickerController()
+        if (controller && typeof controller.togglePause === 'function') {
+          controller.togglePause()
         }
       }
     }
