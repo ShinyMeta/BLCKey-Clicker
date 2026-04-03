@@ -107,6 +107,13 @@ const resolvedConfig = computed(
   () => props.chestHistoryEntry?.config ?? props.chestConfig ?? currentChestConfig.value,
 );
 
+const resolvedConfigKey = computed(() => {
+  const config = resolvedConfig.value;
+  if (!config) return "";
+  if (config.__previewKey) return String(config.__previewKey);
+  return `${config.name ?? "Black Lion Chest"}:${config.appearanceType ?? 0}`;
+});
+
 const dropHistory = computed(() => 
   props.chestHistoryEntry?.opens ?? [],
 );
@@ -126,10 +133,6 @@ function handleViewDropHistoryClick(){
   emit("view-drop-history", props.chestHistoryEntry);
 }
 
-function pickRandom(array) {
-  return array[Math.floor(Math.random() * array.length)];
-}
-
 const exclusiveItems = computed(() => {
   const config = resolvedConfig.value;
   if (!config?.sets) return [];
@@ -141,12 +144,17 @@ const weaponPreviewItems = computed(() => {
   const config = resolvedConfig.value;
   if (!config?.sets) return [];
   const items = [];
+
   for (const setKey of ["uncommonWeapons", "rareWeapons"]) {
-    const weapons = config.sets[setKey]?.items;
-    if (weapons?.length) {
-      items.push({ ...pickRandom(weapons), key: setKey, collection: config.sets[setKey].name });
-    }
+    const weaponSet = config.sets[setKey];
+    if (!weaponSet?.items?.length) continue;
+
+    const previewItem = weaponSet.previewItem ?? weaponSet.items[0];
+    if (!previewItem) continue;
+
+    items.push({ ...previewItem, key: setKey, collection: weaponSet.name });
   }
+
   return items;
 });
 
@@ -158,8 +166,9 @@ const previewItems = computed(() => {
 
 
 watch(
-  () => resolvedConfig.value,
-  async (chestConfig) => {
+  resolvedConfigKey,
+  async () => {
+    const chestConfig = resolvedConfig.value;
     if (!chestConfig) {
       isLoadingMetadata.value = false;
       return;

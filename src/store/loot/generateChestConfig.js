@@ -7,6 +7,8 @@ import glyphsCatalog from "./config/sets/glyphs.json";
 import nodesCatalog from "./config/sets/nodes.json";
 import tonicsCatalog from "./config/sets/tonics.json";
 
+let chestPreviewKeyCounter = 0;
+
 /**
  * Picks a random chest name from the catalog.
  * Appends "Chest" if the chosen name doesn't already contain it.
@@ -45,13 +47,29 @@ function pickRandom(catalog, count, excludedIds = new Set()) {
   };
 }
 
+function pickRandomItem(items = []) {
+  if (!items.length) return null;
+  return items[Math.floor(Math.random() * items.length)];
+}
+
 /**
  * Picks a random weapon set name from the catalog, excluding any in `exclude`.
  */
 function pickRandomWeaponSet(catalog, exclude = []) {
   const names = Object.keys(catalog.sets).filter((n) => !exclude.includes(n));
   const name = names[Math.floor(Math.random() * names.length)];
-  return { name, items: [...catalog.sets[name].items] };
+  const items = [...catalog.sets[name].items];
+  return {
+    name,
+    items,
+    previewItem: pickRandomItem(items),
+  };
+}
+
+function createChestPreviewKey() {
+  chestPreviewKeyCounter += 1;
+  const randomSuffix = Math.random().toString(36).slice(2, 10);
+  return `chest-preview-${Date.now().toString(36)}-${chestPreviewKeyCounter}-${randomSuffix}`;
 }
 
 /**
@@ -130,6 +148,7 @@ export function generateChestConfigFromCatalogs({
 
 
   return {
+    __previewKey: createChestPreviewKey(),
     name: name ?? pickRandomChestName(),
     appearanceType: Math.floor(Math.random() * 4),
     sets: {

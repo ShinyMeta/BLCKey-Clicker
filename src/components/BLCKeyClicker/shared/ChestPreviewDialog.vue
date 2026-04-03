@@ -516,11 +516,8 @@ function computePanelPreviewEntries(panel) {
 
   if (panel.key === "uncommon" || panel.key === "rare") {
     const weaponSetKey = panel.key === "uncommon" ? "uncommonWeapons" : "rareWeapons";
-    const weaponGroup = panel.rows.find(
-      (row) => row.type === "group" && row.setKey === weaponSetKey
-    );
-    if (weaponGroup?.items.length) {
-      const entry = pickRandom(weaponGroup.items);
+    const entry = props.chestConfig?.sets?.[weaponSetKey]?.previewItem;
+    if (entry) {
       return [{ key: `${panel.key}-weapon-preview`, entry }];
     }
   }
@@ -541,12 +538,15 @@ function computeRowPreviewEntries(row) {
     return [];
   }
 
+  if (row.setKey === "uncommonWeapons" || row.setKey === "rareWeapons") {
+    const entry = props.chestConfig?.sets?.[row.setKey]?.previewItem;
+    return entry ? [{ key: `${row.key}-preview`, entry }] : [];
+  }
+
   const randomPreviewSlots = [
     "dyeKits",
     "glyphs",
     "nodes",
-    "uncommonWeapons",
-    "rareWeapons",
   ];
 
   if (randomPreviewSlots.includes(row.setKey)) {

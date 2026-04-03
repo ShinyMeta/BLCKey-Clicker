@@ -3,8 +3,11 @@
   
     <v-divider class="timer-label">Patch Day Countdown</v-divider>
     <ChestCycleTimer />
-    <v-divider class="current-chest-label"  v-if="currentChestConfig">{{ chestLabel }}</v-divider>
-    <ChestPreviewCard v-show="currentChestConfig" :chest-config="currentChestConfig" />
+
+    <template v-for="card in previewCards" :key="card.key">
+      <v-divider :class="card.labelClass">{{ card.label }}</v-divider>
+      <ChestPreviewCard :chest-config="card.config" />
+    </template>
       
   </div>
 </template>
@@ -19,12 +22,41 @@ import { useLootStore } from "@/store/loot/lootStore";
 
 const controller = useBLCKeyClickerController();
 const lootStore = useLootStore();
-const { currentChestConfig } = storeToRefs(lootStore);
+const { currentChestConfig, nextChestConfig } = storeToRefs(lootStore);
+
+function getPreviewCardKey(config) {
+  if (!config) return "";
+  return config.__previewKey ?? `${config.name ?? "Black Lion Chest"}:${config.appearanceType ?? 0}`;
+}
 
 const chestLabel = computed(() => {
   return controller.isActiveChestCycle ?
     "Current Chest Details" 
   : "Previous Chest Details";
+});
+
+const previewCards = computed(() => {
+  const cards = [];
+
+  if (currentChestConfig.value) {
+    cards.push({
+      key: getPreviewCardKey(currentChestConfig.value),
+      labelClass: "current-chest-label",
+      label: chestLabel.value,
+      config: currentChestConfig.value,
+    });
+  }
+
+  if (controller.isBetweenChestCycles && nextChestConfig.value) {
+    cards.push({
+      key: getPreviewCardKey(nextChestConfig.value),
+      labelClass: "next-chest-label",
+      label: "Next Chest Details",
+      config: nextChestConfig.value,
+    });
+  }
+
+  return cards;
 });
 
 </script>

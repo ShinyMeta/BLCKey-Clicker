@@ -31,6 +31,11 @@ export const useBLCKeyClickerController = defineStore(
 
     function setGameState(nextState) {
       gameState.value = nextState;
+
+      if (nextState === GAME_STATES.BETWEEN_CHEST_CYCLES) {
+        lootStore.prepareNextChestConfig();
+      }
+
       return gameState.value;
     }
 

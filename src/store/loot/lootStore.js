@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { shallowRef, ref, computed } from "vue";
+import { shallowRef, ref, computed, toRaw } from "vue";
 import { mergeTemplateWithConfig, buildLootTable, openChest } from "@/store/loot/lootService";
 import { generateChestConfig } from "@/store/loot/generateChestConfig";
 import { LootHandler } from "@/store/loot/lootHandler";
@@ -17,6 +17,7 @@ const ITEM_ID = {
 export const useLootStore = defineStore("loot", () => {
   const baseLootTable = shallowRef(null);
   const currentChestConfig = ref(null);
+  const nextChestConfig = ref(null);
   const lastDrops = shallowRef([]);
   const chestHistory = ref([]);
   const exclusiveLookup = ref(new Map());
@@ -45,6 +46,19 @@ export const useLootStore = defineStore("loot", () => {
   const currentExclusives = computed(() => {
     return exclusivesFromConfig(currentChestConfig.value);
   });
+
+  function ensureChestPreviewKey(config) {
+    if (!config || typeof config !== "object") {
+      return config;
+    }
+
+    if (!config.__previewKey) {
+      const randomSuffix = Math.random().toString(36).slice(2, 10);
+      config.__previewKey = `chest-preview-${Date.now().toString(36)}-${randomSuffix}`;
+    }
+
+    return config;
+  }
 
   function exclusivesFromConfig(config) {
     if (!config?.sets) return [];
@@ -92,9 +106,11 @@ export const useLootStore = defineStore("loot", () => {
    * @param {object} chestConfig - generated chest config with inline sets
    */
   function loadChest(chestConfig) {
-    const merged = mergeTemplateWithConfig(template, chestConfig);
+    // structuredClone cannot clone Vue proxies, so normalize to plain data first.
+    const normalizedConfig = ensureChestPreviewKey(structuredClone(toRaw(chestConfig)));
+    const merged = mergeTemplateWithConfig(template, normalizedConfig);
     baseLootTable.value = buildLootTable(merged);
-    currentChestConfig.value = chestConfig;
+    currentChestConfig.value = normalizedConfig;
 
     const exclusiveItems = baseLootTable.value.fifthDrop.filter(
       (item) => item.category === "exclusive",
@@ -103,22 +119,45 @@ export const useLootStore = defineStore("loot", () => {
 
     chestHistory.value.push({
       id: ++historyIdCounter,
-      config: structuredClone(chestConfig),
+      config: structuredClone(normalizedConfig),
       opens: [],
     });
   }
 
   /**
    * Randomly generate a new chest config from the catalogs and load it
-   * so the loot table is immediately ready for `open()`.
+   * so the loot table is immediately ready for `open()`. If a next chest
+   * config was prepared during BETWEEN_CHEST_CYCLES, it is consumed.
    *
    * @returns {object} the generated chest config
    */
   function generateCurrentChestConfig() {
-    const config = generateChestConfig(currentChestConfig.value, exclusiveLookup.value);
+    const config =
+      nextChestConfig.value ??
+      generateChestConfig(currentChestConfig.value, exclusiveLookup.value);
 
+    nextChestConfig.value = null;
     loadChest(config);
-    return config;
+    return currentChestConfig.value;
+  }
+
+  /**
+   * Pre-generate the next chest config so UI can preview it while between cycles.
+   * If one is already prepared, return it as-is.
+   *
+   * @returns {object} the prepared next chest config
+   */
+  function prepareNextChestConfig() {
+    if (nextChestConfig.value) {
+      return nextChestConfig.value;
+    }
+
+    nextChestConfig.value = generateChestConfig(
+      currentChestConfig.value,
+      exclusiveLookup.value,
+    );
+
+    return nextChestConfig.value;
   }
 
   /**
@@ -181,12 +220,14 @@ export const useLootStore = defineStore("loot", () => {
     exclusiveLookup.value.clear();
     //reset current config and loot table
     currentChestConfig.value = null;
+    nextChestConfig.value = null;
     baseLootTable.value = null;
   }
 
   return {
     lootTable,
     currentChestConfig,
+    nextChestConfig,
     lastDrops,
     chestHistory,
     currentHistoryEntry,
@@ -196,6 +237,7 @@ export const useLootStore = defineStore("loot", () => {
     hasExclusiveDropped,
     exclusiveLookup,
     loadChest,
+    prepareNextChestConfig,
     generateCurrentChestConfig,
     open,
     resetLootStore
