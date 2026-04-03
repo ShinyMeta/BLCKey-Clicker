@@ -17,8 +17,8 @@
         </div>
       </div>
       <v-btn
-        v-tooltip:top="'View Drop History'"
         v-if="chestHistoryEntry"
+        v-tooltip:top="'View Drop History'"
         icon="mdi-history"
         variant="text"
         color="primary"
@@ -26,7 +26,10 @@
         :disabled="!resolvedConfig || openedCount === 0"
         @click="handleViewDropHistoryClick"
       />
-      <ChestPreviewDialog v-else :chest-config="resolvedConfig">
+      <ChestPreviewDialog
+        v-else
+        :chest-config="resolvedConfig"
+      >
         <template #activator="activatorProps">
           <v-btn
             v-tooltip:top="'Open Chest Preview'"
@@ -66,7 +69,10 @@
         />
       </div>
 
-      <v-divider vertical class="chest-preview-card__separator" />
+      <v-divider
+        vertical
+        class="chest-preview-card__separator"
+      />
 
       <div class="chest-preview-card__group">
         <ItemImage

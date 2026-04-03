@@ -1,9 +1,14 @@
 <template>
-  <v-btn class="chest-cycle-timer pa-4" :class="timerLabelClass" variant="tonal" :color="timerButtonColor" size="x-large"
+  <v-btn
+    class="chest-cycle-timer pa-4"
+    :class="timerLabelClass"
+    variant="tonal"
+    :color="timerButtonColor"
+    size="x-large"
     :prepend-icon="timerButtonIcon"
     @click="handleTimerButtonClick"
   >
-      {{ timerLabel }}
+    {{ timerLabel }}
   </v-btn>
 </template>
 

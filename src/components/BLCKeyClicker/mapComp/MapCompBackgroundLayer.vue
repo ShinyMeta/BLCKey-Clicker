@@ -1,5 +1,8 @@
 <template>
-  <div class="map-comp-bg-layer" ref="layerEl">
+  <div
+    ref="layerEl"
+    class="map-comp-bg-layer"
+  >
     <img
       v-for="particle in particles"
       :key="particle.id"
@@ -7,7 +10,7 @@
       class="bg-particle"
       :style="particle.style"
       @animationend="removeParticle(particle.id)"
-    />
+    >
   </div>
 </template>
 

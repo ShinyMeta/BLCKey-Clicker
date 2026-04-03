@@ -5,7 +5,11 @@
     class="dev-menu-window"
     :style="windowStyle"
   >
-    <v-card class="dev-menu-window__card d-flex flex-column overflow-hidden" border rounded="lg">
+    <v-card
+      class="dev-menu-window__card d-flex flex-column overflow-hidden"
+      border
+      rounded="lg"
+    >
       <v-card-title
         class="dev-menu-window__titlebar d-flex align-center justify-space-between ga-2 px-3 py-2"
         @pointerdown="startDrag"
@@ -20,19 +24,10 @@
             :aria-label="isCollapsed ? 'Expand dev menu' : 'Collapse dev menu'"
             @click.stop="toggleCollapsed"
           >
-            <v-icon size="16">{{ isCollapsed ? "mdi-chevron-down" : "mdi-chevron-up" }}</v-icon>
+            <v-icon size="16">
+              {{ isCollapsed ? "mdi-chevron-down" : "mdi-chevron-up" }}
+            </v-icon>
           </v-btn>
-<!-- 
-          <v-btn
-            icon
-            variant="text"
-            density="compact"
-            size="x-small"
-            aria-label="Hide dev menu"
-            @click.stop="disableDevMenu"
-          >
-            <v-icon size="16">mdi-close</v-icon>
-          </v-btn> -->
         </div>
       </v-card-title>
 
@@ -41,13 +36,16 @@
           v-if="!isCollapsed"
           class="dev-menu-window__body d-flex flex-column flex-grow-1"
         >
-          <v-list density="compact" class="bg-transparent overflow-y-auto pa-2">
+          <v-list
+            density="compact"
+            class="bg-transparent overflow-y-auto pa-2"
+          >
             <v-list-item
               v-for="(action) in actions"
               :key="action.label"
-                @click="action.run"
-              >
-                {{ action.label }}
+              @click="action.run"
+            >
+              {{ action.label }}
             </v-list-item>
           </v-list>
 
@@ -60,7 +58,7 @@
             role="separator"
             aria-label="Resize dev menu"
             @pointerdown.stop="startResize"
-          ></div>
+          />
         </div>
       </v-expand-transition>
     </v-card>

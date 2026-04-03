@@ -2,20 +2,28 @@
   <v-card>
     <v-card-title>Tutorial / How to play</v-card-title>
     <v-divider />
-    <v-card-text class="tutorial-text" >
-      <p>In BLCKey Clicker, you are a Guild Wars 2 player that is compelled to 
-        collect every single Black Lion Chest Exclusive.</p>
-      <p>To open the chest, you need keys. Click the "Map Comp" button <span class="important-text">{{ mapCompClicksToComp }}</span> times 
+    <v-card-text class="tutorial-text">
+      <p>
+        In BLCKey Clicker, you are a Guild Wars 2 player that is compelled to 
+        collect every single Black Lion Chest Exclusive.
+      </p>
+      <p>
+        To open the chest, you need keys. Click the "Map Comp" button <span class="important-text">{{ mapCompClicksToComp }}</span> times 
         to complete a map. This has a <span class="important-text">{{ formattedKeyDropChance }}</span> chance to reward a key. After earning 
-        some keys, click the chest to open it and receive your loot!</p>
-      <p>Each chest only lasts <span class="important-text">{{ formattedTimePerCycle }}</span>, so hurry to unlock the exclusives before 
-        they rotate out on patch day!</p>
+        some keys, click the chest to open it and receive your loot!
+      </p>
+      <p>
+        Each chest only lasts <span class="important-text">{{ formattedTimePerCycle }}</span>, so hurry to unlock the exclusives before 
+        they rotate out on patch day!
+      </p>
       <span class="text-h6">Controls / Keybinds:</span>
       <v-divider class="my-2" />
       <p>Clicking the timer or pressing <kbd>Esc</kbd> will pause the game.</p>
-      <p>Hold <kbd>Ctrl</kbd> while right-clicking either key to toggle "auto-attack". 
+      <p>
+        Hold <kbd>Ctrl</kbd> while right-clicking either key to toggle "auto-attack". 
         When auto-attack is turned on, the chest will automatically consume the selected 
-        key until both exclusives are unlocked.</p>
+        key until both exclusives are unlocked.
+      </p>
     </v-card-text>
   </v-card>
 </template>

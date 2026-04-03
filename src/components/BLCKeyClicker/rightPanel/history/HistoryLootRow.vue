@@ -1,17 +1,26 @@
 <template>
   <div class="loot-row">
-    <div v-for="(item, index) in props.items" :key="index" class="loot-slot">
+    <div
+      v-for="(item, index) in props.items"
+      :key="index"
+      class="loot-slot"
+    >
       <ItemImage 
         :item="item"
         :size="size"
         rounded="0"
         text-overlay-style="shadow"
         text-overlay-position="bottom-center"
-        class="loot-item-image" />
+        class="loot-item-image"
+      />
     </div>
-    <v-chip density="comfortable" prepend-icon="mdi-treasure-chest-outline" 
-      variant="flat" color="background"
-      class="history-loot-row--label-chip">
+    <v-chip
+      density="comfortable"
+      prepend-icon="mdi-treasure-chest-outline" 
+      variant="flat"
+      color="background"
+      class="history-loot-row--label-chip"
+    >
       {{ props.label }}
     </v-chip>
   </div>

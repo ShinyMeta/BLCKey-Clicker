@@ -6,7 +6,11 @@
     @mouseup="onMouseUp"
     @mouseleave="onMouseUp"
   >
-    <img :src="mapCompImg" alt="Map Completion" class="map-comp-img" />
+    <img
+      :src="mapCompImg"
+      alt="Map Completion"
+      class="map-comp-img"
+    >
   </button>
 </template>
 

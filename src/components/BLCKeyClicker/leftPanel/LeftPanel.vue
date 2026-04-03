@@ -1,14 +1,19 @@
 <template>
   <div class="left-panel pa-4 d-flex flex-column ga-3">
-  
-    <v-divider class="timer-label">Patch Day Countdown</v-divider>
+    <v-divider class="timer-label">
+      Patch Day Countdown
+    </v-divider>
     <ChestCycleTimer />
 
-    <template v-for="card in previewCards" :key="card.key">
-      <v-divider :class="card.labelClass">{{ card.label }}</v-divider>
+    <template
+      v-for="card in previewCards"
+      :key="card.key"
+    >
+      <v-divider :class="card.labelClass">
+        {{ card.label }}
+      </v-divider>
       <ChestPreviewCard :chest-config="card.config" />
     </template>
-      
   </div>
 </template>
 

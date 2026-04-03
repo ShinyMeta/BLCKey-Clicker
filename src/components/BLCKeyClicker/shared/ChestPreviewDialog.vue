@@ -1,13 +1,22 @@
 <template>
-  <v-dialog v-model="dialogOpen" max-width="860" scrollable>
+  <v-dialog
+    v-model="dialogOpen"
+    max-width="860"
+    scrollable
+  >
     <template #activator="{ props: activatorProps }">
-      <slot name="activator" v-bind="activatorProps" />
+      <slot
+        name="activator"
+        v-bind="activatorProps"
+      />
     </template>
 
     <v-card class="chest-preview-dialog">
       <v-card-title class="chest-preview-dialog__title">
         <div>
-          <div class="text-h6">Chest Preview</div>
+          <div class="text-h6">
+            Chest Preview
+          </div>
           <div class="text-body-2 text-medium-emphasis">
             {{ chestConfig?.name ?? "No chest loaded" }}
           </div>
@@ -23,15 +32,31 @@
             variant="outlined"
             class="percent-mode-toggle"
           >
-            <v-btn value="perChest" size="small" title="Show percentages per chest opened">
+            <v-btn
+              value="perChest"
+              size="small"
+              title="Show percentages per chest opened"
+            >
               Per chest
               <template #append>
-                <v-img :src="blcKeyIcon" width="22" height="22" />
+                <v-img
+                  :src="blcKeyIcon"
+                  width="22"
+                  height="22"
+                />
               </template>
             </v-btn>
-            <v-btn value="goldenKey" size="small" title="Show percentages per 5th-drop roll">
+            <v-btn
+              value="goldenKey"
+              size="small"
+              title="Show percentages per 5th-drop roll"
+            >
               <template #prepend>
-                <v-img :src="goldenBlcKeyIcon" width="22" height="22" />
+                <v-img
+                  :src="goldenBlcKeyIcon"
+                  width="22"
+                  height="22"
+                />
               </template>
               Per 5th-drop
             </v-btn>
@@ -42,16 +67,28 @@
       <v-divider />
 
       <div class="percent-mode-hint text-caption text-medium-emphasis">
-        <v-icon size="14" class="mr-1">mdi-information-outline</v-icon>
+        <v-icon
+          size="14"
+          class="mr-1"
+        >
+          mdi-information-outline
+        </v-icon>
         {{ percentModeDescription }}
       </div>
 
       <v-divider />
 
       <v-card-text class="chest-preview-dialog__content">
-        <v-progress-linear v-if="isLoadingMetadata" indeterminate class="mb-4" />
+        <v-progress-linear
+          v-if="isLoadingMetadata"
+          indeterminate
+          class="mb-4"
+        />
 
-        <v-expansion-panels variant="accordion" class="preview-panels">
+        <v-expansion-panels
+          variant="accordion"
+          class="preview-panels"
+        >
           <v-expansion-panel
             v-for="panel in previewPanels"
             :key="panel.key"
@@ -73,7 +110,9 @@
                     />
                   </div>
                   <div class="panel-header__text">
-                    <div class="text-subtitle-1">{{ panel.title }}</div>
+                    <div class="text-subtitle-1">
+                      {{ panel.title }}
+                    </div>
                     <div class="text-caption text-medium-emphasis">
                       {{ panel.subtitle }}
                     </div>
@@ -91,7 +130,10 @@
 
             <template #text>
               <div class="preview-rows">
-                <template v-for="row in panel.rows" :key="row.key">
+                <template
+                  v-for="row in panel.rows"
+                  :key="row.key"
+                >
                   <v-expansion-panels
                     v-if="row.type === 'group'"
                     variant="accordion"
@@ -118,12 +160,19 @@
                             </div>
                             <div class="text-subtitle-2">
                               {{ row.label }}
-                              <v-chip size="x-small" variant="tonal" class="ml-1">
+                              <v-chip
+                                size="x-small"
+                                variant="tonal"
+                                class="ml-1"
+                              >
                                 {{ row.items.length }}
                               </v-chip>
                             </div>
                           </div>
-                          <v-chip size="small" variant="tonal">
+                          <v-chip
+                            size="small"
+                            variant="tonal"
+                          >
                             {{ formatPercent(getRowPercent(row.totalWeight, panel.denominator)) }}
                           </v-chip>
                         </div>
@@ -144,7 +193,9 @@
                                 :text-overlay="false"
                               />
                               <div>
-                                <div class="text-body-2">{{ item.label }}</div>
+                                <div class="text-body-2">
+                                  {{ item.label }}
+                                </div>
                                 <div
                                   v-if="item.quantity > 1"
                                   class="text-caption text-medium-emphasis"
@@ -177,7 +228,9 @@
                         :text-overlay="false"
                       />
                       <div>
-                        <div class="text-body-2">{{ row.item.label }}</div>
+                        <div class="text-body-2">
+                          {{ row.item.label }}
+                        </div>
                         <div
                           v-if="row.item.quantity > 1"
                           class="text-caption text-medium-emphasis"
@@ -193,7 +246,12 @@
                         color="success"
                         variant="tonal"
                       >
-                        <v-icon start size="14">mdi-check</v-icon>
+                        <v-icon
+                          start
+                          size="14"
+                        >
+                          mdi-check
+                        </v-icon>
                         Obtained
                       </v-chip>
                       <template v-else>

@@ -1,9 +1,11 @@
 <template>
   <div class="volume-slider">
-    <div class="volume-slider__label text-caption">{{ label }}</div>
+    <div class="volume-slider__label text-caption">
+      {{ label }}
+    </div>
     <v-slider
-      :prepend-icon="prependIcon"
       v-model="value"
+      :prepend-icon="prependIcon"
       :min="0"
       :max="1"
     />

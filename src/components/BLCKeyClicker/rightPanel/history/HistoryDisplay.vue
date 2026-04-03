@@ -7,7 +7,10 @@
       No chest history yet.
     </div>
     <div v-else>
-      <div v-if="totalPages > 1" class="d-flex justify-center mb-4">
+      <div
+        v-if="totalPages > 1"
+        class="d-flex justify-center mb-4"
+      >
         <v-pagination
           v-model="currentPage"
           :length="totalPages"
@@ -15,13 +18,20 @@
           density="compact"
         />
       </div>
-      <div v-for="entry in pagedHistory" :key="entry.id" class="mb-3">
+      <div
+        v-for="entry in pagedHistory"
+        :key="entry.id"
+        class="mb-3"
+      >
         <ChestPreviewCard
           :chest-history-entry="entry"
           @view-drop-history="viewDropHistory"
         />
       </div>
-      <div v-if="totalPages > 1" class="d-flex justify-center">
+      <div
+        v-if="totalPages > 1"
+        class="d-flex justify-center"
+      >
         <v-pagination
           v-model="currentPage"
           :length="totalPages"

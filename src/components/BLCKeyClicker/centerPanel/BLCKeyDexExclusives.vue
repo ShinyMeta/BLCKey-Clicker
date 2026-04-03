@@ -1,17 +1,22 @@
 <template>
   <div>
-    <v-card max-width=500>
-      <v-card-title class="text-h5">{{ ListOfExclusives.length }} Exclusives Seen So Far</v-card-title>
+    <v-card max-width="500">
+      <v-card-title class="text-h5">
+        {{ ListOfExclusives.length }} Exclusives Seen So Far
+      </v-card-title>
       <v-card-text>
         <div class="d-flex align-center ga-2 flex-wrap justify-center pa-2">
-          <div v-for="exclusive in ListOfExclusives" :key="exclusive.id">
-            <ItemImage :item="exclusive" :size="50" />
+          <div
+            v-for="exclusive in ListOfExclusives"
+            :key="exclusive.id"
+          >
+            <ItemImage
+              :item="exclusive"
+              :size="50"
+            />
           </div>
-
-
         </div>
       </v-card-text>
-      
     </v-card>
   </div>
 </template>

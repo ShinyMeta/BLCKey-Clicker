@@ -1,12 +1,23 @@
 <template>
   <div class="center-panel d-flex flex-column">
     <VFadeTransition mode="out-in">
-      <NewGame                 v-if="controller.isNewGame" key="new" />
-      <ActiveChestCycle   v-else-if="controller.isActiveChestCycle" key="active" />
-      <BetweenChestCycles v-else-if="controller.isBetweenChestCycles" key="between" />
-      <GameOver           v-else-if="controller.isGameOver" key="gameOver"
-        :missed-exclusive="returningExclusive" />
-      
+      <NewGame
+        v-if="controller.isNewGame"
+        key="new"
+      />
+      <ActiveChestCycle
+        v-else-if="controller.isActiveChestCycle"
+        key="active"
+      />
+      <BetweenChestCycles
+        v-else-if="controller.isBetweenChestCycles"
+        key="between"
+      />
+      <GameOver
+        v-else-if="controller.isGameOver"
+        key="gameOver"
+        :missed-exclusive="returningExclusive"
+      />
     </VFadeTransition>
 
     <PausedTimerOverlay />

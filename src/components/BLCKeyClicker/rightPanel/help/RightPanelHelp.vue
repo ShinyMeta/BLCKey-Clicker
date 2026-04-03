@@ -1,5 +1,8 @@
 <template>
-  <v-list nav density="compact">
+  <v-list
+    nav
+    density="compact"
+  >
     <v-list-item 
       prepend-icon="mdi-school" 
       title="Tutorial / How to play" 
@@ -19,10 +22,12 @@
       target="_blank"
       rel="noopener"
     />
-
   </v-list>
     
-  <v-dialog v-model="openTutorial" max-width="800">
+  <v-dialog
+    v-model="openTutorial"
+    max-width="800"
+  >
     <Tutorial />
   </v-dialog>
 </template>

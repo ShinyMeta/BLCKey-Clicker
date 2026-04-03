@@ -9,23 +9,40 @@
       Share
     </v-btn>
 
-    <v-dialog v-model="dialog" max-width="600">
+    <v-dialog
+      v-model="dialog"
+      max-width="600"
+    >
       <v-card>
         <v-card-title>Share your run</v-card-title>
         <v-card-text>
-          <div >{{ sharableString }}</div>
+          <div>{{ sharableString }}</div>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-tooltip v-model="tooltipVisible" location="top" :open-on-hover="false" open-on-click>
+          <v-tooltip
+            v-model="tooltipVisible"
+            location="top"
+            :open-on-hover="false"
+            open-on-click
+          >
             <template #activator="{ props: tooltipProps }">
-              <v-btn color="primary" v-bind="tooltipProps" @click="copyToClipboard">
+              <v-btn
+                color="primary"
+                v-bind="tooltipProps"
+                @click="copyToClipboard"
+              >
                 Copy
               </v-btn>
             </template>
             <span>Copied to clipboard!</span>
           </v-tooltip>
-          <v-btn text @click="dialog = false">Close</v-btn>
+          <v-btn
+            text
+            @click="dialog = false"
+          >
+            Close
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

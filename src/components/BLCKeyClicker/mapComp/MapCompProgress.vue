@@ -21,9 +21,12 @@
           class="reward-flyout"
           :style="reward.style"
           @animationend="removeRewardFlyout(reward.id)"
-        />
+        >
       </div>
-      <MapCompButton class="centered-btn" @click="handleClick" />
+      <MapCompButton
+        class="centered-btn"
+        @click="handleClick"
+      />
     </div>
   </div>
 </template>

@@ -1,13 +1,34 @@
 <template>
   <div class="pa-4 text-medium-emphasis text-body-2 text-center">
     <!-- <v-icon icon="mdi-volume-high" size="48" class="mb-2 d-block mx-auto" /> -->
-    <v-btn :icon="muteButtonIcon" @click="soundSettings.toggleMute" size="x-large" variant="outlined" 
-      :color="muted ? 'error' : 'success'"/>
+    <v-btn
+      :icon="muteButtonIcon"
+      size="x-large"
+      variant="outlined"
+      :color="muted ? 'error' : 'success'" 
+      @click="soundSettings.toggleMute"
+    />
     
-    <volume-slider v-model="masterVolume" label="All Sound" :prepend-icon="masterVolumeIcon" />
-    <volume-slider v-model="channelVolumes.chest" label="Chest" prepend-icon="mdi-treasure-chest-outline" />
-    <volume-slider v-model="channelVolumes.mapComp" label="Map Completion" prepend-icon="mdi-map-check-outline" />
-    <volume-slider v-model="channelVolumes.timer" label="Timer" prepend-icon="mdi-timer-outline" />
+    <volume-slider
+      v-model="masterVolume"
+      label="All Sound"
+      :prepend-icon="masterVolumeIcon"
+    />
+    <volume-slider
+      v-model="channelVolumes.chest"
+      label="Chest"
+      prepend-icon="mdi-treasure-chest-outline"
+    />
+    <volume-slider
+      v-model="channelVolumes.mapComp"
+      label="Map Completion"
+      prepend-icon="mdi-map-check-outline"
+    />
+    <volume-slider
+      v-model="channelVolumes.timer"
+      label="Timer"
+      prepend-icon="mdi-timer-outline"
+    />
   </div>
 </template>
 

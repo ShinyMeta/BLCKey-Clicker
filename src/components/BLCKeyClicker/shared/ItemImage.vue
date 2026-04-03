@@ -17,11 +17,11 @@
           <div
             class="item-image__shine-layer item-image__shine-layer--big"
             :style="shineBigStyles"
-          ></div>
+          />
           <div
             class="item-image__shine-layer item-image__shine-layer--small"
             :style="shineSmallStyles"
-          ></div>
+          />
         </div>
 
         <v-avatar

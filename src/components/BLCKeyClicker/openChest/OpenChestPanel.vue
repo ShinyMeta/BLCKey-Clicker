@@ -7,7 +7,10 @@
           mandatory
           class="item-toggle"
         >
-          <v-btn value="chest" class="item-select-btn">
+          <v-btn
+            value="chest"
+            class="item-select-btn"
+          >
             <div class="item-select-content">
               <ItemImage
                 :item="{ name: 'Black Lion Chest', icon: blcChestImg }"

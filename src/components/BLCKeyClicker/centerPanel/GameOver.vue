@@ -19,7 +19,6 @@
         <ShareGameEndButton :missed-exclusive="props.missedExclusive" />
       </v-card-actions>
     </v-card>
-
   </div>
 </template>
 

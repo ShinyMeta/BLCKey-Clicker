@@ -7,12 +7,10 @@
       />
     </div>
     <v-img 
-      :src ="wolverineMemeSrc"
+      :src="wolverineMemeSrc"
       class="wolverine-meme"
     />
-
   </div>
-
 </template>
 
 <script setup>

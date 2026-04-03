@@ -1,8 +1,15 @@
 <template>
   <div class="right-panel">
-    <v-breadcrumbs :items="breadcrumbItems" density="compact" class="pa-3 pb-2">
+    <v-breadcrumbs
+      :items="breadcrumbItems"
+      density="compact"
+      class="pa-3 pb-2"
+    >
       <template #divider>
-        <v-icon icon="mdi-chevron-right" size="x-small" />
+        <v-icon
+          icon="mdi-chevron-right"
+          size="x-small"
+        />
       </template>
       <template #item="{ item }">
         <v-breadcrumbs-item
@@ -18,7 +25,11 @@
     <v-divider class="mb-1" />
 
     <div class="right-panel__content">
-      <v-list v-if="currentMenu" density="compact" nav>
+      <v-list
+        v-if="currentMenu"
+        density="compact"
+        nav
+      >
         <v-list-item
           v-for="entry in currentMenu"
           :key="entry.title"
@@ -32,8 +43,10 @@
         <GraphicsSettings v-if="currentView === 'graphics'" />
         <SoundSettings v-else-if="currentView === 'sound'" />
         <HistoryDisplay v-else-if="currentView === 'history'" />
-        <HistoryDetail v-else-if="currentView === 'drops'" 
-          :chestHistoryEntry="pageMetaData.selectedHistoryEntry" />
+        <HistoryDetail
+          v-else-if="currentView === 'drops'" 
+          :chest-history-entry="pageMetaData.selectedHistoryEntry"
+        />
         <RightPanelHelp v-else-if="currentView === 'help'" />
       </template>
     </div>

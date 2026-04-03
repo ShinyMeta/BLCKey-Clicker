@@ -15,7 +15,7 @@
         alt="Open Chest"
         class="chest-half chest-top"
         :class="{ opened: lidOpen, closing: isClosing }"
-      />
+      >
       <div
         class="chest-glow-wrap"
         :class="{ active: glowActive }"
@@ -25,15 +25,19 @@
           alt=""
           class="chest-inside-glow"
           :class="{ active: glowActive }"
-        />
+        >
       </div>
       <img
         :src="chestInsideFlashSrc"
         alt=""
         class="chest-inside-flash"
         :class="{ active: flashActive }"
-      />
-      <img :src="chestBottomSrc" alt="" class="chest-half chest-bottom" />
+      >
+      <img
+        :src="chestBottomSrc"
+        alt=""
+        class="chest-half chest-bottom"
+      >
     </div>
   </button>
 </template>

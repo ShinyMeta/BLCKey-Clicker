@@ -1,15 +1,24 @@
 <template>
   <div class="history-detail pa-3">
     <div class="mb-3">
-      <ChestPreviewCard :chest-config="props.chestHistoryEntry?.config" :drop-history="props.chestHistoryEntry?.opens" />
+      <ChestPreviewCard
+        :chest-config="props.chestHistoryEntry?.config"
+        :drop-history="props.chestHistoryEntry?.opens"
+      />
     </div>
 
     <div class="history-rows px-6 pt-2">
-      <div v-if="!reverseDrops.length" class="text-body-2 text-medium-emphasis pa-4">
+      <div
+        v-if="!reverseDrops.length"
+        class="text-body-2 text-medium-emphasis pa-4"
+      >
         No opens for this chest.
       </div>
       <div v-else>
-        <div v-if="totalPages > 1" class="d-flex justify-center mb-4">
+        <div
+          v-if="totalPages > 1"
+          class="d-flex justify-center mb-4"
+        >
           <v-pagination
             v-model="currentPage"
             :length="totalPages"
@@ -17,10 +26,21 @@
             density="compact"
           />
         </div>
-        <div v-for="(open, idx) in pagedDrops" :key="dropNumber(idx)" class="mb-3">
-          <HistoryLootRow :items="open || []" :size="40" :label="`#${dropNumber(idx)}`" />
+        <div
+          v-for="(open, idx) in pagedDrops"
+          :key="dropNumber(idx)"
+          class="mb-3"
+        >
+          <HistoryLootRow
+            :items="open || []"
+            :size="40"
+            :label="`#${dropNumber(idx)}`"
+          />
         </div>
-        <div v-if="totalPages > 1" class="d-flex justify-center">
+        <div
+          v-if="totalPages > 1"
+          class="d-flex justify-center"
+        >
           <v-pagination
             v-model="currentPage"
             :length="totalPages"

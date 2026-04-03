@@ -1,22 +1,46 @@
 <template>
   <div class="loot-row">
-    <div v-for="index in slotIndices" :key="index" class="loot-slot-container" :class="{
-      'loot-slot-container--extra': index >= BASE_SLOT_COUNT,
-      'loot-slot-container--show':
-        index >= BASE_SLOT_COUNT &&
-        index < lootItems.length,
-    }">
+    <div
+      v-for="index in slotIndices"
+      :key="index"
+      class="loot-slot-container"
+      :class="{
+        'loot-slot-container--extra': index >= BASE_SLOT_COUNT,
+        'loot-slot-container--show':
+          index >= BASE_SLOT_COUNT &&
+          index < lootItems.length,
+      }"
+    >
       <div class="loot-placeholder">
-        <ItemImage :item="getPlaceholderItem(index)" :size="64" rounded="0" :tooltip="false" :text-overlay="false"
-          class="loot-item-image" />
+        <ItemImage
+          :item="getPlaceholderItem(index)"
+          :size="64"
+          rounded="0"
+          :tooltip="false"
+          :text-overlay="false"
+          class="loot-item-image"
+        />
       </div>
 
-      <div class="loot-overlay" :class="{ revealed: showLoot && lootItems[index] != null }"
-        :style="{ '--fly-delay': `${computeFlyDelay(index, lootItems.length)}ms` }">
-        <div class="loot-overlay__content" :class="{ fading: isFading }">
-          <ItemImage v-if="lootItems[index]" :ref="(el) => setLootImageRef(index, el)" :item="lootItems[index]"
-            :size="64" rounded="0" text-overlay-style="shadow" text-overlay-position="bottom-center"
-            class="loot-item-image" />
+      <div
+        class="loot-overlay"
+        :class="{ revealed: showLoot && lootItems[index] != null }"
+        :style="{ '--fly-delay': `${computeFlyDelay(index, lootItems.length)}ms` }"
+      >
+        <div
+          class="loot-overlay__content"
+          :class="{ fading: isFading }"
+        >
+          <ItemImage
+            v-if="lootItems[index]"
+            :ref="(el) => setLootImageRef(index, el)"
+            :item="lootItems[index]"
+            :size="64"
+            rounded="0"
+            text-overlay-style="shadow"
+            text-overlay-position="bottom-center"
+            class="loot-item-image"
+          />
         </div>
       </div>
     </div>
