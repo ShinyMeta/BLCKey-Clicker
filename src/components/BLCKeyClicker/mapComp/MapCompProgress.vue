@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onBeforeUnmount, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import { storeToRefs } from "pinia";
 import BLCKeyImg from "@/assets/item/BLCKey.png";
 import TransmutationChargeImg from "@/assets/item/TransmutationCharge.png";
@@ -38,6 +38,7 @@ import MapCompButton from "@/components/BLCKeyClicker/mapComp/MapCompButton.vue"
 import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 import { useMapCompStore } from "@/store/mapCompStore";
 import { emitSoundEvent } from "@/services/sound";
+import { useAnimationFlow } from "@/composables/useAnimationFlow";
 
 const MAX_REWARD_FLYOUTS = 10;
 
@@ -73,19 +74,12 @@ const rewardImageByType = {
 // --- Progress ring delayed reset ---
 const progressOverride = ref(null);
 const ringComplete = ref(false);
-let resetTimer = null;
+const ringResetFlow = useAnimationFlow();
 
 const ringDisplayValue = computed(() => {
   const p =
     progressOverride.value !== null ? progressOverride.value : mapCompProgress.value;
   return (p / mapCompClicksToComp.value) * 100;
-});
-
-onBeforeUnmount(() => {
-  if (resetTimer) {
-    clearTimeout(resetTimer);
-    resetTimer = null;
-  }
 });
 
 function getRewardFlyoutStyle() {
@@ -128,21 +122,19 @@ function removeRewardFlyout(id) {
 }
 
 async function completedRingAnimation() {
-  // If a delayed reset is pending, cancel it and let the latest completion win
-  if (progressOverride.value !== null) {
-    clearTimeout(resetTimer);
-    resetTimer = null;
-    progressOverride.value = null;
-  }
+  const flowId = ringResetFlow.beginFlow();
+  progressOverride.value = null;
 
   ringComplete.value = true;
 
   // Completion — hold the ring at 100% for a lil sec
   progressOverride.value = mapCompClicksToComp.value;
-  resetTimer = setTimeout(() => {
-    progressOverride.value = null;
-    resetTimer = null;
-  }, 400);
+  const holdCompleted = await ringResetFlow.waitForStep(flowId, 400);
+  if (!holdCompleted || !ringResetFlow.isFlowActive(flowId)) {
+    return;
+  }
+
+  progressOverride.value = null;
 }
 
 function handleMapComplete(mapCompCompletionEvent) {

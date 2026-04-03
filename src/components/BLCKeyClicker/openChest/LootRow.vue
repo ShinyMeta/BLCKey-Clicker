@@ -28,11 +28,12 @@
 <script setup>
 import ItemImage from "@/components/BLCKeyClicker/shared/ItemImage.vue";
 import { emitSoundEvent } from "@/services/sound";
-import { computed, onBeforeUnmount, ref } from "vue";
+import { computed, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useLootStore } from "@/store/loot/lootStore";
 import statuetteImg from "@/assets/item/statuette.png";
 import d6PlaceholderImg from "@/assets/BLCOpenUI/d6PlaceHolder.png";
+import { useAnimationFlow } from "@/composables/useAnimationFlow";
 
 const BASE_SLOT_COUNT = 4;
 const LOOT_BASE_DELAY_MS = 500;
@@ -65,6 +66,7 @@ const { currentChestConfig } = storeToRefs(lootStore);
 const lootItems = ref([]);
 const showLoot = ref(false);
 const isFading = ref(false);
+const animationFlow = useAnimationFlow();
 
 
 const guaranteedItem = computed(() =>
@@ -100,35 +102,8 @@ function computeFlyDelay(index, totalItems) {
   return (BASE_SLOT_COUNT - 1) * 100 + 400 + (index - BASE_SLOT_COUNT) * 150;
 }
 
-let fadeTimeoutId = null;
-let clearTimeoutId = null;
-let flyoutCompleteTimeoutId = null;
-let shineTimeoutIds = [];
-let lootFallTimeoutIds = [];
-let currentDisplayId = 0;
-
-function clearTimers() {
-  if (fadeTimeoutId !== null) {
-    window.clearTimeout(fadeTimeoutId);
-    fadeTimeoutId = null;
-  }
-  if (clearTimeoutId !== null) {
-    window.clearTimeout(clearTimeoutId);
-    clearTimeoutId = null;
-  }
-  if (flyoutCompleteTimeoutId !== null) {
-    window.clearTimeout(flyoutCompleteTimeoutId);
-    flyoutCompleteTimeoutId = null;
-  }
-  shineTimeoutIds.forEach((id) => window.clearTimeout(id));
-  shineTimeoutIds = [];
-  lootFallTimeoutIds.forEach((id) => window.clearTimeout(id));
-  lootFallTimeoutIds = [];
-}
-
 function reset() {
-  clearTimers();
-  currentDisplayId++;
+  animationFlow.cancelFlow();
   showLoot.value = false;
   isFading.value = false;
   lootItems.value = [];
@@ -146,45 +121,40 @@ async function preloadImages(items) {
 }
 
 async function displayLoot(items = [], { onFadeStart, onFlyoutComplete } = {}) {
-  clearTimers();
+  const flowId = animationFlow.beginFlow();
   isFading.value = false;
   showLoot.value = false;
-  const thisDisplayId = ++currentDisplayId;
 
   // Overlap the LOOT_BASE_DELAY_MS animation hold with image preloading so the
-  // total wait is max(preload, LOOT_BASE_DELAY_MS) 
-  await Promise.all([
+  // total wait is max(preload, LOOT_BASE_DELAY_MS)
+  const [, holdDelayCompleted] = await Promise.all([
     preloadImages(items),
-    new Promise((r) => setTimeout(r, LOOT_BASE_DELAY_MS)),
+    animationFlow.waitForStep(flowId, LOOT_BASE_DELAY_MS),
   ]);
-  if (thisDisplayId !== currentDisplayId) return;
+  if (!holdDelayCompleted || !animationFlow.isFlowActive(flowId)) return;
 
   lootItems.value = [...items];
 
   await new Promise((r) =>
     requestAnimationFrame(() => requestAnimationFrame(r)),
   );
-  if (thisDisplayId !== currentDisplayId) return;
+  if (!animationFlow.isFlowActive(flowId)) return;
 
   showLoot.value = true;
 
   items.forEach((_, index) => {
     const settleMs = computeFlyDelay(index, items.length) + LOOT_SOUND_DELAY_MS;
-    const id = window.setTimeout(() => {
-      if (thisDisplayId !== currentDisplayId) return;
+    animationFlow.scheduleStep(flowId, settleMs, () => {
       emitSoundEvent("chestLootFall");
-    }, settleMs);
-    lootFallTimeoutIds.push(id);
+    });
   });
 
   for (let i = BASE_SLOT_COUNT; i < items.length; i++) {
     const shineMs = computeFlyDelay(i, items.length);
     const color = SHINE_COLORS[items[i]?.category] ?? "white";
-    const id = window.setTimeout(() => {
-      if (thisDisplayId !== currentDisplayId) return;
+    animationFlow.scheduleStep(flowId, shineMs, () => {
       lootImageRefs[i]?.shine?.(color);
-    }, shineMs);
-    shineTimeoutIds.push(id);
+    });
   }
 
   const lastDelay =
@@ -192,33 +162,25 @@ async function displayLoot(items = [], { onFadeStart, onFlyoutComplete } = {}) {
   const totalFlyInMs = lastDelay;
 
   if (onFlyoutComplete) {
-    flyoutCompleteTimeoutId = window.setTimeout(() => {
-      flyoutCompleteTimeoutId = null;
-      if (thisDisplayId !== currentDisplayId) return;
+    animationFlow.scheduleStep(flowId, totalFlyInMs + FLY_OUT_ANIM_MS, () => {
       onFlyoutComplete();
-    }, totalFlyInMs + FLY_OUT_ANIM_MS);
+    });
   }
 
-  fadeTimeoutId = window.setTimeout(() => {
-    fadeTimeoutId = null;
+  animationFlow.scheduleStep(flowId, totalFlyInMs + LOOT_FADE_DELAY_MS, () => {
     onFadeStart?.();
     isFading.value = true;
 
-    clearTimeoutId = window.setTimeout(() => {
-      clearTimeoutId = null;
+    animationFlow.scheduleStep(flowId, FADE_DURATION_MS, () => {
       showLoot.value = false;
       isFading.value = false;
       lootItems.value = [];
-    }, FADE_DURATION_MS);
-  }, totalFlyInMs + LOOT_FADE_DELAY_MS);
+    });
+  });
 
 }
 
 defineExpose({ displayLoot, reset });
-
-onBeforeUnmount(() => {
-  clearTimers();
-});
 </script>
 
 <style scoped>

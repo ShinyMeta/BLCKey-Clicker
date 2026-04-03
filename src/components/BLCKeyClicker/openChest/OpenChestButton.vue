@@ -39,12 +39,13 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onBeforeUnmount, ref } from "vue";
+import { computed, nextTick, ref } from "vue";
 import chestAppearances from "@/assets/BLCOpenUI/chestHalf";
 import chestInsideGlowSrc from "@/assets/BLCOpenUI/chestInsideGlow.png";
 import chestInsideFlashSrc from "@/assets/BLCOpenUI/chestInsideFlash.png";
 import { emitSoundEvent } from "@/services/sound";
 import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
+import { useAnimationFlow } from "@/composables/useAnimationFlow";
 
 const emit = defineEmits(["click"]);
 const props = defineProps({
@@ -71,29 +72,10 @@ const lidOpen = ref(false);
 const isClosing = ref(false);
 const flashActive = ref(false);
 const glowActive = ref(false);
-const activeTimeouts = new Set();
-let animationRunId = 0;
+const animationFlow = useAnimationFlow();
 
 const controller = useBLCKeyClickerController();
 const isInputDisabled = computed(() => !controller.isActiveInteractionEnabled);
-
-
-function schedule(callback, delay) {
-  const timeoutId = window.setTimeout(() => {
-    activeTimeouts.delete(timeoutId);
-    callback();
-  }, delay);
-
-  activeTimeouts.add(timeoutId);
-}
-
-function clearTimers() {
-  for (const timeoutId of activeTimeouts) {
-    window.clearTimeout(timeoutId);
-  }
-
-  activeTimeouts.clear();
-}
 
 function resetState() {
   isPressed.value = false;
@@ -105,73 +87,62 @@ function resetState() {
 }
 
 function reset() {
-  animationRunId += 1;
-  clearTimers();
+  animationFlow.cancelFlow();
   resetState();
 }
 
 function close() {
-  const currentRunId = ++animationRunId;
-  clearTimers();
+  const flowId = animationFlow.beginFlow();
   isClosing.value = true;
   glowActive.value = false;
 
-  schedule(() => {
-    if (currentRunId !== animationRunId) return;
+  animationFlow.scheduleStep(flowId, 350, () => {
     resetState();
-  }, 350);
+  });
 }
 
 async function playOpenAnimation() {
-  reset();
-  const currentRunId = animationRunId;
+  const flowId = animationFlow.beginFlow();
+  resetState();
   await nextTick();
 
-  if (currentRunId !== animationRunId) return;
+  if (!animationFlow.isFlowActive(flowId)) return;
 
   isPressed.value = true;
 
-  schedule(() => {
-    if (currentRunId !== animationRunId) return;
+  animationFlow.scheduleStep(flowId, 100, () => {
     isPressed.value = false;
     flashActive.value = true;
-  }, 100);  // flash starts
+  });  // flash starts
 
-  schedule(() => {
-    if (currentRunId !== animationRunId) return;
+  animationFlow.scheduleStep(flowId, 500, () => {
     lidOpen.value = true;
     glowActive.value = true;
-  }, 500);  // chest opens
+  });  // chest opens
 
-  schedule(() => {
-    if (currentRunId !== animationRunId) return;
+  animationFlow.scheduleStep(flowId, 700, () => {
     flashActive.value = false;
-  }, 700);  // flash ends
+  });  // flash ends
 
-  schedule(() => {
-    if (currentRunId !== animationRunId) return;
+  animationFlow.scheduleStep(flowId, 12000, () => {
     resetState();
-  }, 12000);  //auto close if exposed .close isn't called by lootRow
+  });  // auto close if exposed .close isn't called by lootRow
 }
 
 async function playDisabledShake() {
-  reset();
-  const currentRunId = animationRunId;
+  const flowId = animationFlow.beginFlow();
+  resetState();
   await nextTick();
 
-  if (currentRunId !== animationRunId) {
+  if (!animationFlow.isFlowActive(flowId)) {
     return;
   }
 
   isShaking.value = true;
 
-  schedule(() => {
-    if (currentRunId !== animationRunId) {
-      return;
-    }
-
+  animationFlow.scheduleStep(flowId, 280, () => {
     isShaking.value = false;
-  }, 280);
+  });
 }
 
 function handleClick() {
@@ -189,10 +160,6 @@ function handleClick() {
 }
 
 defineExpose({ reset, close });
-
-onBeforeUnmount(() => {
-  clearTimers();
-});
 </script>
 
 <style scoped>

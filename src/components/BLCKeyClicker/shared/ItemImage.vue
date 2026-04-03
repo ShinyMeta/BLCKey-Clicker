@@ -100,13 +100,14 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onBeforeUnmount, ref, useAttrs, watch } from "vue";
+import { computed, nextTick, ref, useAttrs, watch } from "vue";
 import noRewardImage from "@/assets/item/noReward.png";
 import unknownImage from "@/assets/item/unknown.png";
 import shineBigSrc from "@/assets/BLCOpenUI/shineBig.png";
 import shineSmallSrc from "@/assets/BLCOpenUI/shineSmall.png";
 import autoAttackSrc from "@/assets/BLCOpenUI/autoAttack.png";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
+import { useAnimationFlow } from "@/composables/useAnimationFlow";
 
 defineOptions({
   inheritAttrs: false,
@@ -493,7 +494,7 @@ function handleImageError() {
 const shineVisible = ref(false);
 const shineSpinning = ref(false);
 const shineColor = ref("white");
-let shineTimeouts = [];
+const shineFlow = useAnimationFlow();
 
 const SHINE_ENTER_MS = 150;
 const SHINE_EXIT_MS = 700;
@@ -515,37 +516,28 @@ const shineSmallStyles = computed(() => ({
   backgroundColor: shineColor.value,
 }));
 
-function clearShineTimeouts() {
-  shineTimeouts.forEach((id) => clearTimeout(id));
-  shineTimeouts = [];
-}
-
 async function shine(color = "white", duration = 2000) {
-  clearShineTimeouts();
+  const flowId = shineFlow.beginFlow();
   shineColor.value = color;
   shineVisible.value = false;
   shineSpinning.value = false;
 
   await nextTick();
+  if (!shineFlow.isFlowActive(flowId)) {
+    return;
+  }
+
   shineVisible.value = true;
   shineSpinning.value = true;
 
-  shineTimeouts.push(
-    setTimeout(() => {
-      shineVisible.value = false;
-    }, SHINE_ENTER_MS + duration),
-  );
+  shineFlow.scheduleStep(flowId, SHINE_ENTER_MS + duration, () => {
+    shineVisible.value = false;
+  });
 
-  shineTimeouts.push(
-    setTimeout(() => {
-      shineSpinning.value = false;
-    }, SHINE_ENTER_MS + duration + SHINE_EXIT_MS),
-  );
+  shineFlow.scheduleStep(flowId, SHINE_ENTER_MS + duration + SHINE_EXIT_MS, () => {
+    shineSpinning.value = false;
+  });
 }
-
-onBeforeUnmount(() => {
-  clearShineTimeouts();
-});
 
 defineExpose({ shine });
 </script>
