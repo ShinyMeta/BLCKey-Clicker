@@ -1,11 +1,14 @@
 <template>
   <div class="map-comp-progress">
-    <div class="progress-wrapper">
+    <div
+      class="progress-wrapper"
+      :style="{ '--map-comp-ring-size': `${RING_SIZE}px` }"
+    >
       <MapCompBackgroundLayer />
       <v-progress-circular
         :model-value="ringDisplayValue"
-        :size="400"
-        :width="20"
+        :size="RING_SIZE"
+        :width="RING_WIDTH"
         color="cyan-darken-3"
         rounded
         class="progress-ring"
@@ -44,6 +47,8 @@ import { emitSoundEvent } from "@/services/sound";
 import { useAnimationFlow } from "@/composables/useAnimationFlow";
 
 const MAX_REWARD_FLYOUTS = 10;
+const RING_SIZE = 400;
+const RING_WIDTH = 20;
 
 const emit = defineEmits(["click", "mapComplete"]);
 const controller = useBLCKeyClickerController();
@@ -189,6 +194,8 @@ function handleClick() {
   position: relative;
   display: grid;
   place-items: center;
+  width: var(--map-comp-ring-size);
+  height: var(--map-comp-ring-size);
   overflow: visible;
 }
 
