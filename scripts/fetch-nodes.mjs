@@ -17,10 +17,12 @@ import {
   getPageSections,
   getSectionWikitext,
 } from "./lib/wiki-scraper.mjs";
+import catalogUtils from "./lib/catalog-utils.cjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT = join(__dirname, "../src/store/loot/config/sets/nodes.json");
 const PICK_COUNT = 4;
+const { readExistingCatalog, mergeItemsByNumericKey } = catalogUtils;
 
 function parseNodeNames(wikitext) {
   return [
@@ -33,6 +35,8 @@ function parseNodeNames(wikitext) {
 }
 
 async function main() {
+  const existingCatalog = readExistingCatalog(OUTPUT);
+
   console.log("Locating the Black Lion Chest upgrades section…");
   const sections = await getPageSections("Home_instance");
   const blcSection = sections.find(
@@ -61,11 +65,17 @@ async function main() {
     }
   }
 
-  writeFileSync(
-    OUTPUT,
-    JSON.stringify({ pickCount: PICK_COUNT, items }, null, 2) + "\n"
-  );
-  console.log(`\nWrote ${items.length} nodes → ${OUTPUT}`);
+  const mergedItems = mergeItemsByNumericKey(existingCatalog.items, items, "itemId");
+  const output = {
+    ...existingCatalog,
+    pickCount: Number.isFinite(Number(existingCatalog.pickCount))
+      ? Number(existingCatalog.pickCount)
+      : PICK_COUNT,
+    items: mergedItems,
+  };
+
+  writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
+  console.log(`\nWrote ${mergedItems.length} nodes → ${OUTPUT}`);
 }
 
 main().catch((err) => {

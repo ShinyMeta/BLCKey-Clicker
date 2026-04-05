@@ -17,10 +17,12 @@ import {
   getPageSections,
   getSectionWikitext,
 } from "./lib/wiki-scraper.mjs";
+import catalogUtils from "./lib/catalog-utils.cjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT = join(__dirname, "../src/store/loot/config/sets/glyphs.json");
 const PICK_COUNT = 2;
+const { readExistingCatalog, mergeItemsByNumericKey } = catalogUtils;
 
 function parseGlyphNames(wikitext) {
   return [
@@ -33,6 +35,8 @@ function parseGlyphNames(wikitext) {
 }
 
 async function main() {
+  const existingCatalog = readExistingCatalog(OUTPUT);
+
   console.log("Locating the Trading glyphs section…");
   const sections = await getPageSections("Glyph_(upgrade)");
   const tradingSection = sections.find((s) => s.line === "Trading glyphs");
@@ -62,11 +66,17 @@ async function main() {
     }
   }
 
-  writeFileSync(
-    OUTPUT,
-    JSON.stringify({ pickCount: PICK_COUNT, items }, null, 2) + "\n"
-  );
-  console.log(`\nWrote ${items.length} glyphs → ${OUTPUT}`);
+  const mergedItems = mergeItemsByNumericKey(existingCatalog.items, items, "itemId");
+  const output = {
+    ...existingCatalog,
+    pickCount: Number.isFinite(Number(existingCatalog.pickCount))
+      ? Number(existingCatalog.pickCount)
+      : PICK_COUNT,
+    items: mergedItems,
+  };
+
+  writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
+  console.log(`\nWrote ${mergedItems.length} glyphs → ${OUTPUT}`);
 }
 
 main().catch((err) => {

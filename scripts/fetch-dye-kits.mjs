@@ -20,11 +20,13 @@ import {
   getPageSections,
   getSectionWikitext,
 } from "./lib/wiki-scraper.mjs";
+import catalogUtils from "./lib/catalog-utils.cjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT = join(__dirname, "../src/store/loot/config/sets/dyeKits.json");
 const PICK_COUNT = 4;
 const EXCLUDED_KITS = new Set(["Smooth Berry Dye Kit"]);
+const { readExistingCatalog, mergeItemsByNumericKey } = catalogUtils;
 
 function parseDyeKitNames(wikitext) {
   return [
@@ -38,6 +40,8 @@ function parseDyeKitNames(wikitext) {
 }
 
 async function main() {
+  const existingCatalog = readExistingCatalog(OUTPUT);
+
   console.log("Locating the Dye page Exclusive colors section…");
   const sections = await getPageSections("Dye");
   const exclusiveColorsSection = sections.find(
@@ -64,8 +68,17 @@ async function main() {
     }
   }
 
-  writeFileSync(OUTPUT, JSON.stringify({ pickCount: PICK_COUNT, items }, null, 2) + "\n");
-  console.log(`\nWrote ${items.length} dye kits → ${OUTPUT}`);
+  const mergedItems = mergeItemsByNumericKey(existingCatalog.items, items, "itemId");
+  const output = {
+    ...existingCatalog,
+    pickCount: Number.isFinite(Number(existingCatalog.pickCount))
+      ? Number(existingCatalog.pickCount)
+      : PICK_COUNT,
+    items: mergedItems,
+  };
+
+  writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
+  console.log(`\nWrote ${mergedItems.length} dye kits → ${OUTPUT}`);
 }
 
 main().catch((err) => {

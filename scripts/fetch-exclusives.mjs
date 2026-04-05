@@ -18,10 +18,12 @@ import {
   getPageWikitext,
   getSectionWikitext,
 } from "./lib/wiki-scraper.mjs";
+import catalogUtils from "./lib/catalog-utils.cjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT = join(__dirname, "../src/store/loot/config/sets/exclusives.json");
 const EXCLUDED_ITEM_IDS = new Set([105365, 105387, 105349]);
+const { readExistingCatalog, mergeItemsByNumericKey } = catalogUtils;
 
 function parseStatuetteItems(wikitext) {
   const sections = [
@@ -64,6 +66,8 @@ function parseChestItems(wikitext) {
 }
 
 async function main() {
+  const existingCatalog = readExistingCatalog(OUTPUT);
+
   console.log("Fetching statuette vendor template…");
   const statuetteWikitext = await getPageWikitext("Template:Inventory/statuette");
   const statuetteItems = parseStatuetteItems(statuetteWikitext);
@@ -105,8 +109,14 @@ async function main() {
     }
   }
 
-  writeFileSync(OUTPUT, JSON.stringify({ items: filteredItems }, null, 2) + "\n");
-  console.log(`\nWrote ${filteredItems.length} items → ${OUTPUT}`);
+  const mergedItems = mergeItemsByNumericKey(existingCatalog.items, filteredItems, "itemId");
+  const output = {
+    ...existingCatalog,
+    items: mergedItems,
+  };
+
+  writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
+  console.log(`\nWrote ${mergedItems.length} items → ${OUTPUT}`);
 }
 
 main().catch((err) => {
