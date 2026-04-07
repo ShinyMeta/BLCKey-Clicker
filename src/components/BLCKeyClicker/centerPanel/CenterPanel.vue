@@ -13,11 +13,11 @@
         v-else-if="controller.isBetweenChestCycles"
         key="between"
       />
-      <GameOver
+      <!-- <GameOver
         v-else-if="controller.isGameOver"
         key="gameOver"
         :missed-exclusive="returningExclusive"
-      />
+      /> -->
     </VFadeTransition>
 
     <PausedTimerOverlay />
@@ -29,7 +29,7 @@ import { computed } from 'vue';
 import NewGame from './NewGame.vue';
 import ActiveChestCycle from './ActiveChestCycle.vue';
 import BetweenChestCycles from './BetweenChestCycles.vue';
-import GameOver from './GameOver.vue';
+// import GameOver from './GameOver.vue';
 import PausedTimerOverlay from './PausedTimerOverlay.vue';
 import { useBLCKeyClickerController } from '@/store/BLCKeyClickerController';
 import { useLootStore } from "@/store/loot/lootStore";

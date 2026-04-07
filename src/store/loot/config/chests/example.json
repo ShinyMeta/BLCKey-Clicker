@@ -1,173 +1,209 @@
 {
+  "__previewKey": "chest-preview-mnp6qf99-1-84jlwe2m",
   "name": "Example Chest",
+  "appearanceType": 1,
   "sets": {
     "guaranteedItem": {
       "items": [
         {
-          "itemId": 86946,
-          "label": "The Evon Gnashblade Lucky Envelope"
-        }
-      ]
-    },
-    "newExclusive": {
-      "items": [
-        {
-          "itemId": 105378,
-          "label": "Witch Cauldron Chair"
+          "itemId": 93786,
+          "label": "Gnashblade's Exotic Weapon Grab Bag"
         }
       ]
     },
     "returningExclusive": {
       "items": [
         {
-          "itemId": 106814,
-          "label": "Asuran Conjured Doorway Skin"
+          "itemId": 98047,
+          "label": "Jade Tech Wings Backpack and Glider Combo"
+        }
+      ]
+    },
+    "newExclusive": {
+      "items": [
+        {
+          "itemId": 103616,
+          "label": "Acclaimed Militia Chestpiece Skin"
         }
       ]
     },
     "dyeKits": {
       "items": [
         {
-          "itemId": 68005,
-          "label": "Glint's Winter Dye Kit"
+          "itemId": 68786,
+          "label": "Shadow Dye Kit"
+        },
+        {
+          "itemId": 80974,
+          "label": "Primordus Dye Kit"
+        },
+        {
+          "itemId": 41744,
+          "label": "Flame Dye Kit"
         },
         {
           "itemId": 43078,
           "label": "Lion's Arch Commemorative Dye Kit"
-        },
-        {
-          "itemId": 77470,
-          "label": "Winter Chimes Dye Kit"
-        },
-        {
-          "itemId": 98106,
-          "label": "Jade Dye Kit"
         }
       ]
     },
     "uncommonWeapons": {
-      "name": "Winter's Weapon Collection",
+      "achievementId": 4191,
+      "label": "Desert King Weapon Collection",
       "items": [
         {
-          "skinId": 3770,
-          "label": "Winter's Cutter"
+          "skinId": 8147,
+          "label": "Desert King Sword"
         },
         {
-          "skinId": 3819,
-          "label": "Winter's Needle"
+          "skinId": 8153,
+          "label": "Desert King Hammer"
         },
         {
-          "skinId": 3804,
-          "label": "Winter's Edge"
+          "skinId": 8163,
+          "label": "Desert King Longbow"
         },
         {
-          "skinId": 3811,
-          "label": "Winter's Brunt"
+          "skinId": 8144,
+          "label": "Desert King Short Bow"
         },
         {
-          "skinId": 3789,
-          "label": "Winter's Reach"
+          "skinId": 8179,
+          "label": "Desert King Axe"
         },
         {
-          "skinId": 3769,
-          "label": "Winter's Sting"
+          "skinId": 8146,
+          "label": "Desert King Dagger"
         },
         {
-          "skinId": 3799,
-          "label": "Winter's Shelter"
+          "skinId": 8162,
+          "label": "Desert King Greatsword"
         },
         {
-          "skinId": 3739,
-          "label": "Winter's Arc"
+          "skinId": 8157,
+          "label": "Desert King Mace"
         },
         {
-          "skinId": 3824,
-          "label": "Winter's Timber"
+          "skinId": 8158,
+          "label": "Desert King Pistol"
         },
         {
-          "skinId": 3829,
-          "label": "Winter's Slice"
+          "skinId": 8176,
+          "label": "Desert King Rifle"
+        },
+        {
+          "skinId": 8152,
+          "label": "Desert King Scepter"
+        },
+        {
+          "skinId": 8155,
+          "label": "Desert King Staff"
+        },
+        {
+          "skinId": 8159,
+          "label": "Desert King Focus"
+        },
+        {
+          "skinId": 8178,
+          "label": "Desert King Torch"
+        },
+        {
+          "skinId": 8150,
+          "label": "Desert King Warhorn"
+        },
+        {
+          "skinId": 8168,
+          "label": "Desert King Shield"
         }
-      ]
+      ],
+      "previewItem": {
+        "skinId": 8168,
+        "label": "Desert King Shield"
+      }
     },
     "rareWeapons": {
-      "name": "Shadow Chevalier Weapon Collection",
+      "achievementId": 4627,
+      "label": "Defiant Glass Weapon Collection",
       "items": [
         {
-          "skinId": 12146,
-          "label": "Shadow Chevalier Sword"
+          "skinId": 8632,
+          "label": "Defiant Glass Axe"
         },
         {
-          "skinId": 12179,
-          "label": "Shadow Chevalier Hammer"
+          "skinId": 8643,
+          "label": "Defiant Glass Dagger"
         },
         {
-          "skinId": 12138,
-          "label": "Shadow Chevalier Longbow"
+          "skinId": 8629,
+          "label": "Defiant Glass Focus"
         },
         {
-          "skinId": 12149,
-          "label": "Shadow Chevalier Short Bow"
+          "skinId": 8633,
+          "label": "Defiant Glass Greatsword"
         },
         {
-          "skinId": 12150,
-          "label": "Shadow Chevalier Axe"
+          "skinId": 8637,
+          "label": "Defiant Glass Hammer"
         },
         {
-          "skinId": 12157,
-          "label": "Shadow Chevalier Dagger"
+          "skinId": 8628,
+          "label": "Defiant Glass Longbow"
         },
         {
-          "skinId": 12160,
-          "label": "Shadow Chevalier Greatsword"
+          "skinId": 8644,
+          "label": "Defiant Glass Mace"
         },
         {
-          "skinId": 12169,
-          "label": "Shadow Chevalier Mace"
+          "skinId": 8639,
+          "label": "Defiant Glass Pistol"
         },
         {
-          "skinId": 12203,
-          "label": "Shadow Chevalier Pistol"
+          "skinId": 8641,
+          "label": "Defiant Glass Rifle"
         },
         {
-          "skinId": 12208,
-          "label": "Shadow Chevalier Rifle"
+          "skinId": 8642,
+          "label": "Defiant Glass Scepter"
         },
         {
-          "skinId": 12183,
-          "label": "Shadow Chevalier Scepter"
+          "skinId": 8630,
+          "label": "Defiant Glass Shield"
         },
         {
-          "skinId": 12147,
-          "label": "Shadow Chevalier Staff"
+          "skinId": 8636,
+          "label": "Defiant Glass Short Bow"
         },
         {
-          "skinId": 12210,
-          "label": "Shadow Chevalier Focus"
+          "skinId": 8635,
+          "label": "Defiant Glass Staff"
         },
         {
-          "skinId": 12207,
-          "label": "Shadow Chevalier Torch"
+          "skinId": 8634,
+          "label": "Defiant Glass Sword"
         },
         {
-          "skinId": 12199,
-          "label": "Shadow Chevalier Warhorn"
+          "skinId": 8640,
+          "label": "Defiant Glass Torch"
         },
         {
-          "skinId": 12188,
-          "label": "Shadow Chevalier Shield"
+          "skinId": 8631,
+          "label": "Defiant Glass Warhorn"
         }
-      ]
+      ],
+      "previewItem": {
+        "skinId": 8640,
+        "label": "Defiant Glass Torch"
+      }
     },
     "glyphs": {
       "items": [
         {
-          "itemId": 90664,
-          "label": "Glyph of Alchemy (Unused)"
+          "itemId": 88298,
+          "label": "Glyph of the Herbalist (Unused)"
         },
         {
-          "itemId": 92682,
-          "label": "Glyph of the Timekeeper (Unused)"
+          "itemId": 87424,
+          "label": "Glyph of the Watchknight (Unused)"
         }
       ]
     },
@@ -178,24 +214,24 @@
           "label": "Elder Wood Logging Node"
         },
         {
-          "itemId": 81852,
-          "label": "Advanced Leather Rack"
+          "itemId": 68089,
+          "label": "Omnomberry Harvesting Node"
         },
         {
-          "itemId": 68091,
-          "label": "Ancient Wood Logging Node"
+          "itemId": 81853,
+          "label": "Advanced Cloth Rack"
         },
         {
-          "itemId": 68095,
-          "label": "Orrian Truffle Harvesting Node"
+          "itemId": 79260,
+          "label": "Iron Ore Mining Node"
         }
       ]
     },
     "tonic": {
       "items": [
         {
-          "itemId": 49145,
-          "label": "Unopened Endless Mystery Tonic (beast)"
+          "itemId": 90008,
+          "label": "Unopened Endless Desert Mystery Tonic"
         }
       ]
     }

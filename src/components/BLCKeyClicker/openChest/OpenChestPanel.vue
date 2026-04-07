@@ -82,6 +82,7 @@ import ItemImage from "@/components/BLCKeyClicker/shared/ItemImage.vue";
 import OpenChestButton from "@/components/BLCKeyClicker/openChest/OpenChestButton.vue";
 import LootRow from "@/components/BLCKeyClicker/openChest/LootRow.vue";
 import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
+import { useDexStore } from "@/store/dexStore";
 import { useInventoryStore } from "@/store/inventoryStore";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import { emitSoundEvent } from "@/services/sound";
@@ -89,6 +90,7 @@ import { useStatStore } from "@/store/statStore";
 
 
 const controller = useBLCKeyClickerController();
+const dexStore = useDexStore();
 const inventoryStore = useInventoryStore();
 const lootStore = controller.lootStore;
 const statStore = useStatStore();
@@ -109,12 +111,12 @@ const miscSettings = useMiscSettingsStore();
 const { keyAutoAttack } = storeToRefs(miscSettings);
 const autoAttackReady = computed(() => {
   const exclusives = lootStore.currentExclusives || [];
-  const allExclusivesDropped = exclusives.length > 0 && 
-    exclusives.every((it) => lootStore.hasExclusiveDropped(it.itemId));
+  const allExclusivesCollected =
+    exclusives.length > 0 && exclusives.every((it) => dexStore.hasCollected(it));
   // selected key has auto attack enabled, and qty in inventory
   return keyAutoAttack.value[selectedKeyType.value] 
     && selectedKeyCount.value > 0 
-    && !allExclusivesDropped;
+    && !allExclusivesCollected;
 });
 const selectedKeyType = ref("blcKey");
 const selectedKeyCount = computed(

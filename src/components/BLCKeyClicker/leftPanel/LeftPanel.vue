@@ -43,7 +43,7 @@ const chestLabel = computed(() => {
 const previewCards = computed(() => {
   const cards = [];
 
-  if (currentChestConfig.value) {
+  if (currentChestConfig?.value) {
     cards.push({
       key: getPreviewCardKey(currentChestConfig.value),
       labelClass: "current-chest-label",

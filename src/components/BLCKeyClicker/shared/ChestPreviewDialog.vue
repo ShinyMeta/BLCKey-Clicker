@@ -279,7 +279,7 @@ import { useMiscSettingsStore } from "@/services/settings/miscSettingsStore";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import template from "@/store/loot/config/template.json";
 import { mergeTemplateWithConfig, buildLootTable } from "@/store/loot/lootService";
-import { useLootStore } from "@/store/loot/lootStore";
+import { useDexStore } from "@/store/dexStore";
 import { storeToRefs } from "pinia";
 
 const CATEGORY_ORDER = [
@@ -321,18 +321,18 @@ const props = defineProps({
   },
 });
 
-const lootStore = useLootStore();
+const dexStore = useDexStore();
 
 // Build a local lootTable from the merged config so this component
 // no longer depends on the store's lootTable. Exclusives are filtered
-// using the store's `hasExclusiveDropped` helper.
+// using dex collection state.
 const lootTable = computed(() => {
   if (!mergedConfig.value) return null;
   const base = buildLootTable(mergedConfig.value);
   return {
     ...base,
     fifthDrop: base.fifthDrop.filter(
-      (item) => item.category !== "exclusive" || !lootStore.hasExclusiveDropped(item.itemId),
+      (item) => item.category !== "exclusive" || !dexStore.hasCollected(item),
     ),
   };
 });
@@ -529,7 +529,7 @@ watch(
 
 function isExclusiveObtained(row) {
   if (row.type !== "item") return false;
-  return lootStore.hasExclusiveDropped(row.item.itemId);
+  return dexStore.hasCollected(row.item);
 }
 
 function getItemBadgeText(row) {

@@ -2,7 +2,7 @@
   <div class="d-flex flex-column align-center ma-4">
     <div class="between-chest-cycles d-flex flex-column ga-4">
       <StatsDisplay />
-      <BLCKeyDexExclusives />
+      <!-- <BLCKeyDexExclusives /> -->
       <v-btn
         prepend-icon="mdi-play"
         color="primary"
@@ -19,7 +19,7 @@
 <script setup>
 import StatsDisplay from "./StatsDisplay.vue";
 import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
-import BLCKeyDexExclusives from "./BLCKeyDexExclusives.vue";
+// import BLCKeyDexExclusives from "./BLCKeyDexExclusives.vue";
 
 const controller = useBLCKeyClickerController();
 

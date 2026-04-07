@@ -1,6 +1,6 @@
 {
-  "sets": {
-    "Chaos Weapon Collection": {
+  "sets": [
+    {
       "items": [
         {
           "skinId": 5580,
@@ -79,9 +79,10 @@
           "label": "Chaos Warhorn"
         }
       ],
-      "achievementId": 1732
+      "achievementId": 1732,
+      "label": "Chaos Weapon Collection"
     },
-    "Sclerite Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 3762,
@@ -148,9 +149,10 @@
           "label": "Sclerite Warhorn"
         }
       ],
-      "achievementId": 1733
+      "achievementId": 1733,
+      "label": "Sclerite Weapon Collection"
     },
-    "Tormented Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 3680,
@@ -229,9 +231,10 @@
           "label": "Tormented Warhorn"
         }
       ],
-      "achievementId": 1735
+      "achievementId": 1735,
+      "label": "Tormented Weapon Collection"
     },
-    "Dragon's Jade Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 3767,
@@ -298,9 +301,10 @@
           "label": "Dragon's Jade Harbinger"
         }
       ],
-      "achievementId": 1738
+      "achievementId": 1738,
+      "label": "Dragon's Jade Weapon Collection"
     },
-    "Dreamthistle Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 3775,
@@ -379,9 +383,10 @@
           "label": "Dreamthistle Warhorn"
         }
       ],
-      "achievementId": 1739
+      "achievementId": 1739,
+      "label": "Dreamthistle Weapon Collection"
     },
-    "Fused Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 3732,
@@ -448,9 +453,10 @@
           "label": "Fused Axe"
         }
       ],
-      "achievementId": 1740
+      "achievementId": 1740,
+      "label": "Fused Weapon Collection"
     },
-    "Ley Line Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5513,
@@ -517,9 +523,10 @@
           "label": "Ley Line Warhorn"
         }
       ],
-      "achievementId": 1741
+      "achievementId": 1741,
+      "label": "Ley Line Weapon Collection"
     },
-    "Lovestruck Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 3660,
@@ -586,9 +593,10 @@
           "label": "Lovestruck Call"
         }
       ],
-      "achievementId": 1742
+      "achievementId": 1742,
+      "label": "Lovestruck Weapon Collection"
     },
-    "Phoenix Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5458,
@@ -655,9 +663,10 @@
           "label": "Phoenix Warhorn"
         }
       ],
-      "achievementId": 1743
+      "achievementId": 1743,
+      "label": "Phoenix Weapon Collection"
     },
-    "Winter's Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 3770,
@@ -700,9 +709,10 @@
           "label": "Winter's Slice"
         }
       ],
-      "achievementId": 1746
+      "achievementId": 1746,
+      "label": "Winter's Weapon Collection"
     },
-    "Zodiac Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 3772,
@@ -769,9 +779,10 @@
           "label": "Zodiac Warhorn"
         }
       ],
-      "achievementId": 1747
+      "achievementId": 1747,
+      "label": "Zodiac Weapon Collection"
     },
-    "Tempest Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5556,
@@ -838,9 +849,10 @@
           "label": "Tempest Warhorn"
         }
       ],
-      "achievementId": 1761
+      "achievementId": 1761,
+      "label": "Tempest Weapon Collection"
     },
-    "Pact Fleet Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5784,
@@ -907,9 +919,10 @@
           "label": "Pact Fleet Shield"
         }
       ],
-      "achievementId": 1813
+      "achievementId": 1813,
+      "label": "Pact Fleet Weapon Collection"
     },
-    "Wintersday Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5797,
@@ -976,9 +989,10 @@
           "label": "Wintersday Shield"
         }
       ],
-      "achievementId": 2027
+      "achievementId": 2027,
+      "label": "Wintersday Weapon Collection"
     },
-    "Mordrem Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5837,
@@ -1045,9 +1059,10 @@
           "label": "Mordrem Warhorn"
         }
       ],
-      "achievementId": 2050
+      "achievementId": 2050,
+      "label": "Mordrem Weapon Collection"
     },
-    "Crimson Lion Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5862,
@@ -1114,9 +1129,10 @@
           "label": "Crimson Lion Shield"
         }
       ],
-      "achievementId": 2083
+      "achievementId": 2083,
+      "label": "Crimson Lion Weapon Collection"
     },
-    "Shadow Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5954,
@@ -1183,9 +1199,10 @@
           "label": "Shadow Shield"
         }
       ],
-      "achievementId": 2087
+      "achievementId": 2087,
+      "label": "Shadow Weapon Collection"
     },
-    "Balthazar's Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5971,
@@ -1252,9 +1269,10 @@
           "label": "Balthazar's Shield"
         }
       ],
-      "achievementId": 2089
+      "achievementId": 2089,
+      "label": "Balthazar's Weapon Collection"
     },
-    "Daydreamer's Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 5994,
@@ -1321,9 +1339,10 @@
           "label": "Daydreamer's Shield"
         }
       ],
-      "achievementId": 2121
+      "achievementId": 2121,
+      "label": "Daydreamer's Weapon Collection"
     },
-    "Scientific Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6021,
@@ -1390,9 +1409,10 @@
           "label": "Scientific Shield"
         }
       ],
-      "achievementId": 2123
+      "achievementId": 2123,
+      "label": "Scientific Weapon Collection"
     },
-    "Gallant Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6057,
@@ -1459,9 +1479,10 @@
           "label": "Gallant Shield"
         }
       ],
-      "achievementId": 2125
+      "achievementId": 2125,
+      "label": "Gallant Weapon Collection"
     },
-    "Dwayna's Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6101,
@@ -1528,9 +1549,10 @@
           "label": "Dwayna's Shield"
         }
       ],
-      "achievementId": 2130
+      "achievementId": 2130,
+      "label": "Dwayna's Weapon Collection"
     },
-    "Glittering Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6380,
@@ -1597,9 +1619,10 @@
           "label": "Glittering Warhorn"
         }
       ],
-      "achievementId": 2490
+      "achievementId": 2490,
+      "label": "Glittering Weapon Collection"
     },
-    "Improvised Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6521,
@@ -1666,9 +1689,10 @@
           "label": "Improvised Shield"
         }
       ],
-      "achievementId": 2586
+      "achievementId": 2586,
+      "label": "Improvised Weapon Collection"
     },
-    "Plasma Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6534,
@@ -1735,9 +1759,10 @@
           "label": "Plasma Warhorn"
         }
       ],
-      "achievementId": 2650
+      "achievementId": 2650,
+      "label": "Plasma Weapon Collection"
     },
-    "Merciless Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6571,
@@ -1804,9 +1829,10 @@
           "label": "Merciless Shield"
         }
       ],
-      "achievementId": 2756
+      "achievementId": 2756,
+      "label": "Merciless Weapon Collection"
     },
-    "Timekeeper Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6588,
@@ -1873,9 +1899,10 @@
           "label": "Timekeeper Shield"
         }
       ],
-      "achievementId": 2763
+      "achievementId": 2763,
+      "label": "Timekeeper Weapon Collection"
     },
-    "Soaring Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6614,
@@ -1942,9 +1969,10 @@
           "label": "Soaring Shield"
         }
       ],
-      "achievementId": 2815
+      "achievementId": 2815,
+      "label": "Soaring Weapon Collection"
     },
-    "Dominator Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6643,
@@ -2011,9 +2039,10 @@
           "label": "Dominator Shield"
         }
       ],
-      "achievementId": 2833
+      "achievementId": 2833,
+      "label": "Dominator Weapon Collection"
     },
-    "Spectral Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6696,
@@ -2080,9 +2109,10 @@
           "label": "Spectral Shield"
         }
       ],
-      "achievementId": 2904
+      "achievementId": 2904,
+      "label": "Spectral Weapon Collection"
     },
-    "Cavalier Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6772,
@@ -2149,9 +2179,10 @@
           "label": "Cavalier Shield"
         }
       ],
-      "achievementId": 3003
+      "achievementId": 3003,
+      "label": "Cavalier Weapon Collection"
     },
-    "Embellished Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6859,
@@ -2218,9 +2249,10 @@
           "label": "Embellished Shield"
         }
       ],
-      "achievementId": 3079
+      "achievementId": 3079,
+      "label": "Embellished Weapon Collection"
     },
-    "Bloodstone Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6911,
@@ -2287,9 +2319,10 @@
           "label": "Bloodstone Shield"
         }
       ],
-      "achievementId": 3091
+      "achievementId": 3091,
+      "label": "Bloodstone Weapon Collection"
     },
-    "Gargoyle Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 6984,
@@ -2356,9 +2389,10 @@
           "label": "Gargoyle Shield"
         }
       ],
-      "achievementId": 3170
+      "achievementId": 3170,
+      "label": "Gargoyle Weapon Collection"
     },
-    "Frostforged Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 7049,
@@ -2425,9 +2459,10 @@
           "label": "Frostforged Shield"
         }
       ],
-      "achievementId": 3261
+      "achievementId": 3261,
+      "label": "Frostforged Weapon Collection"
     },
-    "Devoted Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 7140,
@@ -2494,9 +2529,10 @@
           "label": "Devoted Shield"
         }
       ],
-      "achievementId": 3297
+      "achievementId": 3297,
+      "label": "Devoted Weapon Collection"
     },
-    "Beastslayer Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 7174,
@@ -2563,9 +2599,10 @@
           "label": "Beastslayer Shield"
         }
       ],
-      "achievementId": 3394
+      "achievementId": 3394,
+      "label": "Beastslayer Weapon Collection"
     },
-    "Keepsake Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 7232,
@@ -2632,9 +2669,10 @@
           "label": "Keepsake Shield"
         }
       ],
-      "achievementId": 3448
+      "achievementId": 3448,
+      "label": "Keepsake Weapon Collection"
     },
-    "Abaddon's Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 7338,
@@ -2701,9 +2739,10 @@
           "label": "Abaddon Shield"
         }
       ],
-      "achievementId": 3544
+      "achievementId": 3544,
+      "label": "Abaddon's Weapon Collection"
     },
-    "War God's Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 7731,
@@ -2770,9 +2809,10 @@
           "label": "War God's Shield"
         }
       ],
-      "achievementId": 3899
+      "achievementId": 3899,
+      "label": "War God's Weapon Collection"
     },
-    "Shifting Sands Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 7808,
@@ -2839,9 +2879,10 @@
           "label": "Shifting Sands Shield"
         }
       ],
-      "achievementId": 3949
+      "achievementId": 3949,
+      "label": "Shifting Sands Weapon Collection"
     },
-    "Glacial Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 7972,
@@ -2908,9 +2949,10 @@
           "label": "Glacial Shield"
         }
       ],
-      "achievementId": 4050
+      "achievementId": 4050,
+      "label": "Glacial Weapon Collection"
     },
-    "Alchemist Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8009,
@@ -2977,9 +3019,10 @@
           "label": "Alchemist Shield"
         }
       ],
-      "achievementId": 4073
+      "achievementId": 4073,
+      "label": "Alchemist Weapon Collection"
     },
-    "Inquest Mark II Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8101,
@@ -3046,9 +3089,10 @@
           "label": "Inquest Mark II Shield"
         }
       ],
-      "achievementId": 4162
+      "achievementId": 4162,
+      "label": "Inquest Mark II Weapon Collection"
     },
-    "Desert King Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8147,
@@ -3115,9 +3159,10 @@
           "label": "Desert King Shield"
         }
       ],
-      "achievementId": 4191
+      "achievementId": 4191,
+      "label": "Desert King Weapon Collection"
     },
-    "Mad Realm Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8455,
@@ -3184,9 +3229,10 @@
           "label": "Mad Realm Shield"
         }
       ],
-      "achievementId": 4338
+      "achievementId": 4338,
+      "label": "Mad Realm Weapon Collection"
     },
-    "Equinox Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8322,
@@ -3253,9 +3299,10 @@
           "label": "Equinox Shield"
         }
       ],
-      "achievementId": 4339
+      "achievementId": 4339,
+      "label": "Equinox Weapon Collection"
     },
-    "Orchestral Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8525,
@@ -3322,9 +3369,10 @@
           "label": "Orchestral Warhorn"
         }
       ],
-      "achievementId": 4486
+      "achievementId": 4486,
+      "label": "Orchestral Weapon Collection"
     },
-    "Defiant Glass Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8632,
@@ -3391,9 +3439,10 @@
           "label": "Defiant Glass Warhorn"
         }
       ],
-      "achievementId": 4627
+      "achievementId": 4627,
+      "label": "Defiant Glass Weapon Collection"
     },
-    "Branded Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8673,
@@ -3460,9 +3509,10 @@
           "label": "Branded Shield"
         }
       ],
-      "achievementId": 4660
+      "achievementId": 4660,
+      "label": "Branded Weapon Collection"
     },
-    "Bioluminescent Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8827,
@@ -3529,9 +3579,10 @@
           "label": "Bioluminescent Shield"
         }
       ],
-      "achievementId": 4851
+      "achievementId": 4851,
+      "label": "Bioluminescent Weapon Collection"
     },
-    "Endless Ocean Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8913,
@@ -3598,9 +3649,10 @@
           "label": "Endless Ocean Shield"
         }
       ],
-      "achievementId": 4897
+      "achievementId": 4897,
+      "label": "Endless Ocean Weapon Collection"
     },
-    "Seven Reapers Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 8988,
@@ -3667,9 +3719,10 @@
           "label": "Seven Reapers Shield"
         }
       ],
-      "achievementId": 4996
+      "achievementId": 4996,
+      "label": "Seven Reapers Weapon Collection"
     },
-    "Draconic Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 9123,
@@ -3736,9 +3789,10 @@
           "label": "Draconic Shield"
         }
       ],
-      "achievementId": 5080
+      "achievementId": 5080,
+      "label": "Draconic Weapon Collection"
     },
-    "Dark Wing Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 9271,
@@ -3805,9 +3859,10 @@
           "label": "Dark Wing Shield"
         }
       ],
-      "achievementId": 5201
+      "achievementId": 5201,
+      "label": "Dark Wing Weapon Collection"
     },
-    "Ice Reaver Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 9381,
@@ -3874,9 +3929,10 @@
           "label": "Ice Reaver Shield"
         }
       ],
-      "achievementId": 5323
+      "achievementId": 5323,
+      "label": "Ice Reaver Weapon Collection"
     },
-    "Eternal Forged Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 9497,
@@ -3943,9 +3999,10 @@
           "label": "Eternal Forged Shield"
         }
       ],
-      "achievementId": 5373
+      "achievementId": 5373,
+      "label": "Eternal Forged Weapon Collection"
     },
-    "Lorekeeper Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 9584,
@@ -4012,9 +4069,10 @@
           "label": "Lorekeeper Shield"
         }
       ],
-      "achievementId": 5435
+      "achievementId": 5435,
+      "label": "Lorekeeper Weapon Collection"
     },
-    "Dark Matter Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 9646,
@@ -4081,9 +4139,10 @@
           "label": "Dark Matter Shield"
         }
       ],
-      "achievementId": 5470
+      "achievementId": 5470,
+      "label": "Dark Matter Weapon Collection"
     },
-    "Shimmering Aurora Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 9783,
@@ -4150,9 +4209,10 @@
           "label": "Shimmering Aurora Shield"
         }
       ],
-      "achievementId": 5549
+      "achievementId": 5549,
+      "label": "Shimmering Aurora Weapon Collection"
     },
-    "Bright Inquisitor Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 9872,
@@ -4219,9 +4279,10 @@
           "label": "Bright Inquisitor Shield"
         }
       ],
-      "achievementId": 5606
+      "achievementId": 5606,
+      "label": "Bright Inquisitor Weapon Collection"
     },
-    "Etherbound Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 9950,
@@ -4288,9 +4349,10 @@
           "label": "Etherbound Shield"
         }
       ],
-      "achievementId": 5671
+      "achievementId": 5671,
+      "label": "Etherbound Weapon Collection"
     },
-    "Maguuma Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 10022,
@@ -4357,9 +4419,10 @@
           "label": "Maguuma Shield"
         }
       ],
-      "achievementId": 5843
+      "achievementId": 5843,
+      "label": "Maguuma Weapon Collection"
     },
-    "Magical Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 10096,
@@ -4426,9 +4489,10 @@
           "label": "Magical Shield"
         }
       ],
-      "achievementId": 6030
+      "achievementId": 6030,
+      "label": "Magical Weapon Collection"
     },
-    "Venombite Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 10138,
@@ -4495,9 +4559,10 @@
           "label": "Venombite Shield"
         }
       ],
-      "achievementId": 6049
+      "achievementId": 6049,
+      "label": "Venombite Weapon Collection"
     },
-    "Abyss Stalker Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 10187,
@@ -4564,9 +4629,10 @@
           "label": "Abyss Stalker Shield"
         }
       ],
-      "achievementId": 6058
+      "achievementId": 6058,
+      "label": "Abyss Stalker Weapon Collection"
     },
-    "White Tiger Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 10179,
@@ -4633,9 +4699,10 @@
           "label": "White Tiger Shield"
         }
       ],
-      "achievementId": 6060
+      "achievementId": 6060,
+      "label": "White Tiger Weapon Collection"
     },
-    "Red Crane Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 10269,
@@ -4702,9 +4769,10 @@
           "label": "Red Crane Shield"
         }
       ],
-      "achievementId": 6157
+      "achievementId": 6157,
+      "label": "Red Crane Weapon Collection"
     },
-    "Steel Lotus Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 10806,
@@ -4771,9 +4839,10 @@
           "label": "Steel Lotus Shield"
         }
       ],
-      "achievementId": 6525
+      "achievementId": 6525,
+      "label": "Steel Lotus Weapon Collection"
     },
-    "Fox Fire Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 10890,
@@ -4840,9 +4909,10 @@
           "label": "Fox Fire Shield"
         }
       ],
-      "achievementId": 6632
+      "achievementId": 6632,
+      "label": "Fox Fire Weapon Collection"
     },
-    "New Kaineng Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 11004,
@@ -4909,9 +4979,10 @@
           "label": "New Kaineng Shield"
         }
       ],
-      "achievementId": 6767
+      "achievementId": 6767,
+      "label": "New Kaineng Weapon Collection"
     },
-    "Dokkaebi Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 11057,
@@ -4978,9 +5049,10 @@
           "label": "Dokkaebi Shield"
         }
       ],
-      "achievementId": 6774
+      "achievementId": 6774,
+      "label": "Dokkaebi Weapon Collection"
     },
-    "Snow Garden Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 11169,
@@ -5047,9 +5119,10 @@
           "label": "Snow Garden Shield"
         }
       ],
-      "achievementId": 6816
+      "achievementId": 6816,
+      "label": "Snow Garden Weapon Collection"
     },
-    "Reflective Koi Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 11245,
@@ -5116,9 +5189,10 @@
           "label": "Reflective Koi Shield"
         }
       ],
-      "achievementId": 6831
+      "achievementId": 6831,
+      "label": "Reflective Koi Weapon Collection"
     },
-    "Collapsing Star Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 11408,
@@ -5185,9 +5259,10 @@
           "label": "Collapsing Star Shield"
         }
       ],
-      "achievementId": 6884
+      "achievementId": 6884,
+      "label": "Collapsing Star Weapon Collection"
     },
-    "Paladin's Decree Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 11437,
@@ -5254,9 +5329,10 @@
           "label": "Paladin's Decree Shield"
         }
       ],
-      "achievementId": 6891
+      "achievementId": 6891,
+      "label": "Paladin's Decree Weapon Collection"
     },
-    "Vinelord Edgebloom Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 11838,
@@ -5323,9 +5399,10 @@
           "label": "Vinelord Edgebloom Shield"
         }
       ],
-      "achievementId": 7573
+      "achievementId": 7573,
+      "label": "Vinelord Edgebloom Weapon Collection"
     },
-    "Thundercrag Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 11948,
@@ -5392,9 +5469,10 @@
           "label": "Thundercrag Shield"
         }
       ],
-      "achievementId": 7744
+      "achievementId": 7744,
+      "label": "Thundercrag Weapon Collection"
     },
-    "Necrotic Essence Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 12041,
@@ -5461,9 +5539,10 @@
           "label": "Necrotic Essence Shield"
         }
       ],
-      "achievementId": 7814
+      "achievementId": 7814,
+      "label": "Necrotic Essence Weapon Collection"
     },
-    "Shadow Chevalier Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 12146,
@@ -5530,9 +5609,10 @@
           "label": "Shadow Chevalier Shield"
         }
       ],
-      "achievementId": 8026
+      "achievementId": 8026,
+      "label": "Shadow Chevalier Weapon Collection"
     },
-    "Chromatic Assassin Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 12266,
@@ -5603,9 +5683,10 @@
           "label": "Chromatic Assassin Spear"
         }
       ],
-      "achievementId": 8103
+      "achievementId": 8103,
+      "label": "Chromatic Assassin Weapon Collection"
     },
-    "Void Corrupted Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 12570,
@@ -5676,9 +5757,10 @@
           "label": "Void Corrupted Spear"
         }
       ],
-      "achievementId": 8285
+      "achievementId": 8285,
+      "label": "Void Corrupted Weapon Collection"
     },
-    "Mystical Beast Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 12636,
@@ -5749,9 +5831,10 @@
           "label": "Mystical Beast Spear"
         }
       ],
-      "achievementId": 8433
+      "achievementId": 8433,
+      "label": "Mystical Beast Weapon Collection"
     },
-    "Foefire Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 12669,
@@ -5822,9 +5905,10 @@
           "label": "Foefire Spear"
         }
       ],
-      "achievementId": 8436
+      "achievementId": 8436,
+      "label": "Foefire Weapon Collection"
     },
-    "Dragon Essence Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 12746,
@@ -5895,9 +5979,10 @@
           "label": "Dragon Essence Spear"
         }
       ],
-      "achievementId": 8514
+      "achievementId": 8514,
+      "label": "Dragon Essence Weapon Collection"
     },
-    "Imperial Everbloom Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 12850,
@@ -5968,9 +6053,10 @@
           "label": "Imperial Everbloom Spear"
         }
       ],
-      "achievementId": 8541
+      "achievementId": 8541,
+      "label": "Imperial Everbloom Weapon Collection"
     },
-    "Shade-Touched Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 13203,
@@ -6041,9 +6127,10 @@
           "label": "Shade-Touched Shield"
         }
       ],
-      "achievementId": 8849
+      "achievementId": 8849,
+      "label": "Shade-Touched Weapon Collection"
     },
-    "Calligrapher's Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 13529,
@@ -6114,9 +6201,10 @@
           "label": "Calligrapher's Warhorn"
         }
       ],
-      "achievementId": 9095
+      "achievementId": 9095,
+      "label": "Calligrapher's Weapon Collection"
     },
-    "Painter's Brilliance Weapon Collection": {
+    {
       "items": [
         {
           "skinId": 13726,
@@ -6187,7 +6275,8 @@
           "label": "Painter's Brilliance Warhorn"
         }
       ],
-      "achievementId": 9102
+      "achievementId": 9102,
+      "label": "Painter's Brilliance Weapon Collection"
     }
-  }
+  ]
 }

@@ -1,5 +1,6 @@
 import pluginVue from 'eslint-plugin-vue'
 import globals from 'globals'
+import babelParser from '@babel/eslint-parser'
 
 export default [
   // add more generic rulesets here, such as:
@@ -12,9 +13,27 @@ export default [
       // 'vue/no-unused-vars': 'error'
     },
     languageOptions: {
+      ecmaVersion: "latest",
       sourceType: 'module',
       globals: {
         ...globals.browser
+      }
+    }
+  },
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      parser: babelParser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.node
+      },
+      parserOptions: {
+        requireConfigFile: false,
+        babelOptions: {
+          plugins: ['@babel/plugin-syntax-import-attributes']
+        }
       }
     }
   }

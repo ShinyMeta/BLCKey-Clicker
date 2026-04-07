@@ -28,6 +28,9 @@
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/eslint-parser": "^7.28.6",
+    "@babel/plugin-syntax-import-attributes": "^7.28.6",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "eslint": "^8.57.1",

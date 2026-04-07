@@ -4,6 +4,7 @@ import { useLootStore } from "@/store/loot/lootStore";
 import { useMapCompStore } from "@/store/mapCompStore";
 import { useStatStore } from "@/store/statStore";
 import { useTimerStore } from "@/store/timerStore";
+import { useDexStore } from "@/store/dexStore";
 import { emitSoundEvent } from "@/services/sound";
 import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
@@ -20,6 +21,7 @@ export const useBLCKeyClickerController = defineStore(
   () => {
     const inventoryStore = useInventoryStore();
     const lootStore = useLootStore();
+    const dexStore = useDexStore();
     const mapCompStore = useMapCompStore();
     const statStore = useStatStore();
     const timer = useTimerStore();
@@ -46,7 +48,7 @@ export const useBLCKeyClickerController = defineStore(
 
       const returningExclusive = currentChestConfig.value?.sets?.returningExclusive?.items?.[0];
       const missedReturningExclusive =
-        returningExclusive && !lootStore.hasExclusiveDropped(returningExclusive.itemId);
+        returningExclusive && !dexStore.hasCollected(returningExclusive);
 
       if (missedReturningExclusive) {
         return GAME_STATES.GAME_OVER;

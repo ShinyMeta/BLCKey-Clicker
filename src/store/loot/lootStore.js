@@ -4,6 +4,7 @@ import { mergeTemplateWithConfig, buildLootTable, openChest } from "@/store/loot
 import { generateChestConfig } from "@/store/loot/generateChestConfig";
 import { LootHandler } from "@/store/loot/lootHandler";
 import { useInventoryStore } from "@/store/inventoryStore";
+import { useDexStore } from "@/store/dexStore";
 import template from "@/store/loot/config/template.json";
 
 const ITEM_ID = {
@@ -20,16 +21,17 @@ export const useLootStore = defineStore("loot", () => {
   const nextChestConfig = ref(null);
   const lastDrops = shallowRef([]);
   const chestHistory = ref([]);
-  const exclusiveLookup = ref(new Map());
   let historyIdCounter = 0;
+
+  const dexStore = useDexStore();
+
 
   const lootTable = computed(() => {
     if (!baseLootTable.value) return null;
-    const lookup = exclusiveLookup.value;
     return {
       ...baseLootTable.value,
       fifthDrop: baseLootTable.value.fifthDrop.filter(
-        (item) => item.category !== "exclusive" || !lookup.get(item.itemId)?.dropped,
+        (item) => item.category !== "exclusive" || !dexStore.hasCollected(item),
       ),
     };
   });
@@ -43,9 +45,7 @@ export const useLootStore = defineStore("loot", () => {
       : null,
   );
 
-  const currentExclusives = computed(() => {
-    return exclusivesFromConfig(currentChestConfig.value);
-  });
+  const currentExclusives = computed(() => exclusivesFromConfig(currentChestConfig.value));
 
   function ensureChestPreviewKey(config) {
     if (!config || typeof config !== "object") {
@@ -62,19 +62,22 @@ export const useLootStore = defineStore("loot", () => {
 
   function exclusivesFromConfig(config) {
     if (!config?.sets) return [];
+
     const items = [];
     for (const setKey of ["newExclusive", "returningExclusive"]) {
       const entry = config.sets[setKey]?.items?.[0];
       if (!entry) continue;
-      const obtained = hasExclusiveDropped(entry.itemId);
+
+      const collected = dexStore.hasCollected(entry);
       items.push({
         itemId: entry.itemId,
         label: entry.label,
         setKey,
-        obtained,
-        badgeText: setKey === "newExclusive" && !obtained ? "NEW" : "",
+        collected,
+        badgeText: setKey === "newExclusive" && !collected ? "NEW" : "",
       });
     }
+
     return items;
   }
 
@@ -92,10 +95,20 @@ export const useLootStore = defineStore("loot", () => {
     .onItemId(
       ITEM_ID.TICKET_SCRAP,
       () => inventoryStore.adjustInventory("blackLionWeaponTicket", 0.1)
-    )
-    .onCategory("exclusive", (drop) => {
-      markExclusiveDropped(drop.itemId);
+    );
+
+  const dexDropCategories = [
+    "exclusive",
+    "uncommon",
+    "rare",
+    "superRare",
+  ];
+
+  for (const category of dexDropCategories) {
+    lootHandler.onCategory(category, (drop) => {
+      dexStore.markCollected(drop);
     });
+  }
 
   /**
    * Load a specific chest by providing a chest config.
@@ -112,10 +125,7 @@ export const useLootStore = defineStore("loot", () => {
     baseLootTable.value = buildLootTable(merged);
     currentChestConfig.value = normalizedConfig;
 
-    const exclusiveItems = baseLootTable.value.fifthDrop.filter(
-      (item) => item.category === "exclusive",
-    );
-    trackNewExclusives(exclusiveItems);
+    dexStore.markSeenFromChestConfig(normalizedConfig);
 
     chestHistory.value.push({
       id: ++historyIdCounter,
@@ -134,7 +144,7 @@ export const useLootStore = defineStore("loot", () => {
   function generateCurrentChestConfig() {
     const config =
       nextChestConfig.value ??
-      generateChestConfig(currentChestConfig.value, exclusiveLookup.value);
+      generateChestConfig(currentChestConfig.value, dexStore.seenExclusiveItemIds);
 
     nextChestConfig.value = null;
     loadChest(config);
@@ -154,7 +164,7 @@ export const useLootStore = defineStore("loot", () => {
 
     nextChestConfig.value = generateChestConfig(
       currentChestConfig.value,
-      exclusiveLookup.value,
+      dexStore.seenExclusiveItemIds,
     );
 
     return nextChestConfig.value;
@@ -187,37 +197,10 @@ export const useLootStore = defineStore("loot", () => {
     return drops;
   }
 
-  function trackNewExclusives(items) {
-    for (const item of items) {
-      if (exclusiveLookup.value.has(item.itemId)) {
-        continue;
-      } else {
-        exclusiveLookup.value.set(item.itemId, {
-          itemId: item.itemId,
-          label: item.label,
-          dropped: false,
-        });
-      }
-    }
-  }
-
-  function markExclusiveDropped(itemId) {
-    const entry = exclusiveLookup.value.get(itemId);
-    if (entry) {
-      entry.dropped = true;
-      return true;
-    }
-    return false;
-  }
-
-  function hasExclusiveDropped(itemId) {
-    return exclusiveLookup.value.get(itemId)?.dropped ?? false;
-  }
-
   function resetLootStore() {
-    //reset history and exclusive lookup
+    //reset history and dex progress
     chestHistory.value = [];
-    exclusiveLookup.value.clear();
+    dexStore.resetProgress();
     //reset current config and loot table
     currentChestConfig.value = null;
     nextChestConfig.value = null;
@@ -234,8 +217,6 @@ export const useLootStore = defineStore("loot", () => {
     currentExclusives,
     lootHandler,
     exclusivesFromConfig,
-    hasExclusiveDropped,
-    exclusiveLookup,
     loadChest,
     prepareNextChestConfig,
     generateCurrentChestConfig,

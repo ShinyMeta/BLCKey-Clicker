@@ -1,5 +1,5 @@
 const client = require("gw2api-client");
-const cacheMemory = require("gw2api-client/src/cache/memory");
+const cacheNull = require("gw2api-client/src/cache/null");
 const fs = require("fs");
 const path = require("path");
 const {
@@ -8,17 +8,15 @@ const {
 } = require("./lib/catalog-utils.cjs");
 
 const api = client();
-api.cacheStorage(cacheMemory());
+api.cacheStorage(cacheNull());
 
 const OUTPUT = path.join(__dirname, "../src/store/loot/config/sets/weapons.json");
 const CATEGORY_ID = 76;
 
 async function main() {
   const existingCatalog = readExistingCatalog(OUTPUT);
-  const existingSets =
-    existingCatalog.sets && typeof existingCatalog.sets === "object"
-      ? existingCatalog.sets
-      : {};
+  const existingSets = existingCatalog.sets;
+  const existingSetsByLabel = new Map(existingSets.map((set) => [set.label, set]));
 
   console.log(`Fetching achievement category ${CATEGORY_ID}...`);
   const category = await api.achievements().categories().get(CATEGORY_ID);
@@ -47,10 +45,9 @@ async function main() {
   const skins = await api.skins().many(allSkinIds);
   const skinMap = Object.fromEntries(skins.map((s) => [s.id, s]));
 
-  const sets = {};
-  const fetchedSetNames = new Set();
+  const mergedSetsByLabel = new Map();
   for (const achievement of weaponSets) {
-    fetchedSetNames.add(achievement.name);
+    const setLabel = achievement.name;
 
     const fetchedItems = achievement.bits.map((bit) => {
       const skin = skinMap[bit.id];
@@ -60,30 +57,30 @@ async function main() {
       };
     });
 
-    const existingSet =
-      existingSets[achievement.name] && typeof existingSets[achievement.name] === "object"
-        ? existingSets[achievement.name]
-        : {};
-
-    sets[achievement.name] = {
+    const existingSet = existingSetsByLabel.get(setLabel) ?? {};
+    mergedSetsByLabel.set(setLabel, {
       ...existingSet,
+      label: setLabel,
       achievementId: achievement.id,
       items: mergeItemsByNumericKey(existingSet.items, fetchedItems, "skinId"),
-    };
+    });
   }
 
-  for (const [setName, setValue] of Object.entries(existingSets)) {
-    if (!fetchedSetNames.has(setName)) {
-      sets[setName] = setValue;
+  for (const existingSet of existingSets) {
+    if (!mergedSetsByLabel.has(existingSet.label)) {
+      mergedSetsByLabel.set(existingSet.label, existingSet);
     }
   }
+
+  const sets = [...mergedSetsByLabel.values()];
 
   const output = {
     ...existingCatalog,
     sets,
   };
   fs.writeFileSync(OUTPUT, JSON.stringify(output, null, 2) + "\n");
-  console.log(`Wrote ${Object.keys(sets).length} weapon sets to ${OUTPUT}`);
+  console.log(`Wrote ${sets.length} weapon sets to ${OUTPUT}`);
+  return;
 }
 
 main().catch((err) => {

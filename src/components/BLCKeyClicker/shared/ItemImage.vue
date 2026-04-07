@@ -355,9 +355,7 @@ const isCompleted = computed(() => {
     return props.completed;
   }
 
-  return Boolean(
-    sourceItem.value.completed ?? sourceItem.value.obtained ?? sourceItem.value.dropped
-  );
+  return Boolean(sourceItem.value.collected);
 });
 
 const resolvedBadgeText = computed(() => {

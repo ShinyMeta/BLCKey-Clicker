@@ -66,8 +66,9 @@ import { useRightPanelStore } from "@/store/RightPanelStore";
 
 const MENUS = {
   root: [
-    { icon: "mdi-cog-outline", title: "Settings", path: ["settings"] },
+    { icon: "mdi-notebook", title: "BlckéDex", path: ["dex"] },
     { icon: "mdi-history", title: "History", path: ["history"] },
+    { icon: "mdi-cog", title: "Settings", path: ["settings"] },
     { icon: "mdi-help-circle", title: "Help", path: ["help"] },
   ],
   settings: [
