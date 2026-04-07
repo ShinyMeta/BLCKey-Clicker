@@ -70,6 +70,8 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useStorage } from "@vueuse/core";
 import { useInventoryStore } from "@/store/inventoryStore";
 import { useTimerStore } from "@/store/timerStore";
+import { useDexStore } from "@/store/dexStore";
+import { useLootStore } from "@/store/loot/lootStore";
 import { useDevMenuController } from "@/services/dev/devMenuController";
 
 const STORAGE_KEY = "blc.devMenu.windowState";
@@ -88,6 +90,8 @@ const DEFAULT_WINDOW_STATE = {
 
 const inventoryStore = useInventoryStore();
 const timerStore = useTimerStore();
+const dexStore = useDexStore();
+const lootStore = useLootStore();
 const { isDevMenuEnabled } = useDevMenuController();
 
 const persistedWindowState = useStorage(
@@ -147,7 +151,27 @@ const actions = [
     label: "Set timer to 0",
     run: () => timerStore.stop(),
   },
+  {
+    label: "Unlock both Exclusives",
+    run: () => unlockBothExclusives(),
+  },
 ];
+
+function unlockBothExclusives() {
+  const sets = lootStore.currentChestConfig?.sets;
+  if (!sets) {
+    return;
+  }
+
+  for (const setKey of ["newExclusive", "returningExclusive"]) {
+    const entry = sets[setKey]?.items?.[0];
+    if (!entry) {
+      continue;
+    }
+
+    dexStore.markCollected(entry);
+  }
+}
 
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);

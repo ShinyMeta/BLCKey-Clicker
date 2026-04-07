@@ -158,7 +158,7 @@ const weaponPreviewItems = computed(() => {
     const previewItem = weaponSet.previewItem ?? weaponSet.items[0];
     if (!previewItem) continue;
 
-    items.push({ ...previewItem, key: setKey, collection: weaponSet.name });
+    items.push({ ...previewItem, key: setKey, collection: weaponSet.label });
   }
 
   return items;
