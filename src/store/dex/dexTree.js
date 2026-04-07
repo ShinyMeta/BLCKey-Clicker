@@ -32,7 +32,7 @@ export class DexTree {
 
     const newNode = newDexNode({ label, idKey, idValue: _idValue, status });
     newNode.uniqueId = uniqueId;
-    parentNode.entries.push(newNode);
+    parentNode.childNodes.push(newNode);
     this.treeIndex.set(newNode.uniqueId, newNode);
   }
 
@@ -56,7 +56,7 @@ export class DexTree {
 
   sort() {
     forEachNode(this.root, (node) => {
-      node.entries.sort((a, b) => a.idValue - b.idValue || 
+      node.childNodes.sort((a, b) => a.idValue - b.idValue || 
         a.label.localeCompare(b.label));
     });
   }
@@ -72,18 +72,15 @@ export class DexTree {
   rawTreeObject() {
     return this.root;
   }
-
 }
 
-
-
-function newDexNode({ label, idKey, idValue, status, entries }) {
+function newDexNode({ label, idKey, idValue, status, childNodes }) {
   const thisNode = {}
   thisNode.label = label;
   thisNode.idKey = idKey;
   thisNode.idValue = idValue;
   thisNode.status = status ?? DEX_STATUS.UNKNOWN;
-  thisNode.entries = entries ?? [];
+  thisNode.childNodes = childNodes ?? [];
   if (idKey) {
     thisNode[idKey] = idValue;
   }
@@ -92,13 +89,14 @@ function newDexNode({ label, idKey, idValue, status, entries }) {
 
 function forEachNode(thisNode, callback) {
   callback(thisNode);
-  thisNode.entries.forEach((child) => forEachNode(child, callback));
+  thisNode.childNodes.forEach((child) => forEachNode(child, callback));
 }
 
 function forEachLeaf(thisNode, callback) {
-  if (thisNode.entries.length === 0) {
+  const childNodes = thisNode.childNodes;
+  if (childNodes.length === 0) {
     callback(thisNode);
   } else {
-    thisNode.entries.forEach((child) => forEachLeaf(child, callback));
+    childNodes.forEach((child) => forEachLeaf(child, callback));
   }
 }

@@ -72,7 +72,7 @@ export const useDexStore = defineStore("dex", () => {
 
 	const seenExclusiveItemIds = computed(() => {
     const result = new Set();
-    dexTree.value.getNode("exclusives")?.entries
+		dexTree.value.getNode("exclusives")?.childNodes
 			.filter((entry) => entry.status !== DEX_STATUS.UNKNOWN)
       .forEach(({itemId}) => result.add(itemId));
     return result;
