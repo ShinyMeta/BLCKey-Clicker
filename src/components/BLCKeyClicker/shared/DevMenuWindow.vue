@@ -70,7 +70,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { useStorage } from "@vueuse/core";
 import { useInventoryStore } from "@/store/inventoryStore";
 import { useTimerStore } from "@/store/timerStore";
-import { useDexStore } from "@/store/dexStore";
+import { useDexStore } from "@/store/dex/dexStore";
 import { useLootStore } from "@/store/loot/lootStore";
 import { useDevMenuController } from "@/services/dev/devMenuController";
 

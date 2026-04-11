@@ -82,7 +82,7 @@ import ItemImage from "@/components/BLCKeyClicker/shared/ItemImage.vue";
 import OpenChestButton from "@/components/BLCKeyClicker/openChest/OpenChestButton.vue";
 import LootRow from "@/components/BLCKeyClicker/openChest/LootRow.vue";
 import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
-import { useDexStore } from "@/store/dexStore";
+import { useDexStore } from "@/store/dex/dexStore";
 import { useInventoryStore } from "@/store/inventoryStore";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import { emitSoundEvent } from "@/services/sound";

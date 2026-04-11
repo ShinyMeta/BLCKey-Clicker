@@ -5,23 +5,28 @@ import tonicsCatalog from "@/store/loot/config/sets/tonics.json";
 import weaponsCatalog from "@/store/loot/config/sets/weapons.json";
 import template from "@/store/loot/config/template.json";
 
-import { DEX_STATUS, DexTree } from "./dexTree";
+import { DEX_STATUS, newDexNode } from "@/store/dex/dexTree";
+import * as DexTree from "@/store/dex/dexTree";
 
-const DEFAULT_DEX_TREE = new DexTree();
-
-function injestFlatList({label, items, parentId = "root", status = DEX_STATUS.UNKNOWN}) {
-  DEFAULT_DEX_TREE.addNode(parentId, { label, status })
+function injestFlatList(rootNode, {label, items, status = DEX_STATUS.UNKNOWN}) {
+  const flatNode = newDexNode({ label, status });
+  DexTree.addChildNode(rootNode, flatNode);
   items.forEach((item) => {
-    DEFAULT_DEX_TREE.addNode(label, { ...item, idKey: "itemId", status });
+    DexTree.addChildNode(flatNode, newDexNode({ ...item, idKey: "itemId", status }));
   });
 }
 
-function injestWeaponsCatalog(catalog) {
-  DEFAULT_DEX_TREE.addNode("root", { label: "weapons" })
+function injestWeaponsCatalog(rootNode, catalog) {
+  const weaponsNode = newDexNode({ label: "weapons" });
+  DexTree.addChildNode(rootNode, weaponsNode);
+
   catalog.sets.forEach(({items, ...set}) => {
-    DEFAULT_DEX_TREE.addNode("weapons", { ...set, idKey: "achievementId" });
+    const collectionNode = newDexNode({ ...set, idKey: "achievementId" });
+    DexTree.addChildNode(weaponsNode, collectionNode);
+
     items.forEach((item) => {
-      DEFAULT_DEX_TREE.addNode(`achievementId:${set.achievementId}`, { ...item, idKey: "skinId" });
+      const skinNode = newDexNode({ ...item, idKey: "skinId" });
+      DexTree.addChildNode(collectionNode, skinNode);
     });
   });
 }
@@ -34,9 +39,14 @@ const flatCatalogsToInjest = [
   { label: "contracts", items: template.superRare.items, status: DEX_STATUS.SEEN },
 ];
 
-flatCatalogsToInjest.forEach(injestFlatList);
-injestWeaponsCatalog(weaponsCatalog);
-DEFAULT_DEX_TREE.sort();
+function newDefaultDexTree() {
+  const rootNode = newDexNode({ label: "root" });
+
+  flatCatalogsToInjest.forEach((x) => injestFlatList(rootNode, x));
+  injestWeaponsCatalog(rootNode, weaponsCatalog);
+  DexTree.sortTree(rootNode);
+  return rootNode;
+}
 
 
-export { DEFAULT_DEX_TREE };
+export { newDefaultDexTree };

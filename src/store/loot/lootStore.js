@@ -4,7 +4,7 @@ import { mergeTemplateWithConfig, buildLootTable, openChest } from "@/store/loot
 import { generateChestConfig } from "@/store/loot/generateChestConfig";
 import { LootHandler } from "@/store/loot/lootHandler";
 import { useInventoryStore } from "@/store/inventoryStore";
-import { useDexStore } from "@/store/dexStore";
+import { useDexStore } from "@/store/dex/dexStore";
 import template from "@/store/loot/config/template.json";
 
 const ITEM_ID = {

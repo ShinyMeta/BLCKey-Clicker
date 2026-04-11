@@ -1,95 +1,49 @@
-export const DEX_STATUS = Object.freeze({
+const DEX_STATUS = Object.freeze({
 	UNKNOWN: "unknown",
 	SEEN: "seen",
 	COLLECTED: "collected",
 });
 
-export class DexTree {
-  //DexTree holds the root node and the map index, with methods for stuff
-  constructor(root) {
-    this.root = root ?? newDexNode({ label: "root", status: DEX_STATUS.UNKNOWN });
-    this.root.uniqueId = "root";
-    this.treeIndex = new Map();
-    forEachNode(this.root, (node) => {
-      this.treeIndex.set(node.uniqueId, node);
-    });
-  }
-
-  addNode(parentUniqueId, { label, idKey, idValue, status, ...rest }) {
-    let uniqueId;
-    let _idValue = idValue ?? rest[idKey];
-    if (_idValue === undefined) {
-      uniqueId = label;
-    } else {
-      uniqueId = `${idKey}:${_idValue}`;
-    }
-
-    const parentNode = this.getNode(parentUniqueId);
-    const existingNode = this.getNode(uniqueId);
-    if (!parentNode || existingNode) { 
-      return;
-    }
-
-    const newNode = newDexNode({ label, idKey, idValue: _idValue, status });
-    newNode.uniqueId = uniqueId;
-    parentNode.childNodes.push(newNode);
-    this.treeIndex.set(newNode.uniqueId, newNode);
-  }
-
-  getNode(uniqueId) {
-    return this.treeIndex.get(uniqueId);
-  }
-
-  markSeen(uniqueId) {
-    const node = this.getNode(uniqueId);
-    if (node && node.status === DEX_STATUS.UNKNOWN) {
-      node.status = DEX_STATUS.SEEN;
-    }
-  }
-
-  markCollected(uniqueId) {
-    const node = this.getNode(uniqueId);  
-    if (node && node.status !== DEX_STATUS.COLLECTED) {
-      node.status = DEX_STATUS.COLLECTED;
-    }
-  }
-
-  sort() {
-    forEachNode(this.root, (node) => {
-      node.childNodes.sort((a, b) => a.idValue - b.idValue || 
-        a.label.localeCompare(b.label));
-    });
-  }
-
-  forEachNode(node = this.root, callback) {
-    forEachNode(node, callback);
-  }
-
-  forEachLeaf(node = this.root, callback) {
-    forEachLeaf(node, callback);
-  }
-
-  rawTreeObject() {
-    return this.root;
-  }
+function getUniqueId({label, itemId, skinId, achievementId} = {}) {
+  if (achievementId) return `achievementId:${achievementId}`;
+  if (skinId) return `skinId:${skinId}`;
+  if (itemId) return `itemId:${itemId}`;
+  return label;
 }
 
-function newDexNode({ label, idKey, idValue, status, childNodes }) {
+function getIdKey({itemId, skinId, achievementId} = {}) {
+  if (achievementId) return "achievementId";
+  if (skinId) return "skinId";
+  if (itemId) return "itemId";
+  return null;
+}
+
+
+function newDexNode({ label, idKey, idValue, status, childNodes, ...rest }) {
   const thisNode = {}
   thisNode.label = label;
-  thisNode.idKey = idKey;
-  thisNode.idValue = idValue;
+  thisNode.idKey = idKey ?? getIdKey(rest);
+  thisNode.idValue = idValue ?? (thisNode.idKey ? rest[thisNode.idKey] : null);
   thisNode.status = status ?? DEX_STATUS.UNKNOWN;
   thisNode.childNodes = childNodes ?? [];
-  if (idKey) {
-    thisNode[idKey] = idValue;
+  if (thisNode.idKey) {
+    thisNode[thisNode.idKey] = thisNode.idValue;
   }
   return thisNode;
 }
 
-function forEachNode(thisNode, callback) {
-  callback(thisNode);
-  thisNode.childNodes.forEach((child) => forEachNode(child, callback));
+function addChildNode(parentNode, childNode) {
+  parentNode.childNodes.push(childNode);
+}
+
+function forEachNode(thisNode, callback, leavesFirst = true) {
+  if (leavesFirst) {
+    thisNode.childNodes.forEach((child) => forEachNode(child, callback, leavesFirst));
+    callback(thisNode);
+  } else {
+    callback(thisNode);
+    thisNode.childNodes.forEach((child) => forEachNode(child, callback, leavesFirst));
+  }
 }
 
 function forEachLeaf(thisNode, callback) {
@@ -99,4 +53,37 @@ function forEachLeaf(thisNode, callback) {
   } else {
     childNodes.forEach((child) => forEachLeaf(child, callback));
   }
+}
+
+function sortTree(thisNode) {
+  forEachNode(thisNode, (node) => {
+    node.childNodes.sort((a, b) => a.idValue - b.idValue || 
+      a.label.localeCompare(b.label));
+  });
+}
+
+function patchTree(newTree, existingTree) {
+  const newTreeIndex = new Map();
+  forEachNode(newTree, (node) => {
+    newTreeIndex.set(getUniqueId(node), node);
+  });
+  forEachNode(existingTree, (node) => {
+    const uniqueId = getUniqueId(node);
+    const nodeFromNewTree = newTreeIndex.get(uniqueId);
+    if (nodeFromNewTree) {
+      nodeFromNewTree.status = node.status;
+    }
+  });
+  return newTree;
+}
+
+export  {
+  DEX_STATUS,
+  getUniqueId,
+  newDexNode,
+  addChildNode,
+  forEachNode,
+  forEachLeaf,
+  sortTree,
+  patchTree,
 }

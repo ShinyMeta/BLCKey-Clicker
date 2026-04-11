@@ -279,7 +279,7 @@ import { useMiscSettingsStore } from "@/services/settings/miscSettingsStore";
 import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import template from "@/store/loot/config/template.json";
 import { mergeTemplateWithConfig, buildLootTable } from "@/store/loot/lootService";
-import { useDexStore } from "@/store/dexStore";
+import { useDexStore } from "@/store/dex/dexStore";
 import { storeToRefs } from "pinia";
 
 const CATEGORY_ORDER = [

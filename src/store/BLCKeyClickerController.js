@@ -4,7 +4,7 @@ import { useLootStore } from "@/store/loot/lootStore";
 import { useMapCompStore } from "@/store/mapCompStore";
 import { useStatStore } from "@/store/statStore";
 import { useTimerStore } from "@/store/timerStore";
-import { useDexStore } from "@/store/dexStore";
+import { useDexStore } from "@/store/dex/dexStore";
 import { emitSoundEvent } from "@/services/sound";
 import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
