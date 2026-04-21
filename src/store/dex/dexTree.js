@@ -19,13 +19,14 @@ function getIdKey({itemId, skinId, achievementId} = {}) {
 }
 
 
-function newDexNode({ label, idKey, idValue, status, childNodes, ...rest }) {
+function newDexNode({ label, idKey, idValue, status, childNodes, icon, ...rest }) {
   const thisNode = {}
   thisNode.label = label;
   thisNode.idKey = idKey ?? getIdKey(rest);
   thisNode.idValue = idValue ?? (thisNode.idKey ? rest[thisNode.idKey] : null);
   thisNode.status = status ?? DEX_STATUS.UNKNOWN;
   thisNode.childNodes = childNodes ?? [];
+  thisNode.icon = icon ?? null;
   if (thisNode.idKey) {
     thisNode[thisNode.idKey] = thisNode.idValue;
   }
@@ -57,8 +58,17 @@ function forEachLeaf(thisNode, callback) {
 
 function sortTree(thisNode) {
   forEachNode(thisNode, (node) => {
-    node.childNodes.sort((a, b) => a.idValue - b.idValue || 
-      a.label.localeCompare(b.label));
+    const childNodes = node.childNodes;
+    if (childNodes.length < 2) {
+      return;
+    }
+
+    const canSortById = childNodes.every((child) => Number.isFinite(child?.idValue));
+    if (!canSortById) {
+      return;
+    }
+
+    childNodes.sort((a, b) => a.idValue - b.idValue);
   });
 }
 

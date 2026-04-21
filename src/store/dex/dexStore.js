@@ -33,7 +33,7 @@ export const useDexStore = defineStore("dex", () => {
   // establish reactive status totals and stuff
   const dexTreeReactiveIndex = new DexTreeReactiveIndex(dexTree);
 
-  
+  const getDexTreeReactiveIndex = computed(() => dexTreeReactiveIndex);
 
 	const seenExclusiveItemIds = computed(() => {
     const result = new Set();
@@ -83,7 +83,7 @@ export const useDexStore = defineStore("dex", () => {
 
 	return {
     dexTree,
-    dexTreeReactiveIndex,
+    getDexTreeReactiveIndex,
 		seenExclusiveItemIds,
 		markSeenFromChestConfig,
 		markCollected,

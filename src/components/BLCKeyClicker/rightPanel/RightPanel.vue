@@ -40,7 +40,8 @@
       </v-list>
   
       <template v-else>
-        <GraphicsSettings v-if="currentView === 'graphics'" />
+        <DexMenu v-if="currentView === 'dex'" />
+        <GraphicsSettings v-else-if="currentView === 'graphics'" />
         <SoundSettings v-else-if="currentView === 'sound'" />
         <HistoryDisplay v-else-if="currentView === 'history'" />
         <HistoryDetail
@@ -61,6 +62,7 @@ import SoundSettings from "./settings/SoundSettings.vue";
 import HistoryDisplay from "./history/HistoryDisplay.vue";
 import HistoryDetail from "./history/HistoryDetail.vue";
 import RightPanelHelp from "./help/RightPanelHelp.vue";
+import DexMenu from "./dex/DexMenu.vue";
 
 import { useRightPanelStore } from "@/store/RightPanelStore";
 

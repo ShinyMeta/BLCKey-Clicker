@@ -41,13 +41,44 @@ export class DexTreeReactiveIndex {
     this.treeIndex.clear();
     this.forEachNode(this.dexTreeRef.value, (node) => {
       const uniqueId = getUniqueId(node)
+      const statusTotals = computed(this.statusTotalFactory(node));
       const reactiveNodeReference = {
         node,
-        // uniqueId: computed(() => getUniqueId(node)),
-        statusTotals: computed(this.statusTotalFactory(node)),
+        uniqueId: computed(() => getUniqueId(node)),
+        statusTotals,
+        isLeaf: computed(() => (node.childNodes?.length ?? 0) === 0),
+        isUnknown: computed(() => node.status === DEX_STATUS.UNKNOWN),
+        isCollected: computed(() => node.status === DEX_STATUS.COLLECTED),
+        collectedCount: computed(() => statusTotals.value[DEX_STATUS.COLLECTED] ?? 0),
+        seenOnlyCount: computed(() => statusTotals.value[DEX_STATUS.SEEN] ?? 0),
+        unknownCount: computed(() => statusTotals.value[DEX_STATUS.UNKNOWN] ?? 0),
+        seenCount: computed(() =>
+          (statusTotals.value[DEX_STATUS.COLLECTED] ?? 0) + (statusTotals.value[DEX_STATUS.SEEN] ?? 0)
+        ),
+        totalCount: computed(() => {
+          const t = statusTotals.value;
+          return (t[DEX_STATUS.COLLECTED] ?? 0) + (t[DEX_STATUS.SEEN] ?? 0) + (t[DEX_STATUS.UNKNOWN] ?? 0);
+        }),
+        reactiveChildNodes: computed(() =>
+          node.childNodes.map((child) => this.treeIndex.get(getUniqueId(child))).filter(Boolean)
+        ),
+        dexNumber: 0,
       }
       this.treeIndex.set(uniqueId, reactiveNodeReference);
     });
+
+    this.assignDexNumbers();
+  }
+
+  assignDexNumbers() {
+    this.forEachNode(this.dexTreeRef.value, (node) => {
+      node.childNodes.forEach((child, index) => {
+        const childRef = this.treeIndex.get(getUniqueId(child));
+        if (childRef) {
+          childRef.dexNumber = index + 1;
+        }
+      });
+    }, false);
   }
 
   getNode(nodeLike) {
@@ -79,12 +110,22 @@ export class DexTreeReactiveIndex {
     });
   }
 
-  sort() {
-    this.forEachNode(this.dexTreeRef.value, (node) => {
-      node.childNodes.sort((a, b) => a.idValue - b.idValue || 
-        a.label.localeCompare(b.label));
-    });
-  }
+  // sort() {
+  //   this.forEachNode(this.dexTreeRef.value, (node) => {
+  //     const childNodes = node.childNodes;
+  //     if (childNodes.length < 2) {
+  //       return;
+  //     }
+
+  //     const canSortById = childNodes.every((child) => Number.isFinite(child?.idValue));
+  //     if (!canSortById) {
+  //       return;
+  //     }
+
+  //     childNodes.sort((a, b) => a.idValue - b.idValue);
+  //   });
+  //   this.assignDexNumbers();
+  // }
 
   forEachNode(node, callback, leavesFirst = true) {
     if (!node) return;
