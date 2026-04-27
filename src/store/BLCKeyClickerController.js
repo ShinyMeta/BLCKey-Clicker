@@ -10,10 +10,10 @@ import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 
 const GAME_STATES = Object.freeze({
-  NEW_GAME: "newGame",
-  ACTIVE_CHEST_CYCLE: "activeChestCycle",
-  BETWEEN_CHEST_CYCLES: "betweenChestCycles",
-  GAME_OVER: "gameOver",
+  NEW_GAME: "NEW_GAME",
+  ACTIVE_CHEST_CYCLE: "ACTIVE_CHEST_CYCLE",
+  BETWEEN_CHEST_CYCLES: "BETWEEN_CHEST_CYCLES",
+  GAME_OVER: "GAME_OVER",
 });
 
 export const useBLCKeyClickerController = defineStore(

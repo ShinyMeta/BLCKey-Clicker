@@ -1,7 +1,7 @@
 const DEX_STATUS = Object.freeze({
-	UNKNOWN: "unknown",
-	SEEN: "seen",
-	COLLECTED: "collected",
+	UNKNOWN: "UNKNOWN",
+	SEEN: "SEEN",
+	COLLECTED: "COLLECTED",
 });
 
 function getUniqueId({label, itemId, skinId, achievementId} = {}) {
