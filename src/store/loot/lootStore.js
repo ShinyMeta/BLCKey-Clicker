@@ -1,10 +1,13 @@
 import { defineStore } from "pinia";
-import { shallowRef, ref, computed, toRaw } from "vue";
+import { shallowRef, computed, toRaw } from "vue";
+import { StorageSerializers } from "@vueuse/core";
 import { mergeTemplateWithConfig, buildLootTable, openChest } from "@/store/loot/lootService";
 import { generateChestConfig } from "@/store/loot/generateChestConfig";
 import { LootHandler } from "@/store/loot/lootHandler";
 import { useInventoryStore } from "@/store/inventoryStore";
 import { useDexStore } from "@/store/dex/dexStore";
+import { useSaveManager } from "@/store/saveManager";
+import { fetchItemLikeMetadata } from "@/utils/gw2api";
 import template from "@/store/loot/config/template.json";
 
 const ITEM_ID = {
@@ -16,11 +19,26 @@ const ITEM_ID = {
 };
 
 export const useLootStore = defineStore("loot", () => {
+  const saveManager = useSaveManager();
+  const lootSaveCategory = saveManager.useSaveCategory("loot");
+
   const baseLootTable = shallowRef(null);
-  const currentChestConfig = ref(null);
-  const nextChestConfig = ref(null);
+  const currentChestConfig = lootSaveCategory.useSaveCategoryStorage("currentChestConfig", {
+    defaultValue: null,
+    useStorageOptions: {
+      serializer: StorageSerializers.object,
+    },
+  });
+  const nextChestConfig = lootSaveCategory.useSaveCategoryStorage("nextChestConfig", {
+    defaultValue: null,
+    useStorageOptions: {
+      serializer: StorageSerializers.object,
+    },
+  });
   const lastDrops = shallowRef([]);
-  const chestHistory = ref([]);
+  const chestHistory = lootSaveCategory.useSaveCategoryStorage("chestHistory", {
+    defaultValue: [],
+  });
   let historyIdCounter = 0;
 
   const dexStore = useDexStore();
@@ -60,6 +78,35 @@ export const useLootStore = defineStore("loot", () => {
     return config;
   }
 
+  function getHistoryCounterSeed(historyEntries) {
+    if (!Array.isArray(historyEntries) || historyEntries.length === 0) {
+      return 0;
+    }
+
+    return historyEntries.reduce((maxId, entry) => {
+      const entryId = Number(entry?.id);
+      if (!Number.isFinite(entryId)) {
+        return maxId;
+      }
+
+      return Math.max(maxId, entryId);
+    }, 0);
+  }
+
+  function hydratePersistedLootState() {
+    historyIdCounter = getHistoryCounterSeed(chestHistory.value);
+
+    if (!currentChestConfig.value) {
+      baseLootTable.value = null;
+      return;
+    }
+
+    const merged = mergeTemplateWithConfig(template, currentChestConfig.value);
+    baseLootTable.value = buildLootTable(merged);
+  }
+
+  hydratePersistedLootState();
+
   function exclusivesFromConfig(config) {
     if (!config?.sets) return [];
 
@@ -79,6 +126,36 @@ export const useLootStore = defineStore("loot", () => {
     }
 
     return items;
+  }
+
+  function collectChestItemLikeRefs(table) {
+    if (!table) return [];
+
+    const itemLikeRefs = [];
+
+    for (const section of ["guaranteed", "commonLeft", "commonRight", "fifthDrop"]) {
+      const items = table[section] ?? [];
+      for (const item of items) {
+        const skinId = item?.skinId;
+        const itemId = item?.itemId ?? item?.id;
+
+        if (skinId == null && itemId == null) {
+          continue;
+        }
+
+        itemLikeRefs.push(item);
+      }
+    }
+
+    return itemLikeRefs;
+  }
+
+  function prefetchChestItemMetadata(table) {
+    const refs = collectChestItemLikeRefs(table);
+    if (refs.length === 0) return;
+
+    // Warm the gw2api-client cache so first reveal/open does not block on metadata.
+    void fetchItemLikeMetadata(refs);
   }
 
   lootHandler
@@ -124,6 +201,8 @@ export const useLootStore = defineStore("loot", () => {
     const merged = mergeTemplateWithConfig(template, normalizedConfig);
     baseLootTable.value = buildLootTable(merged);
     currentChestConfig.value = normalizedConfig;
+
+    prefetchChestItemMetadata(baseLootTable.value);
 
     dexStore.markSeenFromChestConfig(normalizedConfig);
 
@@ -199,11 +278,10 @@ export const useLootStore = defineStore("loot", () => {
 
   function resetLootStore() {
     //reset history and dex progress
-    chestHistory.value = [];
+    lootSaveCategory.resetCategory();
+    historyIdCounter = 0;
     dexStore.resetProgress();
     //reset current config and loot table
-    currentChestConfig.value = null;
-    nextChestConfig.value = null;
     baseLootTable.value = null;
   }
 

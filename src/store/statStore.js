@@ -1,11 +1,27 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { useSaveManager } from "@/store/saveManager";
+
+const DEFAULT_TOTAL_KEYS_SPENT = {
+  blcKey: 0,
+  goldenKey: 0,
+};
 
 export const useStatStore = defineStore("stat", () => {
-  const totalMapComps = ref(0);
-  const totalKeysSpent = ref({blcKey: 0, goldenKey: 0});
-  const chestsSinceLastFifthDrop = ref(0);
-  const unluckiestStreak = ref(0);
+  const saveManager = useSaveManager();
+  const statSaveCategory = saveManager.useSaveCategory("stat");
+
+  const totalMapComps = statSaveCategory.useSaveCategoryStorage("totalMapComps", {
+    defaultValue: 0,
+  });
+  const totalKeysSpent = statSaveCategory.useSaveCategoryStorage("totalKeysSpent", {
+    defaultValue: { ...DEFAULT_TOTAL_KEYS_SPENT },
+  });
+  const chestsSinceLastFifthDrop = statSaveCategory.useSaveCategoryStorage("chestsSinceLastFifthDrop", {
+    defaultValue: 0,
+  });
+  const unluckiestStreak = statSaveCategory.useSaveCategoryStorage("unluckiestStreak", {
+    defaultValue: 0,
+  });
 
   function incrementTotalMapComps() {
     totalMapComps.value += 1;
@@ -34,10 +50,7 @@ export const useStatStore = defineStore("stat", () => {
   }
 
   function resetStats() {
-    totalMapComps.value = 0;
-    totalKeysSpent.value = {blcKey: 0, goldenKey: 0};
-    chestsSinceLastFifthDrop.value = 0;
-    unluckiestStreak.value = 0;
+    statSaveCategory.resetCategory();
   }
 
   return {

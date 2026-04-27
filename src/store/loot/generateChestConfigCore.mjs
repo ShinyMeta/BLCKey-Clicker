@@ -154,7 +154,7 @@ export function generateChestConfigFromCatalogs({
   return {
     __previewKey: createChestPreviewKey(),
     name: name ?? pickRandomChestName(chestNames),
-    appearanceType: Math.floor(Math.random() * 4),
+    appearanceType: Math.floor(Math.random() * 5),
     sets: {
       guaranteedItem: pickRandom( guaranteedItemCatalog, guaranteedItemCatalog.pickCount, prevIds),
       returningExclusive: nextExclusives[0],

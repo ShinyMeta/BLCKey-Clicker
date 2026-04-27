@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { useStorage } from "@vueuse/core";
+import { useSaveManager } from "@/store/saveManager";
 
 export const DEX_DISPLAY_BEHAVIOR = Object.freeze({
   SHOW_ALL: "SHOW_ALL",
@@ -8,14 +8,23 @@ export const DEX_DISPLAY_BEHAVIOR = Object.freeze({
 });
 
 export const useMiscSettingsStore = defineStore("miscSettings", () => {
-  const previewPercentMode = useStorage("misc.previewPercentMode", "perChest");
+  const saveManager = useSaveManager();
+  const miscSaveCategory = saveManager.useSaveCategory("misc");
 
-  const dexDisplayBehavior = useStorage("misc.dexDisplayBehavior", DEX_DISPLAY_BEHAVIOR.SHOW_COLLECTED);
+  const previewPercentMode = miscSaveCategory.useSaveCategoryStorage("previewPercentMode", {
+    defaultValue: "perChest",
+  });
+
+  const dexDisplayBehavior = miscSaveCategory.useSaveCategoryStorage("dexDisplayBehavior", {
+    defaultValue: DEX_DISPLAY_BEHAVIOR.SHOW_COLLECTED,
+  });
 
   // Persisted auto-attack settings for keys
-  const keyAutoAttack = useStorage("misc.keyAutoAttack", {
-    blcKey: true,
-    goldenKey: false,
+  const keyAutoAttack = miscSaveCategory.useSaveCategoryStorage("keyAutoAttack", {
+    defaultValue: {
+      blcKey: true,
+      goldenKey: false,
+    },
   });
 
   function toggleKeyAutoAttack(key) {

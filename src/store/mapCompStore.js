@@ -1,12 +1,17 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useStatStore } from "@/store/statStore";
+import { useSaveManager } from "@/store/saveManager";
 
 const MAX_MAP_COMP_COMPLETION_EVENTS = 10;
-
 export const useMapCompStore = defineStore("mapComp", () => {
+  const saveManager = useSaveManager();
+  const mapCompSaveCategory = saveManager.useSaveCategory("mapComp");
+
   const mapCompClicksToComp = ref(5);
-  const mapCompProgress = ref(0);
+  const mapCompProgress = mapCompSaveCategory.useSaveCategoryStorage("mapCompProgress", {
+    defaultValue: 0,
+  });
   const mapCompCompletionEvents = ref([]);
   const mapCompKeyDropChance = ref(0.3);
   let nextMapCompCompletionEventId = 0;
@@ -56,7 +61,7 @@ export const useMapCompStore = defineStore("mapComp", () => {
   }
 
   function resetMapComp() {
-    mapCompProgress.value = 0;
+    mapCompSaveCategory.resetCategory();
     mapCompCompletionEvents.value = [];
   }
 

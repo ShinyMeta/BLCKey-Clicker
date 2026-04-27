@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { useSaveManager } from "@/store/saveManager";
 
 const DEFAULT_INVENTORY = {
   blcKey: 25,
@@ -18,7 +18,11 @@ function roundInventoryAmount(value) {
 }
 
 export const useInventoryStore = defineStore("inventory", () => {
-  const inventory = ref({ ...DEFAULT_INVENTORY });
+  const saveManager = useSaveManager();
+  const inventorySaveCategory = saveManager.useSaveCategory("inventory");
+  const inventory = inventorySaveCategory.useSaveCategoryStorage("inventory", {
+    defaultValue: { ...DEFAULT_INVENTORY },
+  });
 
   /**
    * Add a numeric amount to an inventory field, rounding to one
@@ -48,7 +52,7 @@ export const useInventoryStore = defineStore("inventory", () => {
   }
 
   function resetInventory() {
-    inventory.value = { ...DEFAULT_INVENTORY };
+    inventorySaveCategory.resetCategory();
   }
 
   return {

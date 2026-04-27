@@ -1,12 +1,10 @@
 import { defineStore } from "pinia";
 import { computed } from "vue";
-import { useStorage } from "@vueuse/core";
+import { useSaveManager } from "@/store/saveManager";
 import { newDefaultDexTree } from "@/store/dex/defaultDexTree";
 import { DexTreeReactiveIndex } from "@/store/dex/dexTreeReactiveIndex";
 import { DEX_STATUS } from "@/store/dex/dexTree";
 import * as DexTree from "@/store/dex/dexTree";
-
-const DEX_STORAGE_KEY = "dex.dexTree";
 
 const CHEST_SET_KEYS = Object.freeze([
 	"newExclusive",
@@ -24,8 +22,13 @@ const WEAPON_SET_KEYS = Object.freeze([
 const DEFAULT_DEX_TREE = newDefaultDexTree();
 
 export const useDexStore = defineStore("dex", () => {
+	const saveManager = useSaveManager();
+	const dexSaveCategory = saveManager.useSaveCategory("dex");
+
 	// load from storage
-  const dexTree = useStorage(DEX_STORAGE_KEY, DEFAULT_DEX_TREE);
+	const dexTree = dexSaveCategory.useSaveCategoryStorage("dexTree", {
+		defaultValue: DEFAULT_DEX_TREE,
+	});
   // merge/patch with a fresh default tree to ensure new entries are added
   dexTree.value = DexTree.patchTree(newDefaultDexTree(), dexTree.value);
   // sort for ordering in the UI
