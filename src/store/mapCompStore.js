@@ -14,7 +14,6 @@ export const useMapCompStore = defineStore("mapComp", () => {
   });
   const mapCompCompletionEvents = ref([]);
   const mapCompKeyDropChance = ref(0.3);
-  let nextMapCompCompletionEventId = 0;
 
   const statStore = useStatStore();
 
@@ -30,9 +29,15 @@ export const useMapCompStore = defineStore("mapComp", () => {
     };
   }
 
+  function getNextMapCompCompletionEventId() {
+    const lastEvent = mapCompCompletionEvents.value[mapCompCompletionEvents.value.length - 1];
+    const lastId = Number(lastEvent?.id);
+    return Number.isFinite(lastId) ? lastId + 1 : 0;
+  }
+
   function appendMapCompletionEvent(reward, source = "unknown") {
     mapCompCompletionEvents.value.push({
-      id: nextMapCompCompletionEventId++,
+      id: getNextMapCompCompletionEventId(),
       reward,
       source,
     });
@@ -60,9 +65,8 @@ export const useMapCompStore = defineStore("mapComp", () => {
     return reward;
   }
 
-  function resetMapComp() {
-    mapCompSaveCategory.resetCategory();
-    mapCompCompletionEvents.value = [];
+  function resetMapComp(resetType = saveManager.resetTypes.SOFT) {
+    mapCompSaveCategory.resetCategory(resetType);
   }
 
   return {

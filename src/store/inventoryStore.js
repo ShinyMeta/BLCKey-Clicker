@@ -51,8 +51,8 @@ export const useInventoryStore = defineStore("inventory", () => {
     return true;
   }
 
-  function resetInventory() {
-    inventorySaveCategory.resetCategory();
+  function resetInventory(resetType = saveManager.resetTypes.SOFT) {
+    inventorySaveCategory.resetCategory(resetType);
   }
 
   return {

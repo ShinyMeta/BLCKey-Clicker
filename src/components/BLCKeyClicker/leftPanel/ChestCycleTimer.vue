@@ -24,7 +24,7 @@ const isBetweenChestCycles = computed(() => controller.isBetweenChestCycles);
 
 const timerButtonIcon = computed(() => {
   if (isBetweenChestCycles.value) return "mdi-download";
-  return controller.isPaused ? "mdi-play" : "mdi-pause";
+  return controller.isTimerPaused ? "mdi-play" : "mdi-pause";
 });
 
 const timerButtonColor = computed(() => {

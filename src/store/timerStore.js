@@ -23,6 +23,9 @@ export const useTimerStore = defineStore("timer", () => {
       remainingMs: 0,
       isPaused: false,
     },
+    reset: () => {
+      stop();
+    },
   });
 
   const remainingMs = ref(0);
@@ -122,7 +125,7 @@ export const useTimerStore = defineStore("timer", () => {
     writeSnapshot({ force: true });
   }
 
-  function reset() {
+  function restart() {
     stop();
     start();
   }
@@ -161,7 +164,7 @@ export const useTimerStore = defineStore("timer", () => {
     // actions
     start,
     stop,
-    reset,
+    restart,
     togglePause,
   };
 });

@@ -72,6 +72,7 @@ import { useInventoryStore } from "@/store/inventoryStore";
 import { useTimerStore } from "@/store/timerStore";
 import { useDexStore } from "@/store/dex/dexStore";
 import { useLootStore } from "@/store/loot/lootStore";
+import { useBLCKeyClickerController } from "@/store/BLCKeyClickerController";
 import { useDevMenuController } from "@/services/dev/devMenuController";
 
 const STORAGE_KEY = "blc.devMenu.windowState";
@@ -92,6 +93,7 @@ const inventoryStore = useInventoryStore();
 const timerStore = useTimerStore();
 const dexStore = useDexStore();
 const lootStore = useLootStore();
+const gameController = useBLCKeyClickerController();
 const { isDevMenuEnabled } = useDevMenuController();
 
 const persistedWindowState = useStorage(
@@ -150,6 +152,10 @@ const actions = [
   {
     label: "Set timer to 0",
     run: () => timerStore.stop(),
+  },
+  {
+    label: "New Game Reset",
+    run: () => gameController.newGameReset(),
   },
   {
     label: "Unlock both Exclusives",

@@ -49,8 +49,8 @@ export const useStatStore = defineStore("stat", () => {
     }
   }
 
-  function resetStats() {
-    statSaveCategory.resetCategory();
+  function resetStats(resetType = saveManager.resetTypes.SOFT) {
+    statSaveCategory.resetCategory(resetType);
   }
 
   return {

@@ -1,6 +1,6 @@
 <template>
   <v-overlay
-    :model-value="controller.isPaused"
+    :model-value="controller.isTimerPaused"
     contained
     persistent
     class="align-center justify-center"

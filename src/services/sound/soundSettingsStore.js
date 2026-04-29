@@ -6,12 +6,15 @@ const DEFAULT_VOLUME = 0.8;
 export const useSoundSettingsStore = defineStore("soundSettings", () => {
   const saveManager = useSaveManager();
   const soundSaveCategory = saveManager.useSaveCategory("sound");
+  const settingsResetType = saveManager.resetTypes.SETTINGS;
 
   const muted = soundSaveCategory.useSaveCategoryStorage("muted", {
     defaultValue: false,
+    resetType: settingsResetType,
   });
   const masterVolume = soundSaveCategory.useSaveCategoryStorage("masterVolume", {
     defaultValue: DEFAULT_VOLUME,
+    resetType: settingsResetType,
   });
   const channelVolumes = soundSaveCategory.useSaveCategoryStorage("channelVolumes", {
     defaultValue: {
@@ -19,6 +22,7 @@ export const useSoundSettingsStore = defineStore("soundSettings", () => {
       mapComp: DEFAULT_VOLUME,
       timer: DEFAULT_VOLUME,
     },
+    resetType: settingsResetType,
   });
 
   function effectiveVolume(channel) {

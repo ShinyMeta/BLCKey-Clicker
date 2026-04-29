@@ -5,6 +5,7 @@ import { useMapCompStore } from "@/store/mapCompStore";
 import { useStatStore } from "@/store/statStore";
 import { useTimerStore } from "@/store/timerStore";
 import { useDexStore } from "@/store/dex/dexStore";
+import { useSaveManager } from "@/store/saveManager";
 import { emitSoundEvent } from "@/services/sound";
 import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
@@ -19,6 +20,7 @@ const GAME_STATES = Object.freeze({
 export const useBLCKeyClickerController = defineStore(
   "blcKeyClickerController",
   () => {
+    const saveManager = useSaveManager();
     const inventoryStore = useInventoryStore();
     const lootStore = useLootStore();
     const dexStore = useDexStore();
@@ -27,7 +29,7 @@ export const useBLCKeyClickerController = defineStore(
     const timer = useTimerStore();
 
     const { currentChestConfig } = storeToRefs(lootStore);
-    const { remainingMs, isPaused: timerPaused } = storeToRefs(timer);
+    const { remainingMs, isPaused } = storeToRefs(timer);
 
     const gameState = ref(GAME_STATES.NEW_GAME);
 
@@ -103,14 +105,14 @@ export const useBLCKeyClickerController = defineStore(
       return gameState.value === GAME_STATES.GAME_OVER;
     });
 
-    const isPaused = computed(() => {
-      return timerPaused.value;
+    const isTimerPaused = computed(() => {
+      return isPaused.value;
     });
 
     // Whether the user can currently interact with the chest cycle (e.g. open chests, advance map completion).
     // Only true during an active chest cycle that's not paused.
     const isActiveInteractionEnabled = computed(() => {
-      return isActiveChestCycle.value && !isPaused.value;
+      return isActiveChestCycle.value && !isTimerPaused.value;
     });
 
     function startChestCycle(source = "unknown") {
@@ -121,8 +123,7 @@ export const useBLCKeyClickerController = defineStore(
       const chestConfig = lootStore.generateCurrentChestConfig();
 
       // Ensure each new cycle always starts unpaused.
-      timerPaused.value = false;
-      timer.reset();
+      timer.restart();
       emitSoundEvent("timerStart");
       setGameState(GAME_STATES.ACTIVE_CHEST_CYCLE);
 
@@ -177,17 +178,7 @@ export const useBLCKeyClickerController = defineStore(
     function newGameReset() {
       setGameState(GAME_STATES.NEW_GAME);
 
-      timerPaused.value = false;
-      timer.stop();
-
-      //reset inventory
-      inventoryStore.resetInventory();
-      //reset chest history, config/loot table
-      lootStore.resetLootStore();
-      //reset map comp
-      mapCompStore.resetMapComp();
-      //reset stats
-      statStore.resetStats();
+      saveManager.resetAllCategories(saveManager.resetTypes.HARD);
     }
 
     return {
@@ -203,7 +194,7 @@ export const useBLCKeyClickerController = defineStore(
       isActiveChestCycle,
       isBetweenChestCycles,
       isGameOver,
-      isPaused,
+      isTimerPaused,
       isActiveInteractionEnabled,
 
       startChestCycle,

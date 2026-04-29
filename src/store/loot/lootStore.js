@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { shallowRef, computed, toRaw } from "vue";
+import { computed, toRaw } from "vue";
 import { StorageSerializers } from "@vueuse/core";
 import { mergeTemplateWithConfig, buildLootTable, openChest } from "@/store/loot/lootService";
 import { generateChestConfig } from "@/store/loot/generateChestConfig";
@@ -22,7 +22,6 @@ export const useLootStore = defineStore("loot", () => {
   const saveManager = useSaveManager();
   const lootSaveCategory = saveManager.useSaveCategory("loot");
 
-  const baseLootTable = shallowRef(null);
   const currentChestConfig = lootSaveCategory.useSaveCategoryStorage("currentChestConfig", {
     defaultValue: null,
     useStorageOptions: {
@@ -35,14 +34,20 @@ export const useLootStore = defineStore("loot", () => {
       serializer: StorageSerializers.object,
     },
   });
-  const lastDrops = shallowRef([]);
   const chestHistory = lootSaveCategory.useSaveCategoryStorage("chestHistory", {
     defaultValue: [],
   });
-  let historyIdCounter = 0;
 
   const dexStore = useDexStore();
 
+  const baseLootTable = computed(() => {
+    if (!currentChestConfig.value) {
+      return null;
+    }
+
+    const merged = mergeTemplateWithConfig(template, currentChestConfig.value);
+    return buildLootTable(merged);
+  });
 
   const lootTable = computed(() => {
     if (!baseLootTable.value) return null;
@@ -78,34 +83,12 @@ export const useLootStore = defineStore("loot", () => {
     return config;
   }
 
-  function getHistoryCounterSeed(historyEntries) {
-    if (!Array.isArray(historyEntries) || historyEntries.length === 0) {
-      return 0;
-    }
+  function getNextHistoryEntryId() {
+    const lastEntry = chestHistory.value[chestHistory.value.length - 1];
+    const lastId = Number(lastEntry?.id);
 
-    return historyEntries.reduce((maxId, entry) => {
-      const entryId = Number(entry?.id);
-      if (!Number.isFinite(entryId)) {
-        return maxId;
-      }
-
-      return Math.max(maxId, entryId);
-    }, 0);
+    return Number.isFinite(lastId) ? lastId + 1 : 1;
   }
-
-  function hydratePersistedLootState() {
-    historyIdCounter = getHistoryCounterSeed(chestHistory.value);
-
-    if (!currentChestConfig.value) {
-      baseLootTable.value = null;
-      return;
-    }
-
-    const merged = mergeTemplateWithConfig(template, currentChestConfig.value);
-    baseLootTable.value = buildLootTable(merged);
-  }
-
-  hydratePersistedLootState();
 
   function exclusivesFromConfig(config) {
     if (!config?.sets) return [];
@@ -198,8 +181,6 @@ export const useLootStore = defineStore("loot", () => {
   function loadChest(chestConfig) {
     // structuredClone cannot clone Vue proxies, so normalize to plain data first.
     const normalizedConfig = ensureChestPreviewKey(structuredClone(toRaw(chestConfig)));
-    const merged = mergeTemplateWithConfig(template, normalizedConfig);
-    baseLootTable.value = buildLootTable(merged);
     currentChestConfig.value = normalizedConfig;
 
     prefetchChestItemMetadata(baseLootTable.value);
@@ -207,7 +188,7 @@ export const useLootStore = defineStore("loot", () => {
     dexStore.markSeenFromChestConfig(normalizedConfig);
 
     chestHistory.value.push({
-      id: ++historyIdCounter,
+      id: getNextHistoryEntryId(),
       config: structuredClone(normalizedConfig),
       opens: [],
     });
@@ -265,7 +246,6 @@ export const useLootStore = defineStore("loot", () => {
       throw new Error("No chest loaded — call loadChest() first");
     }
     const drops = openChest(lootTable.value, keyType);
-    lastDrops.value = drops;
 
     lootHandler.processDrops(drops);
 
@@ -276,20 +256,14 @@ export const useLootStore = defineStore("loot", () => {
     return drops;
   }
 
-  function resetLootStore() {
-    //reset history and dex progress
-    lootSaveCategory.resetCategory();
-    historyIdCounter = 0;
-    dexStore.resetProgress();
-    //reset current config and loot table
-    baseLootTable.value = null;
+  function resetLootStore(resetType = saveManager.resetTypes.SOFT) {
+    lootSaveCategory.resetCategory(resetType);
   }
 
   return {
     lootTable,
     currentChestConfig,
     nextChestConfig,
-    lastDrops,
     chestHistory,
     currentHistoryEntry,
     currentExclusives,

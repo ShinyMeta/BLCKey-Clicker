@@ -28,6 +28,10 @@ export const useDexStore = defineStore("dex", () => {
 	// load from storage
 	const dexTree = dexSaveCategory.useSaveCategoryStorage("dexTree", {
 		defaultValue: DEFAULT_DEX_TREE,
+		resetType: saveManager.resetTypes.SOFT,
+		reset: () => {
+			resetProgress();
+		},
 	});
   // merge/patch with a fresh default tree to ensure new entries are added
   dexTree.value = DexTree.patchTree(newDefaultDexTree(), dexTree.value);
@@ -81,7 +85,7 @@ export const useDexStore = defineStore("dex", () => {
 	}
 
 	function resetProgress() {
-    dexTreeReactiveIndex.resetProgress(newDefaultDexTree());
+		dexTreeReactiveIndex.resetProgress(newDefaultDexTree());
 	}
 
 	return {
